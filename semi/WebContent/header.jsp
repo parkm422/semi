@@ -7,7 +7,7 @@
 		<c:when test="${empty sessionScope.id }">
 			<span><a href="${cp }/member/join">회원가입</a></span>
 			<span><a href="${cp }/member/login">회원로그인</a></span>
-			<span><a href="">관리자로그인</a></span>
+			<span><a href="${cp }/manager/login">관리자로그인</a></span>
 		</c:when>
 		<c:otherwise>
 			<span><a href="${cp }/member/join">마이페이지</a></span>
