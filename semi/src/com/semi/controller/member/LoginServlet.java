@@ -18,13 +18,13 @@ public class LoginServlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		/*
+		
 		req.setAttribute("top", "/header.jsp");
 		req.setAttribute("nav","/nav.jsp");
 		req.setAttribute("content","/member/login.jsp");
 		req.setAttribute("footer","/footer.jsp");
-		*/
-		resp.sendRedirect(req.getContextPath()+"/member/login.jsp");
+		
+		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 	}
 	
 	@Override
