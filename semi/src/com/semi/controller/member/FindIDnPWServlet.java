@@ -28,15 +28,18 @@ public class FindIDnPWServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		if (checkFind.equals("findID")) {
 			findID(request, response);
+			return;
 		} else if (checkFind.equals("findPW")) {
 			findPW(request, response);
+			return;
 		}
 		
-		request.setAttribute("top", "/header.jsp");
-		request.setAttribute("nav", "nav.jsp");
-		request.setAttribute("content", "/member/myPage.jsp");
-		request.setAttribute("footer", "/footer.jsp");
-		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		//request.setAttribute("top", "/header.jsp");
+		//request.setAttribute("nav", "nav.jsp");
+		//request.setAttribute("content", "/member/myPage.jsp");
+		//request.setAttribute("footer", "/footer.jsp");
+		//request.getRequestDispatcher("/index.jsp").forward(request, response);
+		//response.sendRedirect(location);
 	}
 	
 	protected void findID(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

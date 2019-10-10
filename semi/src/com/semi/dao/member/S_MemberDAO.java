@@ -89,9 +89,9 @@ public class S_MemberDAO {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				id = rs.getString("id");
-				return id;
+				return "회원님의 아이디는 " + id + "입니다.";
 			} else {
-				return "해당 이메일로 가입된 회원은 없습니다.";
+				return "해당 이메일로 가입한 회원은 없습니다.";
 			}
 		} catch (SQLException se) {
 			se.printStackTrace();
@@ -110,7 +110,7 @@ public class S_MemberDAO {
 		
 		try {
 			con = JdbcUtil.getConn();
-			pstmt = con.prepareStatement("SELECT id FROM s_members WHERE email=? id=?");
+			pstmt = con.prepareStatement("SELECT id FROM s_members WHERE email=? AND id=?");
 			pstmt.setString(1, email);
 			pstmt.setString(2, id);
 			rs = pstmt.executeQuery();
@@ -122,10 +122,11 @@ public class S_MemberDAO {
 					randomPwCharArray[i] = randomPwPool.charAt(rnd.nextInt(randomPwPool.length()));
 				}
 				String randomPw = new String(randomPwCharArray, 0, randomPwCharArray.length);
-				pstmt2 = con.prepareStatement("UPDATE s_members SET pwd=? WHERE id=? and email=?");
+				pstmt2 = con.prepareStatement("UPDATE s_members SET pwd=? WHERE id=? AND email=?");
 				pstmt2.setString(1, randomPw);
 				pstmt2.setString(2, id);
 				pstmt2.setString(3, email);
+				pstmt2.executeUpdate();
 				String content = "확인 후 비밀번호를 재설정해주세요.\r\n" + randomPw;
 				SendEmail sendEmail = new SendEmail();
 				sendEmail.send(email, content);
