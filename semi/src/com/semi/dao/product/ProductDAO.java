@@ -119,6 +119,68 @@ public class ProductDAO {
 		}
 	}
 	
+	public ArrayList<Product_ImgVO> getImg(int inum) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JdbcUtil.getConn();
+			String sql = "SELECT * FROM PRODUCT_IMG WHERE INUM=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, inum);
+			rs = pstmt.executeQuery();
+			ArrayList<Product_ImgVO> imgList = new ArrayList<Product_ImgVO>();
+			while(rs.next()) {
+				int imgnum = rs.getInt("imgnum");
+				int inum2 = rs.getInt("inum");
+				String orgfilename = rs.getString("orgfilename");
+				String savefilename = rs.getString("savefilename");
+				
+				Product_ImgVO vo = new Product_ImgVO(imgnum, inum2, orgfilename, savefilename);
+				imgList.add(vo);
+			}
+			return imgList;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return null;
+		}finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}
+	}
+	
+	//상세정보 얻어오기
+	public Product_ListVO getDetail(int inum) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JdbcUtil.getConn();
+			String sql = "SELECT * FROM PRODUCT_LIST WHERE INUM=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, inum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				
+				String cnum = rs.getString("cnum");
+				String pname = rs.getString("pname");
+				int price = rs.getInt("price");
+				int cnt = rs.getInt("cnt");
+				int salecnt = rs.getInt("salecnt");
+				
+				Product_ListVO vo = new Product_ListVO(inum, cnum, pname, price, cnt, salecnt);
+				return vo;
+			}
+			return null;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return null;
+		}finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}
+	}
+	
 	public ArrayList<List_img_joinVO> list(int startRow,int endRow,String major,String sub){
 		
 		Connection con = null;
