@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.semi.dao.product.ProductDAO;
+import com.semi.vo.product.List_img_joinVO;
 import com.semi.vo.product.Product_ListVO;
 
 @WebServlet("/product/list")
@@ -17,9 +18,13 @@ public class ProductServlet extends HttpServlet{
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
+		
+		req.setCharacterEncoding("utf-8");
+		
 		String spageNum = req.getParameter("pageNum");
-		String type = req.getParameter("type");
+		String major = req.getParameter("major");
+		String sub = req.getParameter("sub");
+		
 		int pageNum = 1;
 		if(spageNum != null) {
 			pageNum = Integer.parseInt(spageNum);
@@ -30,7 +35,7 @@ public class ProductServlet extends HttpServlet{
 		
 		ProductDAO dao = ProductDAO.getProductDao();
 		
-		ArrayList<Product_ListVO> list = dao.list(startRow, endRow,type);
+		ArrayList<List_img_joinVO> list = dao.list(startRow, endRow,major,sub);
 		int pageCount = (int)Math.ceil(dao.getCount()/5.0);
 		
 		int startPageNum = ((pageNum-1)/4*4)+1;

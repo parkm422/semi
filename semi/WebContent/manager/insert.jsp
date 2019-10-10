@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<script>
+	
+</script>
 <div id="main">
 	<h1>상품등록 페이지</h1>
 	<div>
-		<select id="major" name="major">
+		<select id="major" name="major" onchange="major()">
 			<option value="OUTER">아우터</option>
 			<option value="TOP">상의</option>
 			<option value="ONEPIECE">원피스</option>

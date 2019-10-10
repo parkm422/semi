@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
 
+import com.semi.vo.product.List_img_joinVO;
 import com.semi.vo.product.Product_ImgVO;
 import com.semi.vo.product.Product_ListVO;
 
@@ -118,31 +119,36 @@ public class ProductDAO {
 		}
 	}
 	
-	public ArrayList<Product_ListVO> list(int startRow,int endRow,String type){
+	public ArrayList<List_img_joinVO> list(int startRow,int endRow,String major,String sub){
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			String sql = "SELECT * FROM(SELECT AA.*,ROWNUM AS RNUM FROM" + 
-						"(SELECT * FROM PRODUCT_LIST ORDER BY INUM DESC)AA)" + 
-						"WHERE RNUM>=? AND RNUM<=?";
+			String sql = "SELECT BB.*,PIMG.IMGNUM,PIMG.SAVEFILENAME FROM(SELECT AA.*,ROWNUM AS RNUM FROM(SELECT P.INUM INUM,P.PNAME PNAME,P.PRICE PRICE,p.cnt cnt, p.cnum cnum,p.salecnt salecnt " + 
+					"FROM PRODUCT_LIST P,COLOR C,PRODUCT_SIZE S,SUB_CATEGORY SUB,MAJOR_CATEGORY MAJOR "+ 
+					"WHERE P.CNUM=C.CNUM AND C.SIZENUM=S.SIZENUM AND S.SCNUM=SUB.SCNUM AND SUB.MCNUM=MAJOR.MCNUM AND M_CATEGORY=? AND S_CATEGORY=?)AA)BB,PRODUCT_IMG PIMG "
+					+ "WHERE BB.INUM=PIMG.INUM AND RNUM>=? AND RNUM<=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
+			pstmt.setString(1, major);
+			pstmt.setString(2, sub);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
 			rs = pstmt.executeQuery();
-			ArrayList<Product_ListVO> list = new ArrayList<Product_ListVO>();
+			ArrayList<List_img_joinVO> list = new ArrayList<List_img_joinVO>();
 			while(rs.next()) {
 				
 				int inum = rs.getInt("inum");
-				String cnum = rs.getString("cnum");
 				String pname = rs.getString("pname");
+				int imgnum = rs.getInt("imgnum");
+				String cnum = rs.getString("cnum");
 				int price = rs.getInt("price");
 				int cnt = rs.getInt("cnt");
 				int salecnt = rs.getInt("salecnt");
+				String savefilename = rs.getString("savefilename");
 				
-				Product_ListVO vo = new Product_ListVO(inum, cnum, pname, price, cnt, salecnt);
+				List_img_joinVO vo = new List_img_joinVO(inum, pname, price, cnt, cnum, salecnt, imgnum, savefilename);
 				list.add(vo);
 				
 			}
