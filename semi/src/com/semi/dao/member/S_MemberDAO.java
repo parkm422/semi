@@ -122,7 +122,10 @@ public class S_MemberDAO {
 					randomPwCharArray[i] = randomPwPool.charAt(rnd.nextInt(randomPwPool.length()));
 				}
 				String randomPw = new String(randomPwCharArray, 0, randomPwCharArray.length);
-				pstmt2 = con.prepareStatement("UPDATE s_members)
+				pstmt2 = con.prepareStatement("UPDATE s_members SET pwd=? WHERE id=? and email=?");
+				pstmt2.setString(1, randomPw);
+				pstmt2.setString(2, id);
+				pstmt2.setString(3, email);
 				String content = "확인 후 비밀번호를 재설정해주세요.\r\n" + randomPw;
 				SendEmail sendEmail = new SendEmail();
 				sendEmail.send(email, content);
