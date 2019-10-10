@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>member/myPage</title>
+<title>/member/findIDResult</title>
 </head>
 <body>
-	
+	<div>
+		<p>${findPW }</p>
+	</div>
 </body>
 </html>

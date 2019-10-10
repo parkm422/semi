@@ -10,4 +10,7 @@
 			<div><input type="submit" value="로그인"></div>
 		</form>
 	</div>
+	<div>
+	<a href="${cp}/member/findIDnPW">아이디/비밀번호 찾기</a>
+	</div>
 </div>
