@@ -19,7 +19,7 @@ public class ProductServlet extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		String spageNum = req.getParameter("pageNum");
-		
+		String type = req.getParameter("type");
 		int pageNum = 1;
 		if(spageNum != null) {
 			pageNum = Integer.parseInt(spageNum);
@@ -30,7 +30,7 @@ public class ProductServlet extends HttpServlet{
 		
 		ProductDAO dao = ProductDAO.getProductDao();
 		
-		ArrayList<Product_ListVO> list = dao.list(startRow, endRow);
+		ArrayList<Product_ListVO> list = dao.list(startRow, endRow,type);
 		int pageCount = (int)Math.ceil(dao.getCount()/5.0);
 		
 		int startPageNum = ((pageNum-1)/4*4)+1;

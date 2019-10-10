@@ -15,10 +15,10 @@
 	<div onclick="find(event)">아우터</div>
 	<div id="outer_list" style="height:100px;display:none;">
 		<ul>
-			<li><a href="" class="outer_type">패딩</a></li>
-			<li><a href="" class="outer_type">코트</a></li>
-			<li><a href="" class="outer_type">야상</a></li>
-			<li><a href="" class="outer_type">자켓</a></li>
+			<li><a href="/product/list?type=패딩" class="outer_type">패딩</a></li>
+			<li><a href="/product/list?type=코트" class="outer_type">코트</a></li>
+			<li><a href="/product/list?type=야상" class="outer_type">야상</a></li>
+			<li><a href="/product/list?type=자켓" class="outer_type">자켓</a></li>
 		</ul>
 	</div>
 	<div>상의</div>

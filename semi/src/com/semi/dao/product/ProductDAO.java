@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
 
-
+import com.semi.vo.product.Product_ImgVO;
 import com.semi.vo.product.Product_ListVO;
 
 import jdbc.JdbcUtil;
@@ -22,7 +22,31 @@ public class ProductDAO {
 		return productDao;
 	}
 	
-	//v
+	public int img_insert(Product_ImgVO vo) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = JdbcUtil.getConn();
+			String sql="INSERT INTO PRODUCT_IMG VALUES(IMG_SEQ.NEXTVAL,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, vo.getImgnum());
+			pstmt.setString(2, vo.getOrgfilename());
+			pstmt.setString(3, vo.getSavefilename());
+			int n = pstmt.executeUpdate();
+			if(n>0) {
+				con.commit();
+				return n;
+			}
+			return 0;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}finally {
+			JdbcUtil.close(con, pstmt, null);
+		}
+	}
+	
 	public int getCount() {
 
 		Connection con = null;
@@ -48,7 +72,7 @@ public class ProductDAO {
 		}
 	}
 	
-	public ArrayList<Product_ListVO> list(int startRow,int endRow){
+	public ArrayList<Product_ListVO> list(int startRow,int endRow,String type){
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
