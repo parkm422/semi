@@ -37,7 +37,11 @@ public class S_MemberDAO {
 			pstmt.setString(6, vo.getPhone());
 			
 			int n = pstmt.executeUpdate();
-			con.commit();
+			if(n>0) {
+				con.commit();
+			}else {
+				con.rollback();
+			}
 			return n;
 		}catch(SQLException se) {
 			se.printStackTrace();
