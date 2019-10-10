@@ -131,6 +131,8 @@ public class ProductDAO {
 					"WHERE P.CNUM=C.CNUM AND C.SIZENUM=S.SIZENUM AND S.SCNUM=SUB.SCNUM AND SUB.MCNUM=MAJOR.MCNUM AND M_CATEGORY=? AND S_CATEGORY=?)AA)BB,PRODUCT_IMG PIMG "
 					+ "WHERE BB.INUM=PIMG.INUM AND RNUM>=? AND RNUM<=?";
 			pstmt = con.prepareStatement(sql);
+			System.out.println(major);
+			System.out.println(sub);
 			pstmt.setString(1, major);
 			pstmt.setString(2, sub);
 			pstmt.setInt(3, startRow);

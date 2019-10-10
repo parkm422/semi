@@ -30,16 +30,22 @@ public class ProductServlet extends HttpServlet{
 			pageNum = Integer.parseInt(spageNum);
 		}
 		
-		int startRow = (pageNum-1)*5+1;
-		int endRow = startRow+4;
+		//System.out.println(pageNum);
+		
+		int startRow = 1+(pageNum-1)*30;
+		int endRow = startRow+29;
 		
 		ProductDAO dao = ProductDAO.getProductDao();
 		
 		ArrayList<List_img_joinVO> list = dao.list(startRow, endRow,major,sub);
-		int pageCount = (int)Math.ceil(dao.getCount()/5.0);
+		int pageCount = (int)Math.ceil(dao.getCount()/30.0);
 		
 		int startPageNum = ((pageNum-1)/4*4)+1;
-		int endPageNum = startPageNum+3;
+		int endPageNum = startPageNum+4;
+		
+		if(endPageNum>pageCount) {
+			endPageNum = pageCount;
+		}
 		
 		req.setAttribute("list", list);
 		req.setAttribute("pageNum", pageNum);
