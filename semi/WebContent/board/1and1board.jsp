@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<div id="main">
+
 	<h1>1:1문의 게시판</h1>
 	<div>
 	<form method="post" action="${cp }/board/1and1board">
@@ -17,4 +17,3 @@
 		<div><input type="submit" value="등록"></div>
 	</form>
 	</div>
-</div>

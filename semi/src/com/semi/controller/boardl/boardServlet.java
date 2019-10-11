@@ -1,4 +1,4 @@
-package com.semi.controller.board;
+package com.semi.controller.boardl;
 
 import java.io.IOException;
 
@@ -9,18 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.semi.dao.board.Ono_EnquiryDao;
-import com.semi.vo.board.Ono_EnquiryVO;
+import com.semi.dao.boardl.Ono_EnquiryDao;
+import com.semi.vo.boardl.Ono_EnquiryVO;
 @WebServlet("/board/1and1board")
 public class boardServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("top", "/header.jsp");
 		req.setAttribute("nav", "/nav.jsp");
-		req.setAttribute("content", "/member/join.jsp");
+		req.setAttribute("content", "/board/1and1board.jsp");
 		req.setAttribute("footer", "/footer.jsp");
 		
-		req.getRequestDispatcher("/main").forward(req, resp);
+		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

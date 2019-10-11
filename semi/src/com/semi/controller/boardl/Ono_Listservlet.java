@@ -1,4 +1,4 @@
-package com.semi.controller.board;
+package com.semi.controller.boardl;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.dao.board.Ono_EnquiryDao;
-import com.semi.vo.board.Ono_EnquiryVO;
+import com.semi.dao.boardl.Ono_EnquiryDao;
+import com.semi.vo.boardl.Ono_EnquiryVO;
 
 @WebServlet("/board/list")
 public class Ono_Listservlet extends HttpServlet{
@@ -27,6 +27,7 @@ public class Ono_Listservlet extends HttpServlet{
 		int startRow=(pageNum-1)*10+1;
 		int endRow=startRow+9;
 		Ono_EnquiryDao dao=new Ono_EnquiryDao();
+		
 		ArrayList<Ono_EnquiryVO> list=dao.list(startRow, endRow,field,keyword);
 		int pageCount=(int)Math.ceil(dao.getCount(field,keyword)/10.0);	
 		int startPage=(pageNum-1)/10*10+1;
@@ -41,7 +42,7 @@ public class Ono_Listservlet extends HttpServlet{
 		req.setAttribute("pageNum",pageNum);
 		req.setAttribute("top", "/header.jsp");
 		req.setAttribute("nav","/nav.jsp");
-		req.setAttribute("content","/member/login.jsp");
+		req.setAttribute("content","/board/list.jsp");
 		req.setAttribute("footer","/footer.jsp");
 		req.setAttribute("field",field);
 		req.setAttribute("keyword",keyword);

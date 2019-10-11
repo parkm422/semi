@@ -7,13 +7,15 @@
 	<tr>
 		<th>글번호</th><th>작성자</th><th>제목</th>
 	</tr>
+	<c:if test="${sessionScope.id == vo.writer}">
 	<c:forEach var="vo" items="${list }">
 		<tr>
-			<td>${vo.enum1 }</td>
+			<td>${vo.ennum }</td>
 			<td>${vo.writer }</td>
-			<td>${vo.title }</a></td>
+			<td><a href="${cp }/board/detail?ennum=${vo.ennum }">${vo.title }</a></td>
 		</tr>
 	</c:forEach>
+	</c:if>
 </table>
 <br>
 <div>

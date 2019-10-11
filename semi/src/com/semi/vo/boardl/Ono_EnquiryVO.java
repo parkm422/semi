@@ -1,7 +1,7 @@
-package com.semi.vo.board;
+package com.semi.vo.boardl;
 
 public class Ono_EnquiryVO {
-	private int Enum;
+	private int ennum;
 	private String category;
 	private String writer;
 	private String title;
@@ -10,9 +10,9 @@ public class Ono_EnquiryVO {
 	
 	public Ono_EnquiryVO() {}
 
-	public Ono_EnquiryVO(int enum1, String category, String writer, String title, String content, String answer) {
+	public Ono_EnquiryVO(int ennum, String category, String writer, String title, String content, String answer) {
 		super();
-		Enum = enum1;
+		this.ennum = ennum;
 		this.category = category;
 		this.writer = writer;
 		this.title = title;
@@ -20,12 +20,12 @@ public class Ono_EnquiryVO {
 		this.answer = answer;
 	}
 
-	public int getEnum() {
-		return Enum;
+	public int getEnnum() {
+		return ennum;
 	}
 
-	public void setEnum(int enum1) {
-		Enum = enum1;
+	public void setEnnum(int ennum) {
+		this.ennum = ennum;
 	}
 
 	public String getCategory() {
@@ -67,6 +67,9 @@ public class Ono_EnquiryVO {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
+
+	
+
 	
 	
 }
