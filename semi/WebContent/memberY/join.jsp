@@ -77,7 +77,7 @@
 </script>
 <div id="main">
 	<div style="width:90%; height:800px; margin:30px;">
-		<form method="post" action="${pageContext.request.contextPath }/member/join" onsubmit="return join()">
+		<form method="post" action="${pageContext.request.contextPath }/memberY/join" onsubmit="return join()">
 			<div><label>이름</label><input type="text" name="name" id="name"></div>
 			<div>
 				<label>아이디</label>

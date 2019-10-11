@@ -1,4 +1,4 @@
-package com.semi.controller.member;
+package com.semi.controller.memberY;
 
 import java.io.IOException;
 
@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.dao.member.S_MemberDAO;
-import com.semi.vo.member.S_MemberVO;
-@WebServlet("/member/join")
+import com.semi.dao.memberY.S_MemberDAO;
+import com.semi.vo.memberY.S_MemberVO;
+@WebServlet("/memberY/join")
 public class JoinServlet extends HttpServlet{
 	
 	@Override
@@ -18,7 +18,7 @@ public class JoinServlet extends HttpServlet{
 		
 		req.setAttribute("top", "/header.jsp");
 		req.setAttribute("nav", "/nav.jsp");
-		req.setAttribute("content", "/member/join.jsp");
+		req.setAttribute("content", "/memberY/join.jsp");
 		req.setAttribute("footer", "/footer.jsp");
 		
 		req.getRequestDispatcher("/main").forward(req, resp);

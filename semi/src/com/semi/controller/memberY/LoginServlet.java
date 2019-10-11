@@ -1,4 +1,4 @@
-package com.semi.controller.member;
+package com.semi.controller.memberY;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
 
-import com.semi.dao.member.S_MemberDAO;
-@WebServlet("/member/login")
+import com.semi.dao.memberY.S_MemberDAO;
+@WebServlet("/memberY/login")
 public class LoginServlet extends HttpServlet{
 	
 	@Override
@@ -21,7 +21,7 @@ public class LoginServlet extends HttpServlet{
 		
 		req.setAttribute("top", "/header.jsp");
 		req.setAttribute("nav","/nav.jsp");
-		req.setAttribute("content","/member/login.jsp");
+		req.setAttribute("content","/memberY/login.jsp");
 		req.setAttribute("footer","/footer.jsp");
 		
 		req.getRequestDispatcher("/index.jsp").forward(req, resp);
@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet{
 			req.setAttribute("content","/main.jsp");
 		}else {
 			req.setAttribute("errMsg", "아이디 또는 비밀번호를 다시 확인하세요.<br>등록되지 않은 아이디이거나, 아이디 또는 비밀번호를 잘못 입력하셨습니다.");
-			req.setAttribute("content","/member/login.jsp");
+			req.setAttribute("content","/memberY/login.jsp");
 		}
 		req.setAttribute("top", "/header.jsp");
 		req.setAttribute("nav","/nav.jsp");

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <div id="main">
 	<div>
-		<form method="post" action="${cp }/member/login">
+		<form method="post" action="${cp }/memberY/login">
 			<div><input type="text" name="id" placeholder="아이디"></div>
 			<div><input type="password" name="pwd" placeholder="비밀번호"></div>
 			<div style="color:red;">${errMsg }</div>

@@ -1,11 +1,11 @@
-package com.semi.dao.member;
+package com.semi.dao.memberY;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.semi.vo.member.S_MemberVO;
+import com.semi.vo.memberY.S_MemberVO;
 
 import jdbc.JdbcUtil;
 
