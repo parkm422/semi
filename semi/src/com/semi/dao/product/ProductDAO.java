@@ -75,7 +75,6 @@ public class ProductDAO {
 	
 	//장바구니 추가
 	public int basketInsert(BasketVO vo) {
-		System.out.println(vo);
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		

@@ -2,6 +2,7 @@ package com.semi.controller.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,12 +25,25 @@ public class BasketServlet extends HttpServlet{
 	
 		req.setCharacterEncoding("utf-8");
 		String type = req.getParameter("type");
-		System.out.println(type);
+		
+		String id = req.getParameter("id");
+		
 		if(type != null && type.equals("put")) {
 			
 			itemPut(req,resp);
 			return;
 		}
+		
+		S_MemberDAO dao = S_MemberDAO.getSmemberDao();
+		
+		S_MemberVO vo = dao.select(id);
+		
+		ProductDAO itemDao = ProductDAO.getProductDao();
+		
+		ArrayList<BasketVO> basketList = itemDao.basketList(vo.getMnum());
+		
+		
+		req.setAttribute("basketList", basketList);
 		
 		req.setAttribute("top", "/header.jsp");
 		req.setAttribute("nav", "/nav.jsp");

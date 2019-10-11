@@ -10,7 +10,7 @@
 			<span><a href="${cp }/manager/login">관리자로그인</a></span>
 		</c:when>
 		<c:otherwise>
-			<span><a href="${cp }/member/basket">장바구니</a></span>
+			<span><a href="${cp }/member/basket?id=${sessionScope.id }">장바구니</a></span>
 			<span><a href="${cp }/member/mypage">마이페이지</a></span>
 			<c:if test="${sessionScope.id == 'ADMIN' }">
 				<span><a href="${cp }/manager/adpage">관리자페이지</a></span>
