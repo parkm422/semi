@@ -1,11 +1,13 @@
 package com.semi.dao.product;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.PreparedStatement;
 
+import com.semi.vo.product.BasketVO;
 import com.semi.vo.product.List_img_joinVO;
 import com.semi.vo.product.Product_ImgVO;
 import com.semi.vo.product.Product_ListVO;
@@ -23,6 +25,8 @@ public class ProductDAO {
 		return productDao;
 	}
 	
+	
+	// 상품등록
 	public int productInsert(Product_ListVO vo,String orgfilename,String savefilename) {
 		
 		Connection con = null;
@@ -68,7 +72,99 @@ public class ProductDAO {
 			JdbcUtil.close(con, pstmt, null);
 		}
 	}
-	/*
+	
+	//장바구니 추가
+	public int basketInsert(BasketVO vo) {
+		System.out.println(vo);
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			con = JdbcUtil.getConn();
+			
+			String sql = "INSERT INTO BASKET VALUES(BASKET_SEQ.NEXTVAL,?,?,?,1,SYSDATE)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, vo.getMnum());
+			pstmt.setInt(2, vo.getInum());
+			pstmt.setString(3, vo.getPname());
+			int n = pstmt.executeUpdate();
+			if(n>0) {
+				con.commit();
+				return n;
+			}
+			con.rollback();
+			return 0;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}finally {
+			JdbcUtil.close(con, pstmt, null);
+		}
+	}
+	
+	// 해당 회원 장바구니 목록 얻어오기
+	public ArrayList<BasketVO> basketList(int mnum){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JdbcUtil.getConn();
+			String sql = "SELECT * FROM BASKET WHERE MNUM=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, mnum);
+			rs = pstmt.executeQuery();
+			ArrayList<BasketVO> bList = new ArrayList<BasketVO>();
+			while(rs.next()) {
+				
+				int bnum = rs.getInt("bnum");
+				int mnum2 = rs.getInt("mnum");
+				int inum = rs.getInt("inum");
+				String pname = rs.getString("pname");
+				int cnt = rs.getInt("cnt");
+				Date regdate = rs.getDate("regdate");
+				
+				BasketVO vo = new BasketVO(bnum, mnum2, inum, pname, cnt, regdate);
+				bList.add(vo);
+			}
+			return bList;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return null;
+		}finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}
+	}
+	
+	// 상품번호로 이미지 찾기
+	public String img_name(int inum) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JdbcUtil.getConn();
+			String sql = "SELECT SAVEFILENAME FROM PRODUCT_IMG WHERE INUM=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, inum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				
+				String savefilename = rs.getString("savefilename");
+				return savefilename;
+				
+			}
+			return null;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return null;
+		}finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}
+	}
+	
+	// 상품 이미지 추가
 	public int img_insert(Product_ImgVO vo) {
 		
 		Connection con = null;
@@ -93,7 +189,8 @@ public class ProductDAO {
 			JdbcUtil.close(con, pstmt, null);
 		}
 	}
-	*/
+	
+	// 상품 갯수 얻어오기
 	public int getCount() {
 
 		Connection con = null;
@@ -119,6 +216,7 @@ public class ProductDAO {
 		}
 	}
 	
+	//상품번호에 해당하는 상품 이미지 얻어오기
 	public ArrayList<Product_ImgVO> getImg(int inum) {
 		
 		Connection con = null;
@@ -181,6 +279,7 @@ public class ProductDAO {
 		}
 	}
 	
+	//상품 리스트
 	public ArrayList<List_img_joinVO> list(int startRow,int endRow,String major,String sub){
 		
 		Connection con = null;

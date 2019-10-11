@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.dao.board.ReviewDAO;
 import com.semi.dao.product.ProductDAO;
+import com.semi.vo.board.ReviewVO;
 import com.semi.vo.product.Product_ImgVO;
 import com.semi.vo.product.Product_ListVO;
 @WebServlet("/product/detail")
@@ -20,12 +22,23 @@ public class DetailServlet extends HttpServlet{
 	
 		int inum = Integer.parseInt(req.getParameter("inum"));
 		
+		String spageNum = req.getParameter("pageNum");
+		
+		int pageNum = 1;
+		
+		if(spageNum != null) {
+			pageNum = Integer.parseInt(spageNum);
+		}
+		
+		int startRow = 1+(pageNum-1)*10;
+		int endRow = startRow + 9;
+		
 		ProductDAO dao = ProductDAO.getProductDao();
 		
 		Product_ListVO vo = dao.getDetail(inum);
 		
 		ArrayList<Product_ImgVO> imgList = dao.getImg(inum);
-		System.out.println(inum);
+		//System.out.println(inum);
 		req.setAttribute("top", "/header.jsp");
 		req.setAttribute("nav", "/nav.jsp");
 		req.setAttribute("content", "/product/product_detail.jsp");
@@ -33,6 +46,15 @@ public class DetailServlet extends HttpServlet{
 		
 		req.setAttribute("vo", vo);
 		req.setAttribute("imgList", imgList);
+		
+		
+		
+		ReviewDAO reviewDao = ReviewDAO.getReviewDao();
+		
+		ArrayList<ReviewVO> reviewList = reviewDao.review_list(startRow, endRow, inum);
+		
+		req.setAttribute("reviewList", reviewList);
+		
 		
 		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 		

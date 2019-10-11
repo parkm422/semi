@@ -1,6 +1,7 @@
 package com.semi.dao.member;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,6 +49,42 @@ public class S_MemberDAO {
 			return -1;
 		}finally {
 			JdbcUtil.close(con, pstmt, null);
+		}
+	}
+	
+	// 아이디로 회원찾기
+	public S_MemberVO select(String id) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JdbcUtil.getConn();
+			String sql = "SELECT * FROM S_MEMBERS WHERE ID=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				
+				int mnum = rs.getInt("mnum");
+				String name = rs.getString("name");
+				String id2 = rs.getString("id");
+				String pwd = rs.getString("pwd");
+				String email = rs.getString("email");
+				String address = rs.getString("address");
+				String phone = rs.getString("phone");
+				int point = rs.getInt("point");
+				Date joindate = rs.getDate("joindate");
+				
+				S_MemberVO vo = new S_MemberVO(mnum, name, id2, pwd, email, address, phone, point, joindate);
+				return vo;
+			}
+			return null;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return null;
+		}finally {
+			JdbcUtil.close(con, pstmt, rs);
 		}
 	}
 	

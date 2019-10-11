@@ -72,5 +72,11 @@ public class BasketVO {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
+
+	@Override
+	public String toString() {
+		return "BasketVO [bnum=" + bnum + ", mnum=" + mnum + ", inum=" + inum + ", pname=" + pname + ", cnt=" + cnt
+				+ ", regdate=" + regdate + "]";
+	}
 	
 }
