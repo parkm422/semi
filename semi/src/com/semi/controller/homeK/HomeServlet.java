@@ -1,4 +1,4 @@
-package com.semi.controller.home;
+package com.semi.controller.homeK;
 
 import java.io.IOException;
 

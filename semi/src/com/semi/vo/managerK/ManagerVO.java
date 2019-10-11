@@ -1,4 +1,4 @@
-package com.semi.vo.manager;
+package com.semi.vo.managerK;
 
 public class ManagerVO {
 	

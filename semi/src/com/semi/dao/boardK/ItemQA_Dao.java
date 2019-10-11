@@ -1,4 +1,4 @@
-package com.semi.dao.board;
+package com.semi.dao.boardK;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.semi.vo.board.ItemQA_Vo;
+import com.semi.vo.boardK.ItemQA_Vo;
 
 import jdbc.JdbcUtil;
 

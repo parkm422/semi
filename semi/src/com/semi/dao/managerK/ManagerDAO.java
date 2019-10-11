@@ -1,4 +1,4 @@
-package com.semi.dao.manager;
+package com.semi.dao.managerK;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

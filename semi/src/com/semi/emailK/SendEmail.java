@@ -1,4 +1,4 @@
-package com.semi.email;
+package com.semi.emailK;
 
 import java.util.Date;
 import java.util.Properties;

@@ -1,4 +1,4 @@
-package com.semi.vo.board;
+package com.semi.vo.boardK;
 
 public class ItemQA_Vo {
 	private int qnum;

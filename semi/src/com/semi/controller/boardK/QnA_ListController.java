@@ -1,4 +1,4 @@
-package com.semi.controller.board;
+package com.semi.controller.boardK;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package com.semi.controller.member;
+package com.semi.controller.memberK;
 
 import java.io.IOException;
 
@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.dao.member.S_MemberDAO;
-import com.semi.vo.member.S_MemberVO;
+import com.semi.dao.memberK.S_MemberDAO;
+import com.semi.vo.memberK.S_MemberVO;
 @WebServlet("/member/join")
 public class JoinServlet extends HttpServlet{
 	

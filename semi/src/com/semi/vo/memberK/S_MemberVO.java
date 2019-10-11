@@ -1,4 +1,4 @@
-package com.semi.vo.member;
+package com.semi.vo.memberK;
 
 import java.sql.Date;
 

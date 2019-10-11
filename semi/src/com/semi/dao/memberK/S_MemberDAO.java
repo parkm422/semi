@@ -1,4 +1,4 @@
-package com.semi.dao.member;
+package com.semi.dao.memberK;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Random;
 
-import com.semi.email.SendEmail;
-import com.semi.vo.member.S_MemberVO;
+import com.semi.emailK.SendEmail;
+import com.semi.vo.memberK.S_MemberVO;
 
 import jdbc.JdbcUtil;
 
