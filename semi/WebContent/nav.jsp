@@ -25,5 +25,5 @@
 	<div>바텀</div>
 	<div>원피스</div>
 	<div>가방</div>
-	<div><a href="${cp }/member/QnA" class="outer_type">질답게시판</a></div>
+	<div><a href="${cp }/member/board/QnAList" class="outer_type">질답게시판</a></div>
 </div>

@@ -9,17 +9,12 @@
 		var count = document.getElementById("count");
 		var countN = 4;
 		count.innerHTML = countN;
-		() => {
-			setInterval(() => {
-				countN = parseInt(countN)-1;
-				count.innerHTML = countN;
-			}, 1000);
-		}
-		() => {
+		setInterval(() => {
+			countN = parseInt(countN)-1;
+			count.innerHTML = countN;
 			if (parseInt(countN) === 0) {
 				location.href="${cp}/member/login";
 			}
-		//setTimeout(location.href="${cp}/member/login", 4000);
-		}
+		}, 1000);
 	})();
 </script>
