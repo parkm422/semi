@@ -7,12 +7,12 @@
 		<c:when test="${empty sessionScope.id }">
 			<span><a href="${cp }/member/join">회원가입</a></span>
 			<span><a href="${cp }/member/login">회원로그인</a></span>
-			<span><a href="">관리자로그인</a></span>
+			<span><a href="${cp }/manager/login">관리자로그인</a></span>
 		</c:when>
 		<c:otherwise>
 			<span><a href="${cp }/member/join">마이페이지</a></span>
+			<span><a href="${cp }/manager/adpage">관리자페이지</a></span>
 			<span><a href="${cp }/member/login">로그아웃</a></span>
-			<span><a href="">관리자로그인</a></span>
 		</c:otherwise>
 	</c:choose>
 	<h1>테스트 쇼핑몰</h1>
