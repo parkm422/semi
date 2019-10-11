@@ -34,12 +34,12 @@ public class SendEmail {
 					return new PasswordAuthentication(un, pw);
 				}
 			});
-			Message mimeMessage = new MimeMessage(session);
-			mimeMessage.setFrom(new InternetAddress(EMAIL_ADDRESS));
-			mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
-			mimeMessage.setSubject("비밀번호 재설정 이메일입니다.");
-			mimeMessage.setText(content);
-			Transport.send(mimeMessage);
+			Message msg = new MimeMessage(session);
+			msg.setFrom(new InternetAddress(EMAIL_ADDRESS));
+			msg.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
+			msg.setSubject("비밀번호 재설정 이메일입니다.");
+			msg.setText(content);
+			Transport.send(msg);
 		} catch (MessagingException me) {
 			me.printStackTrace();
 		}
