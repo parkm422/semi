@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import jdbc.JdbcUtil;
 
@@ -126,6 +127,36 @@ public class CategoryDAO {
 				colorList.add(colorname);
 			}
 			return colorList;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return null;
+		}finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}
+	}
+	
+	//맵으로 색상명 얻어오기
+	public String getMapColor(HashMap<String, Object> map) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JdbcUtil.getConn();
+			String sql = "SELECT C.CNUM FROM major_category MC,sub_category SUB,product_size PS,COLOR C " + 
+					"WHERE MC.MCNUM=SUB.MCNUM AND SUB.SCNUM=PS.SCNUM AND PS.SIZENUM=C.SIZENUM AND mc.m_category=? AND sub.s_category=? AND PS.PSIZE=? AND C.COLORNAME=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, (String)map.get("major"));
+			pstmt.setString(2, (String)map.get("sub"));
+			pstmt.setInt(3, (int)map.get("size"));
+			pstmt.setString(4, (String)map.get("color"));
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				
+				String cnum = rs.getString("cnum");
+				return cnum;
+			}
+			return null;
 		}catch(SQLException se) {
 			se.printStackTrace();
 			return null;
