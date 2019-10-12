@@ -22,6 +22,7 @@ public class DetailServlet extends HttpServlet{
 	
 		int inum = Integer.parseInt(req.getParameter("inum"));
 		
+		//리뷰게시판 페이지 얻어오기
 		String spageNum = req.getParameter("pageNum");
 		
 		int pageNum = 1;
@@ -35,26 +36,32 @@ public class DetailServlet extends HttpServlet{
 		
 		ProductDAO dao = ProductDAO.getProductDao();
 		
+		//상품 정보 얻어오기
 		Product_ListVO vo = dao.getDetail(inum);
 		
+		//해당 상품 이미지 얻어오기
 		ArrayList<Product_ImgVO> imgList = dao.getImg(inum);
-		//System.out.println(inum);
-		req.setAttribute("top", "/header.jsp");
-		req.setAttribute("nav", "/nav.jsp");
-		req.setAttribute("content", "/product/product_detail.jsp");
-		req.setAttribute("footer", "/footer.jsp");
+		
+		//상품 사이즈표 얻어오기
+		ArrayList<Integer> sizeList = dao.getSize();
 		
 		req.setAttribute("vo", vo);
 		req.setAttribute("imgList", imgList);
-		
+		req.setAttribute("sizeList", sizeList);
 		
 		
 		ReviewDAO reviewDao = ReviewDAO.getReviewDao();
 		
+		//리뷰게시판 목록 얻어오기
 		ArrayList<ReviewVO> reviewList = reviewDao.review_list(startRow, endRow, inum);
 		
 		req.setAttribute("reviewList", reviewList);
 		
+		
+		req.setAttribute("top", "/header.jsp");
+		req.setAttribute("nav", "/nav.jsp");
+		req.setAttribute("content", "/product/product_detail.jsp");
+		req.setAttribute("footer", "/footer.jsp");
 		
 		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 		

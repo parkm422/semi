@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script>
-	// 아우터 리스트 목록 얻어오기
-	function List(e){
+
+	// 대분류 선택시 소분류 리스트 얻어오기
+	function list(e){
 		var list = document.getElementsByClassName("major_type");
 		var len = list.length;
 
@@ -44,6 +45,7 @@
 		}
 		*/
 	}
+	
 	/*
 	// 하의 리스트 목록 얻어오기
 	function bottomList(e){
@@ -58,7 +60,7 @@
 	*/
 </script>
 <div id="nav">
-	<div onclick="List(event)">아우터</div>
+	<div onclick="list(event)">아우터</div>
 	<div id="outer_list" style="height:100px;display:none;" class="major_type">
 		<ul>
 			<li><a href="${cp }/product/list?major=OUTER&sub=패딩" class="outer_type">패딩</a></li>
@@ -67,7 +69,7 @@
 			<li><a href="${cp }/product/list?major=OUTER&sub=자켓" class="outer_type">자켓</a></li>
 		</ul>
 	</div>
-	<div onclick="List(event)">상의</div>
+	<div onclick="list(event)">상의</div>
 	<div id="top_list" style="height:100px;display:none;" class="major_type">
 		<ul>
 			<li><a href="${cp }/product/list?major=TOP&sub=티셔츠 " class="outer_type">티셔츠</a></li>
@@ -76,7 +78,7 @@
 			<li><a href="${cp }/product/list?major=TOP&sub=셔츠" class="outer_type">셔츠</a></li>
 		</ul>
 	</div>
-	<div onclick="List(event)">하의</div>
+	<div onclick="list(event)">하의</div>
 	<div id="bottom_list" style="height:100px;display:none;" class="major_type">
 		<ul>
 			<li><a href="${cp }/product/list?major=BOTTOM&sub=청바지" class="bottom_type">청바지</a></li>
@@ -84,7 +86,7 @@
 			<li><a href="${cp }/product/list?major=BOTTOM&sub=슬랙스" class="bottom_type">슬랙스</a></li>
 		</ul>
 	</div>
-	<div onclick="List(event)">원피스</div>
+	<div onclick="list(event)">원피스</div>
 		<div id="top_list" style="height:100px;display:none;" class="major_type">
 		<ul>
 			<li><a href="${cp }/product/list?major=ONEPIECE&sub=미니원피스" class="outer_type">미니 원피스</a></li>
@@ -93,7 +95,7 @@
 			<li><a href="${cp }/product/list?major=ONEPIECE&sub=점프수트" class="outer_type">점프수트</a></li>
 		</ul>
 	</div>
-	<div onclick="List(event)">가방</div>
+	<div onclick="list(event)">가방</div>
 	<div id="top_list" style="height:100px;display:none;" class="major_type">
 		<ul>
 			<li><a href="${cp }/product/list?major=BAG&sub=패딩" class="outer_type">백팩</a></li>

@@ -10,15 +10,20 @@
 				<img src="${cp }/upload/${imgList.get(0).savefilename }" style="width:400px; height:500px;">
 			</div>
 			<div style="float:left;width:300px; height:500px;margin-top:10px;margin-left:100px; text-align: center;">
-				<p>
+				<div>
 					상품명 : ${vo.pname }
-				</p>
-				<p>
+				</div>
+				<div>
 					가격 : ${vo.price }
-				</p>
-				<p>
-					하이
-				</p>
+				</div>
+				<div>
+					<select id="item_size" name="item_size">
+						<option value="">옵션</option>
+						<c:forEach var="sizeList" items="${sizeList }">
+							<option value="${sizeList }">${sizeList }</option>
+						</c:forEach>
+					</select>
+				</div>
 				<p>
 					하이
 				</p>
@@ -55,6 +60,14 @@
 			alert("로그인 후 이용해 주세요.");
 			return;
 		}
+		
+		var item_size = document.getElementById("item_size").value;
+		
+		if(item_size == null || item_size == ""){
+			alert("옵션을 선택해주세요.");
+			return;
+		}
+		
 		putxhr = new XMLHttpRequest();
 		putxhr.onreadystatechange = putOk;
 		putxhr.open('get',"${cp}/member/basket?type=put&id=${sessionScope.id}&inum=${vo.inum}",true);

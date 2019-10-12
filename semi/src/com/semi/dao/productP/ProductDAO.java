@@ -247,7 +247,7 @@ public class ProductDAO {
 		}
 	}
 	
-	//상세정보 얻어오기
+	// 상품 상세정보 얻어오기
 	public Product_ListVO getDetail(int inum) {
 		
 		Connection con = null;
@@ -324,4 +324,45 @@ public class ProductDAO {
 		}
 		
 	}
+	
+	//상품 상세정보에 사이즈표 얻어오기
+	public ArrayList<Integer> getSize(){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JdbcUtil.getConn();
+			String sql = "SELECT PS.PSIZE FROM PRODUCT_LIST PL,COLOR C,PRODUCT_SIZE PS WHERE PL.CNUM=C.CNUM AND C.SIZENUM=PS.SIZENUM";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			ArrayList<Integer> sizeList = new ArrayList<Integer>();
+			while(rs.next()) {
+				
+				int psize = rs.getInt("psize");
+				
+				sizeList.add(psize);
+				
+			}
+			
+			return sizeList;
+			
+		}catch(SQLException se) {
+			
+			se.printStackTrace();
+			return null;
+			
+		}finally {
+			
+			JdbcUtil.close(con, pstmt, rs);
+			
+		}
+	}
 }
+
+
+
+
+
+
+
