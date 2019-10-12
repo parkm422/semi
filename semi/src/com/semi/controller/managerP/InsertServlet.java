@@ -37,6 +37,7 @@ public class InsertServlet extends HttpServlet{
 		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 		
 	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -69,10 +70,12 @@ public class InsertServlet extends HttpServlet{
 		map.put("size",size);
 		map.put("color",color);
 		
+		/*
 		System.out.println((String)map.get("major"));
 		System.out.println((String)map.get("sub"));
 		System.out.println((int)map.get("size"));
 		System.out.println((String)map.get("color"));
+		*/
 		
 		CategoryDAO categorydao = CategoryDAO.getCategoryDao();
 		
