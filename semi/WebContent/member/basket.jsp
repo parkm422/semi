@@ -4,9 +4,15 @@
 <div id="main">
 	<h3>회원 장바구니 페이지</h3>
 	<div>
-		<table style="width:1500px;">
+		<table style="width:1500px; text-align: center;">
 			<colgroup>
-				<col width="100px">
+				<col width="10%">
+				<col width="20%">
+				<col width="30%">
+				<col width="10%">
+				<col width="10%">
+				<col width="10%">
+				<col width="10%">
 			</colgroup>
 			<tr>
 				<th>번호</th>
@@ -19,8 +25,30 @@
 			</tr>
 			<c:forEach var="basket" items="${requestScope.basketList }">
 				<tr>
-					<td><c:out value="${basket.savefilename }"/></td>
-					
+					<td>
+						<span>${basket.bnum }</span>
+					</td>
+					<td>
+						<img src="${cp }/upload/${basket.savefilename }" style="width:100px;height:100px;">
+					</td>
+					<td>
+						<div><p>${basket.pname } [${basket.colorname }]</p></div>
+						<div><p>[size : ${basket.psize }]</p></div>
+					</td>
+					<td>
+						<span>${basket.price }</span>
+					</td>
+					<td>
+						<input type="button" value="-" style="width:20px;height:20px;font-size:20px;">
+						<span>${basket.cnt }</span>
+						<input type="button" value="+" style="width:20px;height:20px;font-size:20px;">
+					</td>
+					<td>
+						<span>${basket.price * basket.cnt }</span>
+					</td>
+					<td>
+						<input type="button" value="상품삭제">
+					</td>
 				</tr>		
 			</c:forEach>
 		</table>

@@ -368,8 +368,8 @@ public class ProductDAO {
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			String sql ="SELECT AA.INUM,AA.PNAME,AA.COLORNAME, AA.PSIZE,IMG.SAVEFILENAME,B.BNUM,B.MNUM,B.CNT,B.REGDATE " + 
-					"FROM(SELECT PL.PNAME,PL.INUM,C.COLORNAME,PS.PSIZE FROM PRODUCT_LIST PL,COLOR C,PRODUCT_SIZE PS "
+			String sql ="SELECT AA.INUM,AA.PNAME,AA.COLORNAME, AA.PSIZE,IMG.SAVEFILENAME,AA.PRICE,B.BNUM,B.MNUM,B.CNT,B.REGDATE " + 
+					"FROM(SELECT PL.PNAME,PL.INUM,PL.PRICE,C.COLORNAME,PS.PSIZE FROM PRODUCT_LIST PL,COLOR C,PRODUCT_SIZE PS "
 					+ "WHERE PL.CNUM=C.CNUM AND C.SIZENUM=PS.SIZENUM)AA,PRODUCT_IMG IMG,BASKET B " + 
 					"WHERE AA.INUM=IMG.INUM AND B.INUM=AA.INUM AND B.MNUM=?";
 			pstmt = con.prepareStatement(sql);
@@ -383,6 +383,7 @@ public class ProductDAO {
 				String colorname = rs.getString("COLORNAME");
 				int psize = rs.getInt("PSIZE");
 				String savefilename = rs.getString("savefilename");
+				int price = rs.getInt("price");
 				int bnum = rs.getInt("bnum");
 				int cnt = rs.getInt("cnt");
 				Date regdate = rs.getDate("regdate");
@@ -393,6 +394,7 @@ public class ProductDAO {
 				map.put("colorname", colorname);
 				map.put("psize", psize);
 				map.put("savefilename", savefilename);
+				map.put("price", price); 	
 				map.put("bnum", bnum);
 				map.put("cnt", cnt);
 				map.put("regdate", regdate);
