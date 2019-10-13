@@ -6,9 +6,10 @@
 	<div>
 		<table style="width:1500px; text-align: center;">
 			<colgroup>
-				<col width="10%">
+				<col width="5%">
 				<col width="20%">
-				<col width="30%">
+				<col width="25%">
+				<col width="10%">
 				<col width="10%">
 				<col width="10%">
 				<col width="10%">
@@ -22,6 +23,7 @@
 				<th>수량</th>
 				<th>주문금액</th>
 				<th>주문관리(삭제)</th>
+				<th>등록일</th>
 			</tr>
 			<c:forEach var="basket" items="${requestScope.basketList }">
 				<tr>
@@ -49,8 +51,38 @@
 					<td>
 						<input type="button" value="상품삭제">
 					</td>
+					<td>
+						<span>${basket.regdate }</span>
+					</td>
 				</tr>		
 			</c:forEach>
 		</table>
+		
+		<!-- 장바구니 페이징처리 -->
+		<div style="text-align: center;">
+			<c:if test="${startPageNum>5 }">
+				<a href="${cp }/member/basket?pageNum=${startPageNum-1}">이전</a>
+			</c:if>
+			
+			<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+		<c:choose>
+			<c:when test="${pageNum == i }">
+				<a href="${cp }/member/basket?pageNum=${i}">
+					<span style="color:blue;">[${i }]</span>
+				</a>
+			</c:when>
+			<c:otherwise>
+				<a href="${cp }/member/basket?pageNum=${i}">
+					<span style="color:gray;">[${i }]</span>
+				</a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+			
+			<c:if test="${endPageNum<basketCount }">
+				<a href="${cp }/member/basket?pageNum=${startPageNum-1}">다음</a>
+			</c:if>
+		</div>
+		
 	</div>
 </div>

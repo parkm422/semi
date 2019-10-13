@@ -192,16 +192,19 @@ public class ProductDAO {
 	}
 	
 	// 상품 갯수 얻어오기
-	public int getCount() {
+	public int getCount(String sub) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			String sql = "SELECT NVL(COUNT(*),0) AS CNT FROM PRODUCT_LIST";
+			String sql = "SELECT NVL(COUNT(*),0) AS CNT " + 
+					"FROM PRODUCT_LIST PL,COLOR C,PRODUCT_SIZE PS,sub_category SUB " + 
+					"WHERE C.CNUM=PL.CNUM AND C.SIZENUM=PS.SIZENUM AND SUB.SCNUM=PS.SCNUM AND SUB.S_CATEGORY=?";
 			
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, sub);
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				int num = rs.getInt("CNT");
@@ -361,19 +364,20 @@ public class ProductDAO {
 	}
 	
 	//회원 장바구니 목록에 담고갈 정보 조인으로 얻어오기
-	public ArrayList<HashMap<String, Object>> getBasketList(int mnum){
+	public ArrayList<HashMap<String, Object>> getBasketList(int mnum, int startRow, int endRow){
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			String sql ="SELECT AA.INUM,AA.PNAME,AA.COLORNAME, AA.PSIZE,IMG.SAVEFILENAME,AA.PRICE,B.BNUM,B.MNUM,B.CNT,B.REGDATE " + 
-					"FROM(SELECT PL.PNAME,PL.INUM,PL.PRICE,C.COLORNAME,PS.PSIZE FROM PRODUCT_LIST PL,COLOR C,PRODUCT_SIZE PS "
-					+ "WHERE PL.CNUM=C.CNUM AND C.SIZENUM=PS.SIZENUM)AA,PRODUCT_IMG IMG,BASKET B " + 
-					"WHERE AA.INUM=IMG.INUM AND B.INUM=AA.INUM AND B.MNUM=?";
+			String sql ="SELECT BB.*,IMG.SAVEFILENAME,B.BNUM,B.MNUM,B.REGDATE,B.CNT " + 
+					"FROM(SELECT AA.*,ROWNUM AS RNUM FROM(SELECT PL.PNAME,PL.INUM,C.COLORNAME,PS.PSIZE,PL.PRICE FROM PRODUCT_LIST PL,COLOR C,PRODUCT_SIZE PS WHERE PL.CNUM=C.CNUM AND C.SIZENUM=PS.SIZENUM)AA)BB,PRODUCT_IMG IMG,BASKET B " + 
+					"WHERE BB.INUM=IMG.INUM AND BB.INUM=B.INUM AND RNUM>=? AND RNUM<=? AND B.MNUM=?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, mnum);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			pstmt.setInt(3, mnum);
 			rs = pstmt.executeQuery();
 			ArrayList<HashMap<String, Object>> basketList = new ArrayList<HashMap<String, Object>>();
 			while(rs.next()) {
@@ -382,11 +386,11 @@ public class ProductDAO {
 				String pname = rs.getString("PNAME");
 				String colorname = rs.getString("COLORNAME");
 				int psize = rs.getInt("PSIZE");
-				String savefilename = rs.getString("savefilename");
-				int price = rs.getInt("price");
-				int bnum = rs.getInt("bnum");
-				int cnt = rs.getInt("cnt");
-				Date regdate = rs.getDate("regdate");
+				String savefilename = rs.getString("SAVEFILENAME");
+				int price = rs.getInt("PRICE");
+				int bnum = rs.getInt("BNUM");
+				int cnt = rs.getInt("CNT");
+				Date regdate = rs.getDate("REGDATE");
 				
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				map.put("inum", inum);
@@ -408,6 +412,33 @@ public class ProductDAO {
 			return null;
 		}
 	}
+	
+	// 회원 장바구니 목록 개수 얻어오기
+	public int getBasketCount(int mnum) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JdbcUtil.getConn();
+			String sql ="SELECT NVL(COUNT(*),0) AS CNT FROM BASKET WHERE MNUM=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, mnum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				
+				int cnt = rs.getInt("CNT");
+				return cnt;
+			}
+			return 0;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}
+	}
+	
 }
 
 

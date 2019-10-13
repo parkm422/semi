@@ -38,7 +38,7 @@ public class ProductServlet extends HttpServlet{
 		ProductDAO dao = ProductDAO.getProductDao();
 		
 		ArrayList<List_img_joinVO> list = dao.list(startRow, endRow,major,sub);
-		int pageCount = (int)Math.ceil(dao.getCount()/30.0);
+		int pageCount = (int)Math.ceil(dao.getCount(sub)/30.0);
 		
 		int startPageNum = ((pageNum-1)/4*4)+1;
 		int endPageNum = startPageNum+4;

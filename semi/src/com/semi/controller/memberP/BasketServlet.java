@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
@@ -27,21 +28,51 @@ public class BasketServlet extends HttpServlet{
 		req.setCharacterEncoding("utf-8");
 		String type = req.getParameter("type");
 		
-		String id = req.getParameter("id");
-		
+		//type값이 put이면 장바구니 담기
 		if(type != null && type.equals("put")) {
-			
+					
 			itemPut(req,resp);
 			return;
 		}
 		
-		S_MemberDAO dao = S_MemberDAO.getSmemberDao();
-		
-		S_MemberVO vo = dao.getMemberInfo(id);
-		
+		S_MemberDAO memberDao = S_MemberDAO.getSmemberDao();
 		ProductDAO itemDao = ProductDAO.getProductDao();
 		
-		ArrayList<HashMap<String, Object>> basketList = itemDao.getBasketList(vo.getMnum());
+		HttpSession session = req.getSession();
+		
+		String id = (String) session.getAttribute("id");
+		
+		String basketPageNum = req.getParameter("pageNum");
+			
+		int pageNum = 1;
+		if(basketPageNum != null) {
+			pageNum = Integer.parseInt(basketPageNum);
+		}
+		
+		int startRow = 1+(pageNum-1)*5;
+		int endRow = startRow+4;
+		
+		int startPageNum = ((pageNum-1)/5*5)+1;
+		int endPageNum = startPageNum+4;
+		
+		S_MemberVO vo = memberDao.getMemberInfo(id);
+		
+		int basketPageCount = (int) Math.ceil(itemDao.getBasketCount(vo.getMnum())/5.0);
+		
+		if(endPageNum>basketPageCount) {
+			endPageNum = basketPageCount;
+		}
+		
+		ArrayList<HashMap<String, Object>> basketList = itemDao.getBasketList(vo.getMnum(),startRow,endRow);
+		
+		
+		req.setAttribute("pageNum", pageNum);
+		req.setAttribute("startRow", startRow);
+		req.setAttribute("endRow", endRow);
+		req.setAttribute("startPageNum", startPageNum);
+		req.setAttribute("endPageNum", endPageNum);
+		req.setAttribute("basketPageCount", basketPageCount);
+		
 		
 		req.setAttribute("basketList", basketList);
 		
@@ -53,6 +84,7 @@ public class BasketServlet extends HttpServlet{
 		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 	}
 	
+	//장바구니 담기 메소드
 	protected void itemPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		req.setCharacterEncoding("utf-8");
