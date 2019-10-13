@@ -4,9 +4,10 @@
 	xhr = null;
 	function idcheck(){
 		var id = document.getElementById("id").value;
+		alert(id);
 		xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = callback;
-		xhr.open('get','${cp}/member/idcheck.jsp?id='+id,true);
+		xhr.open('get','${cp}/member/idcheck?id='+id,true);
 		xhr.send();
 	}
 	function callback(){
@@ -15,7 +16,7 @@
 			var data = xhr.responseText;
 			var check = JSON.parse(data);
 			var idcheck = document.getElementById("idc");
-			if(check == true){
+			if(check.check == true){
 				idcheck.innerHTML = "이미 사용중인 아이디입니다.";
 			}else{
 				idcheck.innerHTML = "사용 가능한 아이디입니다.";

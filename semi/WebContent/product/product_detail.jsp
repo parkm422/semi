@@ -11,10 +11,10 @@
 			</div>
 			<div style="float:left;width:300px; height:500px;margin-top:10px;margin-left:100px; text-align: center;">
 				<div>
-					상품명 : ${vo.pname }
+					<span>상품명 : ${vo.pname }</span>
 				</div>
 				<div>
-					가격 : ${vo.price }
+					<span>가격 : ${vo.price }</span>
 				</div>
 				<div>
 					<select id="item_size" name="item_size">
