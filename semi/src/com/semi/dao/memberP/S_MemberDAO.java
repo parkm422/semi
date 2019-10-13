@@ -53,7 +53,7 @@ public class S_MemberDAO {
 	}
 	
 	// 아이디로 회원찾기
-	public S_MemberVO select(String id) {
+	public S_MemberVO getMemberInfo(String id) {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;

@@ -3,6 +3,7 @@ package com.semi.controller.memberP;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,12 +37,11 @@ public class BasketServlet extends HttpServlet{
 		
 		S_MemberDAO dao = S_MemberDAO.getSmemberDao();
 		
-		S_MemberVO vo = dao.select(id);
+		S_MemberVO vo = dao.getMemberInfo(id);
 		
 		ProductDAO itemDao = ProductDAO.getProductDao();
 		
-		ArrayList<BasketVO> basketList = itemDao.basketList(vo.getMnum());
-		
+		ArrayList<HashMap<String, Object>> basketList = itemDao.getBasketList(vo.getMnum());
 		
 		req.setAttribute("basketList", basketList);
 		
@@ -60,16 +60,18 @@ public class BasketServlet extends HttpServlet{
 		String id = req.getParameter("id");
 		int inum = Integer.parseInt(req.getParameter("inum"));
 		
+		// 상품 DAO 객체 생성
 		ProductDAO productDao = ProductDAO.getProductDao();
+		
+		// 회원 DAO 객체 생성
 		S_MemberDAO memDao = S_MemberDAO.getSmemberDao();
 		
-		S_MemberVO vo = memDao.select(id);
+		S_MemberVO vo = memDao.getMemberInfo(id);
 		
 		Product_ListVO pvo = productDao.getDetail(inum);
 		
 		String pname = pvo.getPname();
-		System.out.println(vo.getMnum());
-		System.out.println(vo.getMnum());
+
 		int mnum = vo.getMnum();
 		
 		BasketVO basket = new BasketVO(0, mnum, inum, pname, 1, null);
