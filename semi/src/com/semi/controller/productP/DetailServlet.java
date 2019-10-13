@@ -43,6 +43,7 @@ public class DetailServlet extends HttpServlet{
 		ArrayList<Product_ImgVO> imgList = dao.getImg(inum);
 		
 		//상품 사이즈표 얻어오기
+		//상품 사이즈표 얻어오기는 오라클 distinct사용해서 중복제거하기(아직 처리안함)
 		ArrayList<Integer> sizeList = dao.getSize();
 		
 		req.setAttribute("vo", vo);
