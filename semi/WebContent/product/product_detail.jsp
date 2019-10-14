@@ -41,6 +41,7 @@
 		<h3>상품 리뷰</h3>
 		<c:forEach var="review" items="${reviewList }">
 			<div>
+				<div><span>${review.rnum }</span></div>
 				<div>
 					<span>${review.writer }</span>&nbsp;&nbsp;
 					<span>평점 :</span>
@@ -57,7 +58,11 @@
 				<div style="font-weight: bold;">${review.title }</div><br>
 				<div>${review.content }</div>
 				<div><img src="${cp }/upload/${review.savefilename }" style="width:150px;height:150px;"></div>
-				<div><textarea rows="4" cols="100"></textarea><input type="button" value="등록" onclick="insert()"></div>
+				<div>
+					<div>
+						<textarea rows="4" cols="100"></textarea><input type="button" value="댓글쓰기" onclick="commentInsert(event)">
+					</div>
+				</div>
 			</div>
 		</c:forEach>
 	</div>
@@ -85,6 +90,12 @@
 	</div>
 </div>
 <script type="text/javascript">
+	
+	function commentInsert(e){
+		var comment = e.target.firstChild.nextSibling.nextSibling;
+		alert(comment)
+		comment.style.display = "block";
+	}
 	
 	var putxhr = null;
 	function itemPut(){
@@ -118,4 +129,24 @@
 			}
 		}
 	}
+	
+	function commentInsert(){
+		
+	}
+	
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

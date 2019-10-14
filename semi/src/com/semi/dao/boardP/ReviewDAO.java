@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.semi.vo.boardP.ReviewChildVO;
 import com.semi.vo.boardP.ReviewVO;
 
 import jdbc.JdbcUtil;
@@ -88,9 +89,9 @@ public class ReviewDAO {
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			String sql = "SELECT * " + 
-					"FROM(SELECT AA.*,ROWNUM AS RRNUM FROM(SELECT * FROM REVIEW WHERE INUM=? ORDER BY RNUM DESC, REF DESC, STEP ASC)AA)"
-					+ "WHERE RRNUM>=? AND RRNUM<=?";
+			String sql = "SELECT * FROM(SELECT AA.*,ROWNUM AS RRNUM "
+						+ "FROM(SELECT * FROM REVIEW WHERE INUM=? ORDER BY RNUM DESC)AA) "
+						+ "WHERE RRNUM>=? AND RRNUM<=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, inum);
 			pstmt.setInt(2, startRow);
@@ -107,14 +108,51 @@ public class ReviewDAO {
 				String orgfilename = rs.getString("orgfilename");
 				String savefilename = rs.getString("savefilename");
 				int rating = rs.getInt("rating");
+				
+				ReviewVO vo = new ReviewVO(rnum, inum2, writer, title, content, orgfilename, savefilename, rating);
+				reviewList.add(vo);
+			}
+			return reviewList;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return null;
+		}finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}
+	}
+	
+	public ArrayList<ReviewChildVO> reviewChild_list(ArrayList<Integer> rnum){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JdbcUtil.getConn();
+			String sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? AND RNUM=? AND RNUM=? AND RNUM=? AND RNUM=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, rnum.get(0));
+			pstmt.setInt(2, rnum.get(1));
+			pstmt.setInt(3, rnum.get(2));
+			pstmt.setInt(4, rnum.get(3));
+			pstmt.setInt(5, rnum.get(4));
+			rs = pstmt.executeQuery();
+			ArrayList<ReviewChildVO> childList = new ArrayList<ReviewChildVO>();
+			while(rs.next()) {
+				
+				int rcnum = rs.getInt("rcnum");
+				int rnum2 = rs.getInt("rnum");
+				String rcwriter = rs.getString("rcwriter");
+				String comments = rs.getString("comments");
 				int ref = rs.getInt("ref");
 				int lev = rs.getInt("lev");
 				int step = rs.getInt("step");
 				
-				ReviewVO vo = new ReviewVO(rnum, inum2, writer, title, content, orgfilename, savefilename, rating, ref, lev, step);
-				reviewList.add(vo);
+				ReviewChildVO vo = new ReviewChildVO(rcnum, rnum2, rcwriter, comments, ref, lev, step);
+				childList.add(vo);
 			}
-			return reviewList;
+			
+			return childList;
+			
 		}catch(SQLException se) {
 			se.printStackTrace();
 			return null;
