@@ -6,7 +6,7 @@
 		<form method="post" action="${cp }/manager/login">
 			<div><input type="text" name="id" placeholder="아이디"></div>
 			<div><input type="password" name="pwd" placeholder="비밀번호"></div>
-			<div style="color:red;">${errMsg }</div>
+			<div style="color:red;font-size:12px;">${errMsg }</div>
 			<div><input type="submit" value="로그인"></div>
 		</form>
 	</div>

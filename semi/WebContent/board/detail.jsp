@@ -15,6 +15,7 @@ ${vo.category }<input type="radio" checked="checked"><br>
 내용<br>
 <textarea rows="10" cols="100" readonly="readonly">${vo.content }</textarea><br>
 <c:if test="${vo.answer!=null }">
+관리자 답변<br>
 <textarea rows="5" cols="50" readonly="readonly">${vo.answer }</textarea><br>
 </c:if>
 <c:choose>

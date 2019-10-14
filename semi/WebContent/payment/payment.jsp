@@ -15,6 +15,8 @@
 			document.getElementById("main").style.display="block";
 		}else if(i==1){
 			document.getElementById("main1").style.display="block";
+		}else if(i==2){
+			document.getElementById("main").style.display="block";
 		}
 	}
 	function acount() {
@@ -25,7 +27,11 @@
 			alert("국민은행 계좌번호:123456789-55-123456789 입금할 금액:");
 		
 			location.href="${pageContext.request.contextPath}/main";
+		}else{
+			alert("우리은행 계좌번호:987654321-33-987654321 입금할 금액:");
+			location.href="${pageContext.request.contextPath}/main";
 		}
+		
 	}
 	function card() {
 		var card=document.getElementsByName("card")[0];
@@ -43,7 +49,7 @@
 		var num3=document.getElementsByName("num3").value;
 		if(i!=null){
 			alert("카드사:"+card.value+" "+"카드번호:"+num+"-"+num1+"-"+num2+"-"+num3);
-			location.href=${cp}"/main";
+			location.href="${pageContext.request.contextPath}/main";
 		}
 	}
 
@@ -51,7 +57,7 @@
 </script>
 </head>
 <body>
-총 금액 = <input type="text" name="amount" size="10" value="${vo.AMOUNT }"><br><br>
+총 금액 = <input type="text" name="amount" size="10" value=""><br><br>
 <select name="paymethod">
 <option value="계좌이체">계좌이체</option>
 <option value="카드">카드</option>

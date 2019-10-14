@@ -3,19 +3,22 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h1>1:1게시판</h1>
 <a href="${cp }/main">홈으로</a>
+
 <table border="1" width="600">
 	<tr>
 		<th>글번호</th><th>작성자</th><th>제목</th>
 	</tr>
-	<c:if test="${sessionScope.id == vo.writer}">
+	
 	<c:forEach var="vo" items="${list }">
+		<c:if test="${sessionScope.id == vo.writer}">
 		<tr>
 			<td>${vo.ennum }</td>
 			<td>${vo.writer }</td>
 			<td><a href="${cp }/board/detail?ennum=${vo.ennum }">${vo.title }</a></td>
 		</tr>
+		</c:if>
 	</c:forEach>
-	</c:if>
+	
 </table>
 <br>
 <div>
