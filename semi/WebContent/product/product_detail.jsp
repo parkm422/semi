@@ -70,8 +70,8 @@
 										<span>댓글 : ${child.comments }</span>
 									</div>
 									<div>
-									<a href="javascript:aa(event)">
-											<span>답글 작성</span>
+										<a href="javascript:aa('event')">
+											답글 작성
 										</a>
 										<!-- 
 										<a href="javascript:comment(${child.rcnum },${child.ref },${child.lev },${child.step })">
@@ -111,9 +111,10 @@
 	</div>
 </div>
 <script type="text/javascript">
-	/*
+	
 	function aa(e){
-		var a = e.target.parentNode;
+		var a = e.target;
+		alert(a);
 		var text = document.createElement("textarea");
 		var btn = document.createElement("input");
 		btn.type = "button";
@@ -123,7 +124,7 @@
 		a.appendChild(btn);
 		
 	}
-	*/
+	
 	commentxhr = null;
 	function comment(rcnum,ref,lev,step){
 		commentxhr = new XMLHttpRequest();
