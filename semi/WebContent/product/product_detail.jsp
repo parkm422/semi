@@ -36,18 +36,51 @@
 	<div style="clear: both;">
 		상품상세
 	</div>
+	<br><br>
 	<div>
-		<h3>리뷰게시판</h3>
+		<h3>상품 리뷰</h3>
 		<c:forEach var="review" items="${reviewList }">
 			<div>
-				<div>${review.writer }</div>
+				<div>
+					<span>${review.writer }</span>&nbsp;&nbsp;
+					<span>평점 :</span>
+					<c:choose>
+						<c:when test="${review.rating == 5 }"><span style="color:orange;">★★★★★</span></c:when>
+						<c:when test="${review.rating == 4 }"><span style="color:orange;">★★★★</span></c:when>
+						<c:when test="${review.rating == 3 }"><span style="color:orange;">★★★</span></c:when>
+						<c:when test="${review.rating == 2 }"><span style="color:orange;">★★</span></c:when>
+						<c:when test="${review.rating == 1 }"><span style="color:orange;">★</span></c:when>
+					</c:choose>
+					
+				</div>
 				<div>${vo.pname }</div>
-				<div>${review.title }</div>
+				<div style="font-weight: bold;">${review.title }</div><br>
 				<div>${review.content }</div>
-				<div><img src="${cp }/upload/${review.savefilename }">5</div>
-				<div><textarea rows="2" cols="100"></textarea><input type="button" value="등록" onclick="insert()"></div>
+				<div><img src="${cp }/upload/${review.savefilename }" style="width:150px;height:150px;"></div>
+				<div><textarea rows="4" cols="100"></textarea><input type="button" value="등록" onclick="insert()"></div>
 			</div>
 		</c:forEach>
+	</div>
+	<!-- 리뷰게시판 페이징처리 -->
+	<div>
+		<c:if test="${startPageNum>5 }">
+			<a href="${cp }/product/detail?pageNum=${startPageNum-1 }&inum=${vo.inum }&sub=${param.sub }">[이전]</a>
+		</c:if>
+		
+		<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+			<c:choose>
+				<c:when test="${pageNum == i }">
+					<a href="${cp }/product/detail?pageNum=${i }&inum=${vo.inum }&sub=${param.sub }" style="color:blue;">[${i }]</a>
+				</c:when>
+				<c:otherwise>
+					<a href="${cp }/product/detail?pageNum=${i }&inum=${vo.inum }&sub=${param.sub }" style="color:gray;">[${i }]</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		
+		<c:if test="${endPageNum<reviewPageCount }">
+			<a href="${cp }/product/detail?pageNum=${startPageNum-1 }&inum=${vo.inum }&sub=${param.sub }">[다음]</a>
+		</c:if>
 		
 	</div>
 </div>

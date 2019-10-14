@@ -20,7 +20,7 @@
 	}
 	#nav{
 		width:14.9%;
-		height:2500px;
+		height:4000px;
 		float:left;
 		border-right:1px solid black;
 	}
@@ -33,7 +33,6 @@
 	}
 	#main{
 		width:85%;
-		height:2500px;
 		float:right	;
 	}
 	#footer{

@@ -330,15 +330,18 @@ public class ProductDAO {
 	}
 	
 	//상품 상세정보에 사이즈표 얻어오기
-	public ArrayList<Integer> getSize(){
+	public ArrayList<Integer> getSize(String sub){
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			String sql = "SELECT PS.PSIZE FROM PRODUCT_LIST PL,COLOR C,PRODUCT_SIZE PS WHERE PL.CNUM=C.CNUM AND C.SIZENUM=PS.SIZENUM";
+			String sql = "SELECT distinct PS.PSIZE " + 
+					"FROM PRODUCT_LIST PL,COLOR C,PRODUCT_SIZE PS,SUB_CATEGORY SUB " + 
+					"WHERE PL.CNUM=C.CNUM AND C.SIZENUM=PS.SIZENUM AND SUB.SCNUM=PS.SCNUM AND SUB.S_CATEGORY=?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, sub);
 			rs = pstmt.executeQuery();
 			ArrayList<Integer> sizeList = new ArrayList<Integer>();
 			while(rs.next()) {
@@ -385,23 +388,23 @@ public class ProductDAO {
 			while(rs.next()) {
 				
 				int inum = rs.getInt("INUM");
-				System.err.println("inum"+inum);
+				
 				String pname = rs.getString("PNAME");
-				System.err.println("pname"+pname);
+				
 				String colorname = rs.getString("COLORNAME");
-				System.err.println("colorname"+colorname);
+				
 				int psize = rs.getInt("PSIZE");
-				System.err.println("psize"+psize);
+				
 				String savefilename = rs.getString("SAVEFILENAME");
-				System.err.println("savefilename"+savefilename);
+				
 				int price = rs.getInt("PRICE");
-				System.err.println("price"+price);
+				
 				int bnum = rs.getInt("BNUM");
-				System.err.println("bnum"+bnum);
+				
 				int cnt = rs.getInt("CNT");
-				System.err.println("cnt"+cnt);
+
 				Date regdate = rs.getDate("REGDATE");
-				System.err.println("regdate"+regdate);
+
 				
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				map.put("inum", inum);

@@ -52,6 +52,35 @@ public class ReviewDAO {
 		
 	}
 	*/
+	
+	// 상품번호에 해당 하는 리뷰 개수 얻어오기
+	public int getReviewCount(int inum) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JdbcUtil.getConn();
+			String sql = "SELECT NVL(COUNT(*),0) AS CNT FROM REVIEW WHERE INUM=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, inum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				
+				int cnt = rs.getInt("cnt");
+				
+				return cnt;
+			}
+			return 0;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}
+	}
+	
+	// 리뷰게시판 목록 얻어오기 페이징처리
 	public ArrayList<ReviewVO> review_list(int startRow, int endRow, int inum){
 		
 		Connection con = null;
@@ -60,7 +89,7 @@ public class ReviewDAO {
 		try {
 			con = JdbcUtil.getConn();
 			String sql = "SELECT * " + 
-					"FROM(SELECT AA.*,ROWNUM AS RRNUM FROM(SELECT * FROM REVIEW WHERE INUM=? ORDER BY REF DESC, STEP ASC)AA)"
+					"FROM(SELECT AA.*,ROWNUM AS RRNUM FROM(SELECT * FROM REVIEW WHERE INUM=? ORDER BY RNUM DESC, REF DESC, STEP ASC)AA)"
 					+ "WHERE RRNUM>=? AND RRNUM<=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, inum);
