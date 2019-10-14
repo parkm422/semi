@@ -122,7 +122,6 @@ public class ReviewDAO {
 	}
 	
 	public ArrayList<ReviewChildVO> reviewChild_list(ArrayList<Integer> rnum){
-		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -130,6 +129,7 @@ public class ReviewDAO {
 			con = JdbcUtil.getConn();
 			int len = rnum.size();
 			String sql = "";
+			
 			if(len == 1) {
 				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=?";
 			}else if(len == 2){

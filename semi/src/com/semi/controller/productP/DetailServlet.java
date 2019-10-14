@@ -73,15 +73,16 @@ public class DetailServlet extends HttpServlet{
 		
 		//리뷰자식게시판의 부모 번호 얻어오기
 		ArrayList<Integer> rnum = new ArrayList<Integer>();
-			
-		for(ReviewVO n : reviewList) {
-			rnum.add(n.getRnum());
+		if(rnum != null && rnum.size() > 0) {
+					
+			for(ReviewVO n : reviewList) {
+				rnum.add(n.getRnum());
+			}
+			ArrayList<ReviewChildVO> reviewchild = reviewDao.reviewChild_list(rnum);
+				
+			//리뷰자식게시판 목록 담기
+			req.setAttribute("reviewchild", reviewchild);
 		}
-		ArrayList<ReviewChildVO> reviewchild = reviewDao.reviewChild_list(rnum);
-			
-		//리뷰자식게시판 목록 담기
-		req.setAttribute("reviewchild", reviewchild);
-		
 		//리뷰게시판 페이징처리 담기
 		req.setAttribute("pageNum", pageNum);
 		req.setAttribute("startRow", startRow);
