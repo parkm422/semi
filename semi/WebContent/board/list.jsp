@@ -10,7 +10,7 @@
 	</tr>
 	
 	<c:forEach var="vo" items="${list }">
-		<c:if test="${sessionScope.id == vo.writer}">
+		<c:if test="${sessionScope.id == vo.writer }">
 		<tr>
 			<td>${vo.ennum }</td>
 			<td>${vo.writer }</td>

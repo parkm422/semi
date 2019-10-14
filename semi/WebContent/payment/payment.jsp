@@ -1,3 +1,6 @@
+<%@page import="jdbc.JdbcUtil"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -25,6 +28,7 @@
 		
 		if(i==0){
 			alert("국민은행 계좌번호:123456789-55-123456789 입금할 금액:");
+			
 		
 			location.href="${pageContext.request.contextPath}/main";
 		}else{
@@ -57,7 +61,7 @@
 </script>
 </head>
 <body>
-총 금액 = <input type="text" name="amount" size="10" value=""><br><br>
+총 금액 = <input type="text" name="amount" size="10" value="${price }"><br><br>
 <select name="paymethod">
 <option value="계좌이체">계좌이체</option>
 <option value="카드">카드</option>

@@ -27,6 +27,54 @@ public class ProductDAO {
 		return productDao;
 	}
 	
+public ArrayList<BasketVO> pricesel(int bnum){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JdbcUtil.getConn();
+			String sql = "SELECT * FROM BASKET WHERE MNUM=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bnum);
+			rs = pstmt.executeQuery();
+			ArrayList<BasketVO> bList = new ArrayList<BasketVO>();
+			while(rs.next()) {
+				
+				int bnum1 = rs.getInt("bnum");
+				int mnum2 = rs.getInt("mnum");
+				int inum = rs.getInt("inum");
+				String pname = rs.getString("pname");
+				int cnt = rs.getInt("cnt");
+				Date regdate = rs.getDate("regdate");
+				
+				BasketVO vo = new BasketVO(bnum1, mnum2, inum, pname, cnt, regdate);
+				bList.add(vo);
+			}
+			return bList;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return null;
+		}finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}
+	}
+	
+	public int priceSelect(int bnum) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select price from basket where bnum=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1,bnum);
+			int n=pstmt.executeUpdate();
+			return 0;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}
+	}
 	
 	// 상품등록
 	public int productInsert(Product_ListVO vo,String orgfilename,String savefilename) {
