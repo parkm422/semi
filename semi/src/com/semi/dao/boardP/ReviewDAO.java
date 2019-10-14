@@ -128,8 +128,22 @@ public class ReviewDAO {
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			String sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? AND RNUM=? AND RNUM=? AND RNUM=? AND RNUM=?";
+			int len = rnum.size();
+			String sql = "";
+			if(len == 1) {
+				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=?";
+			}else if(len == 2){
+				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=?";
+			}else if(len == 3) {
+				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? OR RNUM=?";
+			}else if(len == 4) {
+				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? OR RNUM=? OR RNUM=?";
+			}else {
+				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? OR RNUM=? OR RNUM=? OR RNUM=?";
+			}
+			
 			pstmt = con.prepareStatement(sql);
+
 			pstmt.setInt(1, rnum.get(0));
 			pstmt.setInt(2, rnum.get(1));
 			pstmt.setInt(3, rnum.get(2));

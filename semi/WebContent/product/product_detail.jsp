@@ -60,11 +60,30 @@
 				<div><img src="${cp }/upload/${review.savefilename }" style="width:150px;height:150px;"></div>
 				<div>
 					<div>
-						<textarea rows="4" cols="100"></textarea><input type="button" value="댓글쓰기" onclick="commentInsert(event)">
+						<c:forEach var="child" items="${reviewchild }">
+							<c:if test="${child.rnum == review.rnum }">
+								<div style="border:1px solid black;width:500px;">
+									<div>
+										<span>아이디 : ${child.rcwriter }</span>
+									</div>
+									<div>
+										<span>댓글 : ${child.comments }</span>
+									</div>
+									<div>
+										<a href="javascript:comment(${child.rcnum },${child.ref },${child.lev },${child.step })">
+											<span>답글 작성</span>
+										</a>
+									</div>
+								</div>
+							</c:if>
+						</c:forEach>
 					</div>
 				</div>
 			</div>
 		</c:forEach>
+		<div>
+			<textarea rows="4" cols="100"></textarea><input type="button" value="댓글쓰기" onclick="commentInsert(event)">
+		</div>
 	</div>
 	<!-- 리뷰게시판 페이징처리 -->
 	<div>
@@ -91,10 +110,18 @@
 </div>
 <script type="text/javascript">
 	
-	function commentInsert(e){
-		var comment = e.target.firstChild.nextSibling.nextSibling;
-		alert(comment)
-		comment.style.display = "block";
+	commentxhr = null;
+	function comment(rcnum,ref,lev,step){
+		commentxhr = new XMLHttpRequest();
+		commentxhr.onreadystatechange = comm;
+		commentxhr.open('get','${cp}/member/comment?rcnum='+rcnum+'&ref='+ref+'&lev='+lev+'&step='+step,true);
+		commentxhr.send();
+	}
+	function comm(){
+		if(commentxhr.readyState == 4 && commentxhr.status == 200){
+			var data = commentxhr.responseText;
+			var json = JSON.parse(data);
+		}
 	}
 	
 	var putxhr = null;

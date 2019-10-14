@@ -20,9 +20,7 @@
 	}
 	#nav{
 		width:14.9%;
-		height:4000px;
 		float:left;
-		border-right:1px solid black;
 	}
 	#nav div{
 		width:100%;
@@ -37,6 +35,8 @@
 	}
 	#footer{
 		width:100%;
+		display:flex;
+		flex-direction: column;
 	}
 	#footer h1{
 		text-align: center;
