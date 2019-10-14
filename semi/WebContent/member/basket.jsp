@@ -55,7 +55,7 @@
 					<td>
 						<span>${basket.regdate }</span>
 					</td>
-				</tr>		
+				</tr>
 			</c:forEach>
 		</table>
 		

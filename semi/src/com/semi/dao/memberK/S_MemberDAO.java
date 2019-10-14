@@ -1,4 +1,4 @@
-package com.semi.comtroller.memberK;
+package com.semi.dao.memberK;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
