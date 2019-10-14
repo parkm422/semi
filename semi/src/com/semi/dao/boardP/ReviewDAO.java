@@ -143,12 +143,9 @@ public class ReviewDAO {
 			}
 			
 			pstmt = con.prepareStatement(sql);
-
-			pstmt.setInt(1, rnum.get(0));
-			pstmt.setInt(2, rnum.get(1));
-			pstmt.setInt(3, rnum.get(2));
-			pstmt.setInt(4, rnum.get(3));
-			pstmt.setInt(5, rnum.get(4));
+			for(int i = 0; i<len; i++) {
+				pstmt.setInt(i+1, rnum.get(i));
+			}
 			rs = pstmt.executeQuery();
 			ArrayList<ReviewChildVO> childList = new ArrayList<ReviewChildVO>();
 			while(rs.next()) {

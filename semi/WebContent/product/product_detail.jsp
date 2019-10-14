@@ -70,9 +70,14 @@
 										<span>댓글 : ${child.comments }</span>
 									</div>
 									<div>
+									<a href="javascript:aa(event)">
+											<span>답글 작성</span>
+										</a>
+										<!-- 
 										<a href="javascript:comment(${child.rcnum },${child.ref },${child.lev },${child.step })">
 											<span>답글 작성</span>
 										</a>
+										 -->
 									</div>
 								</div>
 							</c:if>
@@ -81,9 +86,6 @@
 				</div>
 			</div>
 		</c:forEach>
-		<div>
-			<textarea rows="4" cols="100"></textarea><input type="button" value="댓글쓰기" onclick="commentInsert(event)">
-		</div>
 	</div>
 	<!-- 리뷰게시판 페이징처리 -->
 	<div>
@@ -109,7 +111,19 @@
 	</div>
 </div>
 <script type="text/javascript">
-	
+	/*
+	function aa(e){
+		var a = e.target.parentNode;
+		var text = document.createElement("textarea");
+		var btn = document.createElement("input");
+		btn.type = "button";
+		btn.value = "등록";
+		
+		a.appendChild(text);
+		a.appendChild(btn);
+		
+	}
+	*/
 	commentxhr = null;
 	function comment(rcnum,ref,lev,step){
 		commentxhr = new XMLHttpRequest();

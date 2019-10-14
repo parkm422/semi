@@ -21,6 +21,7 @@
 	#nav{
 		width:14.9%;
 		float:left;
+		min-height: 3000px;
 	}
 	#nav div{
 		width:100%;
@@ -32,6 +33,7 @@
 	#main{
 		width:85%;
 		float:right	;
+		min-height: 3000px;
 	}
 	#footer{
 		width:100%;
