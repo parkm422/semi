@@ -2,16 +2,21 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
+	var a=false;
+	var b=false;
 	function pwd1check() {
 		var pwd = document.getElementById("pwd").value;
 		var span1 = document.getElementById("pwdchk1");
 		if(pwd==""){
 			span1.style.color="red";
 			span1.innerHTML="입력하세요.";
+			a=false;
 		}else if(pwd.length<8){
 			span1.innerHTML="8자이상 입력하세요."
+			a=false;
 		}else if(pwd.length>=8){
 			span1.innerHTML="";
+			a=true;
 		}
 	}
 	function pwd2check() {
@@ -21,24 +26,28 @@
 		if (pwd ==chkpwd ) {
 			span2.style.color="blue";
 			span2.innerHTML = "비밀번호가 일치합니다.";
+			b=true;
 		}else if(chkpwd==""){
 			span2.style.color="red";
 			span2.innerHTML="입력하세요.";
+			b=false;
 		}else{
 			span2.style.color="red";
 			span2.innerHTML = "비밀번호가 불일치합니다.";
+			b=false;
 		}
 	}
 	function allcheck() {
 		var chk=document.getElementById("chk");
-		var id=document.getElementById("id").value;
-		var pwd=document.getElementById("pwd").value;
 		var chkpwd=document.getElementById("chkpwd").value;
 		var email=document.getElementById("email").value;
 		var address=document.getElementById("address").value;
 		var phone=document.getElementById("phone").value;
-		if(id!=="" && pwd!=="" && chkpwd!=="" && email!=="" && address!=="" && phone!=""){
+		if(a==true && b==true && chkpwd!=="" && email!=="" && address!=="" && phone!=""){
 			chk.disabled=false;
+			allcheck();
+		}else{
+			allcheck();
 		}
 	}
 </script>

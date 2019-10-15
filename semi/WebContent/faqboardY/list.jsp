@@ -2,9 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<script type="text/javascript">
-	var cnt=0;
 	var xhr=null;
-
+	var cnt=0;
 	function lookanswer(e) {
 		var txts=document.getElementsByClassName("txts");
 		var question=e.target.textContent;
@@ -15,13 +14,13 @@
 	}
 	function success() {
 		if(xhr.readyState==4 && xhr.status==200){
-			cnt++;
 			var data=xhr.responseText;
 			var json=JSON.parse(data);
 			var div=document.getElementsByClassName("result");
+			cnt++;
 			for(var i=0;i<json.length;i++){
-					div[(json[i].fnum-1)].innerHTML="<질문번호>"+json[i].fnum+"<br><카테고리>"+json[i].category+"<br><질문>"+json[i].question+"<br><답변>"+json[i].answer+"<br>";
-					if(cnt==2){
+					div[(json[i]).fnum-1].innerHTML="<질문번호>"+json[i].fnum+"<br><카테고리>"+json[i].category+"<br><질문>"+json[i].question+"<br><답변>"+json[i].answer+"<br>";
+					 if(cnt==2){
 						div[(json[i].fnum-1)].innerHTML="";
 						cnt=0;
 							}

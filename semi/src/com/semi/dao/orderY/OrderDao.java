@@ -74,7 +74,7 @@ public class OrderDao {
 				rs=pstmt.executeQuery();
 				ArrayList<OrderVo> list=new ArrayList<OrderVo>();
 				while(rs.next()) {
-					OrderVo vo=new OrderVo(
+					OrderVo vo2=new OrderVo(
 							rs.getInt("ornum"),
 							rs.getInt("mnum"),
 							rs.getInt("amount"), 
@@ -82,7 +82,7 @@ public class OrderDao {
 							rs.getString("deladd"),
 							rs.getString("delivery"), 
 							rs.getDate("orderdate")); 
-						list.add(vo);
+						list.add(vo2);
 				}
 				return list;
 			}catch(SQLException se) {

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.semi.vo.memberY.MemberVo;
 import com.semi.vo.orderY.OrderVo;
@@ -38,7 +39,7 @@ public class MemberDao {
 				JdbcUtil.close(con, pstmt, null);
 			}
 		}
-		public MemberVo select(String id) {
+		public int select(String id) {
 			Connection con=null;
 			PreparedStatement pstmt=null;
 			ResultSet rs=null;
@@ -50,13 +51,12 @@ public class MemberDao {
 				rs=pstmt.executeQuery();
 				if(rs.next()) {
 					int mnum=rs.getInt("mnum");
-					MemberVo vo=new MemberVo(mnum, null,null,null,null,null,null,0,null);
-					return vo;
+					return mnum;
 				}
-				return null;
+				return 0;
 			}catch(SQLException se) {
 				System.out.println(se.getMessage());
-				return null;
+				return 0;
 			}finally {
 				try {
 					if(rs!=null) rs.close();
@@ -65,5 +65,36 @@ public class MemberDao {
 				}catch(SQLException se) {}
 			}
 		}
-		
+		public ArrayList<MemberVo> list(String id){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select * from s_members where id=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,id);
+			rs=pstmt.executeQuery();
+			ArrayList<MemberVo> list=new ArrayList<MemberVo>();
+			while(rs.next()) {
+				MemberVo vo1=new MemberVo(
+						rs.getInt("mnum"),
+						rs.getString("name"),
+						rs.getString("id"), 
+						rs.getString("pwd"), 
+						rs.getString("email"),
+						rs.getString("address"), 
+						rs.getString("phone"),
+						rs.getInt("point"),
+						rs.getDate("joindate")); 
+					list.add(vo1);
+			}
+			return list;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}	
+	}
 }

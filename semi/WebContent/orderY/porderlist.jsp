@@ -6,17 +6,17 @@
 </p>
 <table border="1" width="600">
 	<tr>
-		<th>주문번호</th><th>회원번호</th><th>총계산금액</th><th>배송주소</th><th>주문상태</th><th>배송상태</th><th>주문날짜</th>
+		<th>주문번호</th><th>상품이름</th><th>사이즈</th><th>색상</th><th>수량</th><th>금액</th><th>구매날짜</th>
 	</tr>
-	<c:forEach var="vo" items="${list }">
+	<c:forEach var="vo2" items="${list }">
 		<tr>
-			<td>${vo.ornum }</td>
-			<td>${vo.mnum }</td>
-			<td>${vo.amount }</td>
-			<td>${vo.deladd}</td>
-			<td>${vo.status}</td>
-			<td>${vo.delivery }</td>
-			<td>${vo.orderdate}</td>
+			<td>${vo2.ornum }</td>
+			<td>${vo2.pname }</td>
+			<td>${vo2.psize }</td>
+			<td>${vo2.color}</td>
+			<td>${vo2.cnt}</td>
+			<td>${vo2.amount}</td>
+			<td>${vo2.orderdate}</td>
 		</tr>
 	</c:forEach>
 </table>
