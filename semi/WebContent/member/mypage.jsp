@@ -3,5 +3,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="main">
 	<h3>마이페이지</h3>
-	<a href="${cp }/delivery/del">주문상태보기</a>
+	<a href="${cp }/deliveryl/del">주문상태보기</a>
 </div>

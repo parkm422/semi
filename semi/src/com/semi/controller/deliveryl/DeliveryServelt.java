@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.dao.delivery.DeliveryDao;
+import com.semi.dao.deliveryl.DeliveryDao;
 import com.semi.dao.managerP.ManagerDAO;
-import com.semi.vo.delivery.DeliveryVo;
+import com.semi.vo.deliveryl.DeliveryVo;
 import com.semi.vo.managerP.ViewVo;
-@WebServlet("/delivery/del")
+@WebServlet("/deliveryl/del")
 public class DeliveryServelt extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,7 +42,7 @@ public class DeliveryServelt extends HttpServlet{
 		req.setAttribute("endPageNum", endPageNum);
 		req.setAttribute("top", "/header.jsp");
 		req.setAttribute("nav","/nav.jsp");
-		req.setAttribute("content","/delivery/delivery.jsp");
+		req.setAttribute("content","/deliveryl/delivery.jsp");
 		req.setAttribute("footer","/footer.jsp");
 		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 	}

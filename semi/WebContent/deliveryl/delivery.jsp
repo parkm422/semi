@@ -21,7 +21,7 @@
 		<!-- 페이징처리 -->
 		<c:choose>
 			<c:when test="${startPageNum>10 }">
-				<a href="${cp }/delivery/del?pageNum=${startPageNum-1}">[이전]</a>
+				<a href="${cp }/deliveryl/del?pageNum=${startPageNum-1}">[이전]</a>
 			</c:when>
 			<c:otherwise>
 				[이전]
@@ -32,12 +32,12 @@
 			<c:choose>
 				<c:when test="${pageNum==i }">
 					<%--현재페이지 색 다르게 표시하기 --%>
-					<a href="${cp }/delivery/del?pageNum=${i}"> <span
+					<a href="${cp }/deliveryl/del?pageNum=${i}"> <span
 						style="color: red;">[${i }]</span>
 					</a>
 				</c:when>
 				<c:otherwise>
-					<a href="${cp }/delivery/del?pageNum=${i}"> <span
+					<a href="${cp }/deliveryl/del?pageNum=${i}"> <span
 						style="color: #555;">[${i }]</span>
 					</a>
 				</c:otherwise>
@@ -45,7 +45,7 @@
 		</c:forEach>
 		<c:choose>
 			<c:when test="${startPageNum<pageCount }">
-				<a href="${cp }/delivery/del?pageNum=${endPageNum+1}">[다음]</a>
+				<a href="${cp }/deliveryl/del?pageNum=${endPageNum+1}">[다음]</a>
 			</c:when>
 			<c:otherwise>
 				[다음]

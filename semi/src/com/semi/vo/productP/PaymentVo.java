@@ -1,26 +1,25 @@
 package com.semi.vo.productP;
 
-public class PaymentVO {
-	
+import com.semi.vo.product.PaymentVO;
+
+public class PaymentVo {
 	private int pnum;
 	private int ornum;
 	private int mnum;
 	private int payamount;
 	private int enpay;
-	private String status;
+	private String varchar;
 	
-	public PaymentVO() {
-		
-	}
+	public PaymentVo() {}
 
-	public PaymentVO(int pnum, int ornum, int mnum, int payamount, int enpay, String status) {
+	public PaymentVo(int pnum, int ornum, int mnum, int payamount, int enpay, String varchar) {
 		super();
 		this.pnum = pnum;
 		this.ornum = ornum;
 		this.mnum = mnum;
 		this.payamount = payamount;
 		this.enpay = enpay;
-		this.status = status;
+		this.varchar = varchar;
 	}
 
 	public int getPnum() {
@@ -63,12 +62,12 @@ public class PaymentVO {
 		this.enpay = enpay;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getVarchar() {
+		return varchar;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setVarchar(String varchar) {
+		this.varchar = varchar;
 	}
 	
 }

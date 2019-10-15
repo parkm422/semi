@@ -1,4 +1,4 @@
-package com.semi.vo.delivery;
+package com.semi.vo.deliveryl;
 
 public class DeliveryVo {
 	private int ornum;

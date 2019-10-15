@@ -11,13 +11,13 @@ import javax.servlet.http.HttpSession;
 
 import com.semi.dao.boardl.Ono_EnquiryDao;
 import com.semi.vo.boardl.Ono_EnquiryVO;
-@WebServlet("/board/1and1board")
+@WebServlet("/boardl/1and1board")
 public class boardServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("top", "/header.jsp");
 		req.setAttribute("nav", "/nav.jsp");
-		req.setAttribute("content", "/board/1and1board.jsp");
+		req.setAttribute("content", "/boardl/1and1board.jsp");
 		req.setAttribute("footer", "/footer.jsp");
 		
 		req.getRequestDispatcher("/index.jsp").forward(req, resp);
