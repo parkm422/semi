@@ -9,7 +9,7 @@
 	
 		<tr>
 			<td>${vo.ornum }</td>
-			<td>$[vo.getname]</td>
+			<td>${vo.getname}</td>
 			<td>${vo.pname }</td>
 			<td>${vo.delivery }</td>
 		</tr>
