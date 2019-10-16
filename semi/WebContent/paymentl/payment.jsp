@@ -61,7 +61,8 @@
 </script>
 </head>
 <body>
-총 금액 = <input type="text" name="amount" size="10" value="${price }"><br><br>
+<form method="post" action="${cp }/orderY/orderinsert">
+총 금액 = <input type="text" name="amount" size="10" value="${amount }"><br><br>
 <select name="paymethod">
 <option value="계좌이체">계좌이체</option>
 <option value="카드">카드</option>
@@ -74,7 +75,13 @@
 		<option value="국민은행">국민은행</option>
 		<option value="우리은행">우리은행</option>
 	</select>
-	<input type="button" value="확인" onclick="acount()">
+	
+	<input type="text" name="status" id="status"  value="${status }" hidden=""><br>
+	<input type="text" name="delivery" id="delivery"  value="${delivery }" hidden=""><br>
+	<input type="text" size="50" id="deladd" name="deladd" value="${deladd }" hidden=""><br>
+	<input type="text" name="getname" id="getname" value="${getname }" hidden=""><br>
+	<input type="submit" value="확인" onclick="acount()">
+	
 </div>
 <div id="main1" style="display: none">
 	카드사선택 <select name="card">
@@ -84,13 +91,14 @@
 		<option value="농협카드">농협</option>
 		<option value="삼성카드">삼성</option>
 	</select>
-	<input type="button" value="확인" onclick="card()">
+	<input type="submit" value="확인" onclick="card()">
 	<div id="information" style="display: none">
 		카드번호 : <input type="text" size="5" name="num">-<input type="text" size="5"name="num1">-<input type="text" size="5" name="num2">-<input type="password" size="5" name="num3"><br>
 		cvv번호: <input type="text" size="3" name="num4">
-		<input type="button" value="확인" onclick="completion()">		
+		<input type="submit" value="확인" onclick="completion()">		
 	</div>
 
 </div>
+</form>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.semi.vo.paymentl;
 
+import com.semi.vo.product.PaymentVO;
 
 public class PaymentVo {
 	private int pnum;

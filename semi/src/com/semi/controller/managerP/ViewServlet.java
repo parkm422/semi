@@ -9,13 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.dao.deliveryl.DeliveryDao;
 import com.semi.dao.managerP.ManagerDAO;
 import com.semi.dao.productP.CategoryDAO;
 import com.semi.vo.managerP.ViewVo;
 @WebServlet("/manager/view")
 public class ViewServlet extends HttpServlet{
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String spageNum = req.getParameter("pageNum");
 		int pageNum = 1;
 		if (spageNum != null) {
@@ -26,7 +27,8 @@ public class ViewServlet extends HttpServlet{
 		ManagerDAO dao = ManagerDAO.getManagerDao();
 		ArrayList<ViewVo> list = dao.list(startRow, endRow);
 		// 전체페이지 갯수 구하기
-		int pageCount = (int) (Math.ceil(dao.getCount() / 10.0));
+		DeliveryDao dao1=new DeliveryDao();
+		int pageCount = (int) (Math.ceil(dao1.getCount() / 10.0));
 		// 시작페이지 번호
 		int startPageNum = ((pageNum - 1) / 10 * 10) + 1;
 		// 끝페이지 번호

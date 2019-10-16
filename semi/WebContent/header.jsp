@@ -28,7 +28,7 @@
 		<li><a href="${cp }/faqboardY/faqinsert">faq작성하기</a></li>
 		<li><a href="${cp }/memberinfoupdateY/memberupdate?id=${sessionScope.id}">회원정보수정</a></li>
 		<li><a href="${cp }/orderY/porderlist?id=${sessionScope.id}">주문리스트보기</a></li>
-		<li><a href="${cp }/orderY/orderinsert?id=${sessionScope.id}">주문하기</a></li>
+		
 	</ul>
 </div>
 </div>

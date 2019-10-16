@@ -3,17 +3,16 @@ package com.semi.vo.deliveryl;
 public class DeliveryVo {
 	private int ornum;
 	private String pname;
-	private String status;
+	private String getname;
 	private String delivery;
 	
 	public DeliveryVo() {}
 
-	public DeliveryVo(int ornum,  String pname, String status, String delivery) {
+	public DeliveryVo(int ornum, String pname, String getname, String delivery) {
 		super();
 		this.ornum = ornum;
-		
 		this.pname = pname;
-		this.status = status;
+		this.getname = getname;
 		this.delivery = delivery;
 	}
 
@@ -25,9 +24,6 @@ public class DeliveryVo {
 		this.ornum = ornum;
 	}
 
-	
-	
-
 	public String getPname() {
 		return pname;
 	}
@@ -36,12 +32,12 @@ public class DeliveryVo {
 		this.pname = pname;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getGetname() {
+		return getname;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setGetname(String getname) {
+		this.getname = getname;
 	}
 
 	public String getDelivery() {
@@ -51,6 +47,6 @@ public class DeliveryVo {
 	public void setDelivery(String delivery) {
 		this.delivery = delivery;
 	}
-	
+
 	
 }

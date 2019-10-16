@@ -11,12 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.semi.dao.deliveryl.DeliveryDao;
 import com.semi.dao.managerP.ManagerDAO;
+import com.semi.dao.paymentl.PaymentDao;
 import com.semi.vo.deliveryl.DeliveryVo;
 import com.semi.vo.managerP.ViewVo;
 @WebServlet("/deliveryl/del")
 public class DeliveryServelt extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String id=(String)req.getSession().getAttribute("id");
+		System.out.println(id);
+		PaymentDao dao1=new PaymentDao();
+		int mnum=dao1.select(id);
 		String spageNum = req.getParameter("pageNum");
 		int pageNum = 1;
 		if (spageNum != null) {
@@ -25,7 +30,8 @@ public class DeliveryServelt extends HttpServlet{
 		int endRow = pageNum * 10;
 		int startRow = endRow - 9;
 		DeliveryDao dao=new DeliveryDao();
-		ArrayList<DeliveryVo> list = dao.list(startRow, endRow);
+		ArrayList<DeliveryVo> list = dao.list(mnum,startRow, endRow);
+		System.out.println("1"+mnum);
 		// 전체페이지 갯수 구하기
 		int pageCount = (int) (Math.ceil(dao.getCount() / 10.0));
 		// 시작페이지 번호
@@ -35,6 +41,9 @@ public class DeliveryServelt extends HttpServlet{
 		if (endPageNum > pageCount) {
 			endPageNum = pageCount;
 		}
+		
+		
+		
 		req.setAttribute("list",list);
 		req.setAttribute("pageCount",pageCount);
 		req.setAttribute("pageNum",pageNum);

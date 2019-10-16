@@ -66,6 +66,7 @@ public class BasketServlet extends HttpServlet{
 		ArrayList<HashMap<String, Object>> basketList = itemDao.getBasketList(vo.getMnum(),startRow,endRow);
 		
 		
+		
 		req.setAttribute("pageNum", pageNum);
 		req.setAttribute("startRow", startRow);
 		req.setAttribute("endRow", endRow);

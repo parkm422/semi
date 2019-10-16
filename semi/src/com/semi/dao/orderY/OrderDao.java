@@ -81,7 +81,8 @@ public class OrderDao {
 							rs.getString("status"), 
 							rs.getString("deladd"),
 							rs.getString("delivery"), 
-							rs.getDate("orderdate")); 
+							rs.getDate("orderdate"),
+							rs.getString("getname")); 
 						list.add(vo2);
 				}
 				return list;

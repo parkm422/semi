@@ -3,14 +3,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <table border="1" width="600">
 	<tr>
-		<th>주문번호</th><th>수령인</th><th>주문상품</th><th>주문상태</th><th>배송정보</th>
+		<th>주문번호</th><th>수령인</th><th>주문상품</th><th>배송정보</th>
 	</tr>
 	<c:forEach var="vo" items="${list }">
+	
 		<tr>
 			<td>${vo.ornum }</td>
-			<td>미정</td>
+			<td>$[vo.getname]</td>
 			<td>${vo.pname }</td>
-			<td>${vo.status }</td>
 			<td>${vo.delivery }</td>
 		</tr>
 		
