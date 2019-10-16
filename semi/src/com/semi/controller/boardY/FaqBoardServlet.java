@@ -30,9 +30,9 @@ public class FaqBoardServlet extends HttpServlet{
 		int endRow=startRow+9;
 		BoardDao dao=BoardDao.getInstance();
 		ArrayList<BoardVo> list=dao.list(startRow, endRow,field,keyword);
-		int pageCount=(int)Math.ceil(dao.getCount(field,keyword)/10.0);	
-		int startPage=(pageNum-1)/10*10+1;
-		int endPage=startPage+9;
+		int pageCount=(int)Math.ceil(dao.getCount()/10.0);	
+		int startPage=(pageNum-1)/5*5+1;
+		int endPage=startPage+5;
 		if(endPage>pageCount) {
 			endPage=pageCount;
 		}

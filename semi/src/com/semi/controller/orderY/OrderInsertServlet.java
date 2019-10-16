@@ -2,16 +2,22 @@ package com.semi.controller.orderY;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.semi.dao.basketY.BasketDao;
+import com.semi.dao.memberP.S_MemberDAO;
 import com.semi.dao.memberY.MemberDao;
 import com.semi.dao.orderY.OrderDao;
+import com.semi.dao.productP.ProductDAO;
+import com.semi.vo.memberP.S_MemberVO;
 import com.semi.vo.memberY.MemberVo;
 import com.semi.vo.orderY.OrderVo;
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
@@ -21,9 +27,55 @@ public class OrderInsertServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id=req.getParameter("id");
+	
 		MemberDao dao1=MemberDao.getInstance();
 		ArrayList<MemberVo> list=dao1.list(id);
-		System.out.println(list);
+		
+	
+		S_MemberDAO memberDao = S_MemberDAO.getSmemberDao();
+		ProductDAO itemDao = ProductDAO.getProductDao();
+		
+		HttpSession session = req.getSession();
+		
+		String basketPageNum = req.getParameter("pageNum");
+			
+		int pageNum = 1;
+		if(basketPageNum != null) {
+			pageNum = Integer.parseInt(basketPageNum);
+		}
+		
+		int startRow = 1+(pageNum-1)*5;
+		int endRow = startRow+4;
+		
+		int startPageNum = ((pageNum-1)/5*5)+1;
+		int endPageNum = startPageNum+4;
+		
+		S_MemberVO vo = memberDao.getMemberInfo(id);
+		
+		int basketPageCount = (int) Math.ceil(itemDao.getBasketCount(vo.getMnum())/5.0);
+		
+		if(endPageNum>basketPageCount) {
+			endPageNum = basketPageCount;
+		}
+		
+		int nn=0;
+		ArrayList<HashMap<String, Object>> basketList1 = itemDao.getBasketList(vo.getMnum(),startRow,endRow);
+		for(int i=0;i<basketList1.size();i++) {
+			System.out.println(basketList1.get(i).get("price"));
+			nn+=(Integer)basketList1.get(i).get("price");
+		}
+		System.out.println(nn);
+		
+		req.setAttribute("pageNum", pageNum);
+		req.setAttribute("startRow", startRow);
+		req.setAttribute("endRow", endRow);
+		req.setAttribute("startPageNum", startPageNum);
+		req.setAttribute("endPageNum", endPageNum);
+		req.setAttribute("basketPageCount", basketPageCount);
+		
+		req.setAttribute("nn", nn);
+		req.setAttribute("basketList1", basketList1);
+		
 		
 		req.setCharacterEncoding("utf-8");
 		req.setAttribute("list",list);
