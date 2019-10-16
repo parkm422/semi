@@ -18,15 +18,13 @@ public class DeliveryDao {
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			String sql = "select * from(select aa.*,rownum as rnum from(select i.getname,o.ornum,o.pname,i.delivery " + 
+			String sql = "select * from(select aa.*,rownum as rnum from(select o.ornum,i.getname,o.pname,i.delivery " + 
 					"from orderdetail o, orderinfo i " + 
 					"where i.mnum=?  and i.ornum=o.ornum ) aa) where rnum>=? and rnum<=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1,mnum);
 			System.out.println("2"+mnum);
 			pstmt.setInt(2,startRow);
-			System.out.println(startRow);
-			System.out.println(endRow);
 			pstmt.setInt(3,endRow);
 			rs = pstmt.executeQuery();
 			ArrayList<DeliveryVo> list = new ArrayList<DeliveryVo>();

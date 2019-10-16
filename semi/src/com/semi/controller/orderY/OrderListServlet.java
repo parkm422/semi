@@ -22,7 +22,6 @@ public class OrderListServlet extends HttpServlet {
 		String field=req.getParameter("field");
 		String keyword=req.getParameter("keyword");
 		String id=req.getParameter("id");
-		System.out.println(id);
 	
 		int pageNum=1;
 		if(spageNum!=null) {

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <form method="get" action="${cp }/orderY/orderinsert">
 <div id="main">
+<input type="text" name="id" id="id" value="${sessionScope.id}" hidden="" ><br>
 	<h3>회원 장바구니 페이지</h3>
 	<div>
 		<table style="width:1500px; text-align: center;">
@@ -35,11 +36,11 @@
 						<img src="${cp }/upload/${basket.savefilename }" style="width:100px;height:100px;">
 					</td>
 					<td>
-						<div><p>${basket.pname } [${basket.colorname }]</p></div>
-						<div><p>[size : ${basket.psize }]</p></div>
+						<div ><p >${basket.pname } [${basket.colorname }]</p></div>
+						<div ><p >[size : ${basket.psize }]</p></div>
 					</td>
 					<td>
-						<span name="price">${basket.price }</span>
+						<span >${basket.price }</span>
 					</td>
 					<td>
 						<input type="button" value="-" style="width:20px;height:20px;font-size:20px;">

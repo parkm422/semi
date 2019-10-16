@@ -29,6 +29,7 @@
 			}
 	</script>
 <h1>FAQ게시판</h1>
+<c:set var="cp" value="${pageContext.request.contextPath }"/>
 <p><a href="${cp }/faqboardY/list">전체글목록</a> | <a href="${cp }/main">홈으로</a>
 </p>
 <table border="1" width="800">
@@ -46,35 +47,32 @@
 	</c:forEach>
 </table>
 <br>
-<div>
-<c:choose>
-	<c:when test="${startPage>10 }">
-		<a href="${cp }/faqboardY/list?pageNum=${startPage-1 }&field=${field}&keyword=${keyword}">[이전]</a>
-	</c:when>
-	<c:otherwise>
-		이전
-	</c:otherwise>
-</c:choose>
-	<c:forEach var="i" begin="${startPage }" end="${endPage }">
+<div><!-- 페이징처리 -->
+<a href="${cp }/faqboardY/list?pageNum=${startPageNum}">[맨앞으로]</a>
+<c:if test="${pageNum > 1}">
+<a href="${cp }/faqboardY/list?pageNum=${pageNum-1}">[이전]</a>
+</c:if>
+	<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
 		<c:choose>
-			<c:when test="${i==pageNum }">
-				<a href="${cp }/faqboardY/list?pageNum=${i}&field=${field}&keyword=${keyword}">
-				<span style='color:blue'>[${i }]</span></a>
+			<c:when test="${pageNum==i }"><%--현재페이지 색 다르게 표시하기 --%>
+				<a href="${cp }/faqboardY/list?pageNum=${i}">
+				<span style="color:red;">[${i }]</span>
+				</a>
 			</c:when>
 			<c:otherwise>
-				<a href="${cp }/faqboardY/list?pageNum=${i}&field=${field}&keyword=${keyword}"><span style='color:#999'>[${i }]</span></a>
+				<a href="${cp }/faqboardY/list?pageNum=${i}">
+				<span style="color:#555;">[${i }]</span>
+				</a>
 			</c:otherwise>
-		</c:choose>
+		</c:choose>					
 	</c:forEach>
-<c:choose>
-	<c:when test="${endPage<pageCount}">
-		<a href="${cp }/faqboardY/list?pageNum=${endPage+1 }&field=${field}&keyword=${keyword}">[다음]</a>
-	</c:when>
-	<c:otherwise>
-		다음
-	</c:otherwise>
-</c:choose>
+<c:if test="${pageNum < endPageNum}">
+	<a href="${cp }/faqboardY/list?pageNum=${pageNum+1}">[다음]</a>
+</c:if>
+<a href="${cp }/faqboardY/list?pageNum=${endPageNum}">[맨뒤로]</a>
 </div>
+</body>
+</html>
 
 
 

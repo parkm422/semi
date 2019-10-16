@@ -70,6 +70,27 @@ public class ManagerDAO {
 			JdbcUtil.close(con,pstmt,rs);
 		}
 	}
+	public int insert(ViewVo vo) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="insert into orderdetail values(order_seq.nextval,?,?,?,?,?,?)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1,vo.getOrnum());
+			pstmt.setInt(2,vo.getInum());
+			pstmt.setString(3,vo.getPpname());
+			pstmt.setInt(4,vo.getPpsize());
+			pstmt.setString(5,vo.getCcolor());
+			pstmt.setInt(6,vo.getCcnt());
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt,null);
+		}
+	}
 
 	public ArrayList<ViewVo> list(int startRow,int endRow) {
 		Connection con = null;

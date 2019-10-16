@@ -98,7 +98,7 @@ public class OrderDao {
 			Connection con=null;
 			PreparedStatement pstmt=null;
 			String sql=
-				"insert into orderinfo values(faq_seq.nextval,?,?,?,?,?,sysdate)";
+				"insert into orderinfo values(faq_seq.nextval,?,?,?,?,?,sysdate,?)";
 			try {
 				con=JdbcUtil.getConn();
 				pstmt=con.prepareStatement(sql);
@@ -107,12 +107,39 @@ public class OrderDao {
 				pstmt.setString(3,vo.getStatus());
 				pstmt.setString(4,vo.getDeladd());
 				pstmt.setString(5,vo.getDelivery());
+				pstmt.setString(6,vo.getGetname());
 				return pstmt.executeUpdate();
 			}catch(SQLException se) {
 				System.out.println(se.getMessage());
 				return -1;
 			}finally {
 				JdbcUtil.close(con, pstmt, null);
+			}
+		}
+		public int select() {
+			Connection con=null;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
+			try {
+				con=JdbcUtil.getConn();
+				String sql="select Max(ornum) from orderinfo";
+				pstmt=con.prepareStatement(sql);
+
+				rs=pstmt.executeQuery();
+				if(rs.next()) {
+					int ornum=rs.getInt("Max(ornum)");
+					return ornum;
+				}
+				return 0;
+			}catch(SQLException se) {
+				System.out.println(se.getMessage());
+				return 0;
+			}finally {
+				try {
+					if(rs!=null) rs.close();
+					if(pstmt!=null) pstmt.close();
+					if(con!=null) con.close();
+				}catch(SQLException se) {}
 			}
 		}
 	}

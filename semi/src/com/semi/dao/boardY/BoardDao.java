@@ -26,7 +26,99 @@ public class BoardDao {
 	public static BoardDao getInstance() {
 		return instance;
 	}
-	
+	public int getCount() {//전체글의 갯수 구하기
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select NVL(count(fnum),0) from faq_board";
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				int num=rs.getInt(1);
+				return num;	
+			}else {
+				return 0;
+			}
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con, pstmt, rs);		
+		}
+	}
+	public int getMaxNum() {//가장 큰 글번호 얻어오기
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select NVL(max(fnum),0) as maxnum from faq_board";
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				//int num=rs.getInt(1);
+				int num=rs.getInt("maxnum");
+				return num;	
+			}else {
+				return 0;
+			}
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con, pstmt, rs);		
+		}
+	}
+	public ArrayList<BoardVo> list(int startRow,int endRow,
+			String field,String keyword){
+	Connection con=null;
+	PreparedStatement pstmt=null;
+	ResultSet rs=null;
+	try {
+		con=JdbcUtil.getConn();
+		String sql="";
+		if(field==null) {//검색조건이 없는 경우
+			sql="select * from" + 		
+				"    (" + 
+				"        select aa.*,rownum rnum from" + 
+				"        (" + 
+				"            select * from faq_board order by fnum asc" + 
+				"        )aa" + 
+				")where rnum>=? and  rnum<=?";
+		}else {//검색조건이 있는 경우
+			sql="select * from " + 
+				"(" + 
+				"   select aa.*,rownum rnum from" + 
+				"    (" + 
+				"        select * from faq_board " + 
+				"	     where " + field + " like '%" + keyword +"%'" + 
+				"	     order by fnum asc " + 
+				"     )aa" + 
+				")where rnum>=? and  rnum<=?";
+		}
+		pstmt=con.prepareStatement(sql);
+		pstmt.setInt(1,startRow);
+		pstmt.setInt(2,endRow);
+		rs=pstmt.executeQuery();
+		ArrayList<BoardVo> list=new ArrayList<BoardVo>();
+		while(rs.next()) {
+			BoardVo vo=new BoardVo(rs.getInt("fnum"),
+					rs.getString("category"), 
+					rs.getString("question"), 
+					rs.getString("answer"));
+			list.add(vo);
+		}
+		return list;
+	}catch(SQLException se) {
+		System.out.println(se.getMessage());
+		return null;
+	}finally {
+		JdbcUtil.close(con, pstmt, rs);
+	}	
+}
+	/*
 	public int getCount(String field,String keyword) {//전체 글의 갯수 구하기
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -98,7 +190,7 @@ public class BoardDao {
 			JdbcUtil.close(con, pstmt, rs);
 		}	
 	}
-	
+	*/
 	public int insert(BoardVo vo) {
 		Connection con=null;
 		PreparedStatement pstmt=null;

@@ -11,6 +11,15 @@ public class ViewVo {
 	private String status;
 	private String delivery;
 	
+	private int dnum;
+	private int ornum;
+	private int inum;
+	private String ppname;
+	private int ppsize;
+	private String ccolor;
+	private int ccnt;
+	
+
 	public ViewVo() {}
 
 	public ViewVo(String name, String id, String pname, int psize, String color, int cnt, int price, String status,
@@ -25,6 +34,17 @@ public class ViewVo {
 		this.price = price;
 		this.status = status;
 		this.delivery = delivery;
+	}
+	
+	public ViewVo(int dnum, int ornum,int inum,String ppname,int ppsize,String ccolor,int ccnt) {
+		super();
+		this.dnum = dnum;
+		this.ornum = ornum;
+		this.inum = inum;
+		this.ppname = ppname;
+		this.ppsize = ppsize;
+		this.ccolor = ccolor;
+		this.ccnt = ccnt;
 	}
 
 	public String getName() {
@@ -98,5 +118,61 @@ public class ViewVo {
 	public void setDelivery(String delivery) {
 		this.delivery = delivery;
 	}
+	public int getDnum() {
+		return dnum;
+	}
+
+	public void setDnum(int dnum) {
+		this.dnum = dnum;
+	} 
+	
+	public int getOrnum() {
+		return ornum;
+	}
+
+	public void setOrnum(int ornum) {
+		this.ornum = ornum;
+	}
+
+	public int getInum() {
+		return inum;
+	}
+
+	public void setInum(int inum) {
+		this.inum = inum;
+	}
+
+	public String getPpname() {
+		return ppname;
+	}
+
+	public void setPpname(String ppname) {
+		this.ppname = ppname;
+	}
+
+	public int getPpsize() {
+		return ppsize;
+	}
+
+	public void setPpsize(int ppsize) {
+		this.ppsize = ppsize;
+	}
+
+	public String getCcolor() {
+		return ccolor;
+	}
+
+	public void setCcolor(String ccolor) {
+		this.ccolor = ccolor;
+	}
+
+	public int getCcnt() {
+		return ccnt;
+	}
+
+	public void setCcnt(int ccnt) {
+		this.ccnt = ccnt;
+	}
+
 	
 }
