@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.semi.dao.boardl.Ono_EnquiryDao;
 import com.semi.vo.boardl.Ono_EnquiryVO;
 
-@WebServlet("/board/list")
+@WebServlet("/boardl/list")
 public class Ono_Listservlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,7 +42,7 @@ public class Ono_Listservlet extends HttpServlet{
 		req.setAttribute("pageNum",pageNum);
 		req.setAttribute("top", "/header.jsp");
 		req.setAttribute("nav","/nav.jsp");
-		req.setAttribute("content","/board/list.jsp");
+		req.setAttribute("content","/boardl/list.jsp");
 		req.setAttribute("footer","/footer.jsp");
 		req.setAttribute("field",field);
 		req.setAttribute("keyword",keyword);

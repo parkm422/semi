@@ -20,7 +20,7 @@ ${vo.category }<input type="radio" checked="checked"><br>
 </c:if>
 <c:choose>
 		<c:when test="${sessionScope.id == 'ADMIN'}">
-<form method="post" action="${cp }/board/go?ennum=${param.ennum }">
+<form method="post" action="${cp }/boardl/go?ennum=${param.ennum }">
 답변<br>
 <textarea rows="5" cols="50" name="answer"></textarea>
 <input type="submit" name="go" value="등록">

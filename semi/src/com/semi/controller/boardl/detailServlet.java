@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.semi.dao.boardl.Ono_EnquiryDao;
 import com.semi.vo.boardl.Ono_EnquiryVO;
-@WebServlet("/board/detail")
+@WebServlet("/boardl/detail")
 public class detailServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -20,7 +20,7 @@ public class detailServlet extends HttpServlet{
 		req.setAttribute("vo",vo);
 		req.setAttribute("top", "/header.jsp");
 		req.setAttribute("nav","/nav.jsp");
-		req.setAttribute("content","/board/detail.jsp");
+		req.setAttribute("content","/boardl/detail.jsp");
 		req.setAttribute("footer","/footer.jsp");
 		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 		

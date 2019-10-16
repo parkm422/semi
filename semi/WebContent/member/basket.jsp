@@ -60,7 +60,7 @@
 			</c:forEach>
 		</table>
 			<div style="text-align: center;">
-				<input type="submit" name="pay" value="주문하기">
+				<input type="submit" value="주문하기">
 			</div>
 </form>
 		

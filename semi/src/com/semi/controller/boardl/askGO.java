@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.semi.dao.boardl.Ono_EnquiryDao;
 import com.semi.vo.boardl.Ono_EnquiryVO;
-@WebServlet("/board/go")
+@WebServlet("/boardl/go")
 
 public class askGO extends HttpServlet{
 	@Override

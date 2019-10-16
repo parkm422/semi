@@ -5,7 +5,7 @@
 
 	<h1>1:1문의 게시판</h1>
 	<div>
-	<form method="post" action="${cp }/board/1and1board">
+	<form method="post" action="${cp }/boardl/1and1board">
 		<div><input type="radio" name="ask" value="사이즈">사이즈</div>
 		<div><input type="radio" name="ask" value="교환">교환</div>
 		<div><input type="radio" name="ask" value="환불">환불</div>

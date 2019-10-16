@@ -14,7 +14,7 @@
 		<tr>
 			<td>${vo.ennum }</td>
 			<td>${vo.writer }</td>
-			<td><a href="${cp }/board/detail?ennum=${vo.ennum }">${vo.title }</a></td>
+			<td><a href="${cp }/boardl/detail?ennum=${vo.ennum }">${vo.title }</a></td>
 		</tr>
 		</c:if>
 	</c:forEach>
@@ -24,7 +24,7 @@
 <div>
 <c:choose>
 	<c:when test="${startPage>10 }">
-		<a href="${cp }/board/list?pageNum=${startPage-1 }&field=${field}&keyword=${keyword}">[이전]</a>
+		<a href="${cp }/boardl/list?pageNum=${startPage-1 }&field=${field}&keyword=${keyword}">[이전]</a>
 	</c:when>
 	<c:otherwise>
 		이전
@@ -33,16 +33,16 @@
 	<c:forEach var="i" begin="${startPage }" end="${endPage }">
 		<c:choose>
 			<c:when test="${i==pageNum }">
-				<a href="${cp }/board/list?pageNum=${i}&field=${field}&keyword=${keyword}"><span style='color:blue'>[${i }]</span></a>
+				<a href="${cp }/boardl/list?pageNum=${i}&field=${field}&keyword=${keyword}"><span style='color:blue'>[${i }]</span></a>
 			</c:when>
 			<c:otherwise>
-				<a href="${cp }/board/list?pageNum=${i}&field=${field}&keyword=${keyword}"><span style='color:#999'>[${i }]</span></a>
+				<a href="${cp }/boardl/list?pageNum=${i}&field=${field}&keyword=${keyword}"><span style='color:#999'>[${i }]</span></a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
 <c:choose>
 	<c:when test="${endPage<pageCount}">
-		<a href="${cp }/board/list?pageNum=${endPage+1 }&field=${field}&keyword=${keyword}">[다음]</a>
+		<a href="${cp }/boardl/list?pageNum=${endPage+1 }&field=${field}&keyword=${keyword}">[다음]</a>
 	</c:when>
 	<c:otherwise>
 		다음
