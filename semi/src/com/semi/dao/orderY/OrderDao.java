@@ -44,7 +44,7 @@ public class OrderDao {
 				JdbcUtil.close(con, pstmt, rs);
 			}	
 		}
-		public ArrayList<OrderVo> list(String id,int startRow,int endRow,
+		public ArrayList<OrderVo> list(int mnum,int startRow,int endRow,
 					String field,String keyword){
 			Connection con=null;
 			PreparedStatement pstmt=null;
@@ -54,7 +54,7 @@ public class OrderDao {
 				String sql="";
 				if(field==null) {
 					sql="select * from(select aa.*,rownum rnum from"
-							+ "(SELECT o.ornum,o.mnum,o.amount,o.status,o.deladd,o.delivery,o.orderdate FROM orderinfo o,s_members s WHERE o.mnum=s.mnum and id=?"
+							+ "(SELECT o.ornum,o.mnum,o.amount,o.status,o.deladd,o.delivery,o.orderdate,o.getname FROM orderinfo o,s_members s WHERE o.mnum=s.mnum and o.mnum=?"
 							+ " order by ornum asc)aa)where rnum>=? and  rnum<=?";
 				}else {
 					sql="select * from " + 
@@ -68,7 +68,7 @@ public class OrderDao {
 						")where rnum>=? and  rnum<=?";
 				}
 				pstmt=con.prepareStatement(sql);
-				pstmt.setString(1,id);
+				pstmt.setInt(1,mnum);
 				pstmt.setInt(2,startRow);
 				pstmt.setInt(3,endRow);
 				rs=pstmt.executeQuery();
@@ -98,7 +98,7 @@ public class OrderDao {
 			Connection con=null;
 			PreparedStatement pstmt=null;
 			String sql=
-				"insert into orderinfo values(faq_seq.nextval,?,?,?,?,?,sysdate)";
+				"insert into orderinfo values(faq_seq.nextval,?,?,?,?,?,sysdate,?)";
 			try {
 				con=JdbcUtil.getConn();
 				pstmt=con.prepareStatement(sql);
@@ -107,6 +107,7 @@ public class OrderDao {
 				pstmt.setString(3,vo.getStatus());
 				pstmt.setString(4,vo.getDeladd());
 				pstmt.setString(5,vo.getDelivery());
+				pstmt.setString(6,vo.getGetname());
 				return pstmt.executeUpdate();
 			}catch(SQLException se) {
 				System.out.println(se.getMessage());

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.dao.memberY.MemberDao;
 import com.semi.dao.orderY.OrderDao;
 import com.semi.vo.orderY.OrderVo;
 
@@ -22,7 +23,7 @@ public class OrderListServlet extends HttpServlet {
 		String field=req.getParameter("field");
 		String keyword=req.getParameter("keyword");
 		String id=req.getParameter("id");
-	
+		
 		int pageNum=1;
 		if(spageNum!=null) {
 			pageNum=Integer.parseInt(spageNum);
@@ -30,13 +31,17 @@ public class OrderListServlet extends HttpServlet {
 		int startRow=(pageNum-1)*10+1;
 		int endRow=startRow+9;
 		OrderDao dao=OrderDao.getInstance();
-		ArrayList<OrderVo> list=dao.list(id,startRow, endRow,field,keyword);
+		MemberDao dao1=MemberDao.getInstance();
+		int mnum=dao1.select(id);
+		
+		ArrayList<OrderVo> list=dao.list(mnum,startRow, endRow,field,keyword);
 		int pageCount=(int)Math.ceil(dao.getCount(field,keyword)/10.0);	
 		int startPage=(pageNum-1)/10*10+1;
 		int endPage=startPage+9;
 		if(endPage>pageCount) {
 			endPage=pageCount;
 		}
+		System.out.println(list);
 		req.setAttribute("list",list);
 		req.setAttribute("pageCount",pageCount);
 		req.setAttribute("startPage",startPage);
