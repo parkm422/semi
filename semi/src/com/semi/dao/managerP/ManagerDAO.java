@@ -70,6 +70,27 @@ public class ManagerDAO {
 			JdbcUtil.close(con,pstmt,rs);
 		}
 	}
+	public int insert(ViewVo vo) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="insert into orderdetail values(detail_seq.nextval,?,?,?,?,?,?)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1,vo.getOrnum());
+			pstmt.setInt(2,vo.getInum());
+			pstmt.setString(3,vo.getPpname());
+			pstmt.setInt(4,vo.getPpsize());
+			pstmt.setString(5,vo.getCcolor());
+			pstmt.setInt(6,vo.getCcnt());
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt,null);
+		}
+	}
 
 	public ArrayList<ViewVo> list(int startRow,int endRow) {
 		Connection con = null;
@@ -77,9 +98,9 @@ public class ManagerDAO {
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			String sql = "select * from(select aa.*,rownum as rnum from(select s.name,s.id,o.pname,o.psize,o.color,o.cnt,p.price,m.status,i.delivery " + 
-					"from s_members s,orderdetail o,product_list p,payment m,orderinfo i " + 
-					")aa) where rnum>=? and rnum<=?";
+			String sql = "select * from(select aa.*,rownum as rnum from(select s.name,s.id,o.pname,o.psize,o.color,o.cnt,p.price,i.status,i.delivery " + 
+					"from s_members s,orderdetail o,orderinfo i, product_list p "+ 
+					"where s.mnum=i.mnum  and i.ornum=o.ornum and p.inum=o.inum)aa) where rnum>=? and rnum<=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1,startRow);
 			pstmt.setInt(2,endRow);
