@@ -23,7 +23,6 @@ public class DeliveryDao {
 					"where i.mnum=?  and i.ornum=o.ornum ) aa) where rnum>=? and rnum<=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1,mnum);
-			System.out.println("2"+mnum);
 			pstmt.setInt(2,startRow);
 			pstmt.setInt(3,endRow);
 			rs = pstmt.executeQuery();

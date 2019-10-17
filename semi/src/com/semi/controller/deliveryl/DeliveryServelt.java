@@ -30,7 +30,7 @@ public class DeliveryServelt extends HttpServlet{
 		int endRow = pageNum * 10;
 		int startRow = endRow - 9;
 		DeliveryDao dao=new DeliveryDao();
-		ArrayList<DeliveryVo> list = dao.list(mnum,startRow, endRow);
+		ArrayList<DeliveryVo> list3 = dao.list(mnum,startRow, endRow);
 		System.out.println("1"+mnum);
 		// 전체페이지 갯수 구하기
 		int pageCount = (int) (Math.ceil(dao.getCounts(mnum) / 10.0));
@@ -44,7 +44,7 @@ public class DeliveryServelt extends HttpServlet{
 		
 		
 		
-		req.setAttribute("list",list);
+		req.setAttribute("list3",list3);
 		req.setAttribute("pageCount",pageCount);
 		req.setAttribute("pageNum",pageNum);
 		req.setAttribute("startPageNum", startPageNum);

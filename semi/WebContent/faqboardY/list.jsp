@@ -3,7 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<script type="text/javascript">
 	var xhr=null;
-	var cnt=0;
 	function lookanswer(e) {
 		var txts=document.getElementsByClassName("txts");
 		var question=e.target.textContent;
@@ -17,16 +16,30 @@
 			var data=xhr.responseText;
 			var json=JSON.parse(data);
 			var div=document.getElementsByClassName("result");
-			cnt++;
-			for(var i=0;i<json.length;i++){
-					div[(json[i]).fnum-1].innerHTML="<질문번호>"+json[i].fnum+"<br><카테고리>"+json[i].category+"<br><질문>"+json[i].question+"<br><답변>"+json[i].answer+"<br>";
-					 if(cnt==2){
-						div[(json[i].fnum-1)].innerHTML="";
-						cnt=0;
+				for(var i=0;i<json.length;i++){
+					if(json[i].fnum>=10){
+						if((json[i].fnum)%10==0){
+							if((div[9].innerHTML)==""){
+								div[9].innerHTML="<질문번호>"+json[i].fnum+"<br><카테고리>"+json[i].category+"<br><질문>"+json[i].question+"<br><답변>"+json[i].answer+"<br>";
+								}else{
+								div[9].innerHTML="";
+										}
 							}
+						if(div[(json[i].fnum)%10-1].innerHTML==""){
+						div[(json[i].fnum)%10-1].innerHTML="<질문번호>"+json[i].fnum+"<br><카테고리>"+json[i].category+"<br><질문>"+json[i].question+"<br><답변>"+json[i].answer+"<br>";
+						}else{
+						div[(json[i].fnum)%10-1].innerHTML="";
+								}
+							}else{
+								if((div[(json[i].fnum)%10-1].innerHTML)==""){
+									div[(json[i].fnum)%10-1].innerHTML="<질문번호>"+json[i].fnum+"<br><카테고리>"+json[i].category+"<br><질문>"+json[i].question+"<br><답변>"+json[i].answer+"<br>";
+									}else{
+									div[(json[i].fnum)%10-1].innerHTML="";
+											}
+							}
+						}
 					}
 				}
-			}
 	</script>
 <h1>FAQ게시판</h1>
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
@@ -47,32 +60,37 @@
 	</c:forEach>
 </table>
 <br>
-<div><!-- 페이징처리 -->
-<a href="${cp }/faqboardY/list?pageNum=${startPageNum}">[맨앞으로]</a>
-<c:if test="${pageNum > 1}">
-<a href="${cp }/faqboardY/list?pageNum=${pageNum-1}">[이전]</a>
-</c:if>
-	<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+<div>
+<c:choose>
+	<c:when test="${startPage>10 }">
+		<a href="${cp }/faqboardY/list?pageNum=${startPage-1 }">[이전]</a>
+	</c:when>
+	<c:otherwise>
+		이전
+	</c:otherwise>
+</c:choose>
+	<c:forEach var="i" begin="${startPage }" end="${endPage }">
 		<c:choose>
-			<c:when test="${pageNum==i }"><%--현재페이지 색 다르게 표시하기 --%>
+			<c:when test="${i==pageNum }">
 				<a href="${cp }/faqboardY/list?pageNum=${i}">
-				<span style="color:red;">[${i }]</span>
-				</a>
+				<span style='color:blue'>[${i }]</span></a>
 			</c:when>
 			<c:otherwise>
-				<a href="${cp }/faqboardY/list?pageNum=${i}">
-				<span style="color:#555;">[${i }]</span>
-				</a>
+				<a href="${cp }/faqboardY/list?pageNum=${i}"><span style='color:#999'>[${i }]</span></a>
 			</c:otherwise>
-		</c:choose>					
+		</c:choose>
 	</c:forEach>
-<c:if test="${pageNum < endPageNum}">
-	<a href="${cp }/faqboardY/list?pageNum=${pageNum+1}">[다음]</a>
-</c:if>
-<a href="${cp }/faqboardY/list?pageNum=${endPageNum}">[맨뒤로]</a>
+<c:choose>
+	<c:when test="${endPage<pageCount}">
+		<a href="${cp }/faqboardY/list?pageNum=${endPage+1 }">[다음]</a>
+	</c:when>
+	<c:otherwise>
+		다음
+	</c:otherwise>
+</c:choose>
 </div>
-</body>
-</html>
+
+
 
 
 

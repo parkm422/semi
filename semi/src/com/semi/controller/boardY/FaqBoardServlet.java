@@ -20,16 +20,14 @@ public class FaqBoardServlet extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String spageNum=req.getParameter("pageNum");	
-		String field=req.getParameter("field");
-		String keyword=req.getParameter("keyword");
 		int pageNum=1;
 		if(spageNum!=null) {
 			pageNum=Integer.parseInt(spageNum);
 		}
 		int startRow=(pageNum-1)*10+1;
 		int endRow=startRow+9;
-		BoardDao dao=BoardDao.getInstance();
-		ArrayList<BoardVo> list=dao.list(startRow, endRow,field,keyword);
+		BoardDao dao=new BoardDao();
+		ArrayList<BoardVo> list=dao.list(startRow, endRow);
 		int pageCount=(int)Math.ceil(dao.getCount()/10.0);	
 		int startPage=(pageNum-1)/5*5+1;
 		int endPage=startPage+5;
@@ -45,8 +43,6 @@ public class FaqBoardServlet extends HttpServlet{
 		req.setAttribute("content","/faqboardY/list.jsp");
 		req.setAttribute("nav","/nav.jsp");
 		req.setAttribute("footer","/footer.jsp");
-		req.setAttribute("field",field);
-		req.setAttribute("keyword",keyword);
 		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 	}
 }

@@ -17,13 +17,20 @@ import com.semi.dao.basketY.BasketDao;
 import com.semi.dao.managerP.ManagerDAO;
 import com.semi.dao.memberP.S_MemberDAO;
 import com.semi.dao.memberY.MemberDao;
+
 import com.semi.dao.orderY.OrderDao;
 
 import com.semi.dao.paymentl.PaymentDao;
 
+
 import com.semi.dao.productP.ProductDAO;
+
 import com.semi.vo.managerP.ViewVo;
 import com.semi.vo.memberP.S_MemberVO;
+
+
+import com.semi.dao.paymentl.PaymentDao;
+
 
 import com.semi.vo.memberY.MemberVo;
 import com.semi.vo.orderY.OrderVo;
@@ -33,8 +40,8 @@ import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 @WebServlet("/orderY/orderinsert")
 public class OrderInsertServlet extends HttpServlet{
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id=(String)req.getSession().getAttribute("id");
 		
 	
@@ -70,11 +77,12 @@ public class OrderInsertServlet extends HttpServlet{
 		
 		int nn=0;
 		ArrayList<HashMap<String, Object>> basketList1 = itemDao.getBasketList(vo.getMnum(),startRow,endRow);
+		System.out.println(basketList1);
 		for(int i=0;i<basketList1.size();i++) {
 			System.out.println(basketList1.get(i).get("price"));
-			nn+=(Integer)basketList1.get(i).get("price");
+			nn+=(Integer)basketList1.get(i).get("price"); 
 		}
-		System.out.println(nn);
+		System.out.println(nn+"llllllllllllllll");
 		
 		req.setAttribute("pageNum", pageNum);
 		req.setAttribute("startRow", startRow);
@@ -84,7 +92,9 @@ public class OrderInsertServlet extends HttpServlet{
 		req.setAttribute("basketPageCount", basketPageCount);
 		
 		req.setAttribute("nn", nn);
+
 		req.setAttribute("basketList1", basketList1);
+
 		
 		req.setCharacterEncoding("utf-8");
 		req.setAttribute("list",list);
@@ -107,8 +117,8 @@ public class OrderInsertServlet extends HttpServlet{
 		MemberDao dao1=MemberDao.getInstance();
 		int mnum=dao1.select(id);
 		OrderVo vo2=new OrderVo(0,mnum, amount, status, deladd, delivery, null,getname);
-		System.out.println(getname);
-		OrderDao dao=OrderDao.getInstance();
+
+		OrderDao dao=new OrderDao();
 		int n=dao.insert(vo2);
 		BasketDao dao2=BasketDao.getInstance();
 		PaymentDao dao3=new PaymentDao();
@@ -149,7 +159,7 @@ public class OrderInsertServlet extends HttpServlet{
 		if(endPageNum>basketPageCount) {
 			endPageNum = basketPageCount;
 		}
-		OrderDao dao8=OrderDao.getInstance();
+		OrderDao dao8=new OrderDao();
 		int lastornum=dao8.select();
 		ArrayList<HashMap<String, Object>> basketList1 = itemDao.getBasketList(vo.getMnum(),startRow,endRow);
 		ManagerDAO dao7=ManagerDAO.getManagerDao();

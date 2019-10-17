@@ -4,7 +4,9 @@
 
 
 <div>
+
 <h1>주문하기</h1>
+
 
 <form method="get" action="${cp }/paymentl/pay">
 	<c:forEach var="vo1" items="${list }">
@@ -27,6 +29,7 @@
 	총계산액<br>
 	<input type="text"  name="amount" id="amount"  value="${requestScope.nn}" readonly="readonly"><br>
 	<input type="text" name="status" id="status" hidden="" value="준비중"><br>
+
 	<input type="text" name="delivery" id="delivery" hidden="" value="준비중"><br>
 
 	

@@ -5,7 +5,7 @@
 	<tr>
 		<th>주문번호</th><th>수령인</th><th>주문상품</th><th>배송정보</th>
 	</tr>
-	<c:forEach var="vo" items="${list }">
+	<c:forEach var="vo" items="${list3 }">
 	
 		<tr>
 			<td>${vo.ornum }</td>

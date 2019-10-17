@@ -30,7 +30,7 @@ public class  FaqBoardInsertServlet extends HttpServlet{
 		String question=req.getParameter("question");
 		String answer=req.getParameter("answer");
 		BoardVo vo=new BoardVo(0, category, question, answer);
-		BoardDao dao=BoardDao.getInstance();
+		BoardDao dao=new BoardDao();
 		int n=dao.insert(vo);
 		if(n>0) {
 			req.setAttribute("code","success");

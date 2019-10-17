@@ -75,7 +75,7 @@ public class ManagerDAO {
 		PreparedStatement pstmt=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="insert into orderdetail values(order_seq.nextval,?,?,?,?,?,?)";
+			String sql="insert into orderdetail values(detail_seq.nextval,?,?,?,?,?,?)";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1,vo.getOrnum());
 			pstmt.setInt(2,vo.getInum());
