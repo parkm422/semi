@@ -99,7 +99,7 @@ public class ViewVo {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPirce(int price) {
 		this.price = price;
 	}
 

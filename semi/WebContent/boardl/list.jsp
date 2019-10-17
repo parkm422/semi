@@ -6,15 +6,24 @@
 
 <table border="1" width="600">
 	<tr>
-		<th>글번호</th><th>작성자</th><th>제목</th>
+		<th>글번호</th><th>작성자</th><th>제목</th><th>관리자답변</th>
 	</tr>
 	
 	<c:forEach var="vo" items="${list }">
-		<c:if test="${sessionScope.id == vo.writer }">
+		<c:if test="${sessionScope.id == vo.writer or sessionScope.id=='ADMIN'}">
 		<tr>
 			<td>${vo.ennum }</td>
 			<td>${vo.writer }</td>
 			<td><a href="${cp }/boardl/detail?ennum=${vo.ennum }">${vo.title }</a></td>
+			<c:choose >
+			<c:when test="${vo.answer!=null }">
+			<td><div style="color: red;">확인</div></td>
+			</c:when>
+			
+			<c:otherwise>
+			<td>미확인</td>
+			</c:otherwise>
+			</c:choose>
 		</tr>
 		</c:if>
 	</c:forEach>

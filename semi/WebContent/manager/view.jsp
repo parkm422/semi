@@ -4,7 +4,7 @@
  <div style="text-align: center;">
  <h1>주문 상세정보</h1>
  </div>
-<table border="1" width="600">
+<table border="1" width="800">
 	<tr>
 		<th>고객명</th><th>아이디</th><th>상품명</th><th>사이즈</th><th>색상</th><th>수량</th><th>가격</th><th>결제상태 확인</th><th>배송정보 확인</th>
 	</tr>

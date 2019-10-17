@@ -33,7 +33,7 @@ public class DeliveryServelt extends HttpServlet{
 		ArrayList<DeliveryVo> list = dao.list(mnum,startRow, endRow);
 		System.out.println("1"+mnum);
 		// 전체페이지 갯수 구하기
-		int pageCount = (int) (Math.ceil(dao.getCount() / 10.0));
+		int pageCount = (int) (Math.ceil(dao.getCounts(mnum) / 10.0));
 		// 시작페이지 번호
 		int startPageNum = ((pageNum - 1) / 10 * 10) + 1;
 		// 끝페이지 번호
