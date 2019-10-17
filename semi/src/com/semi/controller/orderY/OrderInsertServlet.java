@@ -100,7 +100,7 @@ public class OrderInsertServlet extends HttpServlet{
 		MemberDao dao1=MemberDao.getInstance();
 		int mnum=dao1.select(id);
 		OrderVo vo2=new OrderVo(0,mnum, amount, status, deladd, delivery, null,getname);
-		OrderDao dao=OrderDao.getInstance();
+		OrderDao dao=new OrderDao();
 		int n=dao.insert(vo2);
 		BasketDao dao2=BasketDao.getInstance();
 		int m=dao2.delete(mnum);

@@ -6,11 +6,15 @@ public class OrderVo {
 	private int ornum;
 	private int mnum;
 	private int amount;
+	private int cnt;
 	private String status;
 	private String deladd;
 	private String delivery;
 	private Date orderdate;
 	private String getname;
+	private String pname;
+	private String color;
+	private int psize;
 	public OrderVo(int ornum, int mnum, int amount, String status, String deladd, String delivery, Date orderdate,
 			String getname) {
 		super();
@@ -23,6 +27,52 @@ public class OrderVo {
 		this.orderdate = orderdate;
 		this.getname = getname;
 	}
+
+	public OrderVo(int ornum, String pname, int psize, String color,int cnt, String deladd, String delivery, int amount,Date orderdate) {
+		super();
+		this.ornum = ornum;
+		this.pname = pname;
+		this.psize = psize;
+		this.color = color;
+		this.cnt = cnt;
+		this.deladd = deladd;
+		this.delivery = delivery;
+		this.amount=amount;
+		this.orderdate = orderdate;
+	}
+	
+	public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+
+	public String getPname() {
+		return pname;
+	}
+
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public int getPsize() {
+		return psize;
+	}
+
+	public void setPsize(int psize) {
+		this.psize = psize;
+	}
+
 	public int getOrnum() {
 		return ornum;
 	}

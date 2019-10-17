@@ -6,7 +6,7 @@
 </p>
 <table border="1" width="600">
 	<tr>
-		<th>주문번호</th><th>상품이름</th><th>사이즈</th><th>색상</th><th>수량</th><th>금액</th><th>구매날짜</th>
+		<th>주문번호</th><th>상품이름</th><th>사이즈</th><th>색상</th><th>수량</th><th>배송상태</th><th>배송지</th><th>금액</th><th>구매날짜</th>
 	</tr>
 	<c:forEach var="vo2" items="${list }">
 		<tr>
@@ -15,6 +15,8 @@
 			<td>${vo2.psize }</td>
 			<td>${vo2.color}</td>
 			<td>${vo2.cnt}</td>
+			<td>${vo2.deladd}</td>
+			<td>${vo2.delivery}</td>
 			<td>${vo2.amount}</td>
 			<td>${vo2.orderdate}</td>
 		</tr>
@@ -24,7 +26,7 @@
 <div>
 <c:choose>
 	<c:when test="${startPage>10 }">
-		<a href="${cp }/orderY/porderlist?pageNum=${startPage-1 }&field=${field}&keyword=${keyword}">[이전]</a>
+		<a href="${cp }/orderY/porderlist?pageNum=${startPage-1 }&id=${sessionScope.id}">[이전]</a>
 	</c:when>
 	<c:otherwise>
 		이전
@@ -33,17 +35,17 @@
 	<c:forEach var="i" begin="${startPage }" end="${endPage }">
 		<c:choose>
 			<c:when test="${i==pageNum }">
-				<a href="${cp }/orderY/porderlist?pageNum=${i}&field=${field}&keyword=${keyword}">
+				<a href="${cp }/orderY/porderlist?pageNum=${i}&id=${sessionScope.id}">
 				<span style='color:blue'>[${i }]</span></a>
 			</c:when>
 			<c:otherwise>
-				<a href="${cp }/orderY/porderlist?pageNum=${i}&field=${field}&keyword=${keyword}"><span style='color:#999'>[${i }]</span></a>
+				<a href="${cp }/orderY/porderlist?pageNum=${i}&id=${sessionScope.id}"><span style='color:#999'>[${i }]</span></a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
 <c:choose>
 	<c:when test="${endPage<pageCount}">
-		<a href="${cp }/orderY/porderlist?pageNum=${endPage+1 }&field=${field}&keyword=${keyword}">[다음]</a>
+		<a href="${cp }/orderY/porderlist?pageNum=${endPage+1 }&id=${sessionScope.id}">[다음]</a>
 	</c:when>
 	<c:otherwise>
 		다음
