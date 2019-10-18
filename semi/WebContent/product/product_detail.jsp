@@ -36,23 +36,136 @@
 	<div style="clear: both;">
 		상품상세
 	</div>
+	<br><br>
 	<div>
-		<h3>리뷰게시판</h3>
+		<h3>상품 리뷰</h3>
 		<c:forEach var="review" items="${reviewList }">
 			<div>
-				<div>${review.writer }</div>
+				<div><span>${review.rnum }</span></div>
+				<div>
+					<span>${review.writer }</span>&nbsp;&nbsp;
+					<span>평점 :</span>
+					<c:choose>
+						<c:when test="${review.rating == 5 }"><span style="color:orange;">★★★★★</span></c:when>
+						<c:when test="${review.rating == 4 }"><span style="color:orange;">★★★★</span></c:when>
+						<c:when test="${review.rating == 3 }"><span style="color:orange;">★★★</span></c:when>
+						<c:when test="${review.rating == 2 }"><span style="color:orange;">★★</span></c:when>
+						<c:when test="${review.rating == 1 }"><span style="color:orange;">★</span></c:when>
+					</c:choose>
+					
+				</div>
 				<div>${vo.pname }</div>
-				<div>${review.title }</div>
+				<div style="font-weight: bold;">${review.title }</div><br>
 				<div>${review.content }</div>
-				<div><img src="${cp }/upload/${review.savefilename }">5</div>
-				<div><textarea rows="2" cols="100"></textarea><input type="button" value="등록" onclick="insert()"></div>
+				<div><img src="${cp }/upload/${review.savefilename }" style="width:150px;height:150px;"></div>
+				<div>
+					<div>
+						<c:forEach var="child" items="${reviewchild }" varStatus="st">
+							<c:if test="${child.rnum == review.rnum }">
+								<div style="border:1px solid black;width:500px;">
+									<div>
+										<span>아이디 : ${child.rcwriter }</span>
+									</div>
+									<div>
+										<span>댓글 : ${child.comments }</span>
+									</div>
+									<a href="#" onclick="aa(event,'${st.index }','${child.rcnum}','${review.rnum }','${child.ref }','${child.lev }','${child.step }')">
+										답글 작성
+									</a>
+								</div>
+							</c:if>
+						</c:forEach>
+					</div>
+				</div>
 			</div>
 		</c:forEach>
+	</div>
+	<!-- 리뷰게시판 페이징처리 -->
+	<div>
+		<c:if test="${startPageNum>5 }">
+			<a href="${cp }/product/detail?pageNum=${startPageNum-1 }&inum=${vo.inum }&sub=${param.sub }">[이전]</a>
+		</c:if>
+		
+		<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+			<c:choose>
+				<c:when test="${pageNum == i }">
+					<a href="${cp }/product/detail?pageNum=${i }&inum=${vo.inum }&sub=${param.sub }" style="color:blue;">[${i }]</a>
+				</c:when>
+				<c:otherwise>
+					<a href="${cp }/product/detail?pageNum=${i }&inum=${vo.inum }&sub=${param.sub }" style="color:gray;">[${i }]</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		
+		<c:if test="${endPageNum<reviewPageCount }">
+			<a href="${cp }/product/detail?pageNum=${startPageNum-1 }&inum=${vo.inum }&sub=${param.sub }">[다음]</a>
+		</c:if>
 		
 	</div>
 </div>
 <script type="text/javascript">
+
+	var rcnum1=0;
+	var rnum1=0;
+	var ref1 = 0;
+	var lev1 = 0;
+	var step1 = 0;
+	var textid= "";
 	
+	function aa(e,id,rcnum,rnum,ref,lev,step){
+		
+		rcnum1 = rcnum;
+		rnum1 = rnum;
+		ref1 = ref;
+		lev1 = lev;
+		step1 = step;
+		
+		var a = e.target.parentElement.parentElement;
+		var text = document.createElement("textarea");
+		var btn = document.createElement("input");
+		text.id="com" + id;
+		textid="com" + id;
+		btn.type = "button";
+		btn.value = "등록";
+		btn.onclick = comment;
+		
+		text.style.width = "70%";
+		text.style.height = "50px";
+		a.appendChild(text);
+		a.appendChild(btn);
+		
+	}
+	///asdasdasdasdasdsad
+	commentxhr = null;
+	function comment(){
+		
+		var textarea=document.getElementById(textid);
+		var comments = textarea.value;
+
+		commentxhr = new XMLHttpRequest();
+		commentxhr.onreadystatechange = comm;
+		commentxhr.open('get','${cp}/member/comment?comments'+comments+'&rcnum='+rcnum1+'&rnum='+rnum1+'&ref='+ref1+'&lev='+lev1+'&step='+step1,true);
+		commentxhr.send();
+	}
+	
+	function comm(){
+		if(commentxhr.readyState == 4 && commentxhr.status == 200){
+			alert("여기까지 실행됨...");
+			
+			var data = commentxhr.responseText;
+			var json = JSON.parse(data);
+			
+			if(json.code == 'success'){
+				var tt = document.getElementsByTagName("taxtarea");
+				for(var i = tt.length-1; i>=0; i++){
+					tt[i].remov
+				}
+			}
+		}
+	}
+	
+	
+	//장바구니 담기
 	var putxhr = null;
 	function itemPut(){
 		var id = '${sessionScope.id}';
@@ -85,4 +198,24 @@
 			}
 		}
 	}
+	
+	function commentInsert(){
+		
+	}
+	
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

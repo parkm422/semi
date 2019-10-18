@@ -20,9 +20,8 @@
 	}
 	#nav{
 		width:14.9%;
-		height:2500px;
 		float:left;
-		border-right:1px solid black;
+		min-height: 3000px;
 	}
 	#nav div{
 		width:100%;
@@ -33,11 +32,13 @@
 	}
 	#main{
 		width:85%;
-		height:2500px;
 		float:right	;
+		min-height: 3000px;
 	}
 	#footer{
 		width:100%;
+		display:flex;
+		flex-direction: column;
 	}
 	#footer h1{
 		text-align: center;
