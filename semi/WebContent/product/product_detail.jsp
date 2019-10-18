@@ -60,7 +60,7 @@
 				<div><img src="${cp }/upload/${review.savefilename }" style="width:150px;height:150px;"></div>
 				<div>
 					<div>
-						<c:forEach var="child" items="${reviewchild }">
+						<c:forEach var="child" items="${reviewchild }" varStatus="st">
 							<c:if test="${child.rnum == review.rnum }">
 								<div style="border:1px solid black;width:500px;">
 									<div>
@@ -69,16 +69,9 @@
 									<div>
 										<span>댓글 : ${child.comments }</span>
 									</div>
-									<div>
-										<a href="javascript:aa('event')">
-											답글 작성
-										</a>
-										<!-- 
-										<a href="javascript:comment(${child.rcnum },${child.ref },${child.lev },${child.step })">
-											<span>답글 작성</span>
-										</a>
-										 -->
-									</div>
+									<a href="#" onclick="aa(event,'${st.index }','${child.rcnum}','${review.rnum }','${child.ref }','${child.lev }','${child.step }')">
+										답글 작성
+									</a>
 								</div>
 							</c:if>
 						</c:forEach>
@@ -111,34 +104,68 @@
 	</div>
 </div>
 <script type="text/javascript">
+
+	var rcnum1=0;
+	var rnum1=0;
+	var ref1 = 0;
+	var lev1 = 0;
+	var step1 = 0;
+	var textid= "";
 	
-	function aa(e){
-		var a = e.target;
-		alert(a);
+	function aa(e,id,rcnum,rnum,ref,lev,step){
+		
+		rcnum1 = rcnum;
+		rnum1 = rnum;
+		ref1 = ref;
+		lev1 = lev;
+		step1 = step;
+		
+		var a = e.target.parentElement.parentElement;
 		var text = document.createElement("textarea");
 		var btn = document.createElement("input");
+		text.id="com" + id;
+		textid="com" + id;
 		btn.type = "button";
 		btn.value = "등록";
+		btn.onclick = comment;
 		
+		text.style.width = "70%";
+		text.style.height = "50px";
 		a.appendChild(text);
 		a.appendChild(btn);
 		
 	}
 	
 	commentxhr = null;
-	function comment(rcnum,ref,lev,step){
+	function comment(){
+		
+		var textarea=document.getElementById(textid);
+		var comments = textarea.value;
+
 		commentxhr = new XMLHttpRequest();
 		commentxhr.onreadystatechange = comm;
-		commentxhr.open('get','${cp}/member/comment?rcnum='+rcnum+'&ref='+ref+'&lev='+lev+'&step='+step,true);
+		commentxhr.open('get','${cp}/member/comment?comments'+comments+'&rcnum='+rcnum1+'&rnum='+rnum1+'&ref='+ref1+'&lev='+lev1+'&step='+step1,true);
 		commentxhr.send();
 	}
+	
 	function comm(){
 		if(commentxhr.readyState == 4 && commentxhr.status == 200){
+			alert("여기까지 실행됨...");
+			
 			var data = commentxhr.responseText;
 			var json = JSON.parse(data);
+			
+			if(json.code == 'success'){
+				var tt = document.getElementsByTagName("taxtarea");
+				for(var i = tt.length-1; i>=0; i++){
+					tt[i].remov
+				}
+			}
 		}
 	}
 	
+	
+	//장바구니 담기
 	var putxhr = null;
 	function itemPut(){
 		var id = '${sessionScope.id}';
