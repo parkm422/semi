@@ -35,6 +35,9 @@ public class DetailServlet extends HttpServlet{
 		//상품 정보 얻어오기
 		Product_ListVO vo = dao.getDetail(inum);
 		
+		// 해당 상품 평균 평점 얻어오기
+		int rating_avg = dao.getRating(inum);
+		
 		//해당 상품 이미지 얻어오기
 		ArrayList<Product_ImgVO> imgList = dao.getImg(inum);
 		
@@ -45,6 +48,7 @@ public class DetailServlet extends HttpServlet{
 		req.setAttribute("vo", vo);
 		req.setAttribute("imgList", imgList);
 		req.setAttribute("sizeList", sizeList);
+		req.setAttribute("rating_avg", rating_avg);
 		
 		
 		int pageNum = 1;

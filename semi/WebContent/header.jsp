@@ -12,7 +12,7 @@
 
 		</c:when>
 		<c:otherwise>
-			<span><a href="${cp }/member/basket?id=${sessionScope.id }">장바구니</a></span>
+			<span><a href="${cp }/member/basket?id=${sessionScope.id }" style="text-decoration: none;">장바구니</a></span>
 			<span><a href="${cp }/member/mypage">마이페이지</a></span>
 			<c:if test="${sessionScope.id == 'ADMIN' }">
 				<span><a href="${cp }/manager/adpage">관리자페이지</a></span>
@@ -20,12 +20,12 @@
 			<span><a href="${cp }/member/logout">로그아웃</a></span>
 		</c:otherwise>
 	</c:choose>
-	<h1>테스트 쇼핑몰</h1>
+	<h1><a href="${cp }/main" style="text-decoration: none;color: white;">테스트 쇼핑몰</a></h1>
 </div>
 <div>
 	<ul>
-		<li><a href="${cp }/faqboardY/list">faq리스트</a></li>
-		<li><a href="${cp }/faqboardY/faqinsert">faq작성하기</a></li>
+		<li><a href="${cp }/faqboardY/list">FAQ리스트</a></li>
+		<li><a href="${cp }/faqboardY/faqinsert">FAQ작성하기</a></li>
 		<li><a href="${cp }/memberinfoupdateY/memberupdate?id=${sessionScope.id}">회원정보수정</a></li>
 		<li><a href="${cp }/orderY/porderlist?id=${sessionScope.id}">주문리스트보기</a></li>
 		

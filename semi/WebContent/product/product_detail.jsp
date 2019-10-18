@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div id="main">
+<div style="margin: 30px;">
 	<h1>상품상세정보</h1>
 	<div style="margin-left:50px;margin-top:50px;">
 		<div style="margin:10px;">
@@ -10,24 +11,32 @@
 				<img src="${cp }/upload/${imgList.get(0).savefilename }" style="width:400px; height:500px;">
 			</div>
 			<div style="float:left;width:300px; height:500px;margin-top:10px;margin-left:100px; text-align: center;">
-				<div>
+				<div class="detail_info">
 					<span>상품명 : ${vo.pname }</span>
 				</div>
-				<div>
+				<div class="detail_info">
 					<span>가격 : ${vo.price }</span>
 				</div>
-				<div>
-					<select id="item_size" name="item_size">
-						<option value="">옵션</option>
+				<div class="detail_info">
+					<select id="item_size" name="item_size" style="font-size: 12px;">
+						<option value="">옵션 선택</option>
 						<c:forEach var="sizeList" items="${sizeList }">
 							<option value="${sizeList }">${sizeList }</option>
 						</c:forEach>
 					</select>
 				</div>
-				<p>
-					하이
-				</p>
-				<div>
+				<div class="detail_info" style="color: orange; font-size: 20px;">
+					<span style="font-size:15px;color:black;">평점 : </span>
+					<c:choose>
+						<c:when test="${rating_avg == 0 }">☆☆☆☆☆</c:when>
+						<c:when test="${rating_avg == 1 }">★☆☆☆☆</c:when>
+						<c:when test="${rating_avg == 2 }">★★☆☆☆</c:when>
+						<c:when test="${rating_avg == 3 }">★★★☆☆</c:when>
+						<c:when test="${rating_avg == 4 }">★★★★☆</c:when>
+						<c:when test="${rating_avg == 5 }">★★★★★</c:when>
+					</c:choose>
+				</div>
+				<div class="detail_info">
 					<input type="button" value="장바구니담기" onclick="itemPut()">
 				</div>
 			</div>
@@ -102,6 +111,7 @@
 		</c:if>
 		
 	</div>
+</div>
 </div>
 <script type="text/javascript">
 

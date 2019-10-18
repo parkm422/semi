@@ -46,3 +46,10 @@
 	.outer_type{
 		text-decoration: none;
 	}
+	
+	a{
+		text-decoration: none;
+	}
+	.detail_info{
+		margin-bottom: 20px;
+	}

@@ -60,6 +60,7 @@
 	*/
 </script>
 <div id="nav">
+	<div style="margin-top: 20px;margin-right: 20px;">
 	<div onclick="list(event)">아우터</div>
 	<div id="outer_list" style="height:100px;display:none;" class="major_type">
 		<ul>
@@ -103,5 +104,6 @@
 			<li><a href="${cp }/product/list?major=BAG&sub=야상" class="outer_type">클러치/파우치</a></li>
 			<li><a href="${cp }/product/list?major=BAG&sub=자켓" class="outer_type">숄더/토트/에코 백</a></li>
 		</ul>
+	</div>
 	</div>
 </div>
