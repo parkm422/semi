@@ -85,7 +85,7 @@ public class CategoryDAO {
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			String sql = "SELECT PSIZE FROM PRODUCT_SIZE PS,SUB_CATEGORY S WHERE PS.SCNUM=S.SCNUM AND S.S_CATEGORY=?";
+			String sql = "SELECT DISTINCT PSIZE FROM PRODUCT_SIZE PS,SUB_CATEGORY S WHERE PS.SCNUM=S.SCNUM AND S.S_CATEGORY=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, sub);
 			rs = pstmt.executeQuery();

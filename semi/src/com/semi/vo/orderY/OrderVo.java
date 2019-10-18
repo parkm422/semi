@@ -5,8 +5,9 @@ import java.sql.Date;
 public class OrderVo {
 	private int ornum;
 	private int mnum;
-	private int amount;
+	private int price;
 	private int cnt;
+	private int amount;
 	private String status;
 	private String deladd;
 	private String delivery;
@@ -28,7 +29,7 @@ public class OrderVo {
 		this.getname = getname;
 	}
 
-	public OrderVo(int ornum, String pname, int psize, String color,int cnt, String deladd, String delivery, int amount,Date orderdate) {
+	public OrderVo(int ornum, String pname, int psize, String color,int cnt, String deladd, String delivery, int price,Date orderdate) {
 		super();
 		this.ornum = ornum;
 		this.pname = pname;
@@ -37,10 +38,16 @@ public class OrderVo {
 		this.cnt = cnt;
 		this.deladd = deladd;
 		this.delivery = delivery;
-		this.amount=amount;
+		this.price=price;
 		this.orderdate = orderdate;
 	}
-	
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
 	public int getCnt() {
 		return cnt;
 	}
@@ -85,11 +92,11 @@ public class OrderVo {
 	public void setMnum(int mnum) {
 		this.mnum = mnum;
 	}
-	public int getAmount() {
-		return amount;
+	public int getPrice() {
+		return price;
 	}
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 	public String getStatus() {
 		return status;

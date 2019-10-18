@@ -10,16 +10,14 @@ public class ReviewVO {
 	private String orgfilename;
 	private String savefilename;
 	private int rating;
-	private int ref;
-	private int lev;
-	private int step;
+
 	
 	public ReviewVO() {
 		
 	}
 
 	public ReviewVO(int rnum, int inum, String writer, String title, String content, String orgfilename,
-			String savefilename, int rating, int ref, int lev, int step) {
+			String savefilename, int rating) {
 		super();
 		this.rnum = rnum;
 		this.inum = inum;
@@ -29,9 +27,7 @@ public class ReviewVO {
 		this.orgfilename = orgfilename;
 		this.savefilename = savefilename;
 		this.rating = rating;
-		this.ref = ref;
-		this.lev = lev;
-		this.step = step;
+
 	}
 
 	public int getRnum() {
@@ -96,30 +92,6 @@ public class ReviewVO {
 
 	public void setRating(int rating) {
 		this.rating = rating;
-	}
-
-	public int getRef() {
-		return ref;
-	}
-
-	public void setRef(int ref) {
-		this.ref = ref;
-	}
-
-	public int getLev() {
-		return lev;
-	}
-
-	public void setLev(int lev) {
-		this.lev = lev;
-	}
-
-	public int getStep() {
-		return step;
-	}
-
-	public void setStep(int step) {
-		this.step = step;
 	}
 	
 }

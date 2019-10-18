@@ -11,13 +11,13 @@
 			<li style="display:inline-block;">
 				<div style="border:1px solid black;margin-left:15px;margin-bottom:15px;">
 					<div>
-						<a href="${cp }/product/detail?inum=${vo.inum }">
+						<a href="${cp }/product/detail?inum=${vo.inum }&sub=${param.sub }">
 							<img src="${cp }/upload/${vo.savefilename}" style="width:250px;heigth:300px;">
 						</a>
 					</div>
 					<div>
 						<p style="text-align: center;font-size:12px;">
-							<a href="${cp }/product/detail?inum=${vo.inum }">${vo.pname }</a>
+							<a href="${cp }/product/detail?inum=${vo.inum }&sub=${param.sub }">${vo.pname }</a>
 						</p>
 						<p style="text-align: center;font-size:12px;">${vo.price }</p>
 					</div>

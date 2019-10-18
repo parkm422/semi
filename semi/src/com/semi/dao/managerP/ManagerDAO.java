@@ -100,7 +100,7 @@ public class ManagerDAO {
 			con = JdbcUtil.getConn();
 			String sql = "select * from(select aa.*,rownum as rnum from(select s.name,s.id,o.pname,o.psize,o.color,o.cnt,p.price,i.status,i.delivery " + 
 					"from s_members s,orderdetail o,orderinfo i, product_list p "+ 
-					"where s.mnum=i.mnum  and i.ornum=o.ornum and p.inum=o.inum)aa) where rnum>=? and rnum<=?";
+					"where s.mnum=i.mnum  and i.ornum=o.ornum and p.inum=o.inum order by i.ornum asc)aa) where rnum>=? and rnum<=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1,startRow);
 			pstmt.setInt(2,endRow);
