@@ -160,7 +160,7 @@ public ArrayList<BasketVO> pricesel(int bnum){
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			String sql = "SELECT * FROM BASKET WHERE MNUM=?";
+			String sql = "SELECT * FROM BASKET WHERE MNUM=? ORDER BY BNUM DESC";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, mnum);
 			rs = pstmt.executeQuery();

@@ -78,12 +78,11 @@ public class DetailServlet extends HttpServlet{
 			rnum.add(n.getRnum());
 		}
 		
-		if(rnum != null && rnum.size() > 0) {	
-			ArrayList<ReviewChildVO> reviewchild = reviewDao.reviewChild_list(rnum);
-			System.out.println(reviewchild.get(0).getRnum());
-			//리뷰자식게시판 목록 담기
-			req.setAttribute("reviewchild", reviewchild);
-		}
+		
+		ArrayList<ReviewChildVO> reviewchild = reviewDao.reviewChild_list(rnum);
+		//리뷰자식게시판 목록 담기
+		req.setAttribute("reviewchild", reviewchild);
+		
 		
 		//리뷰게시판 페이징처리 담기
 		req.setAttribute("pageNum", pageNum);

@@ -171,6 +171,36 @@ public class ReviewDAO {
 			JdbcUtil.close(con, pstmt, rs);
 		}
 	}
+	
+	public int child_insert(ReviewChildVO vo) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = JdbcUtil.getConn();
+			
+			String sql = "INSERT INTO REVIEWCHILD VALUES(CHILD_SEQ.NEXTVAL,?,?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, vo.getRnum());
+			pstmt.setString(2, vo.getRcwriter());
+			pstmt.setString(3, vo.getComments());
+			pstmt.setInt(4, vo.getRef());
+			pstmt.setInt(5, vo.getLev());
+			pstmt.setInt(6, vo.getStep());
+			
+			int n = pstmt.executeUpdate();
+			if(n>0) {
+				con.commit();
+				return n;
+			}
+			return 0;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}finally {
+			JdbcUtil.close(con, pstmt, null);
+		}
+	}
 }
 
 
