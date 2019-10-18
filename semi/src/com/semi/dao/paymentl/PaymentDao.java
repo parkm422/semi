@@ -14,7 +14,7 @@ public class PaymentDao {
 	public int insert(PaymentVo vo) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
-		String sql="insert into payment(pnum,ornum,mnum,payamount,enpay,status)values(payment_seq.nextval,?,?,?,?,?)";
+		String sql="insert into payment values(payment_seq.nextval,?,?,?,?,?)";
 		try {
 			con=JdbcUtil.getConn();
 			pstmt=con.prepareStatement(sql);
@@ -68,18 +68,18 @@ public class PaymentDao {
 		ResultSet rs=null;
 		try {
 			con=JdbcUtil.getConn();
-			String sql="select * from orderinfo where mnum=?";
+			String sql="select Max(ornum) from orderinfo where mnum=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1,mnum);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				int ornum=rs.getInt("ornum");
-				return ornum;
+				int mornum=rs.getInt("Max(ornum)");
+				return mornum;
 			}
 			return 0;
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
-			return 0;
+			return -1;
 		}finally {
 			try {
 				if(rs!=null) rs.close();

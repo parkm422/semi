@@ -487,6 +487,53 @@ public ArrayList<BasketVO> pricesel(int bnum){
 		}
 	}
 	
+public ArrayList<HashMap<String, Object>> getBasketList(int mnum){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JdbcUtil.getConn();
+			String sql ="SELECT BB.*,IMG.SAVEFILENAME,B.BNUM,B.MNUM,B.REGDATE,B.CNT " + 
+					"FROM(SELECT AA.*,ROWNUM AS RNUM FROM(SELECT PL.PNAME,PL.INUM,C.COLORNAME,PS.PSIZE,PL.PRICE FROM PRODUCT_LIST PL,COLOR C,PRODUCT_SIZE PS WHERE PL.CNUM=C.CNUM AND C.SIZENUM=PS.SIZENUM)AA)BB,PRODUCT_IMG IMG,BASKET B " + 
+					"WHERE BB.INUM=IMG.INUM AND BB.INUM=B.INUM AND B.MNUM=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, mnum);
+			rs = pstmt.executeQuery();
+			ArrayList<HashMap<String, Object>> basketList = new ArrayList<HashMap<String, Object>>();
+			while(rs.next()) {
+				
+				int inum = rs.getInt("INUM");
+				String pname = rs.getString("PNAME");
+				String colorname = rs.getString("COLORNAME");
+				int psize = rs.getInt("PSIZE");
+				String savefilename = rs.getString("SAVEFILENAME");
+				int price = rs.getInt("PRICE");
+				int bnum = rs.getInt("BNUM");
+				int cnt = rs.getInt("CNT");
+				Date regdate = rs.getDate("REGDATE");
+				
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("inum", inum);
+				map.put("pname", pname);
+				map.put("colorname", colorname);
+				map.put("psize", psize);
+				map.put("savefilename", savefilename);
+				map.put("price", price); 	
+				map.put("bnum", bnum);
+				map.put("cnt", cnt);
+				map.put("regdate", regdate);
+				
+				basketList.add(map);
+				
+			}
+			return basketList;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return null;
+		}
+	}
+	
 }
 
 
