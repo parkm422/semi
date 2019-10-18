@@ -139,6 +139,7 @@
 	commentxhr = null;
 	function comment(){
 		
+		
 		var textarea=document.getElementById(textid);
 		var comments = textarea.value;
 

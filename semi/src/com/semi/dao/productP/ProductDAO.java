@@ -332,20 +332,39 @@ public ArrayList<BasketVO> pricesel(int bnum){
 	}
 	
 	//상품 리스트
-	public ArrayList<List_img_joinVO> list(int startRow,int endRow,String major,String sub){
+	public ArrayList<List_img_joinVO> list(int startRow,int endRow,String major,String sub,String sort){
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			String sql = "SELECT BB.*,PIMG.IMGNUM,PIMG.SAVEFILENAME FROM(SELECT AA.*,ROWNUM AS RNUM FROM(SELECT P.INUM INUM,P.PNAME PNAME,P.PRICE PRICE,p.cnt cnt, p.cnum cnum,p.salecnt salecnt " + 
-					"FROM PRODUCT_LIST P,COLOR C,PRODUCT_SIZE S,SUB_CATEGORY SUB,MAJOR_CATEGORY MAJOR "+ 
-					"WHERE P.CNUM=C.CNUM AND C.SIZENUM=S.SIZENUM AND S.SCNUM=SUB.SCNUM AND SUB.MCNUM=MAJOR.MCNUM AND M_CATEGORY=? AND S_CATEGORY=?)AA)BB,PRODUCT_IMG PIMG "
-					+ "WHERE BB.INUM=PIMG.INUM AND RNUM>=? AND RNUM<=?";
+			System.out.println("sort:"+sort);
+			String sql =  "";
+			if(sort != null && sort.equals("high")) {
+				sql += "SELECT BB.*,PIMG.IMGNUM,PIMG.SAVEFILENAME FROM(SELECT AA.*,ROWNUM AS RNUM FROM(SELECT P.INUM INUM,P.PNAME PNAME,P.PRICE PRICE,p.cnt cnt, p.cnum cnum,p.salecnt salecnt " + 
+						"FROM PRODUCT_LIST P,COLOR C,PRODUCT_SIZE S,SUB_CATEGORY SUB,MAJOR_CATEGORY MAJOR "+ 
+						"WHERE P.CNUM=C.CNUM AND C.SIZENUM=S.SIZENUM AND S.SCNUM=SUB.SCNUM AND SUB.MCNUM=MAJOR.MCNUM AND M_CATEGORY=? AND S_CATEGORY=? ORDER BY PRICE DESC)AA)BB,PRODUCT_IMG PIMG "
+						+ "WHERE BB.INUM=PIMG.INUM AND RNUM>=? AND RNUM<=? ORDER BY RNUM ASC";
+			}else if(sort != null && sort.equals("low")) {
+				sql += "SELECT BB.*,PIMG.IMGNUM,PIMG.SAVEFILENAME FROM(SELECT AA.*,ROWNUM AS RNUM FROM(SELECT P.INUM INUM,P.PNAME PNAME,P.PRICE PRICE,p.cnt cnt, p.cnum cnum,p.salecnt salecnt " + 
+						"FROM PRODUCT_LIST P,COLOR C,PRODUCT_SIZE S,SUB_CATEGORY SUB,MAJOR_CATEGORY MAJOR "+ 
+						"WHERE P.CNUM=C.CNUM AND C.SIZENUM=S.SIZENUM AND S.SCNUM=SUB.SCNUM AND SUB.MCNUM=MAJOR.MCNUM AND M_CATEGORY=? AND S_CATEGORY=? ORDER BY PRICE ASC)AA)BB,PRODUCT_IMG PIMG "
+						+ "WHERE BB.INUM=PIMG.INUM AND RNUM>=? AND RNUM<=? ORDER BY RNUM ASC";
+			}else if(sort != null && sort.equals("popular")) {
+				sql+= "SELECT BB.*,PIMG.IMGNUM,PIMG.SAVEFILENAME FROM(SELECT AA.*,ROWNUM AS RNUM FROM(SELECT P.INUM INUM,P.PNAME PNAME,P.PRICE PRICE,p.cnt cnt, p.cnum cnum,p.salecnt salecnt " + 
+						"FROM PRODUCT_LIST P,COLOR C,PRODUCT_SIZE S,SUB_CATEGORY SUB,MAJOR_CATEGORY MAJOR "+ 
+						"WHERE P.CNUM=C.CNUM AND C.SIZENUM=S.SIZENUM AND S.SCNUM=SUB.SCNUM AND SUB.MCNUM=MAJOR.MCNUM AND M_CATEGORY=? AND S_CATEGORY=? ORDER BY SALECNT DESC)AA)BB,PRODUCT_IMG PIMG "
+						+ "WHERE BB.INUM=PIMG.INUM AND RNUM>=? AND RNUM<=? ORDER BY RNUM ASC";
+			}else if(sort == null || sort.equals("")) {
+				sql =  "SELECT BB.*,PIMG.IMGNUM,PIMG.SAVEFILENAME FROM(SELECT AA.*,ROWNUM AS RNUM FROM(SELECT P.INUM INUM,P.PNAME PNAME,P.PRICE PRICE,p.cnt cnt, p.cnum cnum,p.salecnt salecnt " + 
+						"FROM PRODUCT_LIST P,COLOR C,PRODUCT_SIZE S,SUB_CATEGORY SUB,MAJOR_CATEGORY MAJOR "+ 
+						"WHERE P.CNUM=C.CNUM AND C.SIZENUM=S.SIZENUM AND S.SCNUM=SUB.SCNUM AND SUB.MCNUM=MAJOR.MCNUM AND M_CATEGORY=? AND S_CATEGORY=?)AA)BB,PRODUCT_IMG PIMG "
+						+ "WHERE BB.INUM=PIMG.INUM AND RNUM>=? AND RNUM<=? ORDER BY RNUM ASC";
+			}
+			
 			pstmt = con.prepareStatement(sql);
-			System.out.println(major);
-			System.out.println(sub);
+
 			pstmt.setString(1, major);
 			pstmt.setString(2, sub);
 			pstmt.setInt(3, startRow);

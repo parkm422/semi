@@ -24,6 +24,7 @@ public class ProductServlet extends HttpServlet{
 		String spageNum = req.getParameter("pageNum");
 		String major = req.getParameter("major");
 		String sub = req.getParameter("sub");
+		String sort = req.getParameter("sort");
 		
 		int pageNum = 1;
 		if(spageNum != null) {
@@ -37,7 +38,7 @@ public class ProductServlet extends HttpServlet{
 		
 		ProductDAO dao = ProductDAO.getProductDao();
 		
-		ArrayList<List_img_joinVO> list = dao.list(startRow, endRow,major,sub);
+		ArrayList<List_img_joinVO> list = dao.list(startRow, endRow,major,sub,sort);
 		int pageCount = (int)Math.ceil(dao.getCount(sub)/30.0);
 		
 		int startPageNum = ((pageNum-1)/4*4)+1;
@@ -52,6 +53,8 @@ public class ProductServlet extends HttpServlet{
 		req.setAttribute("pageCount", pageCount);
 		req.setAttribute("startPageNum", startPageNum);
 		req.setAttribute("endPageNum", endPageNum);
+		
+		req.setAttribute("sort", sort);
 		
 		req.setAttribute("top", "/header.jsp");
 		req.setAttribute("nav", "/nav.jsp");
