@@ -11,6 +11,36 @@ import com.semi.vo.boardl.Ono_EnquiryVO;
 import jdbc.JdbcUtil;
 
 public class Ono_EnquiryDao {
+	public Ono_EnquiryVO update(int ennum){
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="select * from ono_enquiry where ennum=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1,ennum);
+			rs=pstmt.executeQuery();
+	
+			if(rs.next()) {
+				String category=rs.getString("category");
+				String writer=rs.getString("writer");
+				String title=rs.getString("title");
+				String content=rs.getString("content");
+				String answer=rs.getString("answer");
+				Ono_EnquiryVO vo = new Ono_EnquiryVO(ennum, category, writer, title, content, answer);
+				return vo;
+			}
+			return null;
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return null;
+		}finally {
+			JdbcUtil.close(con,pstmt,rs);
+		}
+	}
+	
+	
 	public int updatego(String content,int ennum) {
 		Connection con=null;
 		PreparedStatement pstmt=null;

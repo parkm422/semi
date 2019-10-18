@@ -4,9 +4,9 @@
 <h1>주문내역</h1>
 <p><a href="${cp }/orderY/porderlist?id=${sessionScope.id}">전체글목록</a> | <a href="${cp }/main">홈으로</a>
 </p>
-<table border="1" width="600">
+<table border="1" width="800">
 	<tr>
-		<th>주문번호</th><th>상품이름</th><th>사이즈</th><th>색상</th><th>수량</th><th>배송상태</th><th>배송지</th><th>금액</th><th>구매날짜</th>
+		<th>주문번호</th><th>상품이름</th><th>사이즈</th><th>색상</th><th>수량</th><th>배송주소</th><th>배송상태</th><th>금액</th><th>구매날짜</th>
 	</tr>
 	<c:forEach var="vo2" items="${list }">
 		<tr>
@@ -17,7 +17,7 @@
 			<td>${vo2.cnt}</td>
 			<td>${vo2.deladd}</td>
 			<td>${vo2.delivery}</td>
-			<td>${vo2.amount}</td>
+			<td>${vo2.price}</td>
 			<td>${vo2.orderdate}</td>
 		</tr>
 	</c:forEach>

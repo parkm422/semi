@@ -62,9 +62,9 @@ public class BasketServlet extends HttpServlet{
 		if(endPageNum>basketPageCount) {
 			endPageNum = basketPageCount;
 		}
-		System.out.println(startRow);
-		System.out.println(endRow);
-		System.out.println(basketPageCount);
+
+		
+
 		ArrayList<HashMap<String, Object>> basketList = itemDao.getBasketList(vo.getMnum(),startRow,endRow);
 		
 		

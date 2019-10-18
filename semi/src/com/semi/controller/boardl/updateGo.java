@@ -16,6 +16,13 @@ public class updateGo extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int ennum=Integer.parseInt(req.getParameter("ennum"));
 		Ono_EnquiryDao dao=new Ono_EnquiryDao();
-		Ono_EnquiryVO vo=dao.updatego(content, ennum);
+		Ono_EnquiryVO vo=dao.detail(ennum);
+		req.setAttribute("vo",vo);
+		req.setAttribute("top", "/header.jsp");
+		req.setAttribute("nav","/nav.jsp");
+		req.setAttribute("content","/boardl/update.jsp");
+		req.setAttribute("footer","/footer.jsp");
+		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 	}
+	
 }

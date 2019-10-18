@@ -75,8 +75,9 @@ public class OrderInsertServlet extends HttpServlet{
 		}
 		
 		int nn=0;
-		ArrayList<HashMap<String, Object>> basketList1 = itemDao.getBasketList(vo.getMnum(),startRow,endRow);
+		ArrayList<HashMap<String, Object>> basketList1 = itemDao.getBasketList(vo.getMnum());
 		System.out.println(basketList1);
+		System.out.println(basketList1.size());
 		for(int i=0;i<basketList1.size();i++) {
 			System.out.println(basketList1.get(i).get("price"));
 			nn+=(Integer)basketList1.get(i).get("price"); 

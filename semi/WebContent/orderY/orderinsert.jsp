@@ -32,7 +32,7 @@
 	</c:forEach>
 	총계산액<br>
 	<input type="text"  name="amount" id="amount"  value="${requestScope.nn}" readonly="readonly"><br>
-	<input type="text" name="status" id="status" hidden="" value="준비중"><br>
+	<input type="text" name="status" id="status" hidden="" value="결제완료"><br>
 
 
 	<input type="text" name="delivery" id="delivery" hidden="" value="준비중"><br>
