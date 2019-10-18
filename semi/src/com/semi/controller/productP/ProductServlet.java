@@ -1,6 +1,7 @@
 package com.semi.controller.productP;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -9,9 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import com.semi.dao.productP.ProductDAO;
 import com.semi.vo.productP.List_img_joinVO;
 import com.semi.vo.productP.Product_ListVO;
+
 
 @WebServlet("/product/list")
 public class ProductServlet extends HttpServlet{
@@ -24,7 +28,7 @@ public class ProductServlet extends HttpServlet{
 		String spageNum = req.getParameter("pageNum");
 		String major = req.getParameter("major");
 		String sub = req.getParameter("sub");
-		
+
 		int pageNum = 1;
 		if(spageNum != null) {
 			pageNum = Integer.parseInt(spageNum);

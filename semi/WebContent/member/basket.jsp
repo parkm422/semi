@@ -8,7 +8,7 @@
 	<div>
 		<table style="width:1500px; text-align: center;">
 			<colgroup>
-				<col width="5%">
+				<col width="10%">
 				<col width="20%">
 				<col width="25%">
 				<col width="10%">
@@ -51,7 +51,7 @@
 						<span>${basket.price * basket.cnt }</span>
 					</td>
 					<td>
-						<input type="button" value="상품삭제">
+						<input type="button" value="상품삭제" onclick="bdelete(${basket.bnum})">
 					</td>
 					<td>
 						<span>${basket.regdate }</span>
@@ -92,4 +92,26 @@
 		
 	</div>
 </div>
+<script>
+var dxhr=null;
+function bdelete(bnum) {
+
+		dxhr=new XMLHttpRequest();
+		dxhr.onreadystatechange=deleteOk;
+		xhr.onreadystatechange=success;
+		xhr.open('get', '${cp }/member/basket?bnum='+bnum,true);
+		xhr.send();
+}
+function deleteOk(){
+	if(dxhr.readyState==4 && dxhr.status==200){
+		var data=dxhr.responseText;
+		var json=JSON.parse(data);
+		if(json.code=='success'){
+			location.href="${cp }/member/basket.jsp?id=${sessionScope.id}";
+		}else{
+			alert("삭제실패!");
+		}
+	}
+}
+</script>
 

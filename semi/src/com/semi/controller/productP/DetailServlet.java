@@ -80,7 +80,6 @@ public class DetailServlet extends HttpServlet{
 		
 		if(rnum != null && rnum.size() > 0) {	
 			ArrayList<ReviewChildVO> reviewchild = reviewDao.reviewChild_list(rnum);
-			System.out.println(reviewchild.get(0).getRnum());
 			//리뷰자식게시판 목록 담기
 			req.setAttribute("reviewchild", reviewchild);
 		}

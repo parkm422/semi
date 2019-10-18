@@ -24,10 +24,24 @@ public class BasketServlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
+		
 		req.setCharacterEncoding("utf-8");
 		String type = req.getParameter("type");
-		
+		//장바구니에서 삭제
+				int bnum = Integer.parseInt(req.getParameter("bnum"));
+				if(bnum!=0) {
+					ProductDAO dao=ProductDAO.getProductDao();
+					int n=dao.delete(bnum);
+					resp.setContentType("text/plain;charset=utf-8");
+					PrintWriter pw=resp.getWriter();
+					JSONObject json=new JSONObject();
+					if(n>0) {
+						json.put("code","success");
+					}else {
+						json.put("code","fail");
+					}
+					pw.print(json);
+				}
 		//type값이 put이면 장바구니 담기
 		if(type != null && type.equals("put")) {
 					

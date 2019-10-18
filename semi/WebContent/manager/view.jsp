@@ -4,14 +4,16 @@
  <div style="text-align: center;">
  <h1>주문 상세정보</h1>
  </div>
-<table border="1" width="800">
+<table border="1" width="1000">
 	<tr>
-		<th>고객명</th><th>아이디</th><th>상품명</th><th>사이즈</th><th>색상</th><th>수량</th><th>가격</th><th>결제상태 확인</th><th>배송정보 확인</th>
+		<th>주문번호</th><th>고객명</th><th>아이디</th><th>받는사람명</th><th>상품명</th><th>사이즈</th><th>색상</th><th>수량</th><th>가격</th><th>결제상태 확인</th><th>배송정보 확인</th>
 	</tr>
 	<c:forEach var="vo" items="${list }">
 		<tr>
+			<td>${vo.ornum }</td>
 			<td>${vo.name }</td>
 			<td>${vo.id }</td>
+			<td>${vo.gname }</td>
 			<td>${vo.pname }</td>
 			<td>${vo.psize }</td>
 			<td>${vo.color }</td>
