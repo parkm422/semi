@@ -419,26 +419,37 @@ public ArrayList<BasketVO> pricesel(int bnum){
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			String sql ="SELECT BB.*,IMG.SAVEFILENAME,B.BNUM,B.MNUM,B.REGDATE,B.CNT " + 
-					"FROM(SELECT AA.*,ROWNUM AS RNUM FROM(SELECT PL.PNAME,PL.INUM,C.COLORNAME,PS.PSIZE,PL.PRICE FROM PRODUCT_LIST PL,COLOR C,PRODUCT_SIZE PS WHERE PL.CNUM=C.CNUM AND C.SIZENUM=PS.SIZENUM)AA)BB,PRODUCT_IMG IMG,BASKET B " + 
-					"WHERE BB.INUM=IMG.INUM AND BB.INUM=B.INUM AND RNUM>=? AND RNUM<=? AND B.MNUM=?";
+			String sql ="SELECT CC.* FROM(SELECT BB.*,IMG.SAVEFILENAME,B.BNUM,B.MNUM,B.CNT,B.REGDATE,ROWNUM AS RNUM " + 
+					"FROM(SELECT AA.* FROM(SELECT PL.PNAME,PL.INUM,C.COLORNAME,PS.PSIZE,PL.PRICE FROM PRODUCT_LIST PL,COLOR C,PRODUCT_SIZE PS WHERE PL.CNUM=C.CNUM AND C.SIZENUM=PS.SIZENUM)AA)BB,PRODUCT_IMG IMG,BASKET B " + 
+					"WHERE BB.INUM=IMG.INUM AND BB.INUM=B.INUM AND B.MNUM=? ORDER BY REGDATE DESC)CC WHERE RNUM>=? AND RNUM<=?";
+			
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
-			pstmt.setInt(3, mnum);
+			pstmt.setInt(1, mnum);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
 			rs = pstmt.executeQuery();
 			ArrayList<HashMap<String, Object>> basketList = new ArrayList<HashMap<String, Object>>();
 			while(rs.next()) {
 				
 				int inum = rs.getInt("INUM");
+				System.err.println("inum"+inum);
 				String pname = rs.getString("PNAME");
+				System.err.println("pname"+pname);
 				String colorname = rs.getString("COLORNAME");
+				System.err.println("colorname"+colorname);
 				int psize = rs.getInt("PSIZE");
+				System.err.println("psize"+psize);
 				String savefilename = rs.getString("SAVEFILENAME");
+				System.err.println("savefilename"+savefilename);
 				int price = rs.getInt("PRICE");
+				System.err.println("price"+price);
 				int bnum = rs.getInt("BNUM");
+				System.err.println("bnum"+bnum);
 				int cnt = rs.getInt("CNT");
+				System.err.println("cnt"+cnt);
 				Date regdate = rs.getDate("REGDATE");
+				System.err.println("regdate"+regdate);
 				
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				map.put("inum", inum);
