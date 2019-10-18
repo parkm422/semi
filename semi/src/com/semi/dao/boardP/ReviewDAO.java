@@ -138,14 +138,20 @@ public class ReviewDAO {
 				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? OR RNUM=?";
 			}else if(len == 4) {
 				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? OR RNUM=? OR RNUM=?";
-			}else {
+			}else if(len == 5){
 				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? OR RNUM=? OR RNUM=? OR RNUM=?";
+			}else {
+				sql = "SELECT * FROM REVIEWCHILD";
 			}
 			
 			pstmt = con.prepareStatement(sql);
-			for(int i = 0; i<len; i++) {
-				pstmt.setInt(i+1, rnum.get(i));
+			
+			if(len >= 1) {
+				for(int i = 0; i<len; i++) {
+					pstmt.setInt(i+1, rnum.get(i));
+				}
 			}
+			
 			rs = pstmt.executeQuery();
 			ArrayList<ReviewChildVO> childList = new ArrayList<ReviewChildVO>();
 			while(rs.next()) {

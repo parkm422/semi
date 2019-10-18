@@ -339,7 +339,6 @@ public ArrayList<BasketVO> pricesel(int bnum){
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			System.out.println("sort:"+sort);
 			String sql =  "";
 			if(sort != null && sort.equals("high")) {
 				sql += "SELECT BB.*,PIMG.IMGNUM,PIMG.SAVEFILENAME FROM(SELECT AA.*,ROWNUM AS RNUM FROM(SELECT P.INUM INUM,P.PNAME PNAME,P.PRICE PRICE,p.cnt cnt, p.cnum cnum,p.salecnt salecnt " + 
