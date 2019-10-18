@@ -7,10 +7,10 @@
 	<h1>상품상세정보</h1>
 	<div style="margin-left:50px;margin-top:50px;">
 		<div style="margin:10px;">
-			<div style="float:left;width:400px; height:500px;margin-right:20px;margin-top:10px;">
+			<div style="float:left;width:400px; height:500px;margin-right:20px;margin-top:10px;margin-bottom: 20px;">
 				<img src="${cp }/upload/${imgList.get(0).savefilename }" style="width:400px; height:500px;">
 			</div>
-			<div style="float:left;width:300px; height:500px;margin-top:10px;margin-left:100px; text-align: center;">
+			<div style="float:left;width:300px; height:500px;margin-top:10px;margin-left:100px;margin-bottom: 20px; text-align: center;">
 				<div class="detail_info">
 					<span>상품명 : ${vo.pname }</span>
 				</div>
@@ -43,7 +43,7 @@
 		</div>
 	</div>
 	<div style="clear: both;">
-		상품상세
+		<h3>상품 상세</h3>
 	</div>
 	<br><br>
 	<div>
@@ -169,7 +169,7 @@
 			if(json.code == 'success'){
 				var tt = document.getElementsByTagName("taxtarea");
 				for(var i = tt.length-1; i>=0; i++){
-					tt[i].remov
+					tt[i].remove
 				}
 			}
 		}
