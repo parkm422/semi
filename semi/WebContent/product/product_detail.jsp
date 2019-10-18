@@ -135,7 +135,7 @@
 		a.appendChild(btn);
 		
 	}
-	///asdasdasdasdasdsad
+
 	commentxhr = null;
 	function comment(){
 		

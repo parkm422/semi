@@ -21,7 +21,7 @@ public class ReviewDAO {
 	public static ReviewDAO getReviewDao() {
 		return reviewDao;
 	}
-	/*
+	
 	public int review_Insert(ReviewVO vo) {
 		
 		Connection con = null;
@@ -29,7 +29,7 @@ public class ReviewDAO {
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			String sql = "INSERT INTO REVIEW VALUES(REVIEW_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO REVIEW VALUES(REVIEW_SEQ.NEXTVAL,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, vo.getInum());
 			pstmt.setString(2, vo.getWriter());
@@ -38,12 +38,14 @@ public class ReviewDAO {
 			pstmt.setString(5, vo.getOrgfilename());
 			pstmt.setString(6, vo.getSavefilename());
 			pstmt.setInt(7, vo.getRating());
-			pstmt.setInt(8, vo.getRef());
-			pstmt.setInt(9, vo.getLev());
-			pstmt.setInt(10, vo.getStep());
 			
+			int n = pstmt.executeUpdate();
 			
-			
+			if(n>0) {
+				con.commit();
+				return n;
+			}
+			return 0;
 		}catch(SQLException se) {
 			se.printStackTrace();
 			return -1;
@@ -52,7 +54,7 @@ public class ReviewDAO {
 		}
 		
 	}
-	*/
+	
 	
 	// 상품번호에 해당 하는 리뷰 개수 얻어오기
 	public int getReviewCount(int inum) {
