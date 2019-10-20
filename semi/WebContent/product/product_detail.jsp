@@ -51,7 +51,7 @@
 		<div>
 			<div style="margin: 60px; border: 1px solid gray;">
 				<h3>상품 리뷰</h3>
-				<c:forEach var="review" items="${reviewList }">
+				<c:forEach var="review" items="${reviewList }" varStatus="bb">
 					<div style="margin-left: 30px;">
 						<div>
 							<span>글번호 : ${review.rnum }</span>&nbsp;&nbsp;
@@ -71,17 +71,21 @@
 						<div><img src="${cp }/upload/${review.savefilename }" style="width:150px;height:150px;"></div>
 						<div>
 							<div style="padding:10px;">
-								<textarea rows="3" cols="100" id="firstcomment"></textarea>
-								<input type="button" style="height:30px;" value="댓글작성" onclick="comment(0,0,0,'${review.rnum}',0,0,0)">
+								<textarea rows="3" cols="100" id="firstcomment_${bb.index }"></textarea>
+								<input type="button" style="height:30px;" value="댓글작성" onclick="comment(0,'${bb.index }',0,'${review.rnum}',0,0,0)">
 							</div>
 						</div>
 						<div>
 							<div>
 								<c:forEach var="child" items="${reviewchild }" varStatus="st">
 									<c:if test="${child.rnum == review.rnum }">
-										<div>
+									<div>
+										<c:forEach begin="0" end="${child.lev }">
+												<div style="display: inline-block; margin-left:20px;"></div>
+										</c:forEach>
+										<div style="display: inline-block;">
+											
 											<div>
-												<c:forEach begin="0" end="${child.lev }">&nbsp;&nbsp;</c:forEach>
 												<span>└아이디 : ${child.rcwriter }</span>
 											</div>
 											<div>
@@ -95,6 +99,7 @@
 												<input type="button" value="등록" onclick="comment(1,'${st.index}','${child.rcnum }','${child.rnum }','${child.ref }','${child.lev }','${child.step }')">
 											</div>
 										</div>
+									</div>
 									</c:if>
 								</c:forEach>
 							</div>
@@ -150,7 +155,7 @@
 		commentxhr.onreadystatechange = comm;
 		var comments = "";
 		if(a == 0){
-			comments = document.getElementById("firstcomment").value;
+			comments = document.getElementById("firstcomment_"+id).value;
 			
 		}else if(a == 1){
 			comments = document.getElementById("comm_"+id).value;
