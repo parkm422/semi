@@ -132,6 +132,7 @@
 				</c:if>
 			</div>
 		</div>
+		<!-- 최상단으로 최하단으로 버튼 -->
 		<div style="position: fixed; bottom: 70px; right: 40px;">
 			<a href="#header" style="background-color: gray;color:white;">▲</a>
 		</div>

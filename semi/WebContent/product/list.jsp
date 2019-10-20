@@ -23,10 +23,10 @@
 							</a>
 						</div>
 						<div>
-							<p style="text-align: center;font-size:12px;">
+							<div style="text-align: center;font-size:17px;">
 								<a href="${cp }/product/detail?inum=${vo.inum }&sub=${param.sub }&sort=${sort}">${vo.pname }</a>
-							</p>
-							<p style="text-align: center;font-size:12px;">${dc.format(vo.price) }원</p>
+							</div>
+							<div style="text-align: center;font-size:17px;"><strong>${dc.format(vo.price) }원</strong></div>
 						</div>
 					</div>
 				</li>
@@ -58,7 +58,11 @@
 			</c:if>
 		</div>
 	</div>
-	<div style="position: fixed; bottom: 40px; right: 40px;">
-		<a href="#header" style="background-color: gray;color:white;">TOP</a>
-	</div>
+	<!-- 최상단으로 최하단으로 버튼 -->
+	<div style="position: fixed; bottom: 70px; right: 40px;">
+			<a href="#header" style="background-color: gray;color:white;">▲</a>
+		</div>
+		<div style="position: fixed; bottom: 40px; right: 40px;">
+			<a href="#footer" style="background-color: gray;color:white;">▼</a>
+		</div>
 </div>
