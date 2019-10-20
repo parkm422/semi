@@ -71,7 +71,7 @@
 						<div><img src="${cp }/upload/${review.savefilename }" style="width:150px;height:150px;"></div>
 						<div>
 							<div style="padding:10px;">
-								<textarea rows="3" cols="100" id="firstcomment_${bb.index }"></textarea>
+								<textarea rows="3" cols="100" id="firstcomment_${bb.index }" onclick="loginCheck('${bb.index}')"></textarea>
 								<input type="button" style="height:30px;" value="댓글작성" onclick="comment(0,'${bb.index }',0,'${review.rnum}',0,0,0)">
 							</div>
 						</div>
@@ -142,7 +142,26 @@
 </div>
 <script type="text/javascript">
 	
+	// 비로그인 상태로 textarea창 클릭시 호출
+	function loginCheck(bb){
+		var sessionId = '${sessionScope.id}';
+		if(sessionId == null || sessionId == ''){
+			var text = document.getElementById("firstcomment_"+bb);
+			text.disabled = true;
+			text.style.fontWeight = "bold";
+			text.value = "로그인 후 작성 할 수 있습니다.";
+		}
+	}
+	
+	// 비로그인 상태에서 대댓글 작성 클릭시 호출
 	function aa(id){
+		
+		var sessionId = '${sessionScope.id}';
+		if(sessionId == null || sessionId == ''){
+			alert("로그인 후 이용해주세요.");
+			location.href="${cp}/member/login";
+			return;
+		}
 		
 		var a = document.getElementById("comm"+id);
 		a.style.display = "block";
@@ -151,6 +170,15 @@
 	
 	commentxhr = null;
 	function comment(a,id,rcnum,rnum,ref,lev,step){
+		
+		//로그인 체크 비로그인시 로그인 페이지 이동 후 함수 종료
+		var sessionId = '${sessionScope.id}';
+		if(sessionId == null || sessionId == ''){
+			alert("로그인 후 이용해주세요.");
+			location.href="${cp}/member/login";
+			return;
+		}
+		
 		commentxhr = new XMLHttpRequest();
 		commentxhr.onreadystatechange = comm;
 		var comments = "";
