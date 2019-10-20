@@ -36,8 +36,7 @@ public class ReviewCommentServlet extends HttpServlet{
 		int step = 0;
 		
 		
-		if(rcnum != null && !rcnum.equals("")) {
-			System.out.println(rcnum);
+		if(rcnum != null && !rcnum.equals("0")) {
 			rcnum1 = Integer.parseInt(rcnum);
 			ref = Integer.parseInt(req.getParameter("ref"));
 			lev = Integer.parseInt(req.getParameter("lev"));

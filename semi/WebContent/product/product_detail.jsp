@@ -4,7 +4,7 @@
 
 <div id="main">
 	<div style="margin: 30px;">
-		<h1>상품상세정보</h1>
+		<div style="margin:60px;"><h1>상품상세정보</h1></div>
 		<div style="margin-left:50px;margin-top:50px;">
 			<div style="margin:10px;">
 				<div style="float:left;width:400px; height:500px;margin-right:20px;margin-top:10px;margin-bottom: 20px;">
@@ -52,10 +52,10 @@
 			<div style="margin: 60px; border: 1px solid gray;">
 				<h3>상품 리뷰</h3>
 				<c:forEach var="review" items="${reviewList }">
-					<div>
-						<div><span>${review.rnum }</span></div>
+					<div style="margin-left: 30px;">
 						<div>
-							<span>${review.writer }</span>&nbsp;&nbsp;
+							<span>글번호 : ${review.rnum }</span>&nbsp;&nbsp;
+							<span>작성자 : ${review.writer }</span>&nbsp;&nbsp;
 							<span>평점 :</span>
 							<c:choose>
 								<c:when test="${review.rating == 5 }"><span style="color:orange;">★★★★★</span></c:when>
@@ -64,31 +64,35 @@
 								<c:when test="${review.rating == 2 }"><span style="color:orange;">★★</span></c:when>
 								<c:when test="${review.rating == 1 }"><span style="color:orange;">★</span></c:when>
 							</c:choose>
-							
 						</div>
-						<div>${vo.pname }</div>
-						<div style="font-weight: bold;">${review.title }</div><br>
+						<div>상품명 : ${vo.pname }</div>
+						<div style="font-weight: bold;">${review.title }</div>
 						<div>${review.content }</div>
 						<div><img src="${cp }/upload/${review.savefilename }" style="width:150px;height:150px;"></div>
 						<div>
-							<textarea rows="5" cols="100"></textarea><input type="button" value="등록">
+							<div style="padding:10px;">
+								<textarea rows="3" cols="100" id="firstcomment"></textarea>
+								<input type="button" style="height:30px;" value="댓글작성" onclick="comment(0,0,0,'${review.rnum}',0,0,0)">
+							</div>
 						</div>
 						<div>
 							<div>
 								<c:forEach var="child" items="${reviewchild }" varStatus="st">
 									<c:if test="${child.rnum == review.rnum }">
-										<div style="border:1px solid black;width:500px;">
+										<div>
 											<div>
+												<c:forEach begin="0" end="${child.lev }">&nbsp;&nbsp;</c:forEach>
 												<span>└아이디 : ${child.rcwriter }</span>
 											</div>
 											<div>
 												<span>댓글 : ${child.comments }</span>
 											</div>
-											<a href="#content" onclick="aa(event,'${st.index }','${child.rcnum}','${review.rnum }','${child.ref }','${child.lev }','${child.step }')">
+											<a href="#content" onclick="aa('${st.index }')">
 												답글 작성
 											</a>
-											<div id="comm${st.index }" style="display:block;">
-												<textarea rows="3" cols="100"></textarea><input type="button" value="등록">
+											<div id="comm${st.index }" style="display:none;">
+												<textarea rows="3" cols="100" id="comm_${st.index }"></textarea>
+												<input type="button" value="등록" onclick="comment(1,'${st.index}','${child.rcnum }','${child.rnum }','${child.ref }','${child.lev }','${child.step }')">
 											</div>
 										</div>
 									</c:if>
@@ -96,6 +100,7 @@
 							</div>
 						</div>
 					</div>
+					<br>
 				</c:forEach>
 			</div>
 		</div>
@@ -131,48 +136,26 @@
 	</div>
 </div>
 <script type="text/javascript">
-	/*
-	var rcnum1=0;
-	var rnum1=0;
-	var ref1 = 0;
-	var lev1 = 0;
-	var step1 = 0;
-	var textid= "";
 	
-	function aa(e,id,rcnum,rnum,ref,lev,step){
+	function aa(id){
 		
-		rcnum1 = rcnum;
-		rnum1 = rnum;
-		ref1 = ref;
-		lev1 = lev;
-		step1 = step;
-		
-		var a = e.target.parentElement.parentElement.nodeName;
-		alert(a);
-		return;
-		var text = document.createElement("textarea");
-		var btn = document.createElement("input");
-		text.id="com" + id;
-		textid="com" + id;
-		btn.type = "button";
-		btn.value = "등록";
-		btn.onclick = comment;
-		
-		text.style.width = "70%";
-		text.style.height = "50px";
-		a.appendChild(text);
-		a.appendChild(btn);
+		var a = document.getElementById("comm"+id);
+		a.style.display = "block";
 		
 	}
-	*/
+	
 	commentxhr = null;
-	function comment(){
-		var textarea=document.getElementById(textid);
-		var comments = textarea.value;
-
+	function comment(a,id,rcnum,rnum,ref,lev,step){
 		commentxhr = new XMLHttpRequest();
 		commentxhr.onreadystatechange = comm;
-		commentxhr.open('get','${cp}/member/comment?comments='+comments+'&rcnum='+rcnum1+'&rnum='+rnum1+'&ref='+ref1+'&lev='+lev1+'&step='+step1,true);
+		var comments = "";
+		if(a == 0){
+			comments = document.getElementById("firstcomment").value;
+			
+		}else if(a == 1){
+			comments = document.getElementById("comm_"+id).value;
+		}
+		commentxhr.open('get','${cp}/member/comment?comments='+comments+'&rcnum='+rcnum+'&rnum='+rnum+'&ref='+ref+'&lev='+lev+'&step='+step,true);
 		commentxhr.send();
 	}
 	

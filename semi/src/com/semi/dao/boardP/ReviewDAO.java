@@ -212,7 +212,7 @@ public class ReviewDAO {
 			
 			if(rcnum == 0) {
 			
-				ref = rcnum;
+				ref = num;
 
 			}else {
 			
