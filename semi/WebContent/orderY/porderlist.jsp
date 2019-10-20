@@ -19,8 +19,8 @@
 	<col width="10%">
 </colgroup>
 	<tr>
-		<th>주문번호</th><th>상품 이미지</th><th>상품이름</th><th>사이즈</th><th>색상</th><th>수량</th><th>배송상태</th><th>배송지</th><th>금액</th><th>구매날짜</th>
-		<th>리뷰잘못쓰면 죽는다</th>
+		<th>주문번호</th><th>상품 이미지</th><th>상품이름</th><th>사이즈</th><th>색상</th><th>수량</th><th>배송지</th><th>배송상태</th><th>금액</th><th>구매날짜</th>
+		<th>리뷰작성하기</th>
 	</tr>
 	<c:forEach var="vo2" items="${list }">
 		<tr>

@@ -1,6 +1,7 @@
 package com.semi.controller.productP;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -101,7 +102,12 @@ public class DetailServlet extends HttpServlet{
 		req.setAttribute("nav", "/nav.jsp");
 		req.setAttribute("content", "/product/product_detail.jsp");
 		req.setAttribute("footer", "/footer.jsp");
-
+		
+		//화폐 단위 ,(콤마)
+		DecimalFormat dc = new DecimalFormat("###,###,###,###");
+				
+		req.setAttribute("dc", dc);
+		
 		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 		
 	}

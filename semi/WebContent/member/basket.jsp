@@ -27,10 +27,10 @@
 				<th>주문관리(삭제)</th>
 				<th>등록일</th>
 			</tr>
-			<c:forEach var="basket" items="${requestScope.basketList }">
+			<c:forEach var="basket" items="${requestScope.basketList }" varStatus="st">
 				<tr>
 					<td>
-						<span>${basket.bnum }</span>
+						<span>${st.index+1 }</span>
 					</td>
 					<td>
 						<img src="${cp }/upload/${basket.savefilename }" style="width:100px;height:100px;">

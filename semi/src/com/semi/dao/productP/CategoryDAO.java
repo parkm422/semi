@@ -20,6 +20,47 @@ public class CategoryDAO {
 		return categoryDao;
 	}
 	
+	/*
+	// 카테고리 등록하기
+	public int addCategory(String major,String sub,int minSize,int maxSize,String color) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
+		
+		try {
+			con = JdbcUtil.getConn();
+			String sql = "INSERT INTO MAJOR_CATEGORY VALUES(MC_SEQ.NEXTVAL,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, major);
+			
+			int n = pstmt.executeUpdate();
+			if( n > 0 ) {
+				
+				sql = "INSERT INTO SUB_CATEGORY VALUES('A'||SUB_SEQ.NEXTVAL,MC_SEQ.CURRVAL,?)";
+				pstmt2 = con.prepareStatement(sql);
+				pstmt2.setString(1, sub);
+				int n2 = pstmt2.executeUpdate();
+				
+				if( n2 > 0 ) {
+					sql = "INSERT INTO PRODUCT_SIZE VALUES('B'||SIZE_SEQ.NEXTVAL,SUB_SEQ.CURRVAL,?)";
+					for(int i = minSize; i<=maxSize; i+=5) {
+						pstmt3 = con.prepareStatement(sql);
+						pstmt3.setInt(1, i);
+					}
+				}
+			}
+			con.rollback();
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}finally {
+			
+		}
+	}
+	*/
+	
 	//대분류명 얻어오기
 	public ArrayList<String> getM_category(){
 		

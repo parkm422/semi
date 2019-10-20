@@ -28,7 +28,6 @@ public class ReviewDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
-		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
 			String sql = "INSERT INTO REVIEW VALUES(REVIEW_SEQ.NEXTVAL,?,?,?,?,?,?,?)";
@@ -52,7 +51,7 @@ public class ReviewDAO {
 				
 				if(n2>0) {
 					con.commit();
-					return n2;
+					return n2; 
 				}else {
 					con.rollback();
 				}
@@ -62,7 +61,9 @@ public class ReviewDAO {
 			se.printStackTrace();
 			return -1;
 		}finally {
-			JdbcUtil.close(con, pstmt, null);
+			JdbcUtil.close(pstmt2);
+			JdbcUtil.close(pstmt);
+			JdbcUtil.close(con);
 		}
 		
 	}
@@ -146,15 +147,15 @@ public class ReviewDAO {
 			String sql = "";
 			
 			if(len == 1) {
-				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=?";
+				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? ORDER BY REF DESC,STEP ASC";
 			}else if(len == 2){
-				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=?";
+				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? ORDER BY REF DESC,STEP ASC";
 			}else if(len == 3) {
-				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? OR RNUM=?";
+				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? OR RNUM=? ORDER BY REF DESC,STEP ASC";
 			}else if(len == 4) {
-				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? OR RNUM=? OR RNUM=?";
+				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? OR RNUM=? OR RNUM=? ORDER BY REF DESC,STEP ASC";
 			}else if(len == 5){
-				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? OR RNUM=? OR RNUM=? OR RNUM=?";
+				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? OR RNUM=? OR RNUM=? OR RNUM=? ORDER BY REF DESC,STEP ASC";
 			}else {
 				sql = "SELECT * FROM REVIEWCHILD";
 			}
@@ -198,17 +199,46 @@ public class ReviewDAO {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
 		try {
 			con = JdbcUtil.getConn();
 			
-			String sql = "INSERT INTO REVIEWCHILD VALUES(CHILD_SEQ.NEXTVAL,?,?,?,?,?,?)";
+			int num = getChildMaxNum()+1;
+			int rcnum = vo.getRcnum();
+			int ref = vo.getRef();
+			int lev = vo.getLev();
+			int step = vo.getStep();
+			
+			
+			if(rcnum == 0) {
+			
+				ref = rcnum;
+
+			}else {
+			
+				
+				String sql1 = "UPDATE REVIEWCHILD SET STEP=STEP+1 WHERE REF=? AND STEP>?";
+				
+				pstmt2 = con.prepareStatement(sql1);
+				pstmt2.setInt(1, ref);
+				pstmt2.setInt(2, step);
+				pstmt2.executeUpdate();
+				
+				lev = lev + 1;
+				step = step + 1;
+						
+			}
+			
+			String sql = "INSERT INTO REVIEWCHILD VALUES(?,?,?,?,?,?,?)";
+			
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, vo.getRnum());
-			pstmt.setString(2, vo.getRcwriter());
-			pstmt.setString(3, vo.getComments());
-			pstmt.setInt(4, vo.getRef());
-			pstmt.setInt(5, vo.getLev());
-			pstmt.setInt(6, vo.getStep());
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, vo.getRnum());
+			pstmt.setString(3, vo.getRcwriter());
+			pstmt.setString(4, vo.getComments());
+			pstmt.setInt(5, ref);
+			pstmt.setInt(6, lev);
+			pstmt.setInt(7, step);
 			
 			int n = pstmt.executeUpdate();
 			if(n>0) {
@@ -221,6 +251,30 @@ public class ReviewDAO {
 			return -1;
 		}finally {
 			JdbcUtil.close(con, pstmt, null);
+		}
+	}
+	
+	public int getChildMaxNum() {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JdbcUtil.getConn();
+			String sql = "SELECT NVL(MAX(RCNUM),0)AS MAXRCNUM FROM REVIEWCHILD";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				int maxRcnum = rs.getInt("MAXRCNUM");
+				return maxRcnum;
+			}else {
+				return 0;
+			}
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}finally {
+			JdbcUtil.close(con, pstmt, rs);
 		}
 	}
 }

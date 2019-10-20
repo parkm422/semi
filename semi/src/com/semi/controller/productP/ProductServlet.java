@@ -1,6 +1,7 @@
 package com.semi.controller.productP;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -47,6 +48,11 @@ public class ProductServlet extends HttpServlet{
 		if(endPageNum>pageCount) {
 			endPageNum = pageCount;
 		}
+		
+		//화폐 단위 ,(콤마)
+		DecimalFormat dc = new DecimalFormat("###,###,###,###");
+		
+		req.setAttribute("dc", dc);
 		
 		req.setAttribute("list", list);
 		req.setAttribute("pageNum", pageNum);
