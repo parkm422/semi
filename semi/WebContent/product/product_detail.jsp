@@ -43,77 +43,84 @@
 			</div>
 		</div>
 		<div style="clear: both;">
-			<h3>상품 상세</h3>
+			<div style="margin: 60px;">
+				<h3>상품 상세</h3>
+			</div>
 		</div>
 		<br><br>
 		<div>
-			<h3>상품 리뷰</h3>
-			<c:forEach var="review" items="${reviewList }">
-				<div>
-					<div><span>${review.rnum }</span></div>
+			<div style="margin: 60px; border: 1px solid gray;">
+				<h3>상품 리뷰</h3>
+				<c:forEach var="review" items="${reviewList }">
 					<div>
-						<span>${review.writer }</span>&nbsp;&nbsp;
-						<span>평점 :</span>
-						<c:choose>
-							<c:when test="${review.rating == 5 }"><span style="color:orange;">★★★★★</span></c:when>
-							<c:when test="${review.rating == 4 }"><span style="color:orange;">★★★★</span></c:when>
-							<c:when test="${review.rating == 3 }"><span style="color:orange;">★★★</span></c:when>
-							<c:when test="${review.rating == 2 }"><span style="color:orange;">★★</span></c:when>
-							<c:when test="${review.rating == 1 }"><span style="color:orange;">★</span></c:when>
-						</c:choose>
-						
-					</div>
-					<div>${vo.pname }</div>
-					<div style="font-weight: bold;">${review.title }</div><br>
-					<div>${review.content }</div>
-					<div><img src="${cp }/upload/${review.savefilename }" style="width:150px;height:150px;"></div>
-					<div>
-						<textarea rows="5" cols="100"></textarea>
-						
-					</div>
-					<div>
+						<div><span>${review.rnum }</span></div>
 						<div>
-							<c:forEach var="child" items="${reviewchild }" varStatus="st">
-								<c:if test="${child.rnum == review.rnum }">
-									<div style="border:1px solid black;width:500px;">
-										<div>
-											<span>└아이디 : ${child.rcwriter }</span>
+							<span>${review.writer }</span>&nbsp;&nbsp;
+							<span>평점 :</span>
+							<c:choose>
+								<c:when test="${review.rating == 5 }"><span style="color:orange;">★★★★★</span></c:when>
+								<c:when test="${review.rating == 4 }"><span style="color:orange;">★★★★</span></c:when>
+								<c:when test="${review.rating == 3 }"><span style="color:orange;">★★★</span></c:when>
+								<c:when test="${review.rating == 2 }"><span style="color:orange;">★★</span></c:when>
+								<c:when test="${review.rating == 1 }"><span style="color:orange;">★</span></c:when>
+							</c:choose>
+							
+						</div>
+						<div>${vo.pname }</div>
+						<div style="font-weight: bold;">${review.title }</div><br>
+						<div>${review.content }</div>
+						<div><img src="${cp }/upload/${review.savefilename }" style="width:150px;height:150px;"></div>
+						<div>
+							<textarea rows="5" cols="100"></textarea><input type="button" value="등록">
+						</div>
+						<div>
+							<div>
+								<c:forEach var="child" items="${reviewchild }" varStatus="st">
+									<c:if test="${child.rnum == review.rnum }">
+										<div style="border:1px solid black;width:500px;">
+											<div>
+												<span>└아이디 : ${child.rcwriter }</span>
+											</div>
+											<div>
+												<span>댓글 : ${child.comments }</span>
+											</div>
+											<a href="#content" onclick="aa(event,'${st.index }','${child.rcnum}','${review.rnum }','${child.ref }','${child.lev }','${child.step }')">
+												답글 작성
+											</a>
+											<div id="comm${st.index }" style="display:block;">
+												<textarea rows="3" cols="100"></textarea><input type="button" value="등록">
+											</div>
 										</div>
-										<div>
-											<span>댓글 : ${child.comments }</span>
-										</div>
-										<a href="#content" onclick="aa(event,'${st.index }','${child.rcnum}','${review.rnum }','${child.ref }','${child.lev }','${child.step }')">
-											답글 작성
-										</a>
-									</div>
-								</c:if>
-							</c:forEach>
+									</c:if>
+								</c:forEach>
+							</div>
 						</div>
 					</div>
-				</div>
-			</c:forEach>
+				</c:forEach>
+			</div>
 		</div>
 		<!-- 리뷰게시판 페이징처리 -->
 		<div>
-			<c:if test="${startPageNum>5 }">
-				<a href="${cp }/product/detail?pageNum=${startPageNum-1 }&inum=${vo.inum }&sub=${param.sub }">[이전]</a>
-			</c:if>
-			
-			<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
-				<c:choose>
-					<c:when test="${pageNum == i }">
-						<a href="${cp }/product/detail?pageNum=${i }&inum=${vo.inum }&sub=${param.sub }" style="color:blue;">[${i }]</a>
-					</c:when>
-					<c:otherwise>
-						<a href="${cp }/product/detail?pageNum=${i }&inum=${vo.inum }&sub=${param.sub }" style="color:gray;">[${i }]</a>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-			
-			<c:if test="${endPageNum<reviewPageCount }">
-				<a href="${cp }/product/detail?pageNum=${startPageNum-1 }&inum=${vo.inum }&sub=${param.sub }">[다음]</a>
-			</c:if>
-			
+			<div style="margin: 60px;font-size: 25px; text-align: center;">
+				<c:if test="${startPageNum>5 }">
+					<a href="${cp }/product/detail?pageNum=${startPageNum-1 }&inum=${vo.inum }&sub=${param.sub }">[이전]</a>
+				</c:if>
+				
+				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
+					<c:choose>
+						<c:when test="${pageNum == i }">
+							<a href="${cp }/product/detail?pageNum=${i }&inum=${vo.inum }&sub=${param.sub }" style="color:blue;">[${i }]</a>
+						</c:when>
+						<c:otherwise>
+							<a href="${cp }/product/detail?pageNum=${i }&inum=${vo.inum }&sub=${param.sub }" style="color:gray;">[${i }]</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				
+				<c:if test="${endPageNum<reviewPageCount }">
+					<a href="${cp }/product/detail?pageNum=${startPageNum-1 }&inum=${vo.inum }&sub=${param.sub }">[다음]</a>
+				</c:if>
+			</div>
 		</div>
 		<div style="position: fixed; bottom: 70px; right: 40px;">
 			<a href="#header" style="background-color: gray;color:white;">▲</a>
@@ -124,7 +131,7 @@
 	</div>
 </div>
 <script type="text/javascript">
-
+	/*
 	var rcnum1=0;
 	var rnum1=0;
 	var ref1 = 0;
@@ -157,7 +164,7 @@
 		a.appendChild(btn);
 		
 	}
-
+	*/
 	commentxhr = null;
 	function comment(){
 		var textarea=document.getElementById(textid);
