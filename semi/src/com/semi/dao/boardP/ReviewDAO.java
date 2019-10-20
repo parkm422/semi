@@ -245,6 +245,7 @@ public class ReviewDAO {
 				con.commit();
 				return n;
 			}
+			con.rollback();
 			return 0;
 		}catch(SQLException se) {
 			se.printStackTrace();
