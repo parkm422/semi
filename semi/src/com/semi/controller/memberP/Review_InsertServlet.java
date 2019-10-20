@@ -8,11 +8,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.semi.dao.boardP.ReviewDAO;
+import com.semi.dao.productP.ProductDAO;
 import com.semi.vo.boardP.ReviewVO;
+import com.semi.vo.productP.Product_ListVO;
 @WebServlet("/member/review_insert")
 public class Review_InsertServlet extends HttpServlet{
 	
@@ -55,11 +58,25 @@ public class Review_InsertServlet extends HttpServlet{
 		String orgfilename = mr.getOriginalFileName("file");
 		String savefilename = mr.getFilesystemName("file");
 		
+		// 상품dao객체 생성
+		ProductDAO productDao = ProductDAO.getProductDao();
+		
+		Product_ListVO itemVO = productDao.getDetail(inum);
+		
+		// 상품가격의 1% 포인트로 적립
+		int point = (int) Math.round(itemVO.getPrice()/100.0);
+		
+		HttpSession session = req.getSession();
+		String id = (String) session.getAttribute("id");
+		
+		// 리뷰 정보 VO에 담아서 저장
 		ReviewVO vo = new ReviewVO(0, inum, writer, title, content, orgfilename, savefilename, rating);
 		
+		// 리뷰DAO객체 생성
 		ReviewDAO reviewDao = ReviewDAO.getReviewDao();
 		
-		int n = reviewDao.review_Insert(vo);
+		int n = reviewDao.review_Insert(vo,point,id);
+		
 		if(n>0) {
 			resp.sendRedirect(req.getContextPath()+"/main");
 		}

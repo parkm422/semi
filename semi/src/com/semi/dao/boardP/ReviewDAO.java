@@ -22,10 +22,12 @@ public class ReviewDAO {
 		return reviewDao;
 	}
 	
-	public int review_Insert(ReviewVO vo) {
+	// 리뷰 작성하기
+	public int review_Insert(ReviewVO vo,int point,String id) {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
@@ -42,8 +44,18 @@ public class ReviewDAO {
 			int n = pstmt.executeUpdate();
 			
 			if(n>0) {
-				con.commit();
-				return n;
+				
+				String sql2 = "UPDATE S_MEMBERS SET POINT= POINT+"+point+" WHERE ID=?";
+				pstmt2 = con.prepareStatement(sql2);
+				pstmt2.setString(1, id);
+				int n2 = pstmt2.executeUpdate();
+				
+				if(n2>0) {
+					con.commit();
+					return n2;
+				}else {
+					con.rollback();
+				}
 			}
 			return 0;
 		}catch(SQLException se) {
@@ -123,6 +135,7 @@ public class ReviewDAO {
 		}
 	}
 	
+	// 리뷰 댓글 얻어오기
 	public ArrayList<ReviewChildVO> reviewChild_list(ArrayList<Integer> rnum){
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -180,6 +193,7 @@ public class ReviewDAO {
 		}
 	}
 	
+	// 리뷰 댓글 등록
 	public int child_insert(ReviewChildVO vo) {
 		
 		Connection con = null;
