@@ -38,7 +38,7 @@ public class SalesStatisticsController extends HttpServlet {
 		int totalAmount = 0;
 		for(OrderInfoVO i : orderList) {
 			totalAmount = i.getAmount();
-		}
+		}  
 		request.setAttribute("totalAmount", totalAmount);
 		
 		PrintWriter pwriter = response.getWriter();
