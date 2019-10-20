@@ -68,7 +68,7 @@
 						<div>상품명 : ${vo.pname }</div>
 						<div style="font-weight: bold;">${review.title }</div>
 						<div>${review.content }</div>
-						<div><img src="${cp }/upload/${review.savefilename }" style="width:150px;height:150px;"></div>
+						<div><img src="${cp }/upload/${review.savefilename }" style="width:150px;height:150px;cursor: pointer;" onclick="imgSize(event)"></div>
 						<div>
 							<div style="padding:10px;">
 								<textarea rows="3" cols="100" id="firstcomment_${bb.index }" onclick="loginCheck('${bb.index}')"></textarea>
@@ -141,6 +141,17 @@
 	</div>
 </div>
 <script type="text/javascript">
+
+	function imgSize(e){
+		var img = e.target;
+		if(img.style.width == '150px'){
+			img.style.width = '300px';
+			img.style.height ='300px';
+		}else{
+			img.style.width = '150px';
+			img.style.height ='150px';
+		}
+	}
 	
 	// 비로그인 상태로 textarea창 클릭시 호출
 	function loginCheck(bb){
@@ -168,6 +179,7 @@
 		
 	}
 	
+	//댓글 작성
 	commentxhr = null;
 	function comment(a,id,rcnum,rnum,ref,lev,step){
 		
@@ -191,7 +203,7 @@
 		commentxhr.open('get','${cp}/member/comment?comments='+comments+'&rcnum='+rcnum+'&rnum='+rnum+'&ref='+ref+'&lev='+lev+'&step='+step,true);
 		commentxhr.send();
 	}
-	
+	//댓글 작성 콜백함수
 	function comm(){
 		if(commentxhr.readyState == 4 && commentxhr.status == 200){
 			
@@ -229,6 +241,7 @@
 		putxhr.send();
 		
 	}
+	//장바구니 담기 콜백함수
 	function putOk(){
 		if(putxhr.readyState == 4 && putxhr.status == 200){
 			var data = putxhr.responseText;
@@ -239,10 +252,6 @@
 				alert("상품을 담지 못했습니다.");
 			}
 		}
-	}
-	
-	function commentInsert(){
-		
 	}
 	
 </script>
