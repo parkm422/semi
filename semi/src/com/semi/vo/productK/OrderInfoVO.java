@@ -10,12 +10,13 @@ public class OrderInfoVO {
 	private String delivery;
 	private int amount;
 	private Date orderdate;
+	private String getName;
 	
 	
 	public OrderInfoVO() {}
 
 
-	public OrderInfoVO(int ornum, int mnum, String status, String deladd, String delivery, int amount, Date orderdate) {
+	public OrderInfoVO(int ornum, int mnum, String status, String deladd, String delivery, int amount, Date orderdate, String getName) {
 		super();
 		this.ornum = ornum;
 		this.mnum = mnum;
@@ -24,6 +25,17 @@ public class OrderInfoVO {
 		this.delivery = delivery;
 		this.amount = amount;
 		this.orderdate = orderdate;
+		this.getName = getName;
+	}
+
+
+	public String getGetName() {
+		return getName;
+	}
+
+
+	public void setGetName(String getName) {
+		this.getName = getName;
 	}
 
 

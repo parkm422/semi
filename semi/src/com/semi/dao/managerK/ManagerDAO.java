@@ -57,14 +57,14 @@ public class ManagerDAO {
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			pstmt = con.prepareStatement("SELECT * FROM orderInfo WHERE orderDate>=? AND orderDate<=? AND status='완료'");
+			pstmt = con.prepareStatement("SELECT * FROM orderInfo WHERE orderDate>=? AND orderDate<=?  AND delivery='배송완료'");
 			pstmt.setString(1, startDate);
 			pstmt.setString(2, endDate);
 			rs = pstmt.executeQuery();
 			ArrayList<OrderInfoVO> orderList = new ArrayList<OrderInfoVO>();
 			OrderInfoVO orderInfoVO = null;
 			while(rs.next()) {
-				orderInfoVO = new OrderInfoVO(rs.getInt("ornum"), rs.getInt("mnum"), rs.getString("status"), rs.getString("deladd"), rs.getString("delivery"), rs.getInt("amount"), rs.getDate(7));
+				orderInfoVO = new OrderInfoVO(rs.getInt("ornum"), rs.getInt("mnum"), rs.getString("status"), rs.getString("deladd"), rs.getString("delivery"), rs.getInt("amount"), rs.getDate(7), rs.getString(8));
 				orderList.add(orderInfoVO);
 			}
 			return orderList;

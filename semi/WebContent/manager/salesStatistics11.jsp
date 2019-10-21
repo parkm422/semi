@@ -55,16 +55,18 @@
 	</div>
 </div>
 <div>
-	<button type="button" id="inqList">조회</button>
+	<button type="button" id="inqButton" onclick="arst()">조회</button>
 </div>
 <div>
-	<table id="">
+	<table id="inqList">
 		<tr>
 			<th>주문번호</th>
 			<th>주문액수</th>
 			<th>주문일자</th>
+			
 		</tr>
 	</table>
+	<div id="totalAmount"></div>
 </div>
 <script type="text/javascript">
 
@@ -116,10 +118,10 @@
 	//AJAX로 조회
 	
 	var xhr = null;
-	function xhr() {
+	function arst() {
 		xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = callback;
-		xhr.open('get', '/manager/salesStatistics?startYear=' + startYear.value + '&startMonth=' + startMonth.value + '&startDay=' + startDay.value
+		xhr.open('get', '${cp }/manager/salesStatistics?startYear=' + startYear.value + '&startMonth=' + startMonth.value + '&startDay=' + startDay.value
 												+ '&endYear=' + endYear.value + '&endMonth=' + endMonth.value + '&endDay=' + endDay.value, true);
 		xhr.send();
 	}
@@ -127,15 +129,28 @@
 	function callback() {
 		if(xhr.readyState==4 && xhr.status==200) {
 			var data = xhr.responseText;
-			var json = JSON.parse(data);
+			var json = JSON.parse(data)[0];
 			var inqList = document.getElementById("inqList");
-			inqList.innerHTML = "<tr><th>주문번호</th><th>주문액수</th><th>주문일자</th></tr>" 
+			inqList.innerHTML = "<tr><th>주문번호</th><th>주문일자</th><th>주문인</th><th>주문액수</th></tr>" 
+			var j = 1;
 			for(var i in json) {
-				inqList.innerHTML += "<tr><td>" + json[i].ornum + "</td><td>" + json[i].amount + "</td><td>" + json[i].orderDate + "</tr>"
+				inqList.innerHTML += "<tr><td>" + json[i].ornum + "</td><td>" + json[i].orderdate + "</td><td>" + json[i].getName + "</td><td>" + json[i].amount + "</td></tr>"
+				j++;
 			}
-			inqList.innterHTML += "<tr><td>주문총액</td><td colspan='2'>${totalAmount}</td></tr>"
+			
+			var totalAmount = document.getElementById("totalAmount")
+			totalAmount.innerHTML = "<h4>주문총액: ${totalAmount }</h4>"
 		}
 	}
+	
+	//var inqButton = document.getElementById("inqButton");
+	//inqButton.addEventListener("click", function () {
+	//	xhr = new XMLHttpRequest();
+	//	xhr.onreadystatechange = callback;
+	//	xhr.open('get', '/manager/salesStatistics?startYear=' + startYear.value + '&startMonth=' + startMonth.value + '&startDay=' + startDay.value
+	//											+ '&endYear=' + endYear.value + '&endMonth=' + endMonth.value + '&endDay=' + endDay.value, true);
+	//	xhr.send();
+	//}, false);
 </script>
 
 

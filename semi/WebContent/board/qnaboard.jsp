@@ -61,12 +61,16 @@
 	function() loadAnswer {
 		xhr = XMLHttpRequest();
 		xhr.onreadystatechange = callback;
-		xhr.open('post', '/board/item_qna?')
-		xhr.send();
+		xhr.open('post', '/board/item_qna', true);
+		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		var param = "qnum=${qnum}";
+		xhr.send(param);
 	}
 	
 	function() callback {
-		
+		if(xhr.readyState===4 && xhr.status===200) {
+			var data = xhr.responseText;
+		}
 	}
 </script>
 </body>

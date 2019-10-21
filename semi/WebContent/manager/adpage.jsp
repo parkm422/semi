@@ -4,6 +4,6 @@
 	<div>
 		<a href="${cp }/manager/insert">상품등록</a>
 		<a href="${cp }/manager/memberInfoList">회원정보조회</a>
-		<a href="${cp }/manager/salesStatistics">기간별 매출통계</a>
+		<a href="${cp }/manager/salesStatistics11.jsp">기간별 매출통계</a>
 	</div>
 </div>

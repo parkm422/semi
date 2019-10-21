@@ -2,7 +2,9 @@ package com.semi.controller.managerK;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,16 +33,14 @@ public class SalesStatisticsController extends HttpServlet {
 		String endMonth = request.getParameter("endMonth");
 		String endDay = request.getParameter("endDay");
 		String endDate = endYear + "/" + endMonth + "/" + endDay;
-		
 		ManagerDAO managerDAO = ManagerDAO.getManagerDAO();
 		ArrayList<OrderInfoVO> orderList = managerDAO.getSalesStatistics(startDate, endDate);
 		
 		int totalAmount = 0;
 		for(OrderInfoVO i : orderList) {
-			totalAmount = i.getAmount();
-		}  
+			totalAmount += i.getAmount();
+		}
 		request.setAttribute("totalAmount", totalAmount);
-		
 		PrintWriter pwriter = response.getWriter();
 		JSONArray jArray = new JSONArray();
 		jArray.put(orderList);
