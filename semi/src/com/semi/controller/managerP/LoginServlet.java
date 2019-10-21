@@ -21,7 +21,7 @@ public class LoginServlet extends HttpServlet{
 		req.setAttribute("content","/manager/login.jsp");
 		req.setAttribute("footer","/footer.jsp");
 		
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -45,6 +45,6 @@ public class LoginServlet extends HttpServlet{
 		
 		req.setAttribute("footer","/footer.jsp");
 		
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 }

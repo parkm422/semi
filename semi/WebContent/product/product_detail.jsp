@@ -49,7 +49,7 @@
 		</div>
 		<br><br>
 		<div>
-			<div style="margin: 60px; border: 1px solid gray;">
+			<div style="margin: 60px; border: 1px solid gray; ">
 				<h3>상품 리뷰</h3>
 				<c:forEach var="review" items="${reviewList }" varStatus="bb">
 					<div style="margin-left: 30px;">
@@ -87,13 +87,14 @@
 											
 											<div>
 												<span>└아이디 : ${child.rcwriter }</span>
+												<span>
+													<a href="#content" onclick="aa('${st.index }')">답글 작성</a>
+												</span>
 											</div>
 											<div>
 												<span>댓글 : ${child.comments }</span>
 											</div>
-											<a href="#content" onclick="aa('${st.index }')">
-												답글 작성
-											</a>
+											
 											<div id="comm${st.index }" style="display:none;">
 												<textarea rows="3" cols="100" id="comm_${st.index }"></textarea>
 												<input type="button" value="등록" onclick="comment(1,'${st.index}','${child.rcnum }','${child.rnum }','${child.ref }','${child.lev }','${child.step }')">

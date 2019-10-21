@@ -4,28 +4,6 @@
 
 <script>
 	
-	var xhr = null;
-	function addCategory(){
-		var major = document.getElementById("major").value;
-		var sub = document.getElementById("sub").value;
-		var minSize = document.getElementById("min_size").value;
-		var maxSize = document.getElementById("max_size").value;
-		var color = document.getElementById("color").value;
-		xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = addCategoryOk;
-		xhr.open('get','${cp}/manager/addcategory',true);
-		insertxhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-		var param = 'major='+major+'&sub='+sub+'&minSize='+minSize+'&maxSize='+maxSize+'&color='+color;
-		xhr.send(param);
-	}
-	
-	function addCategoryOk(){
-		if(xhr.readyState == 4 && xhr.status == 200){
-			var data = xhr.responseText;
-			var json = JSON.parse(data);
-		}
-	}
-	
 </script>
     
 <div id="main">

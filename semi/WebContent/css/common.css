@@ -1,5 +1,5 @@
 @charset "UTF-8";
-*{
+	*{
 		margin:0px;
 		padding: 0px;
 	}
@@ -46,9 +46,9 @@
 		text-decoration: none;
 	}
 	
-	a{
-		text-decoration: none;
-	}
 	.detail_info{
 		margin-bottom: 20px;
+	}
+	a{
+		text-decoration: none;
 	}

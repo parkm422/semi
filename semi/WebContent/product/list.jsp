@@ -8,11 +8,11 @@
 	<div style="margin: 50px;">
 	<h1 style="text-align:center;color:skyblue;">상품 리스트</h1>
 	<div style="margin-top: 30px;margin-bottom: 30px;text-align: right;">
-		<a href="${cp }/product/list?pageNum=${pageNum}&major=${param.major }&sub=${param.sub }&sort=high">[높은 가격순]</a>
-		<a href="${cp }/product/list?pageNum=${pageNum}&major=${param.major }&sub=${param.sub }&sort=low">[낮은 가격순]</a>
-		<a href="${cp }/product/list?pageNum=${pageNum}&major=${param.major }&sub=${param.sub }&sort=popular">[인기 순]</a>
+		<a href="${cp }/product/list?pageNum=${pageNum}&major=${param.major }&sub=${param.sub }&sort=high" style="text-decoration: none;">[높은 가격순]</a>
+		<a href="${cp }/product/list?pageNum=${pageNum}&major=${param.major }&sub=${param.sub }&sort=low" style="text-decoration: none;">[낮은 가격순]</a>
+		<a href="${cp }/product/list?pageNum=${pageNum}&major=${param.major }&sub=${param.sub }&sort=popular" style="text-decoration: none;">[인기 순]</a>
 	</div>
-	<div style="width:1500px;height:1500px;padding-left: 70px;">
+	<div style="padding-left: 70px;">
 		<ul>
 			<c:forEach var="vo" items="${list }">
 				<li style="display:inline-block;">
@@ -24,7 +24,7 @@
 						</div>
 						<div>
 							<div style="text-align: center;font-size:17px;">
-								<a href="${cp }/product/detail?inum=${vo.inum }&sub=${param.sub }&sort=${sort}">${vo.pname }</a>
+								<a href="${cp }/product/detail?inum=${vo.inum }&sub=${param.sub }&sort=${sort}" style="text-decoration: none;color: black;">${vo.pname }</a>
 							</div>
 							<div style="text-align: center;font-size:17px;"><strong>${dc.format(vo.price) }원</strong></div>
 						</div>
@@ -59,10 +59,12 @@
 		</div>
 	</div>
 	<!-- 최상단으로 최하단으로 버튼 -->
-	<div style="position: fixed; bottom: 70px; right: 40px;">
-			<a href="#header" style="background-color: gray;color:white;">▲</a>
+	<div>
+		<div style="position: fixed; bottom: 70px; right: 40px;">
+				<a href="#header" style="background-color: gray;color:white;">▲</a>
 		</div>
 		<div style="position: fixed; bottom: 40px; right: 40px;">
-			<a href="#footer" style="background-color: gray;color:white;">▼</a>
+				<a href="#footer" style="background-color: gray;color:white;">▼</a>
 		</div>
+	</div>
 </div>

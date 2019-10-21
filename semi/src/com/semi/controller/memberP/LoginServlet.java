@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet{
 		req.setAttribute("content","/member/login.jsp");
 		req.setAttribute("footer","/footer.jsp");
 		
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 	
 	@Override
@@ -49,6 +49,6 @@ public class LoginServlet extends HttpServlet{
 		
 		req.setAttribute("footer","/footer.jsp");
 		
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 }

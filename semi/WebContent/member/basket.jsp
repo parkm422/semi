@@ -4,8 +4,7 @@
 <form method="get" action="${cp }/orderY/orderinsert">
 <div id="main">
 <input type="text" name="id" id="id" value="${sessionScope.id}" hidden="" ><br>
-	<h3>회원 장바구니 페이지</h3>
-	<div>
+	<div><h3>회원 장바구니 페이지</h3></div>
 		<table style="width:1500px; text-align: center;">
 			<colgroup>
 				<col width="5%">
@@ -40,7 +39,7 @@
 						<div ><p >[size : ${basket.psize }]</p></div>
 					</td>
 					<td>
-						<span >${basket.price }</span>
+						<span >${dc.format(basket.price) }원</span>
 					</td>
 					<td>
 						<input type="button" value="-" style="width:20px;height:20px;font-size:20px;">
@@ -48,7 +47,7 @@
 						<input type="button" value="+" style="width:20px;height:20px;font-size:20px;">
 					</td>
 					<td>
-						<span>${basket.price * basket.cnt }</span>
+						<span>${dc.format(basket.price * basket.cnt) }원</span>
 					</td>
 					<td>
 						<input type="button" value="상품삭제">
@@ -62,8 +61,7 @@
 			<div style="text-align: center;">
 				<input type="submit" value="주문하기">
 			</div>
-</form>
-		
+	</form>	
 		<!-- 장바구니 페이징처리 -->
 		<div style="text-align: center;">
 			<c:if test="${startPageNum>5 }">
@@ -84,12 +82,11 @@
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
-			
+		<div>
 			<c:if test="${endPageNum<basketCount }">
 				<a href="${cp }/member/basket?pageNum=${startPageNum-1}">다음</a>
 			</c:if>
 		</div>
-		
 	</div>
 </div>
 

@@ -31,7 +31,7 @@ public class Review_InsertServlet extends HttpServlet{
 		req.setAttribute("content", "/member/review_insert.jsp");
 		req.setAttribute("footer", "/footer.jsp");
 		
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 	
 	@Override

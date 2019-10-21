@@ -49,11 +49,6 @@ public class ProductServlet extends HttpServlet{
 			endPageNum = pageCount;
 		}
 		
-		//화폐 단위 ,(콤마)
-		DecimalFormat dc = new DecimalFormat("###,###,###,###");
-		
-		req.setAttribute("dc", dc);
-		
 		req.setAttribute("list", list);
 		req.setAttribute("pageNum", pageNum);
 		req.setAttribute("pageCount", pageCount);
@@ -67,6 +62,6 @@ public class ProductServlet extends HttpServlet{
 		req.setAttribute("content", "/product/list.jsp");
 		req.setAttribute("footer", "/footer.jsp");
 		
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 }

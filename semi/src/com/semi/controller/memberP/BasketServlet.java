@@ -2,6 +2,7 @@ package com.semi.controller.memberP;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -67,8 +68,6 @@ public class BasketServlet extends HttpServlet{
 		System.out.println("mnum:"+vo.getMnum());
 		ArrayList<HashMap<String, Object>> basketList = itemDao.getBasketList(vo.getMnum(),startRow,endRow);
 		
-		
-		
 		req.setAttribute("pageNum", pageNum);
 		req.setAttribute("startRow", startRow);
 		req.setAttribute("endRow", endRow);
@@ -84,7 +83,7 @@ public class BasketServlet extends HttpServlet{
 		req.setAttribute("content", "/member/basket.jsp");
 		req.setAttribute("footer", "/footer.jsp");
 		
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 	
 	//장바구니 담기 메소드

@@ -45,6 +45,6 @@ public class ViewServlet extends HttpServlet{
 		req.setAttribute("nav","/nav.jsp");
 		req.setAttribute("content","/manager/view.jsp");
 		req.setAttribute("footer","/footer.jsp");
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 }
