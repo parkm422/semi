@@ -70,7 +70,11 @@ public class CategoryDAO {
 			se.printStackTrace();
 			return -1;
 		}finally {
-			
+			JdbcUtil.close(pstmt4);
+			JdbcUtil.close(pstmt3);
+			JdbcUtil.close(pstmt2);
+			JdbcUtil.close(pstmt);
+			JdbcUtil.close(con);
 		}
 	}
 	

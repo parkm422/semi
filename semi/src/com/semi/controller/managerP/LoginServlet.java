@@ -15,13 +15,15 @@ public class LoginServlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
+		/*
 		req.setAttribute("top", "/header.jsp");
 		req.setAttribute("nav","/nav.jsp");
 		req.setAttribute("content","/manager/login.jsp");
 		req.setAttribute("footer","/footer.jsp");
 		
 		req.getRequestDispatcher("/main").forward(req, resp);
+		*/
+		resp.sendRedirect(req.getContextPath()+"/manager/login.jsp");
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,7 +40,7 @@ public class LoginServlet extends HttpServlet{
 			req.setAttribute("content","/main.jsp");
 		}else {
 			req.setAttribute("errMsg", "아이디 또는 비밀번호를 다시 확인하세요.<br>등록되지 않은 아이디이거나, 아이디 또는 비밀번호를 잘못 입력하셨습니다.");
-			req.setAttribute("content","/manager/login.jsp");
+			req.getRequestDispatcher("/manager/login.jsp").forward(req, resp);
 		}
 		req.setAttribute("top", "/header.jsp");
 		req.setAttribute("nav","/nav.jsp");

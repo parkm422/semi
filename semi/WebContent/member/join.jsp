@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="${cp }/css/common.css">
+<meta charset="UTF-8">
+<title>회원가입</title>
 <script>
 	xhr = null;
 	function idcheck(){
@@ -76,7 +82,9 @@
 		
 	}
 </script>
-<div id="main">
+</head>
+<body>
+<div style="margin:0 auto;">
 	<div style="width:90%; height:800px; margin:30px;">
 		<h1>회원가입</h1>
 		<form method="post" action="${pageContext.request.contextPath }/member/join" onsubmit="return join()">
@@ -96,3 +104,5 @@
 		</form>
 	</div>
 </div>
+</body>
+</html>

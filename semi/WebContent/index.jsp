@@ -8,10 +8,12 @@
 <title>index.jsp</title>
 </head>
 <body>
-	<jsp:include page="${top}"/>
-	<jsp:include page="${nav}"/>
-	<jsp:include page="${content}"/>
-	<jsp:include page="${footer}"/>
+	<div id="wrap">
+		<jsp:include page="${top}"/>
+		<jsp:include page="${nav}"/>
+		<jsp:include page="${content}"/>
+		<jsp:include page="${footer}"/>
+	</div>
 </body>
 </html>
 

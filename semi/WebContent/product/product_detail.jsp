@@ -88,7 +88,7 @@
 											<div>
 												<span>└아이디 : ${child.rcwriter }</span>
 												<span>
-													<a href="#content" onclick="aa('${st.index }')">답글 작성</a>
+													<a href="#content" id="cc_${st.index }" onclick="aa('${st.index }')">답글 작성</a>
 												</span>
 											</div>
 											<div>
@@ -175,9 +175,19 @@
 			location.href="${cp}/member/login";
 			return;
 		}
-		
+		var cc = document.getElementById("cc_"+id);
+		if(cc.text == '답글 작성'){
+			cc.text = '답글 취소';
+		}else{
+			cc.text = '답글 작성';
+		}
 		var a = document.getElementById("comm"+id);
-		a.style.display = "block";
+		if(a.style.display == 'block'){
+			a.style.display = "none";
+		}else{
+			a.style.display = "block";	
+		}
+		
 		
 	}
 	

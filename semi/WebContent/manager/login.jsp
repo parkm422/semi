@@ -1,13 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div id="main">
-	<h1>관리자 로그인</h1>
-	<div>
-		<form method="post" action="${cp }/manager/login">
-			<div><input type="text" name="id" placeholder="아이디"></div>
-			<div><input type="password" name="pwd" placeholder="비밀번호"></div>
-			<div style="color:red;font-size:12px;">${errMsg }</div>
-			<div><input type="submit" value="로그인"></div>
-		</form>
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="${cp }/css/common.css">
+<meta charset="UTF-8">
+<title>index.jsp</title>
+</head>
+<body>
+<div style="margin: 0 auto;width:100%;margin-left: 450px;">
+	<div style="margin-left: 410px;margin-top: 30px;"><a href="${cp }/main" style="font-size:30px;"><strong>테스트 쇼핑몰</strong></a></div>
+	<div style="text-align: center;width:1000px;height:500px;">
+		<h1 style="margin-bottom: 30px;margin-top: 200px;">관리자 로그인</h1>
+		<div style="">
+			<form method="post" action="${cp }/manager/login">
+				<div style="margin-bottom: 30px;"><input type="text" name="id" placeholder="아이디" style="width:300px;height:60px;"></div>
+				<div style="margin-bottom: 30px;"><input type="password" name="pwd" placeholder="비밀번호" style="width:300px;height:60px;"></div>
+				<div style="color:red;margin-bottom: 30px;">${errMsg }</div>
+				<div style="margin-bottom: 30px;"><input type="submit" value="로그인" style="width:300px;height:60px;background-color: black;color:white;font-size:20px;"></div>
+			</form>
+		</div>
 	</div>
 </div>
+</body>
+</html>

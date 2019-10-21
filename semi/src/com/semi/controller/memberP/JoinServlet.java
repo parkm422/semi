@@ -15,13 +15,15 @@ public class JoinServlet extends HttpServlet{
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+		/*
 		req.setAttribute("top", "/header.jsp");
 		req.setAttribute("nav", "/nav.jsp");
 		req.setAttribute("content", "/member/join.jsp");
 		req.setAttribute("footer", "/footer.jsp");
 		
 		req.getRequestDispatcher("/main").forward(req, resp);
+		*/
+		resp.sendRedirect(req.getContextPath()+"member/join.jsp");
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
