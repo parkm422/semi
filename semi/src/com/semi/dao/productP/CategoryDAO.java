@@ -20,7 +20,7 @@ public class CategoryDAO {
 		return categoryDao;
 	}
 	
-	/*
+	
 	// 카테고리 등록하기
 	public int addCategory(String major,String sub,int minSize,int maxSize,String color) {
 		
@@ -28,7 +28,7 @@ public class CategoryDAO {
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
 		PreparedStatement pstmt3 = null;
-		
+		PreparedStatement pstmt4 = null;
 		try {
 			con = JdbcUtil.getConn();
 			String sql = "INSERT INTO MAJOR_CATEGORY VALUES(MC_SEQ.NEXTVAL,?)";
@@ -44,14 +44,28 @@ public class CategoryDAO {
 				int n2 = pstmt2.executeUpdate();
 				
 				if( n2 > 0 ) {
-					sql = "INSERT INTO PRODUCT_SIZE VALUES('B'||SIZE_SEQ.NEXTVAL,SUB_SEQ.CURRVAL,?)";
+					sql = "INSERT INTO PRODUCT_SIZE VALUES('B'||SIZE_SEQ.NEXTVAL,'A'||SUB_SEQ.CURRVAL,?)";
+					String sql1 = "INSERT INTO COLOR VALUES('C'||COL_SEQ.NEXTVAL,'B'||SIZE_SEQ.CURRVAL,?)";
+					pstmt3 = con.prepareStatement(sql);
+					pstmt4 = con.prepareStatement(sql1);
+					int n3 = 0;
 					for(int i = minSize; i<=maxSize; i+=5) {
-						pstmt3 = con.prepareStatement(sql);
+						System.out.println("minSize:"+minSize);
+						System.out.println("maxSize:"+maxSize);
+						System.out.println("color:"+color);
 						pstmt3.setInt(1, i);
+						pstmt3.executeUpdate();
+						pstmt4.setString(1, color);
+						n3 = pstmt4.executeUpdate();
+					}
+					if(n3 > 0) {
+						con.commit();
+						return n3;
 					}
 				}
 			}
 			con.rollback();
+			return 0;
 		}catch(SQLException se) {
 			se.printStackTrace();
 			return -1;
@@ -59,7 +73,7 @@ public class CategoryDAO {
 			
 		}
 	}
-	*/
+	
 	
 	//대분류명 얻어오기
 	public ArrayList<String> getM_category(){

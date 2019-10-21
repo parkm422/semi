@@ -30,6 +30,7 @@ public class HomeServlet extends HttpServlet{
 			footer="/footer.jsp";
 		}
 		
+		
 		//화폐 단위 ,(콤마)
 		DecimalFormat dc = new DecimalFormat("###,###,###,###");
 						

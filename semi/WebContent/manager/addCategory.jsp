@@ -7,7 +7,7 @@
 </script>
     
 <div id="main">
-	
+	<form method="post" action="${cp }/manager/addCategory">
 	<div>
 		
 		<div>대분류명</div>
@@ -30,7 +30,7 @@
 	</div>
 	
 	<div>
-		<input type="button" value="카테고리 등록" onclick="addCategory()">
+		<input type="submit" value="카테고리 등록">
 	</div>
-	
+	</form>
 </div>

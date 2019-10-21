@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<form method="get" action="${cp }/orderY/orderinsert">
+
+
 <div id="main">
-<input type="text" name="id" id="id" value="${sessionScope.id}" hidden="" ><br>
+	<form method="get" action="${cp }/orderY/orderinsert">
+	<input type="text" name="id" id="id" value="${sessionScope.id}" hidden="" ><br>
 	<div><h3>회원 장바구니 페이지</h3></div>
 		<table style="width:1500px; text-align: center;">
 			<colgroup>
