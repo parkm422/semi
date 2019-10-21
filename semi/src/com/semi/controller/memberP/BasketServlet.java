@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
+import com.semi.dao.basketY.BasketDao;
 import com.semi.dao.memberP.S_MemberDAO;
 import com.semi.dao.productP.ProductDAO;
 import com.semi.vo.memberP.S_MemberVO;
@@ -21,15 +22,16 @@ import com.semi.vo.productP.BasketVO;
 import com.semi.vo.productP.Product_ListVO;
 @WebServlet("/member/basket")
 public class BasketServlet extends HttpServlet{
-	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
-		String type = req.getParameter("type");
+		
 		//장바구니에서 삭제
+				
 				int bnum = Integer.parseInt(req.getParameter("bnum"));
-				if(bnum!=0) {
+				
+				
+				if(bnum!=0 ) {
 					ProductDAO dao=ProductDAO.getProductDao();
 					int n=dao.delete(bnum);
 					resp.setContentType("text/plain;charset=utf-8");
@@ -42,6 +44,15 @@ public class BasketServlet extends HttpServlet{
 					}
 					pw.print(json);
 				}
+	}
+				
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		req.setCharacterEncoding("utf-8");
+		
+		String type = req.getParameter("type");
+	
 		//type값이 put이면 장바구니 담기
 		if(type != null && type.equals("put")) {
 					
@@ -134,8 +145,6 @@ public class BasketServlet extends HttpServlet{
 			json.put("put", "fail");
 		}
 		pw.print(json.toString());
-		
-		
 	}
 	
 }

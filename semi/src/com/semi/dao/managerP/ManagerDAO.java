@@ -70,6 +70,8 @@ public class ManagerDAO {
 			JdbcUtil.close(con,pstmt,rs);
 		}
 	}
+	
+	//주문상세 등록
 	public int insert(ViewVo vo) {
 		Connection con=null;
 		PreparedStatement pstmt=null;

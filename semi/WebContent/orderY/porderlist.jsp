@@ -20,18 +20,19 @@
 			</colgroup>
 	<tr style="height:100px;">
 		<th>주문번호</th><th>상품이미지</th><th>상품이름</th><th>사이즈</th><th>색상</th><th>수량</th><th>배송주소</th><th>배송상태</th><th>금액</th><th>구매날짜</th>
+		<th>리뷰잘못쓰면 죽는다</th>
 	</tr>
-	<c:forEach var="vo2" items="${list}">
+	<c:forEach var="vo2" items="${list}" varStatus="ss">
 		<tr style="height:100px;">
-			<td>${vo2.ornum }</td>
-			<td><img src="${cp }/upload/${vo2.savefilename}" style="width:250px;heigth:300px;"></td>
+			<td>${(pageNum-1)*10+ss.index+1}</td>
+			<td><img src="${cp }/upload/${vo2.savefilename}" style="width:100px;heigth:150px;"></td>
 			<td>${vo2.pname }</td>
 			<td>${vo2.psize }</td>
 			<td>${vo2.color}</td>
 			<td>${vo2.cnt}</td>
 			<td>${vo2.deladd}</td>
 			<td>${vo2.delivery}</td>
-			<td>${vo2.price}</td>
+			<td>${vo2.price*vo2.cnt}</td>
 			<td>${vo2.orderdate}</td>
 			<td><a href="${cp }/member/mypage?inum=${vo2.inum}">리뷰작성</a></td>
 		</tr>

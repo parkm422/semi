@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import javax.swing.text.DefaultEditorKit.InsertBreakAction;
 import javax.websocket.Session;
 
+import com.semi.dao.ProductY.ProductDao;
 import com.semi.dao.basketY.BasketDao;
 import com.semi.dao.managerP.ManagerDAO;
 import com.semi.dao.memberP.S_MemberDAO;
@@ -73,7 +74,7 @@ public class OrderInsertServlet extends HttpServlet{
 		System.out.println(basketList1.size());
 		for(int i=0;i<basketList1.size();i++) {
 			System.out.println(basketList1.get(i).get("price"));
-			nn+=(Integer)basketList1.get(i).get("price"); 
+			nn+=((Integer)basketList1.get(i).get("price")*(Integer)basketList1.get(i).get("cnt")); 
 		}
 		req.setAttribute("pageNum", pageNum);
 		req.setAttribute("startRow", startRow);
@@ -121,7 +122,6 @@ public class OrderInsertServlet extends HttpServlet{
 			int payamount=Integer.parseInt(req.getParameter("amount"));
 			int enpay=Integer.parseInt(req.getParameter("amount"));
 			PaymentVo vo=new PaymentVo(0, mornum, mnum, payamount, enpay, null);
-			System.out.println(mornum);
 			PaymentDao dao4=new PaymentDao();
 			int n1=dao4.insert(vo);
 			MemberDao dao5=MemberDao.getInstance();
@@ -156,15 +156,26 @@ public class OrderInsertServlet extends HttpServlet{
 			int lastornum=dao8.select();
 			ArrayList<HashMap<String, Object>> basketList1 = itemDao.getBasketList(vo.getMnum());
 			ManagerDAO dao7=ManagerDAO.getManagerDao();
-			
-			int m=dao2.delete(mnum);
 			//주문디테일 삽입
-			if(n>0 && m>0) {
-				req.setAttribute("code","success");
+			if(n>0) {
 				for (int i = 0; i < basketList1.size(); i++) {
 					ViewVo vo4= new ViewVo(0,lastornum,(int)basketList1.get(i).get("inum"),(String)basketList1.get(i).get("pname"), (int)basketList1.get(i).get("psize"),(String)basketList1.get(i).get("colorname"), (int)basketList1.get(i).get("cnt"));
 					int ss=dao7.insert(vo4);
-					}
+				}
+				ProductDao dao10=new ProductDao();
+				ArrayList<HashMap<String, Integer>> allcnt=dao10.select(mnum);
+				for(int j=0;j<allcnt.size();j++) {
+					int count=allcnt.get(j).get("count");
+					int allinum = allcnt.get(j).get("allinum");
+					System.out.println(count);
+					System.out.println(allinum);
+					System.out.println(allcnt.size());
+					ProductDao dao11=new ProductDao();
+					int cnt=dao11.update(count,allinum);
+					System.out.println("for문리스트"+allcnt);
+			}
+				int m=dao2.delete(mnum);
+					req.setAttribute("code","success");
 			}else {
 				req.setAttribute("code","fail");
 			}

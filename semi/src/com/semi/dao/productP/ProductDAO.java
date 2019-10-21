@@ -559,12 +559,31 @@ public ArrayList<BasketVO> pricesel(int bnum){
 			
 			Connection con = null;
 			PreparedStatement pstmt = null;
-			ResultSet rs = null;
 			try {
 				con = JdbcUtil.getConn();
 				String sql ="delete from basket where bnum=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setInt(1, bnum);
+				int n = pstmt.executeUpdate();
+				return n;
+			}catch(SQLException se) {
+				se.printStackTrace();
+				return -1;
+			}finally {
+				JdbcUtil.close(con, pstmt, null);
+			}
+		}
+public int update(int cnt,int bnum) {
+			
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				con = JdbcUtil.getConn();
+				String sql ="update into basket set cnt=? where bnum=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, cnt);
+				pstmt.setInt(2, bnum);
 				rs = pstmt.executeQuery();
 				if(rs.next()) {
 					return 1;

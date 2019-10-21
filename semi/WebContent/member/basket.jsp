@@ -9,10 +9,10 @@
 		<table style="width:1500px; text-align: center;">
 			<colgroup>
 				<col width="10%">
+				<col width="15%">
 				<col width="20%">
-				<col width="25%">
 				<col width="10%">
-				<col width="10%">
+				<col width="150px">
 				<col width="10%">
 				<col width="10%">
 				<col width="10%">
@@ -27,7 +27,7 @@
 				<th>주문관리(삭제)</th>
 				<th>등록일</th>
 			</tr>
-			<c:forEach var="basket" items="${requestScope.basketList }">
+			<c:forEach var="basket" items="${requestScope.basketList }" varStatus="ii">
 				<tr>
 					<td>
 						<span>${basket.bnum }</span>
@@ -43,9 +43,10 @@
 						<span >${basket.price }</span>
 					</td>
 					<td>
-						<input type="button" value="-" style="width:20px;height:20px;font-size:20px;">
-						<span>${basket.cnt }</span>
-						<input type="button" value="+" style="width:20px;height:20px;font-size:20px;">
+						<input type="button" value="-" style="width:20px;height:20px;font-size:20px;" onclick="bminus('${ii.index}')">
+						<input type="text" style="width:20px;" id="cnt_${ii.index }" name="cnt" value="${basket.cnt}">
+						<input type="button" value="+" style="width:20px;height:20px;font-size:20px;" onclick="bplus('${ii.index}')">
+						<input type="button" value="수정" onclick="cupdate(${ii.index},${basket.bnum},)">
 					</td>
 					<td>
 						<span>${basket.price * basket.cnt }</span>
@@ -89,25 +90,59 @@
 				<a href="${cp }/member/basket?pageNum=${startPageNum-1}">다음</a>
 			</c:if>
 		</div>
-		
 	</div>
 </div>
 <script>
+//장바구니에서 선택한거 삭제
 var dxhr=null;
 function bdelete(bnum) {
 
 		dxhr=new XMLHttpRequest();
 		dxhr.onreadystatechange=deleteOk;
-		xhr.onreadystatechange=success;
-		xhr.open('get', '${cp }/member/basket?bnum='+bnum,true);
-		xhr.send();
+		dxhr.open('post', '${cp }/member/basket?bnum='+bnum,true);
+		dxhr.send();
 }
 function deleteOk(){
 	if(dxhr.readyState==4 && dxhr.status==200){
 		var data=dxhr.responseText;
 		var json=JSON.parse(data);
 		if(json.code=='success'){
-			location.href="${cp }/member/basket.jsp?id=${sessionScope.id}";
+			location.href="${cp }/member/basket?id=${sessionScope.id}";
+		}else{
+			alert("삭제실패!");
+		}
+	}
+}
+//장바구니 물품 갯수 변경
+function bplus(a) {
+	
+	var cnt=document.getElementById("cnt_"+a);
+	console.log(cnt.value);
+	cnt.value=parseInt(cnt.value)+1;
+}
+
+function bminus(a) {
+	var cnt=document.getElementById("cnt_"+a);
+	cnt.value=parseInt(cnt.value)-1;
+	if(cnt.value==0){
+		cnt.value=1;
+	}
+}
+//장바구니 물품 갯수 수정
+var cxhr=null;
+function cupdate(a,bnum) {
+	var cnt=document.getElementById("cnt_"+a).value;
+	cxhr=new XMLHttpRequest();
+	cxhr.onreadystatechange=updateOk;
+	cxhr.open('post', '${cp }/member/basketupdate?cnt='+cnt+'&bnum='+bnum,true);
+	cxhr.send();
+}
+function updateOk(){
+	if(cxhr.readyState==4 && cxhr.status==200){
+		var data=cxhr.responseText;
+		var json=JSON.parse(data);
+		if(json.code=='success'){
+			location.href="${cp }/member/basket?id=${sessionScope.id}";
 		}else{
 			alert("삭제실패!");
 		}
