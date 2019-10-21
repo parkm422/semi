@@ -8,11 +8,12 @@
 <title>detail.jsp</title>
 </head>
 <body>
-제목<input type="text" value="${vo.title }" readonly="readonly"><br>
-작성자<input type="text" value="${vo.writer }" readonly="readonly"><br>
-${vo.category }<input type="radio" checked="checked"><br>
-내용<br>
-<textarea rows="10" cols="100" readonly="readonly">${vo.content }</textarea><br>
+<div style="margin-top:50px; margin-left: 500px; margin-bottom: 50px;"  align="left">
+<div style="margin-top: 20px;">제목 <input type="text" value="${vo.title }" readonly="readonly"></div><br>
+<div style="margin-top: 3px;">작성자 <input type="text" value="${vo.writer }" readonly="readonly"></div><br>
+<div style="margin-top: 3px;">${vo.category }<input type="radio" checked="checked"><br></div>
+<div style="margin-top: 3px;">내용<br>
+<textarea rows="10" cols="100" readonly="readonly">${vo.content }</textarea><br></div>
 <c:if test="${vo.answer==null }">
 <a href="${cp }/boardl/updatego?ennum=${vo.ennum}">수정</a>
 </c:if>
@@ -31,6 +32,7 @@ ${vo.category }<input type="radio" checked="checked"><br>
 </form>
 	</c:when>
 	</c:choose>
+</div>
 </body>
 </html>
 

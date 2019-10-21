@@ -15,10 +15,19 @@ public class viewupServlet extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		int ornumm=Integer.parseInt(req.getParameter("ornumm"));
+		String delivery=req.getParameter("delivery");
 		ManagerDAO dao=ManagerDAO.getManagerDao();
+		if(delivery.equals("준비중")) {
 		int n=dao.viewup(ornumm);
 		if(n>0) {
 			resp.sendRedirect(req.getContextPath()+"/manager/view");
 		}
+		}else {
+			int n=dao.viewups(ornumm);
+			if(n>0) {
+				resp.sendRedirect(req.getContextPath()+"/manager/view");
+			}
+		}
+		
 	}
 }

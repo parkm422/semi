@@ -8,14 +8,14 @@
 
  </div>
 
-<table border="1" width="800">
+<table style="width: 1500px; text-align: center;" >
 <a href="${cp }/main">홈으로</a>
 	<tr>
 		<th>주문번호</th><th>고객명</th><th>아이디</th><th>상품명</th><th>사이즈</th><th>색상</th><th>수량</th><th>가격</th><th>결제상태 확인</th><th>배송정보 확인</th>
 	</tr>
 	
 	<c:forEach var="vo" items="${list }" >
-		<form method="post" action="${cp }/managerP/deliveryup?ornumm=${vo.ornumm }">
+		<form method="post" action="${cp }/managerP/deliveryup?ornumm=${vo.ornumm }&delivery=${vo.delivery}">
 		<tr>
 			<td id="ornumm">${vo.ornumm }</td>
 			<td>${vo.name }</td>
@@ -24,7 +24,7 @@
 			<td>${vo.psize }</td>
 			<td>${vo.color }</td>
 			<td>${vo.cnt }</td>
-			<td>${vo.price }</td>
+			<td>${dc.format(vo.price) }원</td>
 			<td>${vo.status }</td>
 			
 			<td><input type="submit" value="${vo.delivery }" ></td>

@@ -149,7 +149,7 @@ public class Ono_EnquiryDao {
 						"    (" + 
 						"        select aa.*,rownum rnum from" + 
 						"        (" + 
-						"            select * from ono_enquiry order by ennum desc" + 
+						"            select * from ono_enquiry order by ennum asc" + 
 						"        )aa" + 
 						")where rnum>=? and  rnum<=?";
 			

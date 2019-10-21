@@ -11,6 +11,7 @@ import com.semi.vo.product.PaymentVO;
 import jdbc.JdbcUtil;
 
 public class PaymentDao {
+	
 	public int insert(PaymentVo vo) {
 		Connection con=null;
 		PreparedStatement pstmt=null;

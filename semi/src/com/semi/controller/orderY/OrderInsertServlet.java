@@ -73,25 +73,32 @@ public class OrderInsertServlet extends HttpServlet{
 		if(endPageNum>basketPageCount) {
 			endPageNum = basketPageCount;
 		}
-		
+		int cnt=0;
 		int nn=0;
+		int ss=0;
+		String pnames=null;
 		ArrayList<HashMap<String, Object>> basketList1 = itemDao.getBasketList(vo.getMnum());
 		System.out.println(basketList1);
 		System.out.println(basketList1.size());
 		for(int i=0;i<basketList1.size();i++) {
 			System.out.println(basketList1.get(i).get("price"));
+			pnames=(String)basketList1.get(i).get("pname");
+			System.out.println(pnames);
 			nn+=(Integer)basketList1.get(i).get("price"); 
+			cnt=(int)basketList1.get(i).get("cnt");
+			ss=(int)basketList1.get(i).get("price");
 		}
-
+		System.out.println(pnames);
 		req.setAttribute("pageNum", pageNum);
 		req.setAttribute("startRow", startRow);
 		req.setAttribute("endRow", endRow);
 		req.setAttribute("startPageNum", startPageNum);
 		req.setAttribute("endPageNum", endPageNum);
 		req.setAttribute("basketPageCount", basketPageCount);
-		
+		req.setAttribute("cnt",cnt);
 		req.setAttribute("nn", nn);
-
+		req.setAttribute("ss",ss);
+		req.setAttribute("pnames",pnames);
 		req.setAttribute("basketList1", basketList1);
 
 
@@ -114,18 +121,20 @@ public class OrderInsertServlet extends HttpServlet{
 		String deladd=req.getParameter("deladd");
 		String delivery=req.getParameter("delivery");
 		String getname=req.getParameter("getname");
+		int inamount=Integer.parseInt(req.getParameter("inamount"));
+		
 		MemberDao dao1=MemberDao.getInstance();
 		int mnum=dao1.select(id);
 
 		
 		
 		
-		if(mnum!=0) {
+		if(mnum>0 && amount==inamount) {
 			//주문내역 삽입
 			OrderVo vo2=new OrderVo(0,mnum, amount, status, deladd, delivery, null,getname);
 			OrderDao dao=new OrderDao();
 			int n=dao.insert(vo2);
-			
+			System.out.println("주문내역"+n);
 			BasketDao dao2=BasketDao.getInstance();
 			PaymentDao dao3=new PaymentDao();
 			int mornum=dao3.select(mnum);
@@ -135,6 +144,7 @@ public class OrderInsertServlet extends HttpServlet{
 			System.out.println(mornum);
 			PaymentDao dao4=new PaymentDao();
 			int n1=dao4.insert(vo);
+			System.out.println("결제테이블"+n1);
 			MemberDao dao5=MemberDao.getInstance();
 			ArrayList<MemberVo> list=dao1.list(id);
 
@@ -179,7 +189,9 @@ public class OrderInsertServlet extends HttpServlet{
 			}else {
 				req.setAttribute("code","fail");
 			}
-
+				
+		}else {
+			req.setAttribute("code","fail");
 		}
 		
 		

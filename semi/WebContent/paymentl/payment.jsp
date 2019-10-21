@@ -4,33 +4,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>payment.jsp</title>
+
 <script type="text/javascript">
 	
 	function gopay() {
 		var paymethod=document.getElementsByName("paymethod")[0];
 		var i=paymethod.selectedIndex;
 		if(i==0){
-			document.getElementById("main").style.display="block";
-		}else if(i==1){
 			document.getElementById("main1").style.display="block";
+		}else if(i==1){
+			document.getElementById("main2").style.display="block";
 		}else if(i==2){
-			document.getElementById("main").style.display="block";
+			document.getElementById("main1").style.display="block";
 		}
 	}
 	function acount() {
 		var bank=document.getElementsByName("bank")[0];
 		var i=bank.selectedIndex;
-		
+		var main3 = document.getElementById("main3");
 		if(i==0){
-			alert("국민은행 계좌번호:123456789-55-123456789 입금할 금액:");
-			
-		
-			location.href="${pageContext.request.contextPath}/main";
+			main3.style.display = "block";
 		}else{
 			alert("우리은행 계좌번호:987654321-33-987654321 입금할 금액:");
 			location.href="${pageContext.request.contextPath}/main";
@@ -59,8 +52,8 @@
 
 
 </script>
-</head>
-<body>
+<div id="main">
+
 <form method="post" action="${cp }/orderY/orderinsert">
 총 금액 = <input type="text" name="amount" size="10" value="${amount }"><br><br>
 <select name="paymethod">
@@ -70,20 +63,47 @@
 <option value="핸드폰">핸드폰</option>
 </select><br>
 <input type="button" value="확인" onclick="gopay()">
-<div id="main" style="display: none">
+<div id="main1" style="display: none;">
 	<select name="bank">
 		<option value="국민은행">국민은행</option>
 		<option value="우리은행">우리은행</option>
 	</select>
 	
+	
+	<input type="button" value="확인" onclick="acount()">
+	
+</div>
+<div id="main3" style="display:none;">
+	<table style="width: 1000px; text-align: center;">
+		<tr>
+			<th>상품명</th><th>수량</th><th>가격</th>
+			
+		</tr>
+		
+		<c:forEach var="map" items="${list }">
+		<tr>
+		<td>${map.pname}</td>
+		
+		<td>${map.cnt }</td>
+			
+		<td>${map.price }</td>
+		</tr>
+		</c:forEach>
+		
+		
+	</table>
 	<input type="text" name="status" id="status"  value="${status }" hidden=""><br>
 	<input type="text" name="delivery" id="delivery"  value="${delivery }" hidden=""><br>
 	<input type="text" size="50" id="deladd" name="deladd" value="${deladd }" hidden=""><br>
 	<input type="text" name="getname" id="getname" value="${getname }" hidden=""><br>
-	<input type="submit" value="확인" onclick="acount()">
+	<div style="margin-right:650px; text-align: right;">
+			총금액:${amount }
+			<br>입금액:<input type="text" style="width: 100px;" name="inamount">
+			<input type="submit" value="결제">
+		</div>
 	
 </div>
-<div id="main1" style="display: none">
+<div id="main2" style="display: none">
 	카드사선택 <select name="card">
 		<option value="국민카드">국민</option>
 		<option value="우리카드">우리</option>
@@ -100,5 +120,4 @@
 
 </div>
 </form>
-</body>
-</html>
+</div>

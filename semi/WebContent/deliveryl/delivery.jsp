@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<table border="1" width="600">
+<div style="margin-top: 50px;">
+<table style="width: 1500px; text-align: center;">
 	<tr>
 		<th>주문번호</th><th>수령인</th><th>주문상품</th><th>배송정보</th>
 	</tr>
@@ -16,6 +17,7 @@
 		
 		</c:forEach>
 </table>
+</div>
 <br>
 <div>
 		<!-- 페이징처리 -->

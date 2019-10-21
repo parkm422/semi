@@ -25,44 +25,29 @@ public class payServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
-		String id=(String)req.getSession().getAttribute("id");
 		int amount =Integer.parseInt(req.getParameter("amount"));
 		String getname=req.getParameter("getname");
 		String status=req.getParameter("status");
 		String deladd=req.getParameter("deladd");
 		String delivery=req.getParameter("delivery");
+		String[] pname=req.getParameterValues("pname");
+		String[] cnt=req.getParameterValues("cnt");
+		String[] price=req.getParameterValues("price");
 		
-		MemberDao dao1=MemberDao.getInstance();
-		ArrayList<MemberVo> list=dao1.list(id);
-
-		S_MemberDAO memberDao = S_MemberDAO.getSmemberDao();
-		ProductDAO itemDao = ProductDAO.getProductDao();
-		
-		HttpSession session = req.getSession();
-		
-		String basketPageNum = req.getParameter("pageNum");
+		ArrayList<HashMap<String,Object>> list=new ArrayList<HashMap<String,Object>>();
+		for(int i=0;i<pname.length;i++) {
+			HashMap<String,Object> map=new HashMap<String, Object>();
+			map.put("pname", pname[i]);
+			map.put("cnt", cnt[i]);
+			map.put("price", price[i]);
+			list.add(map);
 			
-		int pageNum = 1;
-		if(basketPageNum != null) {
-			pageNum = Integer.parseInt(basketPageNum);
-		}
-		
-		int startRow = 1+(pageNum-1)*5;
-		int endRow = startRow+4;
-		
-		int startPageNum = ((pageNum-1)/5*5)+1;
-		int endPageNum = startPageNum+4;
-		
-		S_MemberVO vo = memberDao.getMemberInfo(id);
-		
-		int basketPageCount = (int) Math.ceil(itemDao.getBasketCount(vo.getMnum())/5.0);
-		
-		if(endPageNum>basketPageCount) {
-			endPageNum = basketPageCount;
 		}
 		
 		
-	
+		//req.setAttribute("pname",pname);
+		//req.setAttribute("cnt",cnt);
+		//req.setAttribute("price",price);
 		req.setAttribute("getname",getname);
 		req.setAttribute("amount",amount);
 		req.setAttribute("status",status);
@@ -72,6 +57,7 @@ public class payServlet extends HttpServlet{
 		req.setAttribute("nav","/nav.jsp");
 		req.setAttribute("content","/paymentl/payment.jsp");
 		req.setAttribute("footer","/footer.jsp");
+		req.setAttribute("list",list);
 		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 	}
 }
