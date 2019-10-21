@@ -23,7 +23,7 @@ public class JoinServlet extends HttpServlet{
 		
 		req.getRequestDispatcher("/main").forward(req, resp);
 		*/
-		resp.sendRedirect(req.getContextPath()+"member/join.jsp");
+		resp.sendRedirect(req.getContextPath()+"/member/join.jsp");
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
