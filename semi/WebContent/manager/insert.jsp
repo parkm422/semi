@@ -158,37 +158,53 @@
 	
 </script>
 <div id="main">
-	<h1>상품등록 페이지</h1>
-	<form method="post" action="${cp }/manager/insert" enctype="multipart/form-data">
-		<div>
-			<select id="major" name="major" onchange="subList()" style="width:100px;">
-				<option value="">대분류</option>
-				<c:forEach var="m_c" items="${mcategory }">
-					<option value="${m_c }">${m_c }</option>
-				</c:forEach>
-			</select>&nbsp;&nbsp;&nbsp;
-			
-			<select id="sub" name="sub" onchange="sizeList()" style="width:100px;">
-				<option value="">소분류</option>
+	<div style="width:600px;margin: 0 auto;margin-top: 50px;">
+		<div style="margin-bottom: 30px;"><h1>상품등록 페이지</h1></div>
+		<form method="post" action="${cp }/manager/insert" enctype="multipart/form-data">
+			<div style="margin-bottom: 20px;">
+				<select id="major" name="major" onchange="subList()" style="width:100px;height:30px;">
+					<option value="">대분류</option>
+					<c:forEach var="m_c" items="${mcategory }">
+						<option value="${m_c }">${m_c }</option>
+					</c:forEach>
+				</select>&nbsp;&nbsp;&nbsp;
 				
-			</select>&nbsp;&nbsp;&nbsp;
-			
-			<select id="size" name="size" onchange="colorList()" style="width:100px;">
-				<option value="">사이즈</option>
+				<select id="sub" name="sub" onchange="sizeList()" style="width:100px;height:30px;">
+					<option value="">소분류</option>
+					
+				</select>&nbsp;&nbsp;&nbsp;
 				
-			</select>&nbsp;&nbsp;&nbsp;
-			
-			<select id="color" name="color" style="width:100px;">
-				<option value="">색상</option>
+				<select id="size" name="size" onchange="colorList()" style="width:100px;height:30px;">
+					<option value="">사이즈</option>
+					
+				</select>&nbsp;&nbsp;&nbsp;
 				
-			</select>&nbsp;&nbsp;&nbsp;
-		</div>
-		<div>
-			<div>상품명<input type="text" name="pname"></div>
-			<div>가격<input type="text" name="price"></div>
-			<div>재고<input type="text" name="cnt"></div>
-			<div>이미지<input type="file" name="pimg"></div>
-			<div><input type="submit" value="상품등록"></div>
-		</div>
-	</form>
+				<select id="color" name="color" style="width:100px;height:30px;">
+					<option value="">색상</option>
+					
+				</select>&nbsp;&nbsp;&nbsp;
+			</div>
+			<div>
+				<div>상품명</div>
+				<div style="margin-bottom: 20px;width:350px;height:35px;border:1px solid lightgray;padding-left: 10px;padding-top:13px;">
+					<input type="text" name="pname" style="border:none;width:300px;height:25px;">
+				</div>
+				<div>가격</div>
+				<div style="margin-bottom: 20px;width:350px;height:35px;border:1px solid lightgray;padding-left: 10px;padding-top:13px;">
+					<input type="text" name="price" style="border:none;width:300px;height:25px;">
+				</div>
+				<div>재고</div>
+				<div style="margin-bottom: 20px;width:350px;height:35px;border:1px solid lightgray;padding-left: 10px;padding-top:13px;">
+					<input type="text" name="cnt" style="border:none;width:300px;height:25px;">
+				</div>
+				<div>이미지</div>
+				<div style="margin-bottom: 20px;width:350px;height:35px;border:1px solid lightgray;padding-left: 10px;padding-top:13px;">
+					<input type="file" name="pimg" style="border:none;width:300px;height:25px;">
+				</div>
+				<div>
+					<input type="submit" value="상품등록" style="width:360px;height:35px;cursor: pointer;font-weight: bold;font-size:20px;">
+				</div>
+			</div>
+		</form>
+	</div>
 </div>

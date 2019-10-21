@@ -8,9 +8,9 @@
 	<div style="margin: 50px;">
 	<h1 style="text-align:center;color:skyblue;">상품 리스트</h1>
 	<div style="margin-top: 30px;margin-bottom: 30px;text-align: right;">
-		<a href="${cp }/product/list?pageNum=${pageNum}&major=${param.major }&sub=${param.sub }&sort=high" style="text-decoration: none;">[높은 가격순]</a>
-		<a href="${cp }/product/list?pageNum=${pageNum}&major=${param.major }&sub=${param.sub }&sort=low" style="text-decoration: none;">[낮은 가격순]</a>
-		<a href="${cp }/product/list?pageNum=${pageNum}&major=${param.major }&sub=${param.sub }&sort=popular" style="text-decoration: none;">[인기 순]</a>
+		<a href="${cp }/product/list?pageNum=${pageNum}&major=${param.major }&sub=${param.sub }&sort=high" style="text-decoration: none;color:gray;">[높은 가격순]</a>
+		<a href="${cp }/product/list?pageNum=${pageNum}&major=${param.major }&sub=${param.sub }&sort=low" style="text-decoration: none;color:gray;">[낮은 가격순]</a>
+		<a href="${cp }/product/list?pageNum=${pageNum}&major=${param.major }&sub=${param.sub }&sort=popular" style="text-decoration: none;color:gray;">[인기 순]</a>
 	</div>
 	<div style="padding-left: 70px;">
 		<ul>
@@ -33,7 +33,7 @@
 			</c:forEach>
 		</ul>
 	</div>
-		<div style="text-align: right;">
+		<div style="text-align: center;">
 			<c:if test="${startPageNum>5 }">
 				<a href="${cp }/product/list?pageNum=${startPageNum-1}&major=${param.major }&sub=${param.sub }&sort=${sort}">[이전]</a>
 			</c:if>

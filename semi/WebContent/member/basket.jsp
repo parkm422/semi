@@ -37,8 +37,8 @@
 						<img src="${cp }/upload/${basket.savefilename }" style="width:100px;height:100px;">
 					</td>
 					<td>
-						<div ><p >${basket.pname } [${basket.colorname }]</p></div>
-						<div ><p >[size : ${basket.psize }]</p></div>
+						<div><a href="${cp }/product/detail?inum=${basket.inum }">${basket.pname }</a></div>
+						<div><span>[${basket.colorname }]</span>&nbsp;&nbsp;<span>[size : ${basket.psize }]</span></div>
 					</td>
 					<td>
 						<span >${dc.format(basket.price) }원</span>
