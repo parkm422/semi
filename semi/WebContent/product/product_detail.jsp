@@ -37,72 +37,77 @@
 	<div style="clear: both;">상품상세</div>
 	<div>
 		<h3>상품 Q&A</h3>
-		<table>
+		<table id="question">
 			<tr>
 				<th>글번호</th>
 				<th>질문제목</th>
 				<th>작성자</th>
 			</tr>
-			<c:forEach var="post" items="${list }">
+			<c:forEach var="post" items="${list }" varStatus="postId" >
 				<tr>
-					<td>${post.qnum }</td>
+					<td>${post.rnum }</td>
 					<td><a href="">${post.title }</a></td>
 					<td>${post.writer }</td>
 				</tr>
+				<tr style="display:none">
+					<td colspan="3">질문: ${post.content }</td>
+				</tr>
+				<tr style="display:none">
+					<td colspan="3">답변: ${post.answer }</td>
+				</tr>
 			</c:forEach>
-			<div>
-				<c:choose>
-					<c:when test="${startPageNum>10 }">
-						<a href="${cp }/board/qnaboard?pageNum=${startPageNum-1}">[이전]22</a>
-					</c:when>
-					<c:otherwise>
-					[이전]11
+		</table>
+		<c:choose>
+			<c:when test="${startPageNum>10 }">
+				<a href="${cp }/product/detail?qnaPageNum=${startPageNum-1}&inum=${vo.inum}">[이전]</a>
+			</c:when>
+			<c:otherwise>
+					[이전]
 				</c:otherwise>
-				</c:choose>
-				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }"
-					step="1">
-					<c:choose>
-						<c:when test="${pageNum==i }">
-							<a href="${cp }/board/list?pageNum=${i}"> <span
-								style="color: red;">[${i }]</span>
-							</a>
-						</c:when>
-						<c:otherwise>
-							<a href="${cp }/board/list?pageNum=${i}"> <span
-								style="color: #555;">[${i }]</span>
-							</a>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-				<c:choose>
-					<c:when test="${endPageNum<pageCount }">
-						<a href="${cp }/board/list?pageNum=${endPageNum+1}">[다음]</a>
-					</c:when>
-					<c:otherwise>
+		</c:choose>
+		<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }"
+			step="1">
+			<c:choose>
+				<c:when test="${qnaPageNum==i }">
+					<a href="${cp }/product/detail?qnaPageNum=${i}&inum=${vo.inum}"> <span
+						style="color: red;">[${i }]</span>
+					</a>
+				</c:when>
+				<c:otherwise>
+					<a href="${cp }/product/detail?qnaPageNum=${i}&inum=${vo.inum}"> <span
+						style="color: #555;">[${i }]</span>
+					</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<c:choose>
+			<c:when test="${endPageNum<qnaTotalPage }">
+				<a href="${cp }/product/detail?qnaPageNum=${endPageNum+1}&inum=${vo.inum}">[다음]</a>
+			</c:when>
+			<c:otherwise>
 			[다음]
 		</c:otherwise>
-				</c:choose>
-			</div>
-		</table>
+		</c:choose>
 	</div>
-	<div>
-		<h3>리뷰게시판</h3>
-		<c:forEach var="review" items="${reviewList }">
+</div>
+<div>
+	<h3>리뷰게시판</h3>
+	<c:forEach var="review" items="${reviewList }">
+		<div>
+			<div>${review.writer }</div>
+			<div>${vo.pname }</div>
+			<div>${review.title }</div>
+			<div>${review.content }</div>
 			<div>
-				<div>${review.writer }</div>
-				<div>${vo.pname }</div>
-				<div>${review.title }</div>
-				<div>${review.content }</div>
-				<div>
-					<img src="${cp }/upload/${review.savefilename }">5
-				</div>
-				<div>
-					<textarea rows="2" cols="100"></textarea>
-					<input type="button" value="등록" onclick="insert()">
-				</div>
+				<img src="${cp }/upload/${review.savefilename }">5
 			</div>
-		</c:forEach>
-	</div>
+			<div>
+				<textarea rows="2" cols="100"></textarea>
+				<input type="button" value="등록" onclick="insert()">
+			</div>
+		</div>
+	</c:forEach>
+</div>
 <script type="text/javascript">
 	var putxhr = null;
 	function itemPut() {
@@ -140,4 +145,9 @@
 			}
 		}
 	}
+	
+	var question = document.getElementById("question");
+	question.  addEventListener("click", () => {
+		
+	}, capture)
 </script>

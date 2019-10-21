@@ -1,6 +1,7 @@
 package com.semi.boardK;
 
 public class QnABoardVO {
+	private int rnum;
 	private int qnum;
 	private int inum;
 	private String writer;
@@ -10,14 +11,21 @@ public class QnABoardVO {
 	public QnABoardVO() {
 		super();
 	}
-	public QnABoardVO(int qnum, int inum, String writer, String title, String content, String answer) {
+	public QnABoardVO(int rnum, int qnum, int inum, String writer, String title, String content, String answer) {
 		super();
+		this.rnum = rnum;
 		this.qnum = qnum;
 		this.inum = inum;
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
 		this.answer = answer;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 	public int getQnum() {
 		return qnum;

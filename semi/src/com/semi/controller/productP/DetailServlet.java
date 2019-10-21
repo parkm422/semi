@@ -24,7 +24,7 @@ public class DetailServlet extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		int inum = Integer.parseInt(req.getParameter("inum"));
-
+/*
 		// 리뷰게시판 페이지 얻어오기
 		String spageNum = req.getParameter("pageNum");
 
@@ -59,21 +59,24 @@ public class DetailServlet extends HttpServlet {
 		ArrayList<ReviewVO> reviewList = reviewDao.review_list(startRow, endRow, inum);
 
 		req.setAttribute("reviewList", reviewList);
-
+*/
 		
+		ProductDAO dao = ProductDAO.getProductDao();
+		// 상품 정보 얻어오기
+		Product_ListVO vo = dao.getDetail(inum);
+		req.setAttribute("vo", vo);
 		
 		// QnA게시판 목록 처리
 		// 상품번호 inum은 공유
-		String qnaSPageNum = req.getParameter("pageNum");
+		String qnaSPageNum = req.getParameter("qnaPageNum");
 		int qnaPageNum = 1;
 		if (qnaSPageNum != null) {
-			qnaPageNum = Integer.parseInt(spageNum);
+			qnaPageNum = Integer.parseInt(qnaSPageNum);
 		}
 		int qnaEndRow = qnaPageNum * 10;
 		int qnaStartRow = qnaEndRow - 9;
 		QnABoardDAO qnaDAO = QnABoardDAO.getQnABoardDAo();
 		ArrayList<QnABoardVO> qnaList = qnaDAO.getPostList(inum, qnaStartRow, qnaEndRow);
-
 		int qnaTotalPage = (int) Math.ceil(qnaDAO.getTotalPost(inum) / 10.0);
 		int startPageNum = ((qnaPageNum - 1) / 10 * 10) + 1;
 		int endPageNum = startPageNum + 9;

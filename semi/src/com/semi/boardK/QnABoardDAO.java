@@ -47,16 +47,14 @@ public class QnABoardDAO {
 			con = JdbcUtil.getConn();
 			pstmt = con.prepareStatement("SELECT * "
 					+ "FROM (SELECT rownum as rnum, a.* "
-					+ 	"FROM (SELECT * "
-					+ 		"FROM item_qna WHERE inum=? ORDER BY qnum DESC) a "
-					+ 	"WHERE rownum <=?) b "
-					+ "WHERE b.rnum >=?");
+					+ 	"FROM (SELECT * FROM item_qna WHERE inum=? ORDER BY qnum DESC) a "
+					+ "WHERE rownum <=?) b WHERE b.rnum >=?");
 			pstmt.setInt(1, inum);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, endRow);
+			pstmt.setInt(2, endRow);
+			pstmt.setInt(3, startRow);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				vo = new QnABoardVO(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+				vo = new QnABoardVO(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString("writer"), rs.getString("title"), rs.getString("content"), rs.getString("answer"));
 				postList.add(vo);
 			}
 			return postList;
@@ -67,7 +65,7 @@ public class QnABoardDAO {
 			JdbcUtil.close(con, pstmt, rs);
 		}
 	}
-	
+	/*
 	public QnABoardVO getPost(int qnum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -75,7 +73,7 @@ public class QnABoardDAO {
 		QnABoardVO vo = null;
 		try {
 			con = JdbcUtil.getConn();
-			pstmt = con.prepareStatement("SELECT * FROM item_qna WHERE qnum=?");
+			pstmt = con.prepareStatement("SELECT Count(*) FROM item_qna WHERE qnum=?");
 			pstmt.setInt(1, qnum);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
@@ -91,4 +89,5 @@ public class QnABoardDAO {
 			JdbcUtil.close(con, pstmt, rs);
 		}
 	}
+	*/
 }
