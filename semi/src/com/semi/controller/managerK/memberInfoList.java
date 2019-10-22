@@ -32,8 +32,8 @@ public class memberInfoList extends HttpServlet{
 		request.setAttribute("list", list); 
 		request.setAttribute("content","/manager/memberInfoList.jsp");
 		request.setAttribute("top","/header.jsp");
-		request.setAttribute("nav","/nav.jsp");
+		request.setAttribute("nav","/adnav.jsp");
 		request.setAttribute("footer","/footer.jsp");
-		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		request.getRequestDispatcher("/main").forward(request, response);
 	}
 }

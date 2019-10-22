@@ -59,6 +59,6 @@ public class payServlet extends HttpServlet{
 		req.setAttribute("content","/paymentl/payment.jsp");
 		req.setAttribute("footer","/footer.jsp");
 		req.setAttribute("list",list);
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 }
