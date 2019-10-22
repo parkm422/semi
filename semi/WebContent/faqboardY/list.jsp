@@ -10,7 +10,7 @@
 		xhr.onreadystatechange=success;
 		xhr.open('get', 'faqlist.jsp?question='+question,true);
 		xhr.send();
-	}//55
+	}
 	function success() {
 		if(xhr.readyState==4 && xhr.status==200){
 			var data=xhr.responseText;
@@ -41,19 +41,16 @@
 					}
 				}
 	</script>
-	ㅅㅅ
 <h1>FAQ게시판</h1>
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
-<p><a href="${cp }/faqboardY/list">전체글목록</a>
-</p>
-<table border="1" style="width: 800px;border: none;" >
+<table style="width: 800px;border: none;" >
 	<tr>
 		<th>번호</th><th>질문</th>
 	</tr>
 	<c:forEach var="vo" items="${list}" varStatus="cc">
 		<tr>
-			<td>${(pageNum-1)*10+cc.index+1 }</td>
-			<td onclick="lookanswer(event)">${vo.question}</td>
+			<td style="text-align: center;">${(pageNum-1)*10+cc.index+1 }</td>
+			<td style="text-align: center;" onclick="lookanswer(event)">${vo.question}</td>
 		</tr>
 		<tr>
 		<td class="result" colspan="2" ></td>
@@ -89,6 +86,8 @@
 		다음
 	</c:otherwise>
 </c:choose>
+<p><a href="${cp }/faqboardY/list">전체글목록</a>
+</p>
 </div>
 
 
