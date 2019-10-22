@@ -23,9 +23,8 @@
 							</a>
 						</div>
 						<div>
-							<div style="text-align: center;font-size:17px;overflow: hidden; text-overflow: ellipsis;">
-								<a href="${cp }/product/detail?inum=${vo.inum }&sub=${param.sub }&sort=${sort}" style="text-decoration: none;color: black;font-size:12px;
-">${vo.pname }</a>
+							<div style="width:250px;height:50px;text-align: center;font-size:17px;text-overflow:ellipsis;overflow:hidden;">
+								<a href="${cp }/product/detail?inum=${vo.inum }&sub=${param.sub }&sort=${sort}" style="text-decoration: none;color: black;font-size:12px;">${vo.pname }</a>
 							</div>
 							<div style="text-align: center;font-size:17px;"><strong>${dc.format(vo.price) }원</strong></div>
 						</div>
@@ -36,18 +35,18 @@
 	</div>
 		<div style="text-align: center;">
 			<c:if test="${startPageNum>5 }">
-				<a href="${cp }/product/list?pageNum=${startPageNum-1}&major=${param.major }&sub=${param.sub }&sort=${sort}">[이전]</a>
+				<a href="${cp }/product/list?pageNum=${startPageNum-1}&major=${param.major }&sub=${param.sub }&sort=${sort}" style="text-decoration: none;">[이전]</a>
 			</c:if>
 			
 			<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
 				<c:choose>
 					<c:when test="${pageNum == i }">
-						<a href="${cp }/product/list?pageNum=${i}&major=${param.major }&sub=${param.sub }&sort=${sort}">
+						<a href="${cp }/product/list?pageNum=${i}&major=${param.major }&sub=${param.sub }&sort=${sort}" style="text-decoration: none;">
 							<span style="color:blue;">[${i }]</span>
 						</a>
 					</c:when>
 					<c:otherwise>
-						<a href="${cp }/product/list?pageNum=${i}&major=${param.major }&sub=${param.sub }&sort=${sort}">
+						<a href="${cp }/product/list?pageNum=${i}&major=${param.major }&sub=${param.sub }&sort=${sort}" style="text-decoration: none;">
 							<span style="color:gray;">[${i }]</span>
 						</a>
 					</c:otherwise>
@@ -55,7 +54,7 @@
 			</c:forEach>
 			
 			<c:if test="${endPageNum<pageCount }">
-				<a href="${pageContext.request.contextPath }/board/list?pageNum=${endPageNum+1}&major=${param.major }&sub=${param.sub }&sort=${sort}">[다음]</a>
+				<a href="${pageContext.request.contextPath }/board/list?pageNum=${endPageNum+1}&major=${param.major }&sub=${param.sub }&sort=${sort}" style="text-decoration: none;">[다음]</a>
 			</c:if>
 		</div>
 	</div>
