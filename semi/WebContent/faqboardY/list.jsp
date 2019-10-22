@@ -49,9 +49,9 @@
 	<tr>
 		<th>번호</th><th>질문</th>
 	</tr>
-	<c:forEach var="vo" items="${list}">
+	<c:forEach var="vo" items="${list}" varStatus="aa">
 		<tr>
-			<td>${vo.fnum }</td>
+			<td>${(pageNum-1)*10+aa.index+1}</td>
 			<td onclick="lookanswer(event)">${vo.question}</td>
 		</tr>
 		<tr>

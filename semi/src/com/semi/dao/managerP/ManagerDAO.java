@@ -21,6 +21,40 @@ public class ManagerDAO {
 	public static ManagerDAO getManagerDao() {
 		return managerdao;
 	}
+	public int viewup(int ornumm) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="update orderinfo set delivery=? where ornum=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,"배송중");
+			pstmt.setInt(2,ornumm);
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt,null);
+		}
+	}
+	public int viewups(int ornumm) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		try {
+			con=JdbcUtil.getConn();
+			String sql="update orderinfo set delivery=? where ornum=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1,"배송완료");
+			pstmt.setInt(2,ornumm);
+			return pstmt.executeUpdate();
+		}catch(SQLException se) {
+			System.out.println(se.getMessage());
+			return -1;
+		}finally {
+			JdbcUtil.close(con,pstmt,null);
+		}
+	}
 
 	public boolean exist(String id, String pwd) {
 

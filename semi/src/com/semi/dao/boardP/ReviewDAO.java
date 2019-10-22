@@ -108,7 +108,7 @@ public class ReviewDAO {
 				String orgfilename = rs.getString("orgfilename");
 				String savefilename = rs.getString("savefilename");
 				int rating = rs.getInt("rating");
-				
+
 				ReviewVO vo = new ReviewVO(rnum, inum2, writer, title, content, orgfilename, savefilename, rating);
 				reviewList.add(vo);
 			}
@@ -157,9 +157,11 @@ public class ReviewDAO {
 				int ref = rs.getInt("ref");
 				int lev = rs.getInt("lev");
 				int step = rs.getInt("step");
-				
+
+
 				ReviewChildVO vo = new ReviewChildVO(rcnum, rnum2, rcwriter, comments, ref, lev, step);
 				childList.add(vo);
+
 			}
 			
 			return childList;

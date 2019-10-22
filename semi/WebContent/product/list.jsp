@@ -6,13 +6,13 @@
 
 <div id="main">
 	<h1 style="text-align:center;color:skyblue;">상품 리스트</h1>
-	<ul>
+	<ul >
 		<c:forEach var="vo" items="${list }">
 			<li style="display:inline-block;">
 				<div style="border:1px solid black;margin-left:15px;margin-bottom:15px;">
 					<div>
 						<a href="${cp }/product/detail?inum=${vo.inum }&sub=${param.sub }">
-							<img src="${cp }/upload/${vo.savefilename}" style="width:250px;heigth:300px;">
+							<img src="${cp }/upload/${vo.savefilename}" style="width:250px;height:300px;">
 						</a>
 					</div>
 					<div>

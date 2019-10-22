@@ -1,6 +1,7 @@
 package com.semi.vo.managerP;
 
 public class ViewVo {
+	private int ornumm;
 	private String name;
 	private String id;
 	private String pname;
@@ -23,10 +24,11 @@ public class ViewVo {
 
 	public ViewVo() {}
 
-	public ViewVo(int ornum,String name, String id, String gname,String pname, int psize, String color, int cnt, int price, String status,
+
+	public ViewVo(int ornumm,String name, String id, String gname,String pname, int psize, String color, int cnt, int price, String status,
 			String delivery) {
 		super();
-		this.ornum = ornum;
+		this.ornumm = ornumm;
 		this.name = name;
 		this.id = id;
 		this.gname = gname;
@@ -38,7 +40,9 @@ public class ViewVo {
 		this.status = status;
 		this.delivery = delivery;
 	}
-	
+
+
+
 	public ViewVo(int dnum, int ornum,int inum,String ppname,int ppsize,String ccolor,int ccnt) {
 		super();
 		this.dnum = dnum;
@@ -56,6 +60,12 @@ public class ViewVo {
 
 	public void setGname(String gname) {
 		this.gname = gname;
+	}
+	public int getOrnumm() {
+		return ornumm;
+	}
+	public void setOrnumm(int ornumm) {
+		this.ornumm=ornumm;
 	}
 
 	public String getName() {

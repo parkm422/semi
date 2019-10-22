@@ -7,12 +7,14 @@
 <meta charset="UTF-8">
 <title>index.jsp</title>
 </head>
+<div id="wrap">
 <body>
 	<jsp:include page="${top}"/>
 	<jsp:include page="${nav}"/>
 	<jsp:include page="${content}"/>
 	<jsp:include page="${footer}"/>
 </body>
+</div>
 </html>
 
 

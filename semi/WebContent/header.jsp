@@ -25,10 +25,26 @@
 <div>
 	<ul>
 		<li><a href="${cp }/faqboardY/list">faq리스트</a></li>
-		<li><a href="${cp }/faqboardY/faqinsert">faq작성하기</a></li>
-		<li><a href="${cp }/memberinfoupdateY/memberupdate?id=${sessionScope.id}">회원정보수정</a></li>
 		<li><a href="${cp }/orderY/porderlist?id=${sessionScope.id}">주문리스트보기</a></li>
 		
 	</ul>
+</div>
+<div id="slide" style="text-align: center;">
+  <input type="radio" name="pos" id="pos1" checked>
+  <input type="radio" name="pos" id="pos2">
+  <input type="radio" name="pos" id="pos3">
+  <input type="radio" name="pos" id="pos4">
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <p class="pos">
+    <label for="pos1"></label>
+    <label for="pos2"></label>
+    <label for="pos3"></label>
+    <label for="pos4"></label>
+  </p>
 </div>
 </div>

@@ -1,4 +1,9 @@
 @charset "UTF-8";
+#html{
+	width: 500px;
+	height: 500px;
+	padding-bottom: 500px;
+}
 *{
 		margin:0px;
 		padding: 0px;
@@ -31,9 +36,23 @@
 		cursor:pointer;
 	}
 	#main{
+		position: relative;
 		width:85%;
 		float:right	;
-		min-height: 3000px;
+		min-height: 3000xp;
+	}
+	/*
+	#main li{
+	position:absolute;
+	top:0;
+	left:0;
+	 display:none;
+-webkit-display:block;
+	
+	}
+	#main img{
+		width:85%;
+		min-height:3000px;
 	}
 	#footer{
 		width:100%;
@@ -43,6 +62,8 @@
 	#footer h1{
 		text-align: center;
 	}
+	
 	.outer_type{
 		text-decoration: none;
 	}
+	*/
