@@ -49,7 +49,7 @@
 						<td>
 							<input type="button" value="-" style="width:20px;height:20px;font-size:20px;background-color: white;" onclick="bplus('${ii.index}')">
 							<input type="text" style="width:20px;" id="cnt_${ii.index }" name="cnt" value="${basket.cnt}">
-							<input type="button" value="+" style="width:20px;height:20px;font-size:20px;background-color: white;" onclick="bplus('${ii.index}')">
+							<input type="button" value="+" style="width:20px;height:20px;font-size:20px;background-color: white;" onclick="bminus('${ii.index}')">
 							<input type="button" value="수정" style="width:30px;height:20px;font-size:12px;background-color: white;" onclick="cupdate(${ii.index},${basket.bnum})">
 						</td>
 						<td>
