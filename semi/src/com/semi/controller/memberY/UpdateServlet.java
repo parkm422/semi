@@ -28,9 +28,9 @@ public class UpdateServlet extends HttpServlet{
 		}
 		req.setAttribute("top","/header.jsp");
 		req.setAttribute("content","/memberinfoupdateY/memberupdate.jsp");
-		req.setAttribute("nav","/nav.jsp");
+		req.setAttribute("nav","/mypagenav.jsp");
 		req.setAttribute("footer","/footer.jsp");
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -51,8 +51,8 @@ public class UpdateServlet extends HttpServlet{
 
 		req.setAttribute("top","/header.jsp");
 		req.setAttribute("content","/memberinfoupdateY/result.jsp");
-		req.setAttribute("nav","/nav.jsp");
+		req.setAttribute("nav","/mypagenav.jsp");
 		req.setAttribute("footer","/footer.jsp");
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 }

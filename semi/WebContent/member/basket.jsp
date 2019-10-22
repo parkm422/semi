@@ -40,7 +40,7 @@
 							<img src="${cp }/upload/${basket.savefilename }" style="width:70px;height:70px;">
 						</td>
 						<td>
-							<div><a href="${cp }/product/detail?inum=${basket.inum }" style="color:black;">${basket.pname }</a></div>
+							<div><a href="${cp }/product/detail?inum=${basket.inum }" style="color:black;text-decoration: none;">${basket.pname }</a></div>
 							<div><span style="color:gray;">[${basket.colorname }]</span>&nbsp;&nbsp;<span style="color:gray;">[size : ${basket.psize }]</span></div>
 						</td>
 						<td>
@@ -69,7 +69,7 @@
 				</div>
 		</form>	
 			<!-- 장바구니 페이징처리 -->
-			<div style="text-align: center;">
+			<div style="text-align: center;font-size:20px;">
 				<c:if test="${startPageNum>5 }">
 					<a href="${cp }/member/basket?pageNum=${startPageNum-1}">이전</a>
 				</c:if>

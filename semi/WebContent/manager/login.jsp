@@ -9,7 +9,7 @@
 </head>
 <body>
 <div style="margin: 0 auto;width:100%;margin-left: 450px;">
-	<div style="margin-left: 410px;margin-top: 30px;"><a href="${cp }/main" style="font-size:30px;"><strong>테스트 쇼핑몰</strong></a></div>
+	<div style="margin-left: 410px;margin-top: 30px;"><a href="${cp }/main" style="font-size:30px;text-decoration: none;"><strong>테스트 쇼핑몰</strong></a></div>
 	<div style="text-align: center;width:1000px;height:500px;">
 		<h1 style="margin-bottom: 30px;margin-top: 200px;">관리자 로그인</h1>
 		<div style="">

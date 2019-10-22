@@ -119,7 +119,7 @@ public class OrderInsertServlet extends HttpServlet{
 		req.setAttribute("content","/orderY/orderinsert.jsp");
 		req.setAttribute("nav","/nav.jsp");
 		req.setAttribute("footer","/footer.jsp");
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -220,7 +220,7 @@ public class OrderInsertServlet extends HttpServlet{
 		req.setAttribute("content","/orderY/result.jsp");
 		req.setAttribute("nav","/nav.jsp");
 		req.setAttribute("footer","/footer.jsp");
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 	
 }

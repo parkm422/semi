@@ -16,7 +16,6 @@
 		<th>가입일</th>
 	</tr>
 	<c:forEach items="${list }" var="mInfo">
-	
 	<tr>
 		<td>${mInfo.mnum }</td>
 		<td>${mInfo.id }</td>
