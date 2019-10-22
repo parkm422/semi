@@ -35,6 +35,7 @@
 		</div>
 	</div>
 	<div style="clear: both;">상품상세</div>
+
 	<div>
 		<h3>상품 Q&A</h3>
 		<table id="question">
@@ -43,23 +44,27 @@
 				<th>질문제목</th>
 				<th>작성자</th>
 			</tr>
-			<c:forEach var="post" items="${list }" varStatus="postId" >
+			<c:forEach var="post" items="${list }" varStatus="postId">
 				<tr>
 					<td>${post.rnum }</td>
-					<td><a href="">${post.title }</a></td>
+					<td><a href="#!" onclick="viewContent('${postId.index}')">${post.title }</a></td>
 					<td>${post.writer }</td>
 				</tr>
-				<tr style="display:none">
+				<tr style="display: none;" id="a_${postId.index }">
 					<td colspan="3">질문: ${post.content }</td>
 				</tr>
-				<tr style="display:none">
+				<tr style="display: none;" id="b_${postId.index }">
 					<td colspan="3">답변: ${post.answer }</td>
+				</tr>
+				<tr style="display: none;" id="c_${postId.index }">
+					<td><button type="button">답변 작성</button></td>
 				</tr>
 			</c:forEach>
 		</table>
 		<c:choose>
 			<c:when test="${startPageNum>10 }">
-				<a href="${cp }/product/detail?qnaPageNum=${startPageNum-1}&inum=${vo.inum}">[이전]</a>
+				<a
+					href="${cp }/product/detail?qnaPageNum=${startPageNum-1}&inum=${vo.inum}">[이전]</a>
 			</c:when>
 			<c:otherwise>
 					[이전]
@@ -69,27 +74,35 @@
 			step="1">
 			<c:choose>
 				<c:when test="${qnaPageNum==i }">
-					<a href="${cp }/product/detail?qnaPageNum=${i}&inum=${vo.inum}"> <span
-						style="color: red;">[${i }]</span>
+					<a href="${cp }/product/detail?qnaPageNum=${i}&inum=${vo.inum}">
+						<span style="color: red;">[${i }]</span>
 					</a>
 				</c:when>
 				<c:otherwise>
-					<a href="${cp }/product/detail?qnaPageNum=${i}&inum=${vo.inum}"> <span
-						style="color: #555;">[${i }]</span>
+					<a href="${cp }/product/detail?qnaPageNum=${i}&inum=${vo.inum}">
+						<span style="color: #555;">[${i }]</span>
 					</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
 		<c:choose>
 			<c:when test="${endPageNum<qnaTotalPage }">
-				<a href="${cp }/product/detail?qnaPageNum=${endPageNum+1}&inum=${vo.inum}">[다음]</a>
+				<a
+					href="${cp }/product/detail?qnaPageNum=${endPageNum+1}&inum=${vo.inum}">[다음]</a>
 			</c:when>
 			<c:otherwise>
 			[다음]
 		</c:otherwise>
 		</c:choose>
+		<div>
+			<button type="button" id="writeQuestion">질문 작성</button>
+		</div>
 	</div>
+
+
 </div>
+
+
 <div>
 	<h3>리뷰게시판</h3>
 	<c:forEach var="review" items="${reviewList }">
@@ -145,9 +158,28 @@
 			}
 		}
 	}
+
+	function viewContent(id) {
+		var a = document.getElementById("a_" + id);
+		var b = document.getElementById("b_" + id);
+
+		if (a.style.display === "block" & b.style.display === "block") {
+			a.style.display = "none";
+			b.style.display = "none";
+			//c.style.display = "none";
+
+		} else if (a.style.display === "none" & b.style.display === "none") {
+			a.style.display = "block";
+			b.style.display = "block";
+			//console.log(sessionStorage.getItem("adminId"));
+			//if (sessionStorage.getItem("adminId") !== null) {
+			//	c.style.display = "block";
+			//}
+		}
+	}
 	
-	var question = document.getElementById("question");
-	question.  addEventListener("click", () => {
-		
-	}, capture)
+	var writeQuestionBtn = document.getElementById("writeQuestion");
+	writeQuestionBtn.addEventListener("click", () => {
+		location.href="${cp}/member/writeQnAQuestion?inum=${vo.inum}";
+	}, false);
 </script>
