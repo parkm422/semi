@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-	
+<div id="main">
 	<div style="margin-top:50px; margin-left: 500px; margin-bottom: 50px;"  align="left" ><h1>1:1문의 게시판</h1></div>
 	<div style="margin-left: 500px;" align="left">
 	<form method="post" action="${cp }/boardl/1and1board">
@@ -18,3 +18,4 @@
 		<div ><input type="submit" value="등록"></div>
 	</form>
 	</div>
+</div>

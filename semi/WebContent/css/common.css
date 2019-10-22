@@ -36,5 +36,28 @@
 	}
 	#footer{
 		width:100%;
-		min-height:150px;
+		display:flex;
+		flex-direction: column;
+		min-height: 100px;
 	}
+	.outer_type{
+		text-decoration: none;
+	}
+	.item_dtail_link{
+		text-decoration: none;
+	}
+	.item_review_link{
+		text-decoration: none;
+	}
+	.adnav_link{
+		text-decoration: none;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
