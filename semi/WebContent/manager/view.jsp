@@ -4,12 +4,11 @@
 
 
  <div style="text-align: center;">
- <h1>주문 상세정보</h1>
+ <h1 style="margin-bottom: 20px;">주문 상세정보</h1>
 
- </div>
+ 
 
 <table style="width: 1500px; text-align: center;" >
-<a href="${cp }/main">홈으로</a>
 	<tr>
 		<th>주문번호</th><th>고객명</th><th>아이디</th><th>상품명</th><th>사이즈</th><th>색상</th><th>수량</th><th>가격</th><th>결제상태 확인</th><th>배송정보 확인</th>
 	</tr>
@@ -33,7 +32,7 @@
 	</form>
 	</c:forEach>
 	</table>
-</table>
+</div>
 <br>
 <div>
 		<!-- 페이징처리 -->
