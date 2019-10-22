@@ -25,13 +25,13 @@
 상품설명<br>
 
 <c:forEach var="basket1" items="${requestScope.basketList1}" varStatus="ss">
-	<input type="text" size="50" id="pname_${ss.index }" name="pname" readonly="readonly" value="${basket1.pname},${basket1.colorname }, size : ${basket1.psize }"><br>
-	<input type="text" size="50" class="price"id="price_${ss.index }" name="price"  readonly="readonly" value="${basket1.price}"><br>
+	<input type="text" size="30" id="pname_${ss.index }" name="pname" readonly="readonly" value="${basket1.pname},${basket1.colorname }, size : ${basket1.psize },갯수:${basket1.cnt}"><br>
+	<input type="text" size="10" class="price"id="price_${ss.index }" name="price"  readonly="readonly" value="금액:${basket1.price*basket1.cnt}원"><br>
 	<input type="text" name="cnt" value="${requestScope.cnt }" hidden="">
 	<input type="text" name="savefilename" value="${requestScope.savefilename }" hidden="">
 	</c:forEach>
 	총계산액<br>
-	<input type="text"  name="amount" id="amount"  value="${requestScope.nn}" readonly="readonly"><br>
+	<input type="text" size="10" name="amount" id="amount"  value="${requestScope.nn}원" readonly="readonly"><br>
 	<input type="text" name="pnames" id="pnames" value="${requestScope.pnames }" hidden=""><br>
 	
  	

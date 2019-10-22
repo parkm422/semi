@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h1>주문내역</h1>
-<p><a href="${cp }/orderY/porderlist?id=${sessionScope.id}">전체글목록</a> | <a href="${cp }/main">홈으로</a>
+<p><a href="${cp }/orderY/porderlist?id=${sessionScope.id}">전체목록</a>
 </p>
-<table style="width:1500px;text-align:center;">
+<table style="width:1500px;text-align:center;" >
 <colgroup>
 	<col width="5%">
 	<col width="20%">
