@@ -50,7 +50,7 @@ public class DeliveryServelt extends HttpServlet{
 		req.setAttribute("startPageNum", startPageNum);
 		req.setAttribute("endPageNum", endPageNum);
 		req.setAttribute("top", "/header.jsp");
-		req.setAttribute("nav","/nav.jsp");
+		req.setAttribute("nav","/mypagenav.jsp");
 		req.setAttribute("content","/deliveryl/delivery.jsp");
 		req.setAttribute("footer","/footer.jsp");
 		req.getRequestDispatcher("/index.jsp").forward(req, resp);

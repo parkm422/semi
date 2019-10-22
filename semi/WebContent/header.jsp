@@ -21,7 +21,7 @@
 					<span><a href="${cp }/member/logout" style="color:white;margin-left: 10px;">로그아웃</a></span>
 				</c:otherwise>
 			</c:choose>
-			<div><h1><a href="${cp }/main" style="text-decoration: none;color: white;">테스트 쇼핑몰</a></h1></div>
+			<div style="margin:30px;"><h1><a href="${cp }/main" style="text-decoration: none;color: white;">테스트 쇼핑몰</a></h1></div>
 		</div>
 	
 	</div>

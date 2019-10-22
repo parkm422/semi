@@ -25,7 +25,7 @@
 	<c:forEach var="vo2" items="${list }">
 		<tr>
 			<td>${vo2.ornum }</td>
-			<td><img src="${cp }/upload/${vo2.savefilename }" style="width:100px;height:150px;"></td>
+			<td><img src="${cp }/upload/${vo2.savefilename }" style="width:70px;height:70px;"></td>
 			<td>${vo2.pname }</td>
 			<td>${vo2.psize }</td>
 			<td>${vo2.color}</td>

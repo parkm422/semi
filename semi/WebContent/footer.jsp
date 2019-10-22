@@ -2,15 +2,5 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id="footer">
-<div id="board_menu" style="text-align: right;">
-<c:choose>
-		<c:when test="${sessionScope.id !=null }">
-			<span><a href="${cp }/boardl/1and1board">1:1게시판</a></span>
-			<span><a href="${cp }/boardl/list">글목록</a></span>
-		</c:when>
-		<c:otherwise>
-			<h2>메롱</h2>
-		</c:otherwise>
-	</c:choose>
-</div>
+	오시는길 안내해드려
 </div>
