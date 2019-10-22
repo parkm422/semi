@@ -18,9 +18,9 @@ public class DeliveryDao {
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			String sql = "select * from(select aa.*,rownum as rnum from(select o.ornum,i.getname,o.pname,i.delivery " + 
-					"from orderdetail o, orderinfo i " + 
-					"where i.mnum=?  and i.ornum=o.ornum order by ornum asc) aa) where rnum>=? and rnum<=?";
+			String sql = "select * from(select aa.*,rownum as rnum from(select o.ornum,i.getname,o.pname,p.status,i.delivery " + 
+					"from orderdetail o, orderinfo i, payment p " + 
+					"where i.mnum=?  and i.ornum=o.ornum and i.ornum=p.ornum order by ornum asc) aa) where rnum>=? and rnum<=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1,mnum);
 			pstmt.setInt(2,startRow);
@@ -29,7 +29,7 @@ public class DeliveryDao {
 			ArrayList<DeliveryVo> list = new ArrayList<DeliveryVo>();
 			while (rs.next()) {
 				DeliveryVo vo =new DeliveryVo(rs.getInt("ornum"),
-						rs.getString("getname"),rs.getString("pname"),rs.getString("delivery"));
+						rs.getString("getname"),rs.getString("pname"),rs.getString("status"),rs.getString("delivery"));
 				list.add(vo);
 			}
 			return list;

@@ -33,13 +33,14 @@ public class payServlet extends HttpServlet{
 		String[] pname=req.getParameterValues("pname");
 		String[] cnt=req.getParameterValues("cnt");
 		String[] price=req.getParameterValues("price");
-		
+		String[] savefilename=req.getParameterValues("savefilename");		
 		ArrayList<HashMap<String,Object>> list=new ArrayList<HashMap<String,Object>>();
 		for(int i=0;i<pname.length;i++) {
 			HashMap<String,Object> map=new HashMap<String, Object>();
 			map.put("pname", pname[i]);
 			map.put("cnt", cnt[i]);
 			map.put("price", price[i]);
+			map.put("savefilename",savefilename[i]);
 			list.add(map);
 			
 		}

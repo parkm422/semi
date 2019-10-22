@@ -77,6 +77,7 @@ public class OrderInsertServlet extends HttpServlet{
 		int nn=0;
 		int ss=0;
 		String pnames=null;
+		String savefilename=null;
 		ArrayList<HashMap<String, Object>> basketList1 = itemDao.getBasketList(vo.getMnum());
 		System.out.println(basketList1);
 		System.out.println(basketList1.size());
@@ -87,6 +88,7 @@ public class OrderInsertServlet extends HttpServlet{
 			nn+=(Integer)basketList1.get(i).get("price"); 
 			cnt=(int)basketList1.get(i).get("cnt");
 			ss=(int)basketList1.get(i).get("price");
+			savefilename=(String)basketList1.get(i).get("savefilename");
 		}
 		System.out.println(pnames);
 		req.setAttribute("pageNum", pageNum);
@@ -98,6 +100,7 @@ public class OrderInsertServlet extends HttpServlet{
 		req.setAttribute("cnt",cnt);
 		req.setAttribute("nn", nn);
 		req.setAttribute("ss",ss);
+		req.setAttribute("savefilename",savefilename);
 		req.setAttribute("pnames",pnames);
 		req.setAttribute("basketList1", basketList1);
 
