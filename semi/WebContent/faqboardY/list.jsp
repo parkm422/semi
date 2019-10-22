@@ -10,7 +10,7 @@
 		xhr.onreadystatechange=success;
 		xhr.open('get', 'faqlist.jsp?question='+question,true);
 		xhr.send();
-	}//
+	}//55
 	function success() {
 		if(xhr.readyState==4 && xhr.status==200){
 			var data=xhr.responseText;
