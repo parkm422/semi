@@ -19,7 +19,6 @@
 					<col width="10%">
 					<col width="10%">
 				</colgroup>
-
 				<tr>
 					<th>번호</th>
 					<th>이미지</th>
@@ -56,7 +55,7 @@
 							<span>${dc.format(basket.price * basket.cnt) }원</span>
 						</td>
 						<td>
-							<input type="button" value="상품 삭제" style="width:80px;height:40px;background-color: white;">
+							<input type="button" value="상품 삭제" style="width:80px;height:40px;background-color: white;" onclick="bdelete(${basket.bnum})">
 						</td>
 						<td>
 							<span>${basket.regdate }</span>
