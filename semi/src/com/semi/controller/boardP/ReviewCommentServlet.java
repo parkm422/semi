@@ -22,25 +22,32 @@ public class ReviewCommentServlet extends HttpServlet{
 		
 		req.setCharacterEncoding("utf-8");
 		
-		String parentNum = req.getParameter("parentNum");
 		String rcnum = req.getParameter("rcnum");
+		String rnum = req.getParameter("rnum");
 		String comments = req.getParameter("comments");
 		
 		HttpSession session = req.getSession();
 		String rcwriter = (String)session.getAttribute("id");
 		
-		
-		
 		int rcnum1 = 0;
-		int rnum = 0;
+		int rnum1 = Integer.parseInt(rnum);
 		int ref = 0;
 		int lev = 0;
 		int step = 0;
 		
-		if(rcnum != null && rcnum.equals("")) {
-			rcnum1 = Integer.parseInt(rcnum);
-		}
 		
+		if(rcnum != null && !rcnum.equals("0")) {
+			rcnum1 = Integer.parseInt(rcnum);
+			ref = Integer.parseInt(req.getParameter("ref"));
+			lev = Integer.parseInt(req.getParameter("lev"));
+			step = Integer.parseInt(req.getParameter("step"));
+		}
+		System.out.println("ref="+ref);
+		System.out.println("lev="+lev);
+		System.out.println("step="+step);
+		System.out.println("rcnum="+rcnum);
+		
+<<<<<<< HEAD
 		if(parentNum != null && parentNum.equals("")) {
 			rnum = Integer.parseInt(parentNum);
 			ref = Integer.parseInt("ref");
@@ -52,6 +59,9 @@ public class ReviewCommentServlet extends HttpServlet{
 =======
 		
 		ReviewChildVO vo = new ReviewChildVO(rcnum1, rnum, rcwriter, comments, ref, lev, step);
+=======
+		ReviewChildVO vo = new ReviewChildVO(rcnum1, rnum1, rcwriter, comments, ref, lev, step);
+>>>>>>> refs/remotes/origin/final
 		
 		
 		ReviewDAO reviewDao = ReviewDAO.getReviewDao();
@@ -68,6 +78,10 @@ public class ReviewCommentServlet extends HttpServlet{
 			json.put("code", "fail");
 		}
 		pw.print(json);
+<<<<<<< HEAD
 >>>>>>> refs/remotes/origin/semi2
+=======
+
+>>>>>>> refs/remotes/origin/final
 	}
 }

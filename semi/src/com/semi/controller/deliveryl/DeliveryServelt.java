@@ -31,7 +31,7 @@ public class DeliveryServelt extends HttpServlet{
 		int startRow = endRow - 9;
 		DeliveryDao dao=new DeliveryDao();
 		ArrayList<DeliveryVo> list3 = dao.list(mnum,startRow, endRow);
-		System.out.println("1"+mnum);
+		System.out.println(list3);
 		// 전체페이지 갯수 구하기
 		int pageCount = (int) (Math.ceil(dao.getCounts(mnum) / 10.0));
 		// 시작페이지 번호
@@ -50,7 +50,7 @@ public class DeliveryServelt extends HttpServlet{
 		req.setAttribute("startPageNum", startPageNum);
 		req.setAttribute("endPageNum", endPageNum);
 		req.setAttribute("top", "/header.jsp");
-		req.setAttribute("nav","/nav.jsp");
+		req.setAttribute("nav","/mypagenav.jsp");
 		req.setAttribute("content","/deliveryl/delivery.jsp");
 		req.setAttribute("footer","/footer.jsp");
 		req.getRequestDispatcher("/index.jsp").forward(req, resp);

@@ -49,6 +49,7 @@ public class IdCheckServlet extends HttpServlet{
 		PrintWriter pw = resp.getWriter();
 		System.out.println(find);
 		json.put("check",find);
+		json.put("id", id);
 		pw.print(json);
 	}
 }

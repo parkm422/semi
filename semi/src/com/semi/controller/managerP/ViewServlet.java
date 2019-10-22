@@ -1,6 +1,7 @@
 package com.semi.controller.managerP;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -36,6 +37,11 @@ public class ViewServlet extends HttpServlet{
 		if (endPageNum > pageCount) {
 			endPageNum = pageCount;
 		}
+		
+		DecimalFormat dc = new DecimalFormat("###,###,###,###");
+		
+		req.setAttribute("dc", dc);
+		
 		req.setAttribute("list",list);
 		req.setAttribute("pageCount",pageCount);
 		req.setAttribute("pageNum",pageNum);
@@ -45,6 +51,6 @@ public class ViewServlet extends HttpServlet{
 		req.setAttribute("nav","/nav.jsp");
 		req.setAttribute("content","/manager/view.jsp");
 		req.setAttribute("footer","/footer.jsp");
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 }

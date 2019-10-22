@@ -34,7 +34,7 @@ public class InsertServlet extends HttpServlet{
 		req.setAttribute("content", "/manager/insert.jsp");
 		req.setAttribute("footer", "/footer.jsp");
 		
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 		
 	}
 	

@@ -4,7 +4,7 @@
 <h1>1:1게시판</h1>
 <a href="${cp }/main">홈으로</a>
 
-<table border="1" width="600">
+<table style="width: 1500px; text-align: center;">
 	<tr>
 		<th>글번호</th><th>작성자</th><th>제목</th><th>관리자답변</th>
 	</tr>

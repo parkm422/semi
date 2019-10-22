@@ -1,6 +1,7 @@
 package com.semi.controller.homeY;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,6 +29,12 @@ public class HomeServlet extends HttpServlet{
 		if(footer==null) {
 			footer="/footer.jsp";
 		}
+		
+		
+		//화폐 단위 ,(콤마)
+		DecimalFormat dc = new DecimalFormat("###,###,###,###");
+						
+		req.setAttribute("dc", dc);
 		
 		req.setAttribute("top",top);
 		req.setAttribute("nav",nav);

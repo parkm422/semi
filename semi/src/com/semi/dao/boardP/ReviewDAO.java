@@ -21,15 +21,16 @@ public class ReviewDAO {
 	public static ReviewDAO getReviewDao() {
 		return reviewDao;
 	}
-	/*
-	public int review_Insert(ReviewVO vo) {
+	
+	// 리뷰 작성하기
+	public int review_Insert(ReviewVO vo,int point,String id) {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		PreparedStatement pstmt2 = null;
 		try {
 			con = JdbcUtil.getConn();
-			String sql = "INSERT INTO REVIEW VALUES(REVIEW_SEQ.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO REVIEW VALUES(REVIEW_SEQ.NEXTVAL,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, vo.getInum());
 			pstmt.setString(2, vo.getWriter());
@@ -38,21 +39,35 @@ public class ReviewDAO {
 			pstmt.setString(5, vo.getOrgfilename());
 			pstmt.setString(6, vo.getSavefilename());
 			pstmt.setInt(7, vo.getRating());
-			pstmt.setInt(8, vo.getRef());
-			pstmt.setInt(9, vo.getLev());
-			pstmt.setInt(10, vo.getStep());
 			
+			int n = pstmt.executeUpdate();
 			
-			
+			if(n>0) {
+				
+				String sql2 = "UPDATE S_MEMBERS SET POINT= POINT+"+point+" WHERE ID=?";
+				pstmt2 = con.prepareStatement(sql2);
+				pstmt2.setString(1, id);
+				int n2 = pstmt2.executeUpdate();
+				
+				if(n2>0) {
+					con.commit();
+					return n2; 
+				}else {
+					con.rollback();
+				}
+			}
+			return 0;
 		}catch(SQLException se) {
 			se.printStackTrace();
 			return -1;
 		}finally {
-			JdbcUtil.close(con, pstmt, null);
+			JdbcUtil.close(pstmt2);
+			JdbcUtil.close(pstmt);
+			JdbcUtil.close(con);
 		}
 		
 	}
-	*/
+	
 	
 	// 상품번호에 해당 하는 리뷰 개수 얻어오기
 	public int getReviewCount(int inum) {
@@ -108,7 +123,7 @@ public class ReviewDAO {
 				String orgfilename = rs.getString("orgfilename");
 				String savefilename = rs.getString("savefilename");
 				int rating = rs.getInt("rating");
-				
+
 				ReviewVO vo = new ReviewVO(rnum, inum2, writer, title, content, orgfilename, savefilename, rating);
 				reviewList.add(vo);
 			}
@@ -121,6 +136,7 @@ public class ReviewDAO {
 		}
 	}
 	
+	// 리뷰 댓글 얻어오기
 	public ArrayList<ReviewChildVO> reviewChild_list(ArrayList<Integer> rnum){
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -131,21 +147,27 @@ public class ReviewDAO {
 			String sql = "";
 			
 			if(len == 1) {
-				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=?";
+				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? ORDER BY REF DESC,STEP ASC";
 			}else if(len == 2){
-				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=?";
+				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? ORDER BY REF DESC,STEP ASC";
 			}else if(len == 3) {
-				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? OR RNUM=?";
+				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? OR RNUM=? ORDER BY REF DESC,STEP ASC";
 			}else if(len == 4) {
-				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? OR RNUM=? OR RNUM=?";
+				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? OR RNUM=? OR RNUM=? ORDER BY REF DESC,STEP ASC";
+			}else if(len == 5){
+				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? OR RNUM=? OR RNUM=? OR RNUM=? ORDER BY REF DESC,STEP ASC";
 			}else {
-				sql = "SELECT * FROM REVIEWCHILD WHERE RNUM=? OR RNUM=? OR RNUM=? OR RNUM=? OR RNUM=?";
+				sql = "SELECT * FROM REVIEWCHILD";
 			}
 			
 			pstmt = con.prepareStatement(sql);
-			for(int i = 0; i<len; i++) {
-				pstmt.setInt(i+1, rnum.get(i));
+			
+			if(len >= 1) {
+				for(int i = 0; i<len; i++) {
+					pstmt.setInt(i+1, rnum.get(i));
+				}
 			}
+			
 			rs = pstmt.executeQuery();
 			ArrayList<ReviewChildVO> childList = new ArrayList<ReviewChildVO>();
 			while(rs.next()) {
@@ -157,9 +179,11 @@ public class ReviewDAO {
 				int ref = rs.getInt("ref");
 				int lev = rs.getInt("lev");
 				int step = rs.getInt("step");
-				
+
+
 				ReviewChildVO vo = new ReviewChildVO(rcnum, rnum2, rcwriter, comments, ref, lev, step);
 				childList.add(vo);
+
 			}
 			
 			return childList;
@@ -172,33 +196,88 @@ public class ReviewDAO {
 		}
 	}
 	
+	// 리뷰 댓글 등록
 	public int child_insert(ReviewChildVO vo) {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
 		try {
 			con = JdbcUtil.getConn();
 			
-			String sql = "INSERT INTO REVIEWCHILD VALUES(CHILD_SEQ.NEXTVAL,?,?,?,?,?,?)";
+			int num = getChildMaxNum()+1;
+			int rcnum = vo.getRcnum();
+			int ref = vo.getRef();
+			int lev = vo.getLev();
+			int step = vo.getStep();
+			
+			
+			if(rcnum == 0) {
+			
+				ref = num;
+
+			}else {
+			
+				
+				String sql1 = "UPDATE REVIEWCHILD SET STEP=STEP+1 WHERE REF=? AND STEP>?";
+				
+				pstmt2 = con.prepareStatement(sql1);
+				pstmt2.setInt(1, ref);
+				pstmt2.setInt(2, step);
+				pstmt2.executeUpdate();
+				
+				lev = lev + 1;
+				step = step + 1;
+						
+			}
+			
+			String sql = "INSERT INTO REVIEWCHILD VALUES(?,?,?,?,?,?,?)";
+			
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, vo.getRnum());
-			pstmt.setString(2, vo.getRcwriter());
-			pstmt.setString(3, vo.getComments());
-			pstmt.setInt(4, vo.getRef());
-			pstmt.setInt(5, vo.getLev());
-			pstmt.setInt(6, vo.getStep());
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, vo.getRnum());
+			pstmt.setString(3, vo.getRcwriter());
+			pstmt.setString(4, vo.getComments());
+			pstmt.setInt(5, ref);
+			pstmt.setInt(6, lev);
+			pstmt.setInt(7, step);
 			
 			int n = pstmt.executeUpdate();
 			if(n>0) {
 				con.commit();
 				return n;
 			}
+			con.rollback();
 			return 0;
 		}catch(SQLException se) {
 			se.printStackTrace();
 			return -1;
 		}finally {
 			JdbcUtil.close(con, pstmt, null);
+		}
+	}
+	
+	public int getChildMaxNum() {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = JdbcUtil.getConn();
+			String sql = "SELECT NVL(MAX(RCNUM),0)AS MAXRCNUM FROM REVIEWCHILD";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				int maxRcnum = rs.getInt("MAXRCNUM");
+				return maxRcnum;
+			}else {
+				return 0;
+			}
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}finally {
+			JdbcUtil.close(con, pstmt, rs);
 		}
 	}
 }

@@ -18,6 +18,6 @@ public class AdpageServlet extends HttpServlet{
 		req.setAttribute("content", "/manager/adpage.jsp");
 		req.setAttribute("footer", "/footer.jsp");
 		
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 }

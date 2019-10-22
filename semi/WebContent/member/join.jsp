@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원가입</title>
 <script>
 	xhr = null;
 	function idcheck(){
 		var id = document.getElementById("id").value;
-		alert(id);
 		xhr = new XMLHttpRequest();
 		xhr.onreadystatechange = callback;
-		xhr.open('get','${cp}/member/idcheck?id='+id,true);
+		xhr.open('get','${pageContext.request.contextPath}/member/idcheck?id='+id,true);
 		xhr.send();
 	}
 	function callback(){
@@ -16,7 +20,8 @@
 			var data = xhr.responseText;
 			var check = JSON.parse(data);
 			var idcheck = document.getElementById("idc");
-			if(check.check == true){
+			
+			if(check.check == true && id != ""){
 				idcheck.innerHTML = "이미 사용중인 아이디입니다.";
 			}else{
 				idcheck.innerHTML = "사용 가능한 아이디입니다.";
@@ -24,6 +29,23 @@
 			
 		}
 	}
+	
+	function pwdcheck(){
+		var pwd1 = document.getElementById("pwd1").value;
+		var pwd2 = document.getElementById("pwd2").value;
+		
+		var pwdc = document.getElementById("pwdc");
+		
+		if(pwd1 != pwd2){
+			pwdc.style.color = "red";
+			pwdc.innerHTML = "비밀번호가 일치하지 않습니다.";
+		}else if(pwd1 == pwd2){
+			pwdc.style.color = "blue";
+			pwdc.innerHTML = "비밀번호가 일치합니다.";
+		}
+		
+	}
+	
 	
 	//회원가입 유효성 체크
 	function join(){
@@ -75,24 +97,64 @@
 		return true;
 		
 	}
+	
 </script>
-<div id="main">
-	<div style="width:90%; height:800px; margin:30px;">
-		<h1>회원가입</h1>
+<style>
+	.text_1{
+		font-size: 14px;
+		font-weight: 700;
+	}
+</style>
+</head>
+<body>
+<div style="margin: auto;width:450px;">
+	<div style="width:100%; margin:30px;">
+		<div style="padding-left: 70px;"><a href="${cp }/main" style="font-size: 30px;font-weight: bold; text-decoration: none;color:green;">테스트 쇼핑몰</a></div>
+		<h1 style="margin-left:100px;">회원가입</h1>
 		<form method="post" action="${pageContext.request.contextPath }/member/join" onsubmit="return join()">
-			<div><label>이름</label><input type="text" name="name" id="name"></div>
-			<div>
-				<label>아이디</label>
-				<input type="text" name="id" id="id">
-				<input type="button" value="중복검사" onclick="idcheck()">
-				<span style="color:red;font-size:12px;" id="idc"></span>
+		
+			<div style="margin-bottom: 10px;">이름</div>
+			<div style="width:350px;height:35px;border:1px solid lightgray;padding-left: 10px;padding-top:13px;margin-bottom: 30px;">
+				<input type="text" name="name" id="name" style="border:none;width:300px;height:25px;">
 			</div>
-			<div><label>비밀번호</label><input type="password" name="pwd" id="pwd1"></div>
-			<div><label>비밀번호확인</label><input type="password" name="pwd" id="pwd2"></div>
-			<div><label>이메일</label><input type="text" size="50" name="email"></div>
-			<div><label>주소</label><input type="text" size="100" name="address"></div>
-			<div><label>연락처</label><input type="text" name="phone"></div>
-			<input type="submit" value="가입">
+			<div style="margin-bottom: 10px;">아이디</div>
+			<div style="width:350px;height:35px;border:1px solid lightgray;padding-left: 10px;padding-top:13px;margin-bottom: 5px;">
+				<input type="text" name="id" id="id" style="border:none;width:300px;height:25px;" onkeyup="idcheck()">
+			</div>
+			
+			<div style="color:red;font-size:12px;width:350px;height:30px;" id="idc"></div>
+			
+			<div style="margin-bottom: 10px;">비밀번호</div>
+			<div style="width:350px;height:35px;border:1px solid lightgray;padding-left: 10px;padding-top:13px;margin-bottom: 30px;">
+				<input type="password" name="pwd" id="pwd1" style="border:none;width:300px;height:25px;">
+			</div>
+			
+			<div style="margin-bottom: 10px;">비밀번호확인</div>
+			<div style="width:350px;height:35px;border:1px solid lightgray;padding-left: 10px;padding-top:13px;margin-bottom: 5px;">
+				<input type="password" name="pwd" id="pwd2" style="border:none;width:300px;height:25px;" onkeyup="pwdcheck()">
+			</div>
+			
+			<div style="color:red;font-size:12px;width:350px;height:30px;" id="pwdc"></div>
+			
+			<div style="margin-bottom: 10px;">이메일</div>
+			<div style="width:350px;height:40px;border:1px solid lightgray;padding-left: 10px;padding-top:13px;margin-bottom: 30px;">
+				<input type="text" size="50" name="email" style="border:none;width:300px;height:25px;">
+			</div>
+			<div style="margin-bottom: 10px;">주소</div>
+			<div style="width:350px;height:35px;border:1px solid lightgray;padding-left: 10px;padding-top:13px;margin-bottom: 30px;">
+				<input type="text" size="100" name="address" style="border:none;width:340px;height:25px;">
+			</div>
+			
+			<div style="margin-bottom: 10px;">연락처</div>
+			<div style="width:350px;height:35px;border:1px solid lightgray;padding-left: 10px;padding-top:13px;margin-bottom: 30px;">
+				<input type="text" name="phone" style="border:none;width:300px;height:25px;">
+			</div>
+			
+			<div style="margin-top: 20px;">
+				<input type="submit" value="가입" style="width:360px; height:60px; background-color: black;color:white;margin-bottom: 30px;cursor: pointer;">
+			</div>
 		</form>
 	</div>
 </div>
+</body>
+</html>

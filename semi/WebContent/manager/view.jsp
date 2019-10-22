@@ -1,28 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
- <div style="text-align: center;">
- <h1>주문 상세정보</h1>
- </div>
-<table border="1" width="800">
+
+
+<div style="text-align: center;">
+
+ <h1 style="margin-bottom: 20px;">주문 상세정보</h1>
+
+<table style="width: 1500px; text-align: center;" >
 	<tr>
-		<th>고객명</th><th>아이디</th><th>상품명</th><th>사이즈</th><th>색상</th><th>수량</th><th>가격</th><th>결제상태 확인</th><th>배송정보 확인</th>
+		<th>주문번호</th><th>고객명</th><th>아이디</th><th>상품명</th><th>사이즈</th><th>색상</th><th>수량</th><th>가격</th><th>결제상태 확인</th><th>배송정보 확인</th>
 	</tr>
-	<c:forEach var="vo" items="${list }">
+	
+	<c:forEach var="vo" items="${list }" >
+		<form method="post" action="${cp }/managerP/deliveryup?ornumm=${vo.ornumm }&delivery=${vo.delivery}">
 		<tr>
+			<td id="ornumm">${vo.ornumm }</td>
 			<td>${vo.name }</td>
 			<td>${vo.id }</td>
+			<td>${vo.gname }</td>
 			<td>${vo.pname }</td>
 			<td>${vo.psize }</td>
 			<td>${vo.color }</td>
 			<td>${vo.cnt }</td>
-			<td>${vo.price }</td>
+			<td>${dc.format(vo.price) }원</td>
 			<td>${vo.status }</td>
-			<td>${vo.delivery }</td>
+			<td><input type="submit" value="${vo.delivery }" ></td>		
 		</tr>
-	
+		</form>
 	</c:forEach>
-</table>
+	</table>
+</div>
 <br>
 <div>
 		<!-- 페이징처리 -->

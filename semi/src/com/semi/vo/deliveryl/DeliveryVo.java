@@ -4,15 +4,17 @@ public class DeliveryVo {
 	private int ornum;
 	private String getname;
 	private String pname;
+	private String status;
 	private String delivery;
 	
 	public DeliveryVo() {}
 
-	public DeliveryVo(int ornum, String getname, String pname, String delivery) {
+	public DeliveryVo(int ornum, String getname, String pname, String status, String delivery) {
 		super();
 		this.ornum = ornum;
 		this.getname = getname;
 		this.pname = pname;
+		this.status = status;
 		this.delivery = delivery;
 	}
 
@@ -38,6 +40,14 @@ public class DeliveryVo {
 
 	public void setPname(String pname) {
 		this.pname = pname;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public String getDelivery() {

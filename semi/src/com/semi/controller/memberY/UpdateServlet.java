@@ -18,13 +18,9 @@ public class UpdateServlet extends HttpServlet{
 		
 		req.setCharacterEncoding("utf-8");
 		String id=req.getParameter("id");
-		String pwd=req.getParameter("pwd");
-		String email=req.getParameter("email");
-		String address=req.getParameter("address");
-		String phone=req.getParameter("phone");
-		MemberVo vo=new MemberVo(0, null,id,pwd, email, address,phone,0,null);
+		MemberVo vo=new MemberVo(0, null,id,null, null, null,null,0,null);
 		MemberDao dao=MemberDao.getInstance();
-		int n=dao.update(vo);
+		int n=dao.select(id);
 		if(n>0) {
 			req.setAttribute("code","success");
 		}else {
@@ -32,9 +28,9 @@ public class UpdateServlet extends HttpServlet{
 		}
 		req.setAttribute("top","/header.jsp");
 		req.setAttribute("content","/memberinfoupdateY/memberupdate.jsp");
-		req.setAttribute("nav","/nav.jsp");
+		req.setAttribute("nav","/mypagenav.jsp");
 		req.setAttribute("footer","/footer.jsp");
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -55,8 +51,8 @@ public class UpdateServlet extends HttpServlet{
 
 		req.setAttribute("top","/header.jsp");
 		req.setAttribute("content","/memberinfoupdateY/result.jsp");
-		req.setAttribute("nav","/nav.jsp");
+		req.setAttribute("nav","/mypagenav.jsp");
 		req.setAttribute("footer","/footer.jsp");
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 }

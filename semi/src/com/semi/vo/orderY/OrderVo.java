@@ -5,6 +5,7 @@ import java.sql.Date;
 public class OrderVo {
 	private int ornum;
 	private int mnum;
+	private int inum;
 	private int price;
 	private int cnt;
 	private int amount;
@@ -13,6 +14,7 @@ public class OrderVo {
 	private String delivery;
 	private Date orderdate;
 	private String getname;
+	private String savefilename;
 	private String pname;
 	private String color;
 	private int psize;
@@ -29,9 +31,12 @@ public class OrderVo {
 		this.getname = getname;
 	}
 
-	public OrderVo(int ornum, String pname, int psize, String color,int cnt, String deladd, String delivery, int price,Date orderdate) {
+
+	public OrderVo(int ornum, String savefilename,int inum,String pname, int psize, String color,int cnt, String deladd, String delivery, int price,Date orderdate) {
 		super();
 		this.ornum = ornum;
+		this.savefilename = savefilename;
+		this.inum = inum;
 		this.pname = pname;
 		this.psize = psize;
 		this.color = color;
@@ -41,6 +46,14 @@ public class OrderVo {
 		this.price=price;
 		this.orderdate = orderdate;
 	}
+
+	public int getInum() {
+		return inum;
+	}
+
+	public void setInum(int inum) {
+		this.inum = inum;
+	}
 	public int getAmount() {
 		return amount;
 	}
@@ -48,12 +61,20 @@ public class OrderVo {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
+
 	public int getCnt() {
 		return cnt;
 	}
 
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
+	}
+	public String getSavefilename() {
+		return savefilename;
+	}
+
+	public void setSavefilename(String savefilename) {
+		this.savefilename = savefilename;
 	}
 
 	public String getPname() {

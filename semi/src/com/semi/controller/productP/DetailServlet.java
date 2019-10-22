@@ -1,6 +1,7 @@
 package com.semi.controller.productP;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -9,22 +10,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.boardK.QnABoardDAO;
+import com.semi.boardK.QnABoardVO;
 import com.semi.dao.boardP.ReviewDAO;
 import com.semi.dao.productP.ProductDAO;
 import com.semi.vo.boardP.ReviewChildVO;
 import com.semi.vo.boardP.ReviewVO;
 import com.semi.vo.productP.Product_ImgVO;
 import com.semi.vo.productP.Product_ListVO;
+
 @WebServlet("/product/detail")
-public class DetailServlet extends HttpServlet{
-	
+public class DetailServlet extends HttpServlet {
+
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
+
 		int inum = Integer.parseInt(req.getParameter("inum"));
-		
-		//리뷰게시판 페이지 얻어오기
+
+		// 리뷰게시판 페이지 얻어오기
 		String spageNum = req.getParameter("pageNum");
+		
 		String sub = req.getParameter("sub");
 		
 		//상품 DAO
@@ -34,6 +39,9 @@ public class DetailServlet extends HttpServlet{
 		
 		//상품 정보 얻어오기
 		Product_ListVO vo = dao.getDetail(inum);
+		
+		// 해당 상품 평균 평점 얻어오기
+		int rating_avg = dao.getRating(inum);
 		
 		//해당 상품 이미지 얻어오기
 		ArrayList<Product_ImgVO> imgList = dao.getImg(inum);
@@ -45,11 +53,11 @@ public class DetailServlet extends HttpServlet{
 		req.setAttribute("vo", vo);
 		req.setAttribute("imgList", imgList);
 		req.setAttribute("sizeList", sizeList);
-		
+		req.setAttribute("rating_avg", rating_avg);
 		
 		int pageNum = 1;
-		
-		if(spageNum != null) {
+
+		if (spageNum != null) {
 			pageNum = Integer.parseInt(spageNum);
 		}
 		
@@ -71,6 +79,32 @@ public class DetailServlet extends HttpServlet{
 		//리뷰게시판 목록 담기
 		req.setAttribute("reviewList", reviewList);
 		
+		// QnA게시판 목록 처리
+		// 상품번호 inum은 공유
+		String qnaSPageNum = req.getParameter("qnaPageNum");
+		int qnaPageNum = 1;
+		if (qnaSPageNum != null) {
+			qnaPageNum = Integer.parseInt(qnaSPageNum);
+		}
+		int qnaEndRow = qnaPageNum * 10;
+		int qnaStartRow = qnaEndRow - 9;
+		QnABoardDAO qnaDAO = QnABoardDAO.getQnABoardDAo();
+		ArrayList<QnABoardVO> qnaList = qnaDAO.getPostList(inum, qnaStartRow, qnaEndRow);
+		int qnaTotalPage = (int) Math.ceil(qnaDAO.getTotalPost(inum) / 10.0);
+		int qnastartPageNum = ((qnaPageNum - 1) / 10 * 10) + 1;
+		int qnaendPageNum = qnastartPageNum + 9;
+		if (qnaendPageNum > qnaTotalPage) {
+			qnaendPageNum = qnaTotalPage;
+		}
+
+		req.setAttribute("list", qnaList);
+		req.setAttribute("qnaTotalPage", qnaTotalPage);
+		req.setAttribute("qnastartPageNum", qnastartPageNum);
+		req.setAttribute("qnaendPageNum", qnaendPageNum);
+		req.setAttribute("qnaPageNum", qnaPageNum);
+
+		
+		
 		//리뷰자식게시판의 부모 번호 얻어오기
 		ArrayList<Integer> rnum = new ArrayList<Integer>();
 		
@@ -78,11 +112,11 @@ public class DetailServlet extends HttpServlet{
 			rnum.add(n.getRnum());
 		}
 		
-		
 		ArrayList<ReviewChildVO> reviewchild = reviewDao.reviewChild_list(rnum);
 		//리뷰자식게시판 목록 담기
 		req.setAttribute("reviewchild", reviewchild);
 		
+
 		
 		//리뷰게시판 페이징처리 담기
 		req.setAttribute("pageNum", pageNum);
@@ -97,17 +131,9 @@ public class DetailServlet extends HttpServlet{
 		req.setAttribute("nav", "/nav.jsp");
 		req.setAttribute("content", "/product/product_detail.jsp");
 		req.setAttribute("footer", "/footer.jsp");
-
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
 		
+		req.getRequestDispatcher("/main").forward(req, resp);
+		
+
 	}
 }
-
-
-
-
-
-
-
-
-

@@ -1,6 +1,7 @@
 package com.semi.controller.productP;
 
 import java.io.IOException;
+
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.semi.dao.productP.ProductDAO;
 import com.semi.vo.productP.List_img_joinVO;
-import com.semi.vo.productP.Product_ListVO;
+
 
 @WebServlet("/product/list")
 public class ProductServlet extends HttpServlet{
@@ -25,6 +26,8 @@ public class ProductServlet extends HttpServlet{
 		String major = req.getParameter("major");
 		String sub = req.getParameter("sub");
 		
+		String sort = req.getParameter("sort");
+		
 		int pageNum = 1;
 		if(spageNum != null) {
 			pageNum = Integer.parseInt(spageNum);
@@ -37,7 +40,7 @@ public class ProductServlet extends HttpServlet{
 		
 		ProductDAO dao = ProductDAO.getProductDao();
 		
-		ArrayList<List_img_joinVO> list = dao.list(startRow, endRow,major,sub);
+		ArrayList<List_img_joinVO> list = dao.list(startRow, endRow,major,sub,sort);
 		int pageCount = (int)Math.ceil(dao.getCount(sub)/30.0);
 		
 		int startPageNum = ((pageNum-1)/4*4)+1;
@@ -53,11 +56,13 @@ public class ProductServlet extends HttpServlet{
 		req.setAttribute("startPageNum", startPageNum);
 		req.setAttribute("endPageNum", endPageNum);
 		
+		req.setAttribute("sort", sort);
+		
 		req.setAttribute("top", "/header.jsp");
 		req.setAttribute("nav", "/nav.jsp");
 		req.setAttribute("content", "/product/list.jsp");
 		req.setAttribute("footer", "/footer.jsp");
 		
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 }
