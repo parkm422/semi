@@ -34,4 +34,7 @@
 		float:right	;
 		min-height: 1500px;
 	}
-
+	#footer{
+		width:100%;
+		min-height:150px;
+	}
