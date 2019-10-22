@@ -28,7 +28,7 @@ public class SalesStatisticsController extends HttpServlet {
 		request.setAttribute("footer", "/footer.jsp");
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
-	//arstar
+	//arsta
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/plain;charset=UTF-8");
