@@ -8,5 +8,6 @@
 		<a href="${cp }/manager/salesStatistics">기간별 매출통계</a>
 		<a href="${cp }/manager/addCategory">카테고리 추가</a>
 		<a href="${cp }/faqboardY/faqinsert">FAQ작성하기</a>
+
 	</div>
 </div>
