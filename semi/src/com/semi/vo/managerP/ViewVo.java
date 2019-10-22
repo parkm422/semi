@@ -30,7 +30,6 @@ public class ViewVo {
 		this.ornumm = ornumm;
 		this.name = name;
 		this.id = id;
-		this.gname = gname;
 		this.pname = pname;
 		this.psize = psize;
 		this.color = color;

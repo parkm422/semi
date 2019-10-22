@@ -20,19 +20,19 @@
 					if(json[i].fnum>=10){
 						if((json[i].fnum)%10==0){
 							if((div[9].innerHTML)==""){
-								div[9].innerHTML="<질문번호>"+json[i].fnum+"<br><카테고리>"+json[i].category+"<br><질문>"+json[i].question+"<br><답변>"+json[i].answer+"<br>";
+								div[9].innerHTML="<카테고리>"+json[i].category+"<br><질문>"+json[i].question+"<br><답변>"+json[i].answer+"<br>";
 								}else{
 								div[9].innerHTML="";
 										}
 							}
 						if(div[(json[i].fnum)%10-1].innerHTML==""){
-						div[(json[i].fnum)%10-1].innerHTML="<질문번호>"+json[i].fnum+"<br><카테고리>"+json[i].category+"<br><질문>"+json[i].question+"<br><답변>"+json[i].answer+"<br>";
+						div[(json[i].fnum)%10-1].innerHTML="<카테고리>"+json[i].category+"<br><질문>"+json[i].question+"<br><답변>"+json[i].answer+"<br>";
 						}else{
 						div[(json[i].fnum)%10-1].innerHTML="";
 								}
 							}else{
 								if((div[(json[i].fnum)%10-1].innerHTML)==""){
-									div[(json[i].fnum)%10-1].innerHTML="<질문번호>"+json[i].fnum+"<br><카테고리>"+json[i].category+"<br><질문>"+json[i].question+"<br><답변>"+json[i].answer+"<br>";
+									div[(json[i].fnum)%10-1].innerHTML="<카테고리>"+json[i].category+"<br><질문>"+json[i].question+"<br><답변>"+json[i].answer+"<br>";
 									}else{
 									div[(json[i].fnum)%10-1].innerHTML="";
 											}
@@ -45,13 +45,13 @@
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
 <p><a href="${cp }/faqboardY/list">전체글목록</a>
 </p>
-<table border="1" width="800">
+<table border="1" style="width: 800px;border: none;" >
 	<tr>
 		<th>번호</th><th>질문</th>
 	</tr>
-	<c:forEach var="vo" items="${list}">
+	<c:forEach var="vo" items="${list}" varStatus="cc">
 		<tr>
-			<td>${vo.fnum }</td>
+			<td>${(pageNum-1)*10+cc.index+1 }</td>
 			<td onclick="lookanswer(event)">${vo.question}</td>
 		</tr>
 		<tr>
