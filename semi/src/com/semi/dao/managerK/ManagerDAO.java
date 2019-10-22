@@ -57,7 +57,7 @@ public class ManagerDAO {
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			pstmt = con.prepareStatement("SELECT * FROM orderInfo WHERE orderDate>=? AND orderDate<=?  AND delivery='배송완료'");
+			pstmt = con.prepareStatement("SELECT * FROM orderInfo WHERE orderDate>=? AND orderDate<=? AND delivery='배송완료'");
 			pstmt.setString(1, startDate);
 			pstmt.setString(2, endDate);
 			rs = pstmt.executeQuery();
