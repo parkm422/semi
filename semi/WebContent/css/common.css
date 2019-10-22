@@ -42,6 +42,9 @@
 	}
 	.outer_type{
 		text-decoration: none;
+		color:gray;
+		font-weight: 100;
+		font-size: 14px;
 	}
 	.item_dtail_link{
 		text-decoration: none;

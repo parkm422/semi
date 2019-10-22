@@ -100,9 +100,9 @@
 		<div onclick="list(event)">하의</div>
 		<div id="bottom_list" style="height:100px;display:none;" class="major_type">
 			<ul>
-				<li><a href="${cp }/product/list?major=BOTTOM&sub=청바지" class="bottom_type">데님 팬츠</a></li>
-				<li><a href="${cp }/product/list?major=BOTTOM&sub=면바지" class="bottom_type">코튼 팬츠</a></li>
-				<li><a href="${cp }/product/list?major=BOTTOM&sub=슬랙스" class="bottom_type">슬랙스</a></li>
+				<li><a href="${cp }/product/list?major=BOTTOM&sub=청바지" class="outer_type">데님 팬츠</a></li>
+				<li><a href="${cp }/product/list?major=BOTTOM&sub=면바지" class="outer_type">코튼 팬츠</a></li>
+				<li><a href="${cp }/product/list?major=BOTTOM&sub=슬랙스" class="outer_type">슬랙스</a></li>
 			</ul>
 		</div>
 		
