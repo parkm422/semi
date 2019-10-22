@@ -43,10 +43,22 @@ public class ReviewCommentServlet extends HttpServlet{
 			step = Integer.parseInt(req.getParameter("step"));
 		}
 		
+<<<<<<< HEAD
 		System.out.println("ref="+ref);
 		System.out.println("lev="+lev);
 		System.out.println("step="+step);
 		System.out.println("rcnum="+rcnum);
+=======
+		if(parentNum != null && parentNum.equals("")) {
+			rnum = Integer.parseInt(parentNum);
+			ref = Integer.parseInt("ref");
+			lev = Integer.parseInt("lev");
+			step = Integer.parseInt("step");
+		}
+<<<<<<< HEAD
+
+=======
+>>>>>>> refs/remotes/origin/master
 		
 		ReviewChildVO vo = new ReviewChildVO(rcnum1, rnum1, rcwriter, comments, ref, lev, step);
 		
@@ -65,5 +77,6 @@ public class ReviewCommentServlet extends HttpServlet{
 			json.put("code", "fail");
 		}
 		pw.print(json);
+>>>>>>> refs/remotes/origin/semi2
 	}
 }

@@ -48,8 +48,13 @@ public class OrderDao {
 			ResultSet rs=null;
 			try {
 				con=JdbcUtil.getConn();
+<<<<<<< HEAD
 					String sql="select * from (select aa.*,rownum rnum from(SELECT o.ornum,l.inum,m.savefilename,d.pname,d.psize,d.color,d.cnt,o.deladd,o.delivery,o.amount,o.orderdate"
 							+ " FROM orderinfo o,s_members s,orderdetail d,product_list l,product_img m WHERE o.mnum=s.mnum and o.ornum=d.ornum and l.inum=d.inum and m.inum=l.inum and o.mnum=?"
+=======
+					String sql="select * from (select aa.*,rownum rnum from(SELECT o.ornum,d.pname,d.psize,d.color,d.cnt,o.deladd,o.delivery,l.price,o.orderdate"
+							+ " FROM orderinfo o,s_members s,orderdetail d,product_list l WHERE o.mnum=s.mnum and o.ornum=d.ornum and l.inum=d.inum and o.mnum=?"
+>>>>>>> refs/remotes/origin/master
 							+ " order by ornum asc)aa)where rnum>=? and  rnum<=?";
 				
 				pstmt=con.prepareStatement(sql);
@@ -69,7 +74,7 @@ public class OrderDao {
 							rs.getInt("cnt"),
 							rs.getString("deladd"),
 							rs.getString("delivery"), 
-							rs.getInt("amount"), 
+							rs.getInt("price"), 
 							rs.getDate("orderdate")); 
 						list.add(vo2);
 				}

@@ -4,6 +4,7 @@
 <h1>주문내역</h1>
 <p><a href="${cp }/orderY/porderlist?id=${sessionScope.id}">전체글목록</a> | <a href="${cp }/main">홈으로</a>
 </p>
+<<<<<<< HEAD
 <table style="width:1500px;text-align:center;">
 <colgroup>
 	<col width="5%">
@@ -18,9 +19,16 @@
 	<col width="5%">
 	<col width="10%">
 </colgroup>
+=======
+<table border="1" width="800">
+>>>>>>> refs/remotes/origin/master
 	<tr>
+<<<<<<< HEAD
 		<th>주문번호</th><th>상품 이미지</th><th>상품이름</th><th>사이즈</th><th>색상</th><th>수량</th><th>배송지</th><th>배송상태</th><th>금액</th><th>구매날짜</th>
 		<th>리뷰작성하기</th>
+=======
+		<th>주문번호</th><th>상품이름</th><th>사이즈</th><th>색상</th><th>수량</th><th>배송주소</th><th>배송상태</th><th>금액</th><th>구매날짜</th>
+>>>>>>> refs/remotes/origin/master
 	</tr>
 	<c:forEach var="vo2" items="${list }">
 		<tr>
@@ -32,7 +40,7 @@
 			<td>${vo2.cnt}</td>
 			<td>${vo2.deladd}</td>
 			<td>${vo2.delivery}</td>
-			<td>${vo2.amount}</td>
+			<td>${vo2.price}</td>
 			<td>${vo2.orderdate}</td>
 			<td><a href="${cp }/member/review_insert?inum=${vo2.inum }">리뷰작성</a></td>
 		</tr>
