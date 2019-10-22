@@ -61,7 +61,7 @@
 </script>
 <div id="nav">
 	<div style="margin-top: 20px;margin-right: 20px;font-weight: bold;">
-		
+		<!-- 
 		<div onclick="list(event)">아우터</div>
 		<div id="outer_list" style="height:100px;display:none;" class="major_type">
 			<ul>
@@ -71,7 +71,22 @@
 				<li><a href="${cp }/product/list?major=OUTER&sub=자켓" class="outer_type">자켓</a></li>
 			</ul>
 		</div>
-		
+		 -->
+		 <div onclick="list(event)">아우터</div>
+		 <div id="outer_list" style="width:100%;height:55px;display:none;text-align: center;" class="major_type">
+			 <div style="display:inline-block; width:60px;">
+			 	<ul style="list-style: none;">
+			 		<li style="margin-bottom: 5px;"><a href="${cp }/product/list?major=OUTER&sub=패딩" class="outer_type">패딩</a></li>
+					<li style="margin-bottom: 5px;"><a href="${cp }/product/list?major=OUTER&sub=코트" class="outer_type">코트</a></li>
+			 	</ul>
+			 </div>
+			 <div style="display:inline-block;width:60px;">
+				 <ul style="list-style: none;">
+					<li style="margin-bottom: 5px;"><a href="${cp }/product/list?major=OUTER&sub=야상" class="outer_type">야상</a></li>
+					<li style="margin-bottom: 5px;"><a href="${cp }/product/list?major=OUTER&sub=자켓" class="outer_type">자켓</a></li>
+				</ul>
+			 </div>
+		 </div>
 		<div onclick="list(event)">상의</div>
 		<div id="top_list" style="height:100px;display:none;" class="major_type">
 			<ul>
