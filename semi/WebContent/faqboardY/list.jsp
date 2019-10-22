@@ -41,7 +41,7 @@
 					}
 				}
 	</script>
-	ㅅ
+	ㅅㅅ
 <h1>FAQ게시판</h1>
 <c:set var="cp" value="${pageContext.request.contextPath }"/>
 <p><a href="${cp }/faqboardY/list">전체글목록</a>
