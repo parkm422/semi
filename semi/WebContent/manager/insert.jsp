@@ -202,7 +202,7 @@
 					<input type="file" name="pimg" style="border:none;width:300px;height:25px;">
 				</div>
 				<div>
-					<input type="submit" value="상품등록" style="width:360px;height:35px;cursor: pointer;font-weight: bold;font-size:20px;">
+					<input type="submit" value="상품등록" style="width:360px;height:50px;cursor: pointer;font-weight: bold;font-size:20px;background-color: black;color:white;border:none;">
 				</div>
 			</div>
 		</form>

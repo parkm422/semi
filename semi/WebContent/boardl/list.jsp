@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<h1>1:1게시판</h1>
-<a href="${cp }/main">홈으로</a>
+<h1>나의 문의 내역</h1>
 
 <table style="width: 1500px; text-align: center;">
 	<tr>

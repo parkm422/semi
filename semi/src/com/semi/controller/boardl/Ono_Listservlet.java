@@ -41,12 +41,12 @@ public class Ono_Listservlet extends HttpServlet{
 		req.setAttribute("endPage",endPage);
 		req.setAttribute("pageNum",pageNum);
 		req.setAttribute("top", "/header.jsp");
-		req.setAttribute("nav","/nav.jsp");
+		req.setAttribute("nav","/mypagenav.jsp");
 		req.setAttribute("content","/boardl/list.jsp");
 		req.setAttribute("footer","/footer.jsp");
 		req.setAttribute("field",field);
 		req.setAttribute("keyword",keyword);
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 		
 	}
 }

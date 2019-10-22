@@ -43,9 +43,10 @@ public class LoginServlet extends HttpServlet{
 			req.setAttribute("errMsg", "아이디 또는 비밀번호를 다시 확인하세요.<br>등록되지 않은 아이디이거나, 아이디 또는 비밀번호를 잘못 입력하셨습니다.");
 			req.getRequestDispatcher("/manager/login.jsp").forward(req, resp);
 		}
+		
 		req.setAttribute("top", "/header.jsp");
 		req.setAttribute("nav","/nav.jsp");
-		
+
 		req.setAttribute("footer","/footer.jsp");
 		
 		req.getRequestDispatcher("/main").forward(req, resp);

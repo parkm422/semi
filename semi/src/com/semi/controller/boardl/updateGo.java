@@ -19,10 +19,10 @@ public class updateGo extends HttpServlet{
 		Ono_EnquiryVO vo=dao.detail(ennum);
 		req.setAttribute("vo",vo);
 		req.setAttribute("top", "/header.jsp");
-		req.setAttribute("nav","/nav.jsp");
+		req.setAttribute("nav","/mypagenav.jsp");
 		req.setAttribute("content","/boardl/update.jsp");
 		req.setAttribute("footer","/footer.jsp");
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 	
 }

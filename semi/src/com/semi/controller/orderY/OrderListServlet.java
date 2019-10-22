@@ -62,7 +62,7 @@ public class OrderListServlet extends HttpServlet {
 		req.setAttribute("pageNum",pageNum);
 		req.setAttribute("top","/header.jsp");
 		req.setAttribute("content","/orderY/porderlist.jsp");
-		req.setAttribute("nav","/nav.jsp");
+		req.setAttribute("nav","/mypagenav.jsp");
 		req.setAttribute("footer","/footer.jsp");
 		req.getRequestDispatcher("/main").forward(req, resp);
 	}
