@@ -31,7 +31,7 @@
 	<input type="text" name="savefilename" value="${requestScope.savefilename }" hidden="">
 	</c:forEach>
 	총계산액<br>
-	<input type="text" size="10" name="amount" id="amount"  value="${requestScope.nn}원" readonly="readonly"><br>
+	<input type="text" size="10" name="amount" id="amount"  value="${requestScope.nn}" readonly="readonly"><br>
 	<input type="text" name="pnames" id="pnames" value="${requestScope.pnames }" hidden=""><br>
 	
  	
