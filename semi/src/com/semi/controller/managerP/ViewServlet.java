@@ -38,9 +38,6 @@ public class ViewServlet extends HttpServlet{
 			endPageNum = pageCount;
 		}
 		
-		DecimalFormat dc = new DecimalFormat("###,###,###,###");
-		
-		req.setAttribute("dc", dc);
 		
 		req.setAttribute("list",list);
 		req.setAttribute("pageCount",pageCount);
@@ -48,7 +45,7 @@ public class ViewServlet extends HttpServlet{
 		req.setAttribute("startPageNum", startPageNum);
 		req.setAttribute("endPageNum", endPageNum);
 		req.setAttribute("top", "/header.jsp");
-		req.setAttribute("nav","/nav.jsp");
+		req.setAttribute("nav","/adnav.jsp");
 		req.setAttribute("content","/manager/view.jsp");
 		req.setAttribute("footer","/footer.jsp");
 		req.getRequestDispatcher("/main").forward(req, resp);

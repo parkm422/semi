@@ -27,7 +27,7 @@ public class Review_InsertServlet extends HttpServlet{
 		req.setAttribute("inum", inum);
 		
 		req.setAttribute("top", "/header.jsp");
-		req.setAttribute("nav", "/nav.jsp");
+		req.setAttribute("nav", "/adnav.jsp");
 		req.setAttribute("content", "/member/review_insert.jsp");
 		req.setAttribute("footer", "/footer.jsp");
 		

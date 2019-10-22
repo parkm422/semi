@@ -16,11 +16,11 @@ public class boardServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("top", "/header.jsp");
-		req.setAttribute("nav", "/nav.jsp");
+		req.setAttribute("nav", "/mypagenav.jsp");
 		req.setAttribute("content", "/boardl/1and1board.jsp");
 		req.setAttribute("footer", "/footer.jsp");
 		
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

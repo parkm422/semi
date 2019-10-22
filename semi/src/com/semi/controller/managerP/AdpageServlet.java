@@ -14,7 +14,7 @@ public class AdpageServlet extends HttpServlet{
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		req.setAttribute("top", "/header.jsp");
-		req.setAttribute("nav", "/nav.jsp");
+		req.setAttribute("nav", "/adnav.jsp");
 		req.setAttribute("content", "/manager/adpage.jsp");
 		req.setAttribute("footer", "/footer.jsp");
 		
