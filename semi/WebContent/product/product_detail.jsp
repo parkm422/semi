@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div id="main">
+
 	<div style="margin: 30px;">
 		<div style="margin:60px;"><h1>상품상세정보</h1></div>
 		<div style="margin-left:50px;margin-top:50px;">
@@ -39,15 +40,72 @@
 					<div class="detail_info">
 						<input type="button" value="장바구니담기" onclick="itemPut()">
 					</div>
+
 				</div>
 			</div>
 		</div>
+
 		<div style="clear: both;">
 			<div style="margin: 60px;">
 				<h3>상품 상세</h3>
 			</div>
 		</div>
 		<br><br>
+		<div style="margin: 60px;">
+		<h3>상품 Q&A</h3>
+		<table id="question">
+			<tr>
+				<th>글번호</th>
+				<th>질문제목</th>
+				<th>작성자</th>
+			</tr>
+			<c:forEach var="post" items="${list }" varStatus="postId" >
+				<tr>
+					<td>${post.rnum }</td>
+					<td><a href="#!" onclick="viewContent('${postId.index }')">${post.title }</a></td>
+					<td>${post.writer }</td>
+				</tr>
+				<tr style="display:none" id="a_${postId.index }">
+					<td colspan="3">질문: ${post.content }</td>
+				</tr>
+				<tr style="display:none" id="b_${postId.index }">
+					<td colspan="3">답변: ${post.answer }</td>
+				</tr>
+			</c:forEach>
+		</table>
+		<c:choose>
+			<c:when test="${qnastartPageNum>10 }">
+				<a href="${cp }/product/detail?qnaPageNum=${qnastartPageNum-1}&inum=${vo.inum}">[이전]</a>
+			</c:when>
+			<c:otherwise>
+					[이전]
+				</c:otherwise>
+		</c:choose>
+		<c:forEach var="i" begin="${qnastartPageNum }" end="${qnaendPageNum }"
+			step="1">
+			<c:choose>
+				<c:when test="${qnaPageNum==i }">
+					<a href="${cp }/product/detail?qnaPageNum=${i}&inum=${vo.inum}"> <span
+						style="color: red;">[${i }]</span>
+					</a>
+				</c:when>
+				<c:otherwise>
+					<a href="${cp }/product/detail?qnaPageNum=${i}&inum=${vo.inum}"> <span
+						style="color: #555;">[${i }]</span>
+					</a>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<c:choose>
+			<c:when test="${qnaendPageNum<qnaTotalPage }">
+				<a href="${cp }/product/detail?qnaPageNum=${qnaendPageNum+1}&inum=${vo.inum}">[다음]</a>
+			</c:when>
+			<c:otherwise>
+			[다음]
+		</c:otherwise>
+		</c:choose>
+	</div>
+	
 		<div>
 			<div style="margin: 60px; border: 1px solid gray; ">
 				<h3>상품 리뷰</h3>
@@ -127,9 +185,8 @@
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>
-				
 				<c:if test="${endPageNum<reviewPageCount }">
-					<a href="${cp }/product/detail?pageNum=${startPageNum-1 }&inum=${vo.inum }&sub=${param.sub }">[다음]</a>
+					<a href="${cp }/product/detail?pageNum=${endPageNum+1 }&inum=${vo.inum }&sub=${param.sub }">[다음]</a>
 				</c:if>
 			</div>
 		</div>
@@ -142,6 +199,7 @@
 		</div>
 	</div>
 </div>
+
 <script type="text/javascript">
 
 	function imgSize(e){
@@ -233,52 +291,54 @@
 	
 	//장바구니 담기
 	var putxhr = null;
-	function itemPut(){
+	function itemPut() {
 		var id = '${sessionScope.id}';
-		if(id == null || id == ""){
+		if (id == null || id == "") {
 			alert("로그인 후 이용해 주세요.");
 			return;
 		}
-		
+
 		var item_size = document.getElementById("item_size").value;
-		
-		if(item_size == null || item_size == ""){
+
+		if (item_size == null || item_size == "") {
 			alert("옵션을 선택해주세요.");
 			return;
 		}
-		
+
 		putxhr = new XMLHttpRequest();
 		putxhr.onreadystatechange = putOk;
 		putxhr.open('get',"${cp}/member/basket?type=put&id=${sessionScope.id}&inum=${vo.inum}",true);
 		putxhr.send();
-		
+
 	}
 	//장바구니 담기 콜백함수
 	function putOk(){
 		if(putxhr.readyState == 4 && putxhr.status == 200){
 			var data = putxhr.responseText;
 			var json = JSON.parse(data);
-			if(json.put == 'success'){
+			if (json.put == 'success') {
 				alert("상품을 장바구니에 담았습니다.");
-			}else{
+			} else {
 				alert("상품을 담지 못했습니다.");
 			}
 		}
 	}
-	
+	function viewContent(id) {
+		var a = document.getElementById("a_" + id);
+		var b = document.getElementById("b_" + id);
+
+		if (a.style.display == "block" & b.style.display == "block") {
+			a.style.display = "none";
+			b.style.display = "none";
+			//c.style.display = "none";
+
+		} else if (a.style.display == "none" & b.style.display == "none") {
+			a.style.display = "block";
+			b.style.display = "block";
+			//console.log(sessionStorage.getItem("adminId"));
+			//if (sessionStorage.getItem("adminId") !== null) {
+			//	c.style.display = "block";
+			//}
+		}
+	}
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

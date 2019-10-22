@@ -10,7 +10,6 @@ public class ReviewVO {
 	private String orgfilename;
 	private String savefilename;
 	private int rating;
-
 	
 	public ReviewVO() {
 		
@@ -93,5 +92,5 @@ public class ReviewVO {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-	
+
 }
