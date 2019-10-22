@@ -7,6 +7,7 @@
 </script>
     
 <div id="main">
+
 	<form method="post" action="${cp }/manager/addCategory">
 	<div>
 		
@@ -33,4 +34,6 @@
 		<input type="submit" value="카테고리 등록">
 	</div>
 	</form>
+
+	 
 </div>

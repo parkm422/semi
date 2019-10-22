@@ -356,8 +356,7 @@ public class ProductDAO {
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			String sql = "SELECT distinct PS.PSIZE " + "FROM PRODUCT_LIST PL,COLOR C,PRODUCT_SIZE PS,SUB_CATEGORY SUB "
-					+ "WHERE PL.CNUM=C.CNUM AND C.SIZENUM=PS.SIZENUM AND SUB.SCNUM=PS.SCNUM AND SUB.S_CATEGORY=?";
+			String sql = "SELECT distinct PS.PSIZE FROM PRODUCT_SIZE PS, SUB_CATEGORY SUB WHERE PS.SCNUM=SUB.SCNUM AND SUB.S_CATEGORY=? ORDER BY PS.PSIZE ASC";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, sub);
 			rs = pstmt.executeQuery();

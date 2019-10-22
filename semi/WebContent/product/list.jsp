@@ -16,15 +16,16 @@
 		<ul>
 			<c:forEach var="vo" items="${list }">
 				<li style="display:inline-block;">
-					<div style="margin-left:15px;margin-bottom:15px;">
+					<div style="margin-left:15px;margin-bottom:15px;overflow: hidden;">
 						<div>
 							<a href="${cp }/product/detail?inum=${vo.inum }&sub=${param.sub }&sort=${sort}">
 								<img src="${cp }/upload/${vo.savefilename}" style="width:250px;height:250px;">
 							</a>
 						</div>
 						<div>
-							<div style="text-align: center;font-size:17px;">
-								<a href="${cp }/product/detail?inum=${vo.inum }&sub=${param.sub }&sort=${sort}" style="text-decoration: none;color: black;">${vo.pname }</a>
+							<div style="text-align: center;font-size:17px;overflow: hidden; text-overflow: ellipsis;">
+								<a href="${cp }/product/detail?inum=${vo.inum }&sub=${param.sub }&sort=${sort}" style="text-decoration: none;color: black;font-size:12px;
+">${vo.pname }</a>
 							</div>
 							<div style="text-align: center;font-size:17px;"><strong>${dc.format(vo.price) }원</strong></div>
 						</div>
