@@ -19,7 +19,7 @@ public class FindIDnPWServlet extends HttpServlet {
 		request.setAttribute("nav", "nav.jsp");
 		request.setAttribute("content", "/member/findIDnPW.jsp");
 		request.setAttribute("footer", "/footer.jsp");
-		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		request.getRequestDispatcher("/main").forward(request, response);
 	}
 	
 	@Override
@@ -53,7 +53,7 @@ public class FindIDnPWServlet extends HttpServlet {
 		request.setAttribute("nav", "nav.jsp");
 		request.setAttribute("content", "/member/findIDResult.jsp");
 		request.setAttribute("footer", "/footer.jsp");
-		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		request.getRequestDispatcher("/main").forward(request, response);
 	}
 	
 	protected void findPW(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -67,6 +67,6 @@ public class FindIDnPWServlet extends HttpServlet {
 		request.setAttribute("nav", "nav.jsp");
 		request.setAttribute("content", "/member/findPWResult.jsp");
 		request.setAttribute("footer", "/footer.jsp");
-		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		request.getRequestDispatcher("/main").forward(request, response);
 	}
 }

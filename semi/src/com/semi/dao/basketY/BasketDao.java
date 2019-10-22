@@ -17,7 +17,7 @@ public class BasketDao {
 	public static BasketDao getInstance() {
 		return instance;
 	}
-	
+	//
 	public int delete(int mnum) {
 		Connection con=null;
 		PreparedStatement pstmt=null;

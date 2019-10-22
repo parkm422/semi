@@ -37,6 +37,7 @@ public class LoginServlet extends HttpServlet{
 		if(exist) {
 			HttpSession session = req.getSession();
 			session.setAttribute("id", id);
+			session.setAttribute("type", "manager");
 			req.setAttribute("content","/main.jsp");
 		}else {
 			req.setAttribute("errMsg", "아이디 또는 비밀번호를 다시 확인하세요.<br>등록되지 않은 아이디이거나, 아이디 또는 비밀번호를 잘못 입력하셨습니다.");

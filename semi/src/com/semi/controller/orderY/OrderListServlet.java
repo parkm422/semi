@@ -25,7 +25,7 @@ public class OrderListServlet extends HttpServlet {
 			req.setAttribute("content","/member/login.jsp");
 			req.setAttribute("nav","/nav.jsp");
 			req.setAttribute("footer","/footer.jsp");
-			req.getRequestDispatcher("/index.jsp").forward(req, resp);
+			req.getRequestDispatcher("/main").forward(req, resp);
 		}
 		String spageNum = req.getParameter("pageNum");
 		int pageNum = 1;
@@ -64,6 +64,6 @@ public class OrderListServlet extends HttpServlet {
 		req.setAttribute("content","/orderY/porderlist.jsp");
 		req.setAttribute("nav","/nav.jsp");
 		req.setAttribute("footer","/footer.jsp");
-		req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		req.getRequestDispatcher("/main").forward(req, resp);
 	}
 }

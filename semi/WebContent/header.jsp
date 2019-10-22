@@ -12,14 +12,16 @@
 					<span><a href="${cp }/manager/login" style="color:white;margin-left: 10px;text-decoration: none;">관리자로그인</a></span>
 		
 				</c:when>
-				<c:otherwise>
+				
+				<c:when test="${not empty sessionScope.id && empty sessionScope.type  }">
 					<span><a href="${cp }/member/basket?id=${sessionScope.id }" style="text-decoration: none;color:white;">장바구니</a></span>
 					<span><a href="${cp }/member/mypage" style="color:white;margin-left: 10px;text-decoration: none;">마이페이지</a></span>
-					<c:if test="${sessionScope.id == 'ADMIN' }">
-						<span><a href="${cp }/manager/adpage" style="color:white;margin-left: 10px;text-decoration: none;">관리자페이지</a></span>
-					</c:if>
 					<span><a href="${cp }/member/logout" style="color:white;margin-left: 10px;text-decoration: none;">로그아웃</a></span>
-				</c:otherwise>
+				</c:when>
+				<c:when test="${not empty sessionScope.id && not empty sessionScope.type }">
+						<span><a href="${cp }/manager/adpage" style="color:white;margin-left: 10px;text-decoration: none;">관리자페이지</a></span>
+						<span><a href="${cp }/member/logout" style="color:white;margin-left: 10px;text-decoration: none;">로그아웃</a></span>
+				</c:when>
 			</c:choose>
 			<div style="margin:30px;"><h1><a href="${cp }/main" style="text-decoration: none;color: white;">테스트 쇼핑몰</a></h1></div>
 		</div>
