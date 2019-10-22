@@ -20,7 +20,7 @@ public class DeliveryDao {
 			con = JdbcUtil.getConn();
 			String sql = "select * from(select aa.*,rownum as rnum from(select o.ornum,i.getname,o.pname,i.delivery " + 
 					"from orderdetail o, orderinfo i " + 
-					"where i.mnum=?  and i.ornum=o.ornum ) aa) where rnum>=? and rnum<=?";
+					"where i.mnum=?  and i.ornum=o.ornum order by ornum asc) aa) where rnum>=? and rnum<=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1,mnum);
 			pstmt.setInt(2,startRow);

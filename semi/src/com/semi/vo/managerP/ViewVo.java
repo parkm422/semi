@@ -18,15 +18,18 @@ public class ViewVo {
 	private int ppsize;
 	private String ccolor;
 	private int ccnt;
-	
+	private String gname;
+
 
 	public ViewVo() {}
 
-	public ViewVo(String name, String id, String pname, int psize, String color, int cnt, int price, String status,
+	public ViewVo(int ornum,String name, String id, String gname,String pname, int psize, String color, int cnt, int price, String status,
 			String delivery) {
 		super();
+		this.ornum = ornum;
 		this.name = name;
 		this.id = id;
+		this.gname = gname;
 		this.pname = pname;
 		this.psize = psize;
 		this.color = color;
@@ -45,6 +48,14 @@ public class ViewVo {
 		this.ppsize = ppsize;
 		this.ccolor = ccolor;
 		this.ccnt = ccnt;
+	}
+	
+	public String getGname() {
+		return gname;
+	}
+
+	public void setGname(String gname) {
+		this.gname = gname;
 	}
 
 	public String getName() {

@@ -20,7 +20,13 @@ public class OrderListServlet extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String id=req.getParameter("id");
-		
+		if(id==null || id=="") {
+			req.setAttribute("top","/header.jsp");
+			req.setAttribute("content","/member/login.jsp");
+			req.setAttribute("nav","/nav.jsp");
+			req.setAttribute("footer","/footer.jsp");
+			req.getRequestDispatcher("/index.jsp").forward(req, resp);
+		}
 		String spageNum = req.getParameter("pageNum");
 		int pageNum = 1;
 		if (spageNum != null) {

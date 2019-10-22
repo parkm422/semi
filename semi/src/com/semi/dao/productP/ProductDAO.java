@@ -506,6 +506,104 @@ public class ProductDAO {
 			JdbcUtil.close(con, pstmt, rs);
 		}
 	}
+	//장바구니에서 주문하기로 정보보내기
+		public ArrayList<HashMap<String, Object>> getBasketList(int mnum){
+			
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				con = JdbcUtil.getConn();
+				String sql ="SELECT CC.* FROM(SELECT BB.*,IMG.SAVEFILENAME,B.BNUM,B.MNUM,B.CNT,B.REGDATE,ROWNUM AS RNUM " + 
+						"FROM(SELECT AA.* FROM(SELECT PL.PNAME,PL.INUM,C.COLORNAME,PS.PSIZE,PL.PRICE FROM PRODUCT_LIST PL,COLOR C,PRODUCT_SIZE PS WHERE PL.CNUM=C.CNUM AND C.SIZENUM=PS.SIZENUM)AA)BB,PRODUCT_IMG IMG,BASKET B " + 
+						"WHERE BB.INUM=IMG.INUM AND BB.INUM=B.INUM AND B.MNUM=? ORDER BY REGDATE DESC)CC ";
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, mnum);
+				
+				rs = pstmt.executeQuery();
+				ArrayList<HashMap<String, Object>> basketList = new ArrayList<HashMap<String, Object>>();
+				while(rs.next()) {
+					
+					int inum = rs.getInt("INUM");
+					
+					String pname = rs.getString("PNAME");
+					
+					String colorname = rs.getString("COLORNAME");
+					
+					int psize = rs.getInt("PSIZE");
+					
+					String savefilename = rs.getString("SAVEFILENAME");
+					
+					int price = rs.getInt("PRICE");
+					
+					int bnum = rs.getInt("BNUM");
+					
+					int cnt = rs.getInt("CNT");
+
+					Date regdate = rs.getDate("REGDATE");
+
+					
+					HashMap<String, Object> map = new HashMap<String, Object>();
+					map.put("inum", inum);
+					map.put("pname", pname);
+					map.put("colorname", colorname);
+					map.put("psize", psize);
+					map.put("savefilename", savefilename);
+					map.put("price", price); 	
+					map.put("bnum", bnum);
+					map.put("cnt", cnt);
+					map.put("regdate", regdate);
+					
+					basketList.add(map);
+				}
+				return basketList;
+			}catch(SQLException se) {
+				se.printStackTrace();
+				return null;
+			}
+		}
+		public int delete(int bnum) {
+			
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try {
+				con = JdbcUtil.getConn();
+				String sql ="delete from basket where bnum=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, bnum);
+				int n = pstmt.executeUpdate();
+				return n;
+			}catch(SQLException se) {
+				se.printStackTrace();
+				return -1;
+			}finally {
+				JdbcUtil.close(con, pstmt, null);
+			}
+		}
+public int update(int cnt,int bnum) {
+			
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				con = JdbcUtil.getConn();
+				String sql ="update into basket set cnt=? where bnum=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, cnt);
+				pstmt.setInt(2, bnum);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					return 1;
+				}
+				return 0;
+			}catch(SQLException se) {
+				se.printStackTrace();
+				return -1;
+			}finally {
+				JdbcUtil.close(con, pstmt, rs);
+			}
+		}
 	
 }
 

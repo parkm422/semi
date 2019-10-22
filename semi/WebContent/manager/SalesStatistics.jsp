@@ -15,7 +15,7 @@
 			
 		</select>
 	</div>
-	<div class="DateBox"">
+	<div class="DateBox">
 		<select id="startMonth">
 			<c:forEach var="i" begin="1" end="12" step="1">
 			<option label="${i }">${i }</option>

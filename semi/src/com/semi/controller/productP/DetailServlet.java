@@ -83,11 +83,11 @@ public class DetailServlet extends HttpServlet{
 			rnum.add(n.getRnum());
 		}
 		
-		
 		ArrayList<ReviewChildVO> reviewchild = reviewDao.reviewChild_list(rnum);
 		//리뷰자식게시판 목록 담기
 		req.setAttribute("reviewchild", reviewchild);
 		
+
 		
 		//리뷰게시판 페이징처리 담기
 		req.setAttribute("pageNum", pageNum);

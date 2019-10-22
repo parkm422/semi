@@ -22,17 +22,17 @@
 		<th>주문번호</th><th>상품 이미지</th><th>상품이름</th><th>사이즈</th><th>색상</th><th>수량</th><th>배송지</th><th>배송상태</th><th>금액</th><th>구매날짜</th>
 		<th>리뷰작성하기</th>
 	</tr>
-	<c:forEach var="vo2" items="${list }">
-		<tr>
-			<td>${vo2.ornum }</td>
-			<td><img src="${cp }/upload/${vo2.savefilename }" style="width:70px;height:70px;"></td>
+	<c:forEach var="vo2" items="${list}" varStatus="ss">
+		<tr style="height:100px;">
+			<td>${(pageNum-1)*10+ss.index+1}</td>
+			<td><img src="${cp }/upload/${vo2.savefilename}" style="width:100px;heigth:150px;"></td>
 			<td>${vo2.pname }</td>
 			<td>${vo2.psize }</td>
 			<td>${vo2.color}</td>
 			<td>${vo2.cnt}</td>
 			<td>${vo2.deladd}</td>
 			<td>${vo2.delivery}</td>
-			<td>${vo2.amount}</td>
+			<td>${vo2.price*vo2.cnt}</td>
 			<td>${vo2.orderdate}</td>
 			<td><a href="${cp }/member/review_insert?inum=${vo2.inum }">리뷰작성</a></td>
 		</tr>

@@ -18,13 +18,9 @@ public class UpdateServlet extends HttpServlet{
 		
 		req.setCharacterEncoding("utf-8");
 		String id=req.getParameter("id");
-		String pwd=req.getParameter("pwd");
-		String email=req.getParameter("email");
-		String address=req.getParameter("address");
-		String phone=req.getParameter("phone");
-		MemberVo vo=new MemberVo(0, null,id,pwd, email, address,phone,0,null);
+		MemberVo vo=new MemberVo(0, null,id,null, null, null,null,0,null);
 		MemberDao dao=MemberDao.getInstance();
-		int n=dao.update(vo);
+		int n=dao.select(id);
 		if(n>0) {
 			req.setAttribute("code","success");
 		}else {

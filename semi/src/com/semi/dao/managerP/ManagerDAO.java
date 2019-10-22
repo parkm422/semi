@@ -70,6 +70,8 @@ public class ManagerDAO {
 			JdbcUtil.close(con,pstmt,rs);
 		}
 	}
+	
+	//주문상세 등록
 	public int insert(ViewVo vo) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
@@ -98,16 +100,16 @@ public class ManagerDAO {
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			String sql = "select * from(select aa.*,rownum as rnum from(select s.name,s.id,o.pname,o.psize,o.color,o.cnt,p.price,i.status,i.delivery " + 
+			String sql = "select * from(select aa.*,rownum as rnum from(select i.ornum,s.name,s.id,i.getname,o.pname,o.psize,o.color,o.cnt,p.price,i.status,i.delivery " + 
 					"from s_members s,orderdetail o,orderinfo i, product_list p "+ 
-					"where s.mnum=i.mnum  and i.ornum=o.ornum and p.inum=o.inum)aa) where rnum>=? and rnum<=?";
+					"where s.mnum=i.mnum  and i.ornum=o.ornum and p.inum=o.inum order by i.ornum asc)aa) where rnum>=? and rnum<=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1,startRow);
 			pstmt.setInt(2,endRow);
 			rs = pstmt.executeQuery();
 			ArrayList<ViewVo> list = new ArrayList<ViewVo>();
 			while (rs.next()) {
-				ViewVo vo = new ViewVo(rs.getString("name"), rs.getString("id"), rs.getString("pname"),
+				ViewVo vo = new ViewVo(rs.getInt("ornum"),rs.getString("name"), rs.getString("id"),rs.getString("getname"), rs.getString("pname"),
 						rs.getInt("psize"), rs.getString("color"), rs.getInt("cnt"), rs.getInt("price"),
 						rs.getString("status"), rs.getString("delivery"));
 				list.add(vo);

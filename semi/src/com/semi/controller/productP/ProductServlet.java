@@ -1,7 +1,7 @@
 package com.semi.controller.productP;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
+
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.semi.dao.productP.ProductDAO;
 import com.semi.vo.productP.List_img_joinVO;
-import com.semi.vo.productP.Product_ListVO;
+
 
 @WebServlet("/product/list")
 public class ProductServlet extends HttpServlet{
@@ -25,6 +25,7 @@ public class ProductServlet extends HttpServlet{
 		String spageNum = req.getParameter("pageNum");
 		String major = req.getParameter("major");
 		String sub = req.getParameter("sub");
+		
 		String sort = req.getParameter("sort");
 		
 		int pageNum = 1;

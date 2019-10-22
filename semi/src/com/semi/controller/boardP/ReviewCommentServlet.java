@@ -42,7 +42,6 @@ public class ReviewCommentServlet extends HttpServlet{
 			lev = Integer.parseInt(req.getParameter("lev"));
 			step = Integer.parseInt(req.getParameter("step"));
 		}
-		
 		System.out.println("ref="+ref);
 		System.out.println("lev="+lev);
 		System.out.println("step="+step);
@@ -65,5 +64,6 @@ public class ReviewCommentServlet extends HttpServlet{
 			json.put("code", "fail");
 		}
 		pw.print(json);
+
 	}
 }
