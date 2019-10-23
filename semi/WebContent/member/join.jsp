@@ -20,10 +20,10 @@
 			var data = xhr.responseText;
 			var check = JSON.parse(data);
 			var idcheck = document.getElementById("idc");
-			
-			if(check.check == true && id != ""){
-				idcheck.innerHTML = "이미 사용중인 아이디입니다.";
-			}else{
+			var id = document.getElementById("id").value;
+			if(check.check == true || id.length<4 || id == ""){
+				idcheck.innerHTML = "사용할 수 없는 아이디입니다.";
+			}else if(check.check == false && id.length>3 || id != ""){
 				idcheck.innerHTML = "사용 가능한 아이디입니다.";
 			}
 			

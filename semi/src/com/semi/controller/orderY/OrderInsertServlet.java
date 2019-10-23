@@ -77,7 +77,7 @@ public class OrderInsertServlet extends HttpServlet{
 		if(endPageNum>basketPageCount) {
 			endPageNum = basketPageCount;
 		}
-		int cnt=0;
+		
 		int nn=0;
 		int ss=0;
 		String pnames=null;
@@ -92,7 +92,7 @@ public class OrderInsertServlet extends HttpServlet{
 
 			pnames=(String)basketList1.get(i).get("pname");
 			System.out.println(pnames);
-			cnt=(int)basketList1.get(i).get("cnt");
+			
 			ss=(int)basketList1.get(i).get("price");
 			
 
@@ -104,7 +104,7 @@ public class OrderInsertServlet extends HttpServlet{
 		req.setAttribute("startPageNum", startPageNum);
 		req.setAttribute("endPageNum", endPageNum);
 		req.setAttribute("basketPageCount", basketPageCount);
-		req.setAttribute("cnt",cnt);
+		
 		req.setAttribute("nn", nn);
 		req.setAttribute("ss",ss);
 		
