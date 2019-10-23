@@ -17,9 +17,11 @@
 </head>
 <body>
 <h1 style="justify-content: center; text-align: center; height: 120px;">질문 작성</h1>
-<form action="/member/writeQnAQuestion" method="post">
+<form action="${cp }/member/writeQnAQuestion" method="post">
 작성자&nbsp;&nbsp;<input type="text" name="writer">
 제목&nbsp;&nbsp;<input type="text" name="title"><br><br>
+<input type="hidden" name="inum" value="${param.inum }">
+<input type="hidden" name="sub" value="${param.sub }">
 <textarea name="content" id="summernote"></textarea>
 <button type="submit">질문 올리기</button>
 </form>

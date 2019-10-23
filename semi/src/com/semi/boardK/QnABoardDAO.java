@@ -11,7 +11,7 @@ import jdbc.JdbcUtil;
 public class QnABoardDAO {
 	private QnABoardDAO() {}
 	private static QnABoardDAO qnaBoardDAO = new QnABoardDAO();
-	public static QnABoardDAO getQnABoardDAo() {
+	public static QnABoardDAO getQnABoardDAO() {
 		return qnaBoardDAO;
 	}
 	
@@ -20,7 +20,7 @@ public class QnABoardDAO {
 		PreparedStatement pstmt = null;
 		try {
 			con = JdbcUtil.getConn();
-			pstmt = con.prepareStatement("INSERT INTO itmen_qna VALUES(QNA_SEQ.nextval, ?, ?, ?, ?, null)");
+			pstmt = con.prepareStatement("INSERT INTO item_qna VALUES(QNA_SEQ.nextval, ?, ?, ?, ?, null)");
 			pstmt.setInt(1, inum);
 			pstmt.setString(2, writer);
 			pstmt.setString(3, title);
@@ -41,7 +41,7 @@ public class QnABoardDAO {
 		int totalPost = 0;
 		try {
 			con = JdbcUtil.getConn();
-			pstmt = con.prepareStatement("SELECT NVL(MAX(qnum),0) \"total\" FROM item_qna WHERE inum=?");
+			pstmt = con.prepareStatement("SELECT NVL(COUNT(qnum),0) \"total\" FROM item_qna WHERE inum=?");
 			pstmt.setInt(1, inum);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {

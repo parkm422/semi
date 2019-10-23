@@ -34,6 +34,8 @@ public class HomeServlet extends HttpServlet{
 		//화폐 단위 ,(콤마)
 		DecimalFormat dc = new DecimalFormat("###,###,###,###");
 						
+		
+		
 		req.setAttribute("dc", dc);
 		
 		req.setAttribute("top",top);

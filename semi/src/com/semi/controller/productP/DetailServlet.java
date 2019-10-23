@@ -88,7 +88,7 @@ public class DetailServlet extends HttpServlet {
 		}
 		int qnaEndRow = qnaPageNum * 10;
 		int qnaStartRow = qnaEndRow - 9;
-		QnABoardDAO qnaDAO = QnABoardDAO.getQnABoardDAo();
+		QnABoardDAO qnaDAO = QnABoardDAO.getQnABoardDAO();
 		ArrayList<QnABoardVO> qnaList = qnaDAO.getPostList(inum, qnaStartRow, qnaEndRow);
 		int qnaTotalPage = (int) Math.ceil(qnaDAO.getTotalPost(inum) / 10.0);
 		int qnastartPageNum = ((qnaPageNum - 1) / 10 * 10) + 1;
@@ -96,12 +96,13 @@ public class DetailServlet extends HttpServlet {
 		if (qnaendPageNum > qnaTotalPage) {
 			qnaendPageNum = qnaTotalPage;
 		}
-
+		System.out.println(qnaTotalPage);
 		req.setAttribute("list", qnaList);
 		req.setAttribute("qnaTotalPage", qnaTotalPage);
 		req.setAttribute("qnastartPageNum", qnastartPageNum);
 		req.setAttribute("qnaendPageNum", qnaendPageNum);
 		req.setAttribute("qnaPageNum", qnaPageNum);
+		req.setAttribute("inum", inum);
 
 		
 		

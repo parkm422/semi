@@ -14,7 +14,7 @@ td{
 }
 </style>
 <div>
-<table>
+<table border="1">
 	<tr>
 		<th>회원번호</th>
 		<th>아이디</th>

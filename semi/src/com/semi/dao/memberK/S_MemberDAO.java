@@ -127,7 +127,7 @@ public class S_MemberDAO {
 				pstmt2.setString(2, id);
 				pstmt2.setString(3, email);
 				pstmt2.executeUpdate();
-				String content = "확인 후 비밀번호를 재설정해주세요.\r\n" + randomPw;
+				String content = randomPw;
 				SendEmail sendEmail = new SendEmail();
 				sendEmail.send(email, content);
 				return "비밀번호를 발송했습니다. 이메일을 확인해주세요.";

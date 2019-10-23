@@ -53,6 +53,7 @@
 		<br><br>
 		<div style="margin: 60px;">
 		<h3>상품 Q&A</h3>
+		<a href="${cp }/member/writeQnAQuestion?inum=${vo.inum}&sub=${param.sub}">글쓰기</a>
 		<table id="question">
 			<tr>
 				<th>글번호</th>
@@ -81,8 +82,7 @@
 					[이전]
 				</c:otherwise>
 		</c:choose>
-		<c:forEach var="i" begin="${qnastartPageNum }" end="${qnaendPageNum }"
-			step="1">
+		<c:forEach var="i" begin="${qnastartPageNum }" end="${qnaendPageNum }" step="1">
 			<c:choose>
 				<c:when test="${qnaPageNum==i }">
 					<a href="${cp }/product/detail?qnaPageNum=${i}&inum=${vo.inum}"> <span
