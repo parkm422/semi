@@ -17,13 +17,16 @@
 </head>
 <body>
 <h1 style="justify-content: center; text-align: center; height: 120px;">질문 작성</h1>
-<form action="${cp }/member/writeQnAQuestion" method="post">
+<form action="/member/writeQnAQuestion" method="post">
+작성자&nbsp;&nbsp;<input type="text" name="writer">
+제목&nbsp;&nbsp;<input type="text" name="title"><br><br>
 <textarea name="content" id="summernote"></textarea>
 <button type="submit">질문 올리기</button>
 </form>
 <script>
 $(document).ready(function() {
     $('#summernote').summernote({
+    		width: 600,					 // 가로길이
             height: 300,                 // set editor height
             minHeight: null,             // set minimum height of editor
             maxHeight: null,             // set maximum height of editor

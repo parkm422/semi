@@ -38,7 +38,8 @@ public class SendEmail {
 			msg.setFrom(new InternetAddress(EMAIL_ADDRESS));
 			msg.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
 			msg.setSubject("비밀번호 재설정 이메일입니다.");
-			msg.setText(content);
+			msg.setContent("<h1>테스트 쇼핑몰입니다!</h1><h3>" + content + "</h3>", "text/html; charset=utf-8");
+			//msg.setText(content);
 			Transport.send(msg);
 		} catch (MessagingException me) {
 			me.printStackTrace();
