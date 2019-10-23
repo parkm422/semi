@@ -64,10 +64,12 @@
 	<span id="pwdchk1"></span><br>
 	<a style="font-size: 25px">비밀번호 확인</a><br>
 	<input type="text" name="chkpwd" id="chkpwd" value="${vo.pwd}"  onkeyup="pwd2check()"><br>
-	<span id="pwdchk2"></span>
+	<span id="pwdchk2"></span> item="${email}"
 	<br>
 	<a style="font-size: 20px">이메일</a><br>
-	<input type="text" name="email" id="email" value="${vo.email}" ><br>
+	<c:forEach var="vo1" items="${email}" varStatus="ss">
+	<input type="text"name="email" id="email" value="${vo1.email}" ><br>
+	</c:forEach>
 	<a style="font-size: 20px">주소</a><br>
 	<textarea rows="5" cols="60" name="address" id="address" >${vo.address}</textarea><br><br>
 	<a style="font-size: 20px">전화번호</a><br>

@@ -21,11 +21,14 @@ public class UpdateServlet extends HttpServlet{
 		MemberVo vo=new MemberVo(0, null,id,null, null, null,null,0,null);
 		MemberDao dao=MemberDao.getInstance();
 		int n=dao.select(id);
+		String email="감";
 		if(n>0) {
+			req.setAttribute("email",email);
 			req.setAttribute("code","success");
 		}else {
 			req.setAttribute("code","fail");
 		}
+		
 		req.setAttribute("top","/header.jsp");
 		req.setAttribute("content","/memberinfoupdateY/memberupdate.jsp");
 		req.setAttribute("nav","/mypagenav.jsp");

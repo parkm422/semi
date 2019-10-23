@@ -29,7 +29,7 @@ public class HomeServlet extends HttpServlet{
 		if(footer==null) {
 			footer="/footer.jsp";
 		}
-		
+		//
 		
 		//화폐 단위 ,(콤마)
 		DecimalFormat dc = new DecimalFormat("###,###,###,###");
