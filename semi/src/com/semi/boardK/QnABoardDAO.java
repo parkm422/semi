@@ -15,6 +15,25 @@ public class QnABoardDAO {
 		return qnaBoardDAO;
 	}
 	
+	public int insertQuestion(int inum, String writer, String title, String content) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = JdbcUtil.getConn();
+			pstmt = con.prepareStatement("INSERT INTO itmen_qna VALUES(QNA_SEQ.nextval, ?, ?, ?, ?, null)");
+			pstmt.setInt(1, inum);
+			pstmt.setString(2, writer);
+			pstmt.setString(3, title);
+			pstmt.setString(4, content);
+			return pstmt.executeUpdate();
+		} catch (SQLException se) {
+			se.printStackTrace();
+			return -1;
+		} finally {
+			JdbcUtil.close(con, pstmt, null);
+		}
+	}
+	
 	public int getTotalPost(int inum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;

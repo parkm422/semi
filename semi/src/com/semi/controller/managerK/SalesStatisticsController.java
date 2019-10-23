@@ -22,28 +22,39 @@ import com.semi.vo.productK.OrderInfoVO;
 public class SalesStatisticsController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/plain;charset=UTF-8");
 		
-		String startYear = request.getParameter("startYear");
-		String startMonth = request.getParameter("startMonth");
-		String startDay = request.getParameter("startDay");
-		String startDate = startYear + "/" + startMonth + "/" + startDay;
 		
-		String endYear = request.getParameter("endYear");
-		String endMonth = request.getParameter("endMonth");
-		String endDay = request.getParameter("endDay");
-		String endDate = endYear + "/" + endMonth + "/" + endDay;
-		ManagerDAO managerDAO = ManagerDAO.getManagerDAO();
-		ArrayList<OrderInfoVO> orderList = managerDAO.getSalesStatistics(startDate, endDate);
-		
-		int totalAmount = 0;
-		for(OrderInfoVO i : orderList) {
-			totalAmount += i.getAmount();
+		if(request.getParameter("startYear") != null) {
+			response.setContentType("text/plain;charset=UTF-8");
+			
+			String startYear = request.getParameter("startYear");
+			String startMonth = request.getParameter("startMonth");
+			String startDay = request.getParameter("startDay");
+			String startDate = startYear + "/" + startMonth + "/" + startDay;
+			
+			String endYear = request.getParameter("endYear");
+			String endMonth = request.getParameter("endMonth");
+			String endDay = request.getParameter("endDay");
+			String endDate = endYear + "/" + endMonth + "/" + endDay;
+			ManagerDAO managerDAO = ManagerDAO.getManagerDAO();
+			ArrayList<OrderInfoVO> orderList = managerDAO.getSalesStatistics(startDate, endDate);
+			
+			int totalAmount = 0;
+			for(OrderInfoVO i : orderList) {
+				totalAmount += i.getAmount();
+			}
+			request.setAttribute("totalAmount", totalAmount);
+			PrintWriter pwriter = response.getWriter();
+			JSONArray jArray = new JSONArray();
+			jArray.put(orderList);
+			pwriter.print(jArray);
+			return;
 		}
-		request.setAttribute("totalAmount", totalAmount);
-		PrintWriter pwriter = response.getWriter();
-		JSONArray jArray = new JSONArray();
-		jArray.put(orderList);
-		pwriter.print(jArray);
+		
+		request.setAttribute("top", "/header.jsp");
+		request.setAttribute("nav", "/nav.jsp");
+		request.setAttribute("content", "/manager/salesStatistics111.jsp");
+		request.setAttribute("footer", "/footer.jsp");
+		request.getRequestDispatcher("/main").forward(request, response);
 	}
 }
