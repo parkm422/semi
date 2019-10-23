@@ -39,6 +39,7 @@
 						</td>
 						<td>
 							<img src="${cp }/upload/${basket.savefilename }" style="width:70px;height:70px;">
+							<input type="hidden" name="imgs" value="${cp }/upload/${basket.savefilename }">
 						</td>
 						<td>
 							<div><a href="${cp }/product/detail?inum=${basket.inum }" style="color:black;text-decoration: none;">${basket.pname }</a></div>
