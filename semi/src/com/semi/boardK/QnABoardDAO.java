@@ -14,7 +14,7 @@ public class QnABoardDAO {
 	public static QnABoardDAO getQnABoardDAo() {
 		return qnaBoardDAO;
 	}
-	
+	//
 	public int getTotalPost(int inum) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
