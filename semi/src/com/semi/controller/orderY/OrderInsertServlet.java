@@ -45,7 +45,8 @@ public class OrderInsertServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String id=(String)req.getSession().getAttribute("id");
-		
+		String[] imgs=req.getParameterValues("imgs");
+		req.getSession().setAttribute("imgs",imgs);		
 
 		MemberDao dao1=MemberDao.getInstance();
 		ArrayList<MemberVo> list=dao1.list(id);
@@ -80,7 +81,7 @@ public class OrderInsertServlet extends HttpServlet{
 		int nn=0;
 		int ss=0;
 		String pnames=null;
-		String savefilename=null;
+		
 		ArrayList<HashMap<String, Object>> basketList1 = itemDao.getBasketList(vo.getMnum());
 		System.out.println(basketList1);
 		System.out.println(basketList1.size());
@@ -93,7 +94,7 @@ public class OrderInsertServlet extends HttpServlet{
 			System.out.println(pnames);
 			cnt=(int)basketList1.get(i).get("cnt");
 			ss=(int)basketList1.get(i).get("price");
-			savefilename=(String)basketList1.get(i).get("savefilename");
+			
 
 		}
 		System.out.println(pnames);
@@ -106,7 +107,7 @@ public class OrderInsertServlet extends HttpServlet{
 		req.setAttribute("cnt",cnt);
 		req.setAttribute("nn", nn);
 		req.setAttribute("ss",ss);
-		req.setAttribute("savefilename",savefilename);
+		
 		req.setAttribute("pnames",pnames);
 		req.setAttribute("basketList1", basketList1);
 

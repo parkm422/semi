@@ -1,10 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<h1>1:1게시판</h1>
-<a href="${cp }/main">홈으로</a>
+<style type="text/css">
+	Table tr:nth-child(even){background-color: #f2f2f2;}
+	
+	th,td{
+		padding: 10px 20px;
+		border-radius: 10px;
+	
+	}
+	th{
+		background-color: silver;
+	}
+	
+	
+</style>
 
-<table style="width: 1500px; text-align: center;">
+<h1>1:1게시판</h1>
+
+<table border="1" style="width: 1500px; text-align: center;">
 	<tr>
 		<th>글번호</th><th>작성자</th><th>제목</th><th>관리자답변</th>
 	</tr>

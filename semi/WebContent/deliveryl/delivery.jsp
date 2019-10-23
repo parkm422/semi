@@ -49,7 +49,6 @@ function doBlink() {
 }
 
 
-출처: https://pikabu.tistory.com/77 [피카부]
 
 </style>
 <div style="margin-top: 50px;">
