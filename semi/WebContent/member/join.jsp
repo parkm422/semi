@@ -99,12 +99,6 @@
 	}
 	
 </script>
-<style>
-	.text_1{
-		font-size: 14px;
-		font-weight: 700;
-	}
-</style>
 </head>
 <body>
 <div style="margin: auto;width:450px;">

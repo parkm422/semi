@@ -22,6 +22,15 @@ import com.semi.vo.productK.OrderInfoVO;
 public class SalesStatisticsController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("top", "/header.jsp");
+		request.setAttribute("nav", "/nav.jsp");
+		request.setAttribute("content", "/member/salesStatistic.jsp");
+		request.setAttribute("footer", "/footer.jsp");
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
+	}
+	//arsta
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/plain;charset=UTF-8");
 		
 		String startYear = request.getParameter("startYear");
@@ -45,5 +54,11 @@ public class SalesStatisticsController extends HttpServlet {
 		JSONArray jArray = new JSONArray();
 		jArray.put(orderList);
 		pwriter.print(jArray);
+		
+		request.setAttribute("top", "/header.jsp");
+		request.setAttribute("nav", "nav.jsp");
+		request.setAttribute("content", "/member/findPWResult.jsp");
+		request.setAttribute("footer", "/footer.jsp");
+		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 }

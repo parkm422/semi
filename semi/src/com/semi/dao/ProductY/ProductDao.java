@@ -14,19 +14,31 @@ public class ProductDao {
 	public int update(int cnt,int inum) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
+		PreparedStatement pstmt2=null;
 		String sql=
 			"update product_list set cnt=cnt-"+cnt+""
 					+ " where inum=?";
+		String sql2="update product_list set salecnt=salecnt+"+cnt+""
+					+"where inum=?";
 		try {
 			con=JdbcUtil.getConn();
 			pstmt=con.prepareStatement(sql);
+			pstmt2=con.prepareStatement(sql2);
 			pstmt.setInt(1,inum);
-			return pstmt.executeUpdate();
+			pstmt2.setInt(1,inum);
+			int n=pstmt.executeUpdate();
+			int m=pstmt2.executeUpdate();
+			if(n>0 && m>0) {
+				con.commit();
+				return n;
+			}
+			return 0;
 		}catch(SQLException se) {
 			System.out.println(se.getMessage());
 			return -1;
 		}finally {
 			JdbcUtil.close(con, pstmt, null);
+			JdbcUtil.close(con, pstmt2, null);
 		}
 	}
 	//총 재고와  팔린 갯수 불러오기

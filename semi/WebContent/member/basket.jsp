@@ -20,7 +20,6 @@
 					<col width="10%">
 					<col width="10%">
 				</colgroup>
-
 				<tr>
 					<th>번호</th>
 					<th>이미지</th>

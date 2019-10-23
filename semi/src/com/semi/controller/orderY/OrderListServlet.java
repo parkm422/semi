@@ -20,6 +20,7 @@ public class OrderListServlet extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String id=req.getParameter("id");
+		System.out.println("리스트페이지서버릿");
 		if(id==null || id=="") {
 			req.setAttribute("top","/header.jsp");
 			req.setAttribute("content","/member/login.jsp");
