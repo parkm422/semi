@@ -37,6 +37,7 @@
 	</table>
 </tr>
 </table>
-</form>
+
 <div ><input type="submit" value="등록"></div>
+</form>
 </div>

@@ -27,8 +27,54 @@ public class ProductDAO {
 	public static ProductDAO getProductDao() {
 		return productDao;
 	}
+	/*
+	// 판매개수 가장 많은 상품 5개 얻어오기
+	public ArrayList<List_img_joinVO> hit_item(int start,int end){
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			con = JdbcUtil.getConn();
+			String sql = "SELECT BB.*,PIMG.IMGNUM,PIMG.SAVEFILENAME FROM(SELECT AA.*,ROWNUM AS RNUM FROM(SELECT P.INUM INUM,P.PNAME PNAME,P.PRICE PRICE,p.cnt cnt, p.cnum cnum,p.salecnt salecnt "
+					+ "FROM PRODUCT_LIST P,COLOR C,PRODUCT_SIZE S,SUB_CATEGORY SUB,MAJOR_CATEGORY MAJOR "
+					+ "WHERE P.CNUM=C.CNUM AND C.SIZENUM=S.SIZENUM AND S.SCNUM=SUB.SCNUM AND SUB.MCNUM=MAJOR.MCNUM ORDER BY SALECNT DESC)AA)BB,PRODUCT_IMG PIMG "
+					+ "WHERE BB.INUM=PIMG.INUM AND RNUM>=? AND RNUM<=? ORDER BY RNUM ASC";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rs = pstmt.executeQuery();
+			
+			ArrayList<List_img_joinVO> list = new ArrayList<List_img_joinVO>();
+			
+			while (rs.next()) {
 
+				int inum = rs.getInt("inum");
+				String pname = rs.getString("pname");
+				int imgnum = rs.getInt("imgnum");
+				String cnum = rs.getString("cnum");
+				int price = rs.getInt("price");
+				int cnt = rs.getInt("cnt");
+				int salecnt = rs.getInt("salecnt");
+				String savefilename = rs.getString("savefilename");
 
+				List_img_joinVO vo = new List_img_joinVO(inum, pname, price, cnt, cnum, salecnt, imgnum, savefilename);
+				
+				list.add(vo);
+
+			}
+			
+			return list;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return null;
+		}finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}
+	}
+	*/
 	// 상품등록
 	public int productInsert(Product_ListVO vo, String orgfilename, String savefilename) {
 
@@ -415,7 +461,8 @@ public class ProductDAO {
 		try {
 			con = JdbcUtil.getConn();
 			String sql = "SELECT CC.* FROM(SELECT BB.*,IMG.SAVEFILENAME,B.BNUM,B.MNUM,B.CNT,B.REGDATE,ROWNUM AS RNUM "
-					+ "FROM(SELECT AA.* FROM(SELECT PL.PNAME,PL.INUM,C.COLORNAME,PS.PSIZE,PL.PRICE FROM PRODUCT_LIST PL,COLOR C,PRODUCT_SIZE PS WHERE PL.CNUM=C.CNUM AND C.SIZENUM=PS.SIZENUM)AA)BB,PRODUCT_IMG IMG,BASKET B "
+					+ "FROM(SELECT AA.* FROM(SELECT PL.PNAME,PL.INUM,C.COLORNAME,PS.PSIZE,PL.PRICE FROM PRODUCT_LIST"
+					+ " PL,COLOR C,PRODUCT_SIZE PS WHERE PL.CNUM=C.CNUM AND C.SIZENUM=PS.SIZENUM)AA)BB,PRODUCT_IMG IMG,BASKET B "
 					+ "WHERE BB.INUM=IMG.INUM AND BB.INUM=B.INUM AND B.MNUM=? ORDER BY REGDATE DESC)CC WHERE RNUM>=? AND RNUM<=?";
 
 			pstmt = con.prepareStatement(sql);

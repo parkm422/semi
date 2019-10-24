@@ -145,7 +145,7 @@
 			</div>
 			
 			<div style="margin-top: 20px;">
-				<input type="submit" value="가입" style="width:360px; height:60px; background-color: black;color:white;margin-bottom: 30px;cursor: pointer;">
+				<input type="submit" value="가입" style="width:360px; height:60px; background-color: black;color:white;margin-bottom: 30px;cursor: pointer;border:none;">
 			</div>
 		</form>
 	</div>
