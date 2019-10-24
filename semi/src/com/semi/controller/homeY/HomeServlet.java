@@ -39,7 +39,7 @@ public class HomeServlet extends HttpServlet{
 		
 		cal.set(2019,9,24,23,5,0);
 		
-		timer.scheduleAtFixedRate(task, new Date(), 5000);
+		timer.scheduleAtFixedRate(task, new Date(cal.getTimeInMillis()), 5000);
 		
 	}
 	
