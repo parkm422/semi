@@ -71,7 +71,7 @@ public class HomeServlet extends HttpServlet{
 		
 		req.setAttribute("top",top);
 		req.setAttribute("nav",nav);
-		req.setAttribute("content",content);
+		req.setAttribute("content",content);	
 		req.setAttribute("footer",footer);
 		getServletContext().setAttribute("cp",req.getContextPath());
 		req.getRequestDispatcher("/index.jsp").forward(req, resp);
