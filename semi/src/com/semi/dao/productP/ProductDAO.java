@@ -28,7 +28,42 @@ public class ProductDAO {
 		return productDao;
 	}
 
-
+	
+	// 3일지난 장바구니 목록 삭제
+	public int basket_list_delete() {
+		
+		Connection con = null;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			con = JdbcUtil.getConn();
+			
+			String sql = "DELETE FROM BASKET";
+			
+			pstmt = con.prepareStatement(sql);
+			
+			
+			pstmt.addBatch();
+			
+			pstmt.executeBatch();
+			
+			pstmt.clearBatch();
+			
+			con.commit();
+			
+			return 1;
+			
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}finally {
+			JdbcUtil.close(con, pstmt, null);
+		}
+		
+	}
+	
 	// 상품등록
 	public int productInsert(Product_ListVO vo, String orgfilename, String savefilename) {
 
