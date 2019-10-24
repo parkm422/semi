@@ -85,21 +85,24 @@ public class ProductDAO {
 			int n = pstmt.executeUpdate();
 
 			if (n > 0) {
-				Product_ImgVO imgvo = new Product_ImgVO(0, 0, orgfilename, savefilename);
+				
 				String sql2 = "INSERT INTO PRODUCT_IMG VALUES(IMG_SEQ.NEXTVAL,LIST_SEQ.CURRVAL,?,?)";
+				
 				pstmt2 = con.prepareStatement(sql2);
+				
 				pstmt2.setString(1, orgfilename);
 				pstmt2.setString(2, savefilename);
+				
 				int n2 = pstmt2.executeUpdate();
+				
 				if (n2 > 0) {
 					con.commit();
 					return n2;
-				} else {
-					con.rollback();
 				}
-			} else {
-				con.rollback();
+				
 			}
+			
+			con.rollback();
 			return 0;
 
 		} catch (SQLException se) {
@@ -325,31 +328,42 @@ public class ProductDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		try {
+			
 			con = JdbcUtil.getConn();
+			
 			String sql = "";
+			
 			if (sort != null && sort.equals("high")) {
+				
 				sql += "SELECT BB.*,PIMG.IMGNUM,PIMG.SAVEFILENAME FROM(SELECT AA.*,ROWNUM AS RNUM FROM(SELECT P.INUM INUM,P.PNAME PNAME,P.PRICE PRICE,p.cnt cnt, p.cnum cnum,p.salecnt salecnt "
 						+ "FROM PRODUCT_LIST P,COLOR C,PRODUCT_SIZE S,SUB_CATEGORY SUB,MAJOR_CATEGORY MAJOR "
 						+ "WHERE P.CNUM=C.CNUM AND C.SIZENUM=S.SIZENUM AND S.SCNUM=SUB.SCNUM AND SUB.MCNUM=MAJOR.MCNUM AND M_CATEGORY=? AND S_CATEGORY=? ORDER BY PRICE DESC)AA)BB,PRODUCT_IMG PIMG "
 						+ "WHERE BB.INUM=PIMG.INUM AND RNUM>=? AND RNUM<=? ORDER BY RNUM ASC";
+				
 			} else if (sort != null && sort.equals("low")) {
+				
 				sql += "SELECT BB.*,PIMG.IMGNUM,PIMG.SAVEFILENAME FROM(SELECT AA.*,ROWNUM AS RNUM FROM(SELECT P.INUM INUM,P.PNAME PNAME,P.PRICE PRICE,p.cnt cnt, p.cnum cnum,p.salecnt salecnt "
 						+ "FROM PRODUCT_LIST P,COLOR C,PRODUCT_SIZE S,SUB_CATEGORY SUB,MAJOR_CATEGORY MAJOR "
 						+ "WHERE P.CNUM=C.CNUM AND C.SIZENUM=S.SIZENUM AND S.SCNUM=SUB.SCNUM AND SUB.MCNUM=MAJOR.MCNUM AND M_CATEGORY=? AND S_CATEGORY=? ORDER BY PRICE ASC)AA)BB,PRODUCT_IMG PIMG "
 						+ "WHERE BB.INUM=PIMG.INUM AND RNUM>=? AND RNUM<=? ORDER BY RNUM ASC";
+				
 			} else if (sort != null && sort.equals("popular")) {
+				
 				sql += "SELECT BB.*,PIMG.IMGNUM,PIMG.SAVEFILENAME FROM(SELECT AA.*,ROWNUM AS RNUM FROM(SELECT P.INUM INUM,P.PNAME PNAME,P.PRICE PRICE,p.cnt cnt, p.cnum cnum,p.salecnt salecnt "
 						+ "FROM PRODUCT_LIST P,COLOR C,PRODUCT_SIZE S,SUB_CATEGORY SUB,MAJOR_CATEGORY MAJOR "
 						+ "WHERE P.CNUM=C.CNUM AND C.SIZENUM=S.SIZENUM AND S.SCNUM=SUB.SCNUM AND SUB.MCNUM=MAJOR.MCNUM AND M_CATEGORY=? AND S_CATEGORY=? ORDER BY SALECNT DESC)AA)BB,PRODUCT_IMG PIMG "
 						+ "WHERE BB.INUM=PIMG.INUM AND RNUM>=? AND RNUM<=? ORDER BY RNUM ASC";
+				
 			} else if (sort == null || sort.equals("")) {
-				sql = "SELECT BB.*,PIMG.IMGNUM,PIMG.SAVEFILENAME FROM(SELECT AA.*,ROWNUM AS RNUM FROM(SELECT P.INUM INUM,P.PNAME PNAME,P.PRICE PRICE,p.cnt cnt, p.cnum cnum,p.salecnt salecnt "
+				
+				sql += "SELECT BB.*,PIMG.IMGNUM,PIMG.SAVEFILENAME FROM(SELECT AA.*,ROWNUM AS RNUM FROM(SELECT P.INUM INUM,P.PNAME PNAME,P.PRICE PRICE,p.cnt cnt, p.cnum cnum,p.salecnt salecnt "
 						+ "FROM PRODUCT_LIST P,COLOR C,PRODUCT_SIZE S,SUB_CATEGORY SUB,MAJOR_CATEGORY MAJOR "
 						+ "WHERE P.CNUM=C.CNUM AND C.SIZENUM=S.SIZENUM AND S.SCNUM=SUB.SCNUM AND SUB.MCNUM=MAJOR.MCNUM AND M_CATEGORY=? AND S_CATEGORY=?)AA)BB,PRODUCT_IMG PIMG "
-						+ "WHERE BB.INUM=PIMG.INUM AND RNUM>=? AND RNUM<=? ORDER BY RNUM ASC";
+						+ "WHERE BB.INUM=PIMG.INUM AND RNUM>=? AND RNUM<=?";
+				
 			}
-
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1, major);
@@ -357,7 +371,9 @@ public class ProductDAO {
 			pstmt.setInt(3, startRow);
 			pstmt.setInt(4, endRow);
 			rs = pstmt.executeQuery();
+			
 			ArrayList<List_img_joinVO> list = new ArrayList<List_img_joinVO>();
+			
 			while (rs.next()) {
 
 				int inum = rs.getInt("inum");
@@ -370,15 +386,22 @@ public class ProductDAO {
 				String savefilename = rs.getString("savefilename");
 
 				List_img_joinVO vo = new List_img_joinVO(inum, pname, price, cnt, cnum, salecnt, imgnum, savefilename);
+				
 				list.add(vo);
 
 			}
+			
 			return list;
+			
 		} catch (SQLException se) {
+			
 			se.printStackTrace();
 			return null;
+			
 		} finally {
+			
 			JdbcUtil.close(con, pstmt, rs);
+			
 		}
 
 	}
@@ -391,8 +414,7 @@ public class ProductDAO {
 		ResultSet rs = null;
 		try {
 			con = JdbcUtil.getConn();
-			String sql = "SELECT distinct PS.PSIZE " + "FROM PRODUCT_LIST PL,COLOR C,PRODUCT_SIZE PS,SUB_CATEGORY SUB "
-					+ "WHERE PL.CNUM=C.CNUM AND C.SIZENUM=PS.SIZENUM AND SUB.SCNUM=PS.SCNUM AND SUB.S_CATEGORY=?";
+			String sql = "SELECT distinct PS.PSIZE FROM PRODUCT_SIZE PS, SUB_CATEGORY SUB WHERE PS.SCNUM=SUB.SCNUM AND SUB.S_CATEGORY=? ORDER BY PS.PSIZE ASC";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, sub);
 			rs = pstmt.executeQuery();

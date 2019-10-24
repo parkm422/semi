@@ -49,7 +49,7 @@ public class HomeServlet extends HttpServlet{
 		String nav=(String)req.getAttribute("nav");
 		String content=(String)req.getAttribute("content");
 		String footer=(String)req.getAttribute("footer");
-		
+		//
 		if(top==null) {
 			top="/header.jsp";
 		}

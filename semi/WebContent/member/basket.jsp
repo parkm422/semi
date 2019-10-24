@@ -8,7 +8,8 @@
 		<form method="get" action="${cp }/orderY/orderinsert">
 		<input type="text" name="id" id="id" value="${sessionScope.id}" hidden="" ><br>
 		<div style="margin-bottom: 30px;"><h3>장바구니 목록</h3></div>
-			<table style="width:1300px; text-align: center;">
+		<div style="min-height: 405px;">
+			<table style="width:1300px; text-align: center;border-collapse: separate;border-spacing: 0 10px;">
 				<colgroup>
 					<col width="5%">
 					<col width="15%">
@@ -47,16 +48,16 @@
 							<span>${dc.format(basket.price) }원</span>
 						</td>
 						<td>
-							<input type="button" value="-" style="width:20px;height:20px;font-size:20px;background-color: white;" onclick="bplus('${ii.index}')">
-							<input type="text" style="width:20px;" id="cnt_${ii.index }" name="cnt" value="${basket.cnt}">
-							<input type="button" value="+" style="width:20px;height:20px;font-size:20px;background-color: white;" onclick="bplus('${ii.index}')">
-							<input type="button" value="수정" style="width:30px;height:20px;font-size:12px;background-color: white;" onclick="cupdate(${ii.index},${basket.bnum})">
+							<input type="text" style="width:25px;height:25px;" id="cnt_${ii.index }" name="cnt" value="${basket.cnt}">
+							<p style="display: inline-block;line-height: 20px;"><a class="basket_cnt_btn" href="#content" onclick="bplus('${ii.index}')">+</a></p>
+							<p style="display: inline-block;line-height: 20px;"><a class="basket_cnt_btn" href="#content" onclick="bminus('${ii.index}')">-</a></p>
+							<input type="button" value="수정" style="width:30px;height:25px;font-size:12px;background-color: white;cursor: pointer;" onclick="cupdate(${ii.index},${basket.bnum})">
 						</td>
 						<td>
 							<span>${dc.format(basket.price * basket.cnt) }원</span>
 						</td>
 						<td>
-							<input type="button" value="상품 삭제" style="width:80px;height:40px;background-color: white;">
+							<input type="button" value="상품 삭제" style="width:80px;height:40px;background-color: gray;border:none;color:white;cursor: pointer;" onclick="bdelete(${basket.bnum})">
 						</td>
 						<td>
 							<span>${basket.regdate }</span>
@@ -64,35 +65,34 @@
 					</tr>
 				</c:forEach>
 			</table>
+			</div>
 				<div style="text-align: right;width:1300px;">
-					<input type="submit" value="주문하기" style="width:150px;height:50px;color:white;background-color: black;">
+					<input type="submit" value="주문하기" style="width:150px;height:50px;color:white;background-color: black;border:none;cursor: pointer;">
 				</div>
 		</form>	
 			<!-- 장바구니 페이징처리 -->
-			<div style="text-align: center;font-size:20px;">
+			<div style="text-align: center;font-size:18px;">
 				<c:if test="${startPageNum>5 }">
-					<a href="${cp }/member/basket?pageNum=${startPageNum-1}">이전</a>
+					<a href="${cp }/member/basket?pageNum=${startPageNum-1}" style="text-decoration: none;">이전</a>
 				</c:if>
 				
 				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
 			<c:choose>
 				<c:when test="${pageNum == i }">
-					<a href="${cp }/member/basket?pageNum=${i}">
+					<a href="${cp }/member/basket?pageNum=${i}" style="text-decoration: none;">
 						<span style="color:blue;">[${i }]</span>
 					</a>
 				</c:when>
 				<c:otherwise>
-					<a href="${cp }/member/basket?pageNum=${i}">
+					<a href="${cp }/member/basket?pageNum=${i}" style="text-decoration: none;">
 						<span style="color:gray;">[${i }]</span>
 					</a>
 				</c:otherwise>
 			</c:choose>
 		</c:forEach>
-			<div>
-				<c:if test="${endPageNum<basketCount }">
-					<a href="${cp }/member/basket?pageNum=${startPageNum-1}">다음</a>
+				<c:if test="${endPageNum<basketPageCount }">
+					<a href="${cp }/member/basket?pageNum=${endPageNum+1 }" style="text-decoration: none;">다음</a>
 				</c:if>
-			</div>
 		</div>
 	</div>
 </div>

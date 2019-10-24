@@ -19,7 +19,7 @@
 						<span>가격 : ${dc.format(vo.price) }원</span>
 					</div>
 					<div class="detail_info">
-						<select id="item_size" name="item_size" style="font-size: 12px;">
+						<select id="item_size" name="item_size" style="font-size: 12px;width:80px;height:30px;">
 							<option value="">옵션 선택</option>
 							<c:forEach var="sizeList" items="${sizeList }">
 								<option value="${sizeList }">${sizeList }</option>
@@ -38,16 +38,39 @@
 						</c:choose>
 					</div>
 					<div class="detail_info">
-						<input type="button" value="장바구니담기" onclick="itemPut()">
+						<input type="button" value="장바구니담기" onclick="itemPut()" style="width:100px;height:40px;background-color: black;color:white;border:none;cursor: pointer;">
 					</div>
 
 				</div>
 			</div>
 		</div>
 
-		<div style="clear: both;">
-			<div style="margin: 60px;">
+		<div style="clear: both;margin-left: 60px;">
+			<div>
 				<h3>상품 상세</h3>
+			</div>
+			<div>
+				<p class="item_detail_explain">
+					울 15% 함유된 고급진 원단으로 겨울철 따듯하게 착용 가능한 제품입니다.
+				</p>
+				<p class="item_detail_explain">
+					한겨울까지 착용하기 좋은 무게감이 있는 도톰한 원단으로
+					착용시 핏이 툭 떨어지는게 매력적인 제품입니다.
+				</p>
+				<p class="item_detail_explain">
+					앞뒤가 다른 원단으로 제작된 벨트는 부착이 되어있지 않아 다양하게 활용하기에 좋습니다.
+				</p>
+				<p class="item_detail_explain">
+					어디에나 걸쳐 입기에 좋은 부담스럽지 않은 체크패턴에
+					여유로운 오버핏으로 두툼한 이너 착용시에도 불편함 없이 활동 가능합니다.
+				</p>
+				<p class="item_detail_explain">
+					루즈하게 나온 제품으로 남녀 모두에게 추천드리는 제품입니다.
+				</p>
+				<p class="item_detail_explain">
+					착용컷의 경우 조명과 보정으로 인하여 색감이 다르게
+					보일 수 있으니 디테일컷의 색상으로 확인해주시길 바랍니다.
+				</p>
 			</div>
 		</div>
 		<br><br>
@@ -107,33 +130,36 @@
 	</div>
 	
 		<div>
-			<div style="margin: 60px; border: 1px solid gray; ">
-				<h3>상품 리뷰</h3>
+			<div style="margin: 60px; border: 1px solid lightgray; ">
+				<div style="margin: 10px;"><h3>구매 후기</h3></div>
 				<c:forEach var="review" items="${reviewList }" varStatus="bb">
 					<div style="margin-left: 30px;">
 						<div>
-							<span>글번호 : ${review.rnum }</span>&nbsp;&nbsp;
-							<span>작성자 : ${review.writer }</span>&nbsp;&nbsp;
-							<span>평점 :</span>
+							<span style="font-size:20px;">작성자 : ${review.writer }</span>&nbsp;&nbsp;
+							<span style="font-size:20px;">평점 :</span>
 							<c:choose>
-								<c:when test="${review.rating == 5 }"><span style="color:orange;">★★★★★</span></c:when>
-								<c:when test="${review.rating == 4 }"><span style="color:orange;">★★★★</span></c:when>
-								<c:when test="${review.rating == 3 }"><span style="color:orange;">★★★</span></c:when>
-								<c:when test="${review.rating == 2 }"><span style="color:orange;">★★</span></c:when>
-								<c:when test="${review.rating == 1 }"><span style="color:orange;">★</span></c:when>
+								<c:when test="${review.rating == 5 }"><span style="color:orange;font-size: 20px;">★★★★★</span></c:when>
+								<c:when test="${review.rating == 4 }"><span style="color:orange;font-size: 20px;">★★★★</span></c:when>
+								<c:when test="${review.rating == 3 }"><span style="color:orange;font-size: 20px;">★★★</span></c:when>
+								<c:when test="${review.rating == 2 }"><span style="color:orange;font-size: 20px;">★★</span></c:when>
+								<c:when test="${review.rating == 1 }"><span style="color:orange;font-size: 20px;">★</span></c:when>
 							</c:choose>
 						</div>
-						<div>상품명 : ${vo.pname }</div>
-						<div style="font-weight: bold;">${review.title }</div>
-						<div>${review.content }</div>
-						<div><img src="${cp }/upload/${review.savefilename }" style="width:150px;height:150px;cursor: pointer;" onclick="imgSize(event)"></div>
+						<div style="margin-top: 10px;">상품명 : ${vo.pname }</div>
+						<div style="font-weight: bold;margin-top: 10px;">${review.title }</div>
+						<div style="margin-top: 10px;">${review.content }</div>
+						<div style="margin-top: 10px;"><img src="${cp }/upload/${review.savefilename }" style="width:150px;height:150px;cursor: pointer;" onclick="imgSize(event)"></div>
 						<div>
 							<div style="padding:10px;">
-								<textarea rows="3" cols="100" id="firstcomment_${bb.index }" onclick="loginCheck('${bb.index}')"></textarea>
-								<input type="button" style="height:30px;" value="댓글작성" onclick="comment(0,'${bb.index }',0,'${review.rnum}',0,0,0)">
+								
+									<textarea rows="4" cols="100" id="firstcomment_${bb.index }" onclick="loginCheck('${bb.index}')" style="display: inline-block;float: left;padding:5px;" placeholder="댓글"></textarea>
+								
+								
+									<input type="button" value="댓글작성" onclick="comment(0,'${bb.index }',0,'${review.rnum}',0,0,0)" class="review_comment_btn">
+							
 							</div>
 						</div>
-						<div>
+						<div style="clear: both;">
 							<div>
 								<c:forEach var="child" items="${reviewchild }" varStatus="st">
 									<c:if test="${child.rnum == review.rnum }">
@@ -143,19 +169,19 @@
 										</c:forEach>
 										<div style="display: inline-block;">
 											
-											<div>
+											<div style="margin-top: 5px;">
 												<span>└아이디 : ${child.rcwriter }</span>
 												<span>
-													<a href="#content" id="cc_${st.index }" onclick="aa('${st.index }')">답글 작성</a>
+													<a href="#content" id="cc_${st.index }" onclick="aa('${st.index }')" style="text-decoration: none;">답글 작성</a>
 												</span>
 											</div>
-											<div>
-												<span>댓글 : ${child.comments }</span>
+											<div style="margin-top: 5px;">
+												<span>${child.comments }</span>
 											</div>
 											
-											<div id="comm${st.index }" style="display:none;">
-												<textarea rows="3" cols="100" id="comm_${st.index }"></textarea>
-												<input type="button" value="등록" onclick="comment(1,'${st.index}','${child.rcnum }','${child.rnum }','${child.ref }','${child.lev }','${child.step }')">
+											<div id="comm${st.index }" style="display:none;margin-top: 5px;">
+												<textarea rows="3" cols="100" id="comm_${st.index }" style="display: inline-block;float: left;padding:3px;" placeholder="답글"></textarea>
+												<input class="review_comment_btn" style="height:53px;" type="button" value="등록" onclick="comment(1,'${st.index}','${child.rcnum }','${child.rnum }','${child.ref }','${child.lev }','${child.step }')">
 											</div>
 										</div>
 									</div>

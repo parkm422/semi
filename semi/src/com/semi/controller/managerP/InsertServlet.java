@@ -30,7 +30,7 @@ public class InsertServlet extends HttpServlet{
 		
 		req.setAttribute("mcategory", mcategory);
 		req.setAttribute("top", "/header.jsp");
-		req.setAttribute("nav", "/nav.jsp");
+		req.setAttribute("nav", "/adnav.jsp");
 		req.setAttribute("content", "/manager/insert.jsp");
 		req.setAttribute("footer", "/footer.jsp");
 		

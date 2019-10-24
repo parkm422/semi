@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h1>주문내역</h1>
-<p><a href="${cp }/orderY/porderlist?id=${sessionScope.id}">전체글목록</a> | <a href="${cp }/main">홈으로</a>
 </p>
 <table style="width:1500px;text-align:center;">
 <colgroup>
@@ -25,8 +24,8 @@
 	<c:forEach var="vo2" items="${list}" varStatus="ss">
 		<tr style="height:100px;">
 			<td>${(pageNum-1)*10+ss.index+1}</td>
-			<td><img src="${cp }/upload/${vo2.savefilename}" style="width:100px;heigth:150px;"></td>
-			<td>${vo2.pname }</td>
+			<td><img src="${cp }/upload/${vo2.savefilename}" style="width:50px;heigth:50px;"></td>
+			<td><a href="${cp }/product/detail?inum=${vo2.inum }" class="item_dtail_link">${vo2.pname }</a></td>
 			<td>${vo2.psize }</td>
 			<td>${vo2.color}</td>
 			<td>${vo2.cnt}</td>
@@ -34,7 +33,7 @@
 			<td>${vo2.delivery}</td>
 			<td>${vo2.price*vo2.cnt}</td>
 			<td>${vo2.orderdate}</td>
-			<td><a href="${cp }/member/review_insert?inum=${vo2.inum }">리뷰작성</a></td>
+			<td><a href="${cp }/member/review_insert?inum=${vo2.inum }" class="item_review_link">리뷰작성</a></td>
 		</tr>
 	</c:forEach>
 </table>
