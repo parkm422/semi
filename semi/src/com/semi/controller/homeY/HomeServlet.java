@@ -34,7 +34,7 @@ public class HomeServlet extends HttpServlet{
 				
 			}
 		};
-		//
+		
 		Calendar cal = Calendar.getInstance();
 		
 		cal.set(2019,9,24,23,5,0);
@@ -45,6 +45,7 @@ public class HomeServlet extends HttpServlet{
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		String top=(String)req.getAttribute("top");
 		String nav=(String)req.getAttribute("nav");
 		String content=(String)req.getAttribute("content");
