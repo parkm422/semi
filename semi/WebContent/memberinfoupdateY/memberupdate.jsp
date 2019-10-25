@@ -50,26 +50,30 @@
 			allcheck();
 		}
 	}
+	function home() {
+		location.href="${cp }/member/mypage";
+	}
 </script>
 <div>
-<h1>회원정보수정하기</h1>
+<h1>회원정보수정하기</h1><br><br>
 <form method="post" action="${cp }/memberinfoupdateY/memberupdate">
-	아이디<br>
+	<a style="font-size: 25px">아이디</a><br>
 	<input type="text" name="id" id="id" value="${sessionScope.id}" readonly="readonly" ><br>
-	비밀번호<br>
+	<a style="font-size: 25px">비밀번호</a><br>
 	<input type="text" name="pwd" id="pwd" value="${vo.pwd }" onkeyup="pwd1check()"><br>
 	<span id="pwdchk1"></span><br>
-	비밀번호 확인<br>
+	<a style="font-size: 25px">비밀번호 확인</a><br>
 	<input type="text" name="chkpwd" id="chkpwd" value="${vo.pwd}"  onkeyup="pwd2check()"><br>
 	<span id="pwdchk2"></span>
 	<br>
-	이메일<br>
-	<input type="text" name="email" id="email" size="50" value="${vo.email}" "><br>
-	주소<br>
+	<a style="font-size: 20px">이메일</a><br>
+	<input type="text" name="email" id="email" value="${vo.email}" ><br>
+	<a style="font-size: 20px">주소</a><br>
 	<textarea rows="5" cols="60" name="address" id="address" >${vo.address}</textarea><br><br>
-	연락처<br>
+	<a style="font-size: 20px">전화번호</a><br>
 	<input type="text" name="phone" id="phone" value="${vo.phone }" onkeyup="allcheck()"><br><br>
-	<input type="submit" id="chk" value="등록" disabled="disabled" >
+	<input style="width:70px;height: 35px; text-align: center;font-size: 20px" type="submit" id="chk" value="등록" disabled="disabled" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input style="width:70px;height: 38px; text-align: center;font-size: 25px" type="button" id="re" value="취소" onclick="home()" >
 </form>
 </div>
 

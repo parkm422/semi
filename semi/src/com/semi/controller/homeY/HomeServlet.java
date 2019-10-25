@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.semi.dao.productP.ProductDAO;
 @WebServlet("/main")
 public class HomeServlet extends HttpServlet{
+
 	
 	@Override
 	public void init() throws ServletException {
@@ -29,7 +30,7 @@ public class HomeServlet extends HttpServlet{
 			@Override
 			public void run() {
 			
-				productDao.basket_list_delete();
+				//
 				System.out.println("장바구니 목록 삭제...");
 				
 			}
@@ -42,10 +43,9 @@ public class HomeServlet extends HttpServlet{
 		timer.scheduleAtFixedRate(task, new Date(cal.getTimeInMillis()), 5000);
 		
 	}
-	
+
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		String top=(String)req.getAttribute("top");
 		String nav=(String)req.getAttribute("nav");
 		String content=(String)req.getAttribute("content");
@@ -72,7 +72,7 @@ public class HomeServlet extends HttpServlet{
 		
 		req.setAttribute("top",top);
 		req.setAttribute("nav",nav);
-		req.setAttribute("content",content);	
+		req.setAttribute("content",content);
 		req.setAttribute("footer",footer);
 		getServletContext().setAttribute("cp",req.getContextPath());
 		req.getRequestDispatcher("/index.jsp").forward(req, resp);

@@ -2,17 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<style>
-th{
-	min-width:130px;
-	height:40px;
-}
-td{
-	min-width:130px;
-	height:40px;
-	text-align: center;
-}
-</style>
 <div>
 <table>
 	<tr>

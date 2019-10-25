@@ -1,6 +1,7 @@
 package com.semi.controller.paymentl;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -25,6 +26,8 @@ public class payServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
+		String[] imgs=(String[])req.getSession().getAttribute("imgs");
+		req.getSession().removeAttribute("imgs");
 		int amount =Integer.parseInt(req.getParameter("amount"));
 		String getname=req.getParameter("getname");
 		String status=req.getParameter("status");
@@ -33,18 +36,20 @@ public class payServlet extends HttpServlet{
 		String[] pname=req.getParameterValues("pname");
 		String[] cnt=req.getParameterValues("cnt");
 		String[] price=req.getParameterValues("price");
-		String[] savefilename=req.getParameterValues("savefilename");		
+		System.out.println(cnt);
 		ArrayList<HashMap<String,Object>> list=new ArrayList<HashMap<String,Object>>();
 		for(int i=0;i<pname.length;i++) {
 			HashMap<String,Object> map=new HashMap<String, Object>();
 			map.put("pname", pname[i]);
 			map.put("cnt", cnt[i]);
 			map.put("price", price[i]);
-			map.put("savefilename",savefilename[i]);
+			map.put("imgs",imgs[i]);
 			list.add(map);
 			
 		}
+		DecimalFormat dc = new DecimalFormat("###,###,###,###");
 		
+		req.setAttribute("dc", dc);
 		
 		//req.setAttribute("pname",pname);
 		//req.setAttribute("cnt",cnt);

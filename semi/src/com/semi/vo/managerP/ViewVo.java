@@ -19,7 +19,7 @@ public class ViewVo {
 	private int ppsize;
 	private String ccolor;
 	private int ccnt;
-	private String gname;
+	
 
 
 	public ViewVo() {}
@@ -30,7 +30,6 @@ public class ViewVo {
 		this.ornumm = ornumm;
 		this.name = name;
 		this.id = id;
-		this.gname = gname;
 		this.pname = pname;
 		this.psize = psize;
 		this.color = color;
@@ -53,13 +52,7 @@ public class ViewVo {
 		this.ccnt = ccnt;
 	}
 	
-	public String getGname() {
-		return gname;
-	}
-
-	public void setGname(String gname) {
-		this.gname = gname;
-	}
+	
 	public int getOrnumm() {
 		return ornumm;
 	}

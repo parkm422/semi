@@ -74,10 +74,10 @@ th{
 		<c:forEach var="map" items="${list }">
 		<tr>
 		<td>${map.pname}</td>
-		<td><img src="${cp }/upload/${map.savefilename }" style="width:100px;height:100px;"></td>
+		<td><img src="${map.imgs }" style="width:100px;height:100px;"></td>
 		<td>${map.cnt }</td>
 			
-		<td>${map.price }</td>
+		<td>${map.price * map.cnt}</td>
 		</tr>
 		</c:forEach>
 		<tr>

@@ -20,10 +20,10 @@
 			var data = xhr.responseText;
 			var check = JSON.parse(data);
 			var idcheck = document.getElementById("idc");
-			
-			if(check.check == true && id != ""){
-				idcheck.innerHTML = "이미 사용중인 아이디입니다.";
-			}else{
+			var id = document.getElementById("id").value;
+			if(check.check == true || id.length<4 || id == ""){
+				idcheck.innerHTML = "사용할 수 없는 아이디입니다.";
+			}else if(check.check == false && id.length>3 || id != ""){
 				idcheck.innerHTML = "사용 가능한 아이디입니다.";
 			}
 			
@@ -99,12 +99,6 @@
 	}
 	
 </script>
-<style>
-	.text_1{
-		font-size: 14px;
-		font-weight: 700;
-	}
-</style>
 </head>
 <body>
 <div style="margin: auto;width:450px;">
@@ -151,7 +145,7 @@
 			</div>
 			
 			<div style="margin-top: 20px;">
-				<input type="submit" value="가입" style="width:360px; height:60px; background-color: black;color:white;margin-bottom: 30px;cursor: pointer;">
+				<input type="submit" value="가입" style="width:360px; height:60px; background-color: black;color:white;margin-bottom: 30px;cursor: pointer;border:none;">
 			</div>
 		</form>
 	</div>

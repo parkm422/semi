@@ -20,7 +20,6 @@
 					<col width="10%">
 					<col width="10%">
 				</colgroup>
-
 				<tr>
 					<th>번호</th>
 					<th>이미지</th>
@@ -39,6 +38,7 @@
 						</td>
 						<td>
 							<img src="${cp }/upload/${basket.savefilename }" style="width:70px;height:70px;">
+							<input type="hidden" name="imgs" value="${cp }/upload/${basket.savefilename }">
 						</td>
 						<td>
 							<div><a href="${cp }/product/detail?inum=${basket.inum }" style="color:black;text-decoration: none;">${basket.pname }</a></div>

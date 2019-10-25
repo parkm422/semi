@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div id="main">
 <h1>주문내역</h1>
-</p>
-<table style="width:1500px;text-align:center;">
+<table style="width:1500px;text-align:center;" >
 <colgroup>
 	<col width="5%">
 	<col width="20%">
@@ -66,6 +66,7 @@
 		다음
 	</c:otherwise>
 </c:choose>
+</div>
 </div>
 
 
