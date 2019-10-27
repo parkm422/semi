@@ -27,44 +27,79 @@ public class ProductDAO {
 	public static ProductDAO getProductDao() {
 		return productDao;
 	}
+	
+	//3일 지난 장바구니 목록 삭제
+	public int bakset_list_delete() {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = JdbcUtil.getConn();
+			String sql = "DELETE FROM BASKET WHERE SYSDATE-REGDATE>=3";
+			pstmt = con.prepareStatement(sql);
+			int n = pstmt.executeUpdate();
+			
+			if(n>0) {
+				con.commit();
+				return n;
+			}else {
+				con.rollback();
+			}
+			return 0;
+		}catch(SQLException se) {
+			se.printStackTrace();
+			return -1;
+		}finally {
+			JdbcUtil.close(con, pstmt, null);
+		}
+	}
+	
+	// 판매개수 가장 많은 상품 5개 얻어오기
+	public ArrayList<List_img_joinVO> hit_item() {
 
-	/*
-	 * // 판매개수 가장 많은 상품 5개 얻어오기 public ArrayList<List_img_joinVO> hit_item(int
-	 * start,int end){
-	 * 
-	 * Connection con = null; PreparedStatement pstmt = null; ResultSet rs = null;
-	 * 
-	 * try {
-	 * 
-	 * con = JdbcUtil.getConn(); String sql =
-	 * "SELECT BB.*,PIMG.IMGNUM,PIMG.SAVEFILENAME FROM(SELECT AA.*,ROWNUM AS RNUM FROM(SELECT P.INUM INUM,P.PNAME PNAME,P.PRICE PRICE,p.cnt cnt, p.cnum cnum,p.salecnt salecnt "
-	 * +
-	 * "FROM PRODUCT_LIST P,COLOR C,PRODUCT_SIZE S,SUB_CATEGORY SUB,MAJOR_CATEGORY MAJOR "
-	 * +
-	 * "WHERE P.CNUM=C.CNUM AND C.SIZENUM=S.SIZENUM AND S.SCNUM=SUB.SCNUM AND SUB.MCNUM=MAJOR.MCNUM ORDER BY SALECNT DESC)AA)BB,PRODUCT_IMG PIMG "
-	 * + "WHERE BB.INUM=PIMG.INUM AND RNUM>=? AND RNUM<=? ORDER BY RNUM ASC"; pstmt
-	 * = con.prepareStatement(sql); pstmt.setInt(1, start); pstmt.setInt(2, end); rs
-	 * = pstmt.executeQuery();
-	 * 
-	 * ArrayList<List_img_joinVO> list = new ArrayList<List_img_joinVO>();
-	 * 
-	 * while (rs.next()) {
-	 * 
-	 * int inum = rs.getInt("inum"); String pname = rs.getString("pname"); int
-	 * imgnum = rs.getInt("imgnum"); String cnum = rs.getString("cnum"); int price =
-	 * rs.getInt("price"); int cnt = rs.getInt("cnt"); int salecnt =
-	 * rs.getInt("salecnt"); String savefilename = rs.getString("savefilename");
-	 * 
-	 * List_img_joinVO vo = new List_img_joinVO(inum, pname, price, cnt, cnum,
-	 * salecnt, imgnum, savefilename);
-	 * 
-	 * list.add(vo);
-	 * 
-	 * }
-	 * 
-	 * return list; }catch(SQLException se) { se.printStackTrace(); return null;
-	 * }finally { JdbcUtil.close(con, pstmt, rs); } }
-	 */
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = JdbcUtil.getConn();
+			String sql = "SELECT BB.*,PIMG.IMGNUM,PIMG.SAVEFILENAME FROM(SELECT AA.*,ROWNUM AS RNUM FROM(SELECT P.INUM INUM,P.PNAME PNAME,P.PRICE PRICE,p.cnt cnt, p.cnum cnum,p.salecnt salecnt "
+					+ "FROM PRODUCT_LIST P,COLOR C,PRODUCT_SIZE S,SUB_CATEGORY SUB,MAJOR_CATEGORY MAJOR "
+					+ "WHERE P.CNUM=C.CNUM AND C.SIZENUM=S.SIZENUM AND S.SCNUM=SUB.SCNUM AND SUB.MCNUM=MAJOR.MCNUM ORDER BY SALECNT DESC)AA)BB,PRODUCT_IMG PIMG "
+					+ "WHERE BB.INUM=PIMG.INUM AND RNUM>=? AND RNUM<=? ORDER BY RNUM ASC";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, 1);
+			pstmt.setInt(2, 5);
+			rs = pstmt.executeQuery();
+
+			ArrayList<List_img_joinVO> list = new ArrayList<List_img_joinVO>();
+
+			while (rs.next()) {
+
+				int inum = rs.getInt("inum");
+				String pname = rs.getString("pname");
+				int imgnum = rs.getInt("imgnum");
+				String cnum = rs.getString("cnum");
+				int price = rs.getInt("price");
+				int cnt = rs.getInt("cnt");
+				int salecnt = rs.getInt("salecnt");
+				String savefilename = rs.getString("savefilename");
+
+				List_img_joinVO vo = new List_img_joinVO(inum, pname, price, cnt, cnum, salecnt, imgnum, savefilename);
+
+				list.add(vo);
+
+			}
+
+			return list;
+		} catch (SQLException se) {
+			se.printStackTrace();
+			return null;
+		} finally {
+			JdbcUtil.close(con, pstmt, rs);
+		}
+	}
+
 	// 상품등록
 	public int productInsert(Product_ListVO vo, String orgfilename, String savefilename) {
 
